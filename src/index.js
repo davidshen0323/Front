@@ -16,7 +16,7 @@ ReactDOM.render(
             {/* <Route path="/question" component={QuestionList}/> */}
             {/* <Route path="/acceptance" component={AcceptanceList}/> */}
             <Route path="/homepage" component={homepage}/>
-            <Route path="/" component={ReactApp}/>
+            <Route path="/" component={homepage}/>
         </Switch>
     </BrowserRouter>
 , document.getElementById('root'));

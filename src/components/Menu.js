@@ -5,7 +5,8 @@ import { AppBar, Toolbar, Button } from '@material-ui/core/';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import {useState,useEffect} from 'react';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,6 +22,21 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function MyMenu() {
+
+  const [Sclass, setClass] = useState([]);
+
+  const classList = ['cs_id'];
+  const className = ['cs_name'];
+
+  useEffect(() => {
+    async function fetchData() {
+        const result = await axios.get(`/class/all/10811000DMG741D7411023900`);
+        setClass(result.data);
+      //   console.log(result.data);
+    }
+    fetchData();
+}, []);
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -30,10 +46,12 @@ export default function MyMenu() {
               <MenuIcon />
               </IconButton>
               
-              <Button  component={Link} to='/homepage' color="inherit">首頁</Button>
+              <Button component={Link} to='/Homepage1' color="inherit">輔仁大學</Button>
               {/* <Button  component={Link} to='/acceptance' color="inherit">排隊驗收</Button> */}
               {/* <Button  component={Link} to='/question' color="inherit">排隊問題</Button> */}
-              <Typography className={classes.title} align="right" variant="body1" >學生</Typography>
+              <label>{Sclass[0]}</label>
+              <Button component={Link} to='/Homepage1' color="inherit">登出</Button>
+              {/* <Typography className={classes.title} align="right" variant="body1">登出</Typography> */}
               
             </Toolbar>
         </AppBar>
