@@ -25,8 +25,8 @@ export default function MyMenu() {
 
   const [Sclass, setClass] = useState([]);
 
-  const classList = ['cs_id'];
-  const className = ['cs_name'];
+  const classList = ['cs_id','cs_name'];
+
 
   useEffect(() => {
     async function fetchData() {
@@ -49,8 +49,11 @@ export default function MyMenu() {
               <Button component={Link} to='/Homepage1' color="inherit">輔仁大學</Button>
               {/* <Button  component={Link} to='/acceptance' color="inherit">排隊驗收</Button> */}
               {/* <Button  component={Link} to='/question' color="inherit">排隊問題</Button> */}
-              <label>{Sclass[0]}</label>
-              <Button component={Link} to='/Homepage1' color="inherit">登出</Button>
+              {/* <label>{Sclass[0]}</label> */}
+              <Button component={Link} to='/login' color="inherit">登出</Button>
+              <Button  component={Link} to='/login' color="inherit">登入</Button>
+              <Button  component={Link} to='/register' color="inherit">註冊</Button>
+              <Button  component={Link} to='/rollcall' color="inherit">點名</Button>
               {/* <Typography className={classes.title} align="right" variant="body1">登出</Typography> */}
               
             </Toolbar>

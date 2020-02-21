@@ -1,6 +1,6 @@
 import React from 'react';
 import MyMenu from './Menu';
-import Homepage1 from './Homepage1';
+import Login from './login';
 export default function ReactApp() {
 
     
@@ -22,8 +22,8 @@ export default function ReactApp() {
 
   return (
     <div>
-      <MyMenu/>
-      {/* <Homepage1 /> */}
+      
+      <Login />
       
     </div>
     
