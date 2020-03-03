@@ -73,11 +73,7 @@ export default function InputTasksForm(){
                     labelPlacement="end"
                     />
 
-<<<<<<< HEAD
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small" >
-=======
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
                         <InputLabel htmlFor="outlined-adornment-password">佔平時成績</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-%"
