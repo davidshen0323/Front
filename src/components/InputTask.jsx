@@ -1,5 +1,8 @@
 import React from "react"
 
+import InputTasksForm from "./InputTasksForm";
+
+
 class InputTask extends React.Component {
     render() {
         return (
