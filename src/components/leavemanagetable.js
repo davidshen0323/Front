@@ -11,29 +11,34 @@ import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
   { id: 'time', label: '時間', minWidth: 150 },
-  { id: 'attend', label: '出席人數', minWidth: 50, align: 'left', },
+  { id: 'number', label: '學號', minWidth: 100, align: 'left', },
   {
-    id: 'pass',label: '請假人數', minWidth: 50, align: 'left',
+    id: 'name',label: '姓名', minWidth: 50, align: 'left',
     format: value => value.toLocaleString(),
   },
   {
-    id: 'absence',label: '缺席人數', minWidth: 50, align: 'left',
+    id: 'kind',label: '假別', minWidth: 50, align: 'left',
     format: value => value.toLocaleString(),
   },
   {
-    id: 'score',
-    label: '計分設定', minWidth: 100, align: 'left',
+    id: 'reason',
+    label: '事由', minWidth: 100, align: 'left',
     format: value => value.toLocaleString(),
   },
   {
-    id: 'from',
-    label: '來源', minWidth: 100, align: 'left',
+    id: 'proof',
+    label: '證明', minWidth: 100, align: 'left',
+    format: value => value.toFixed(2),
+  },
+  {
+    id: 'pass',
+    label: '審核', minWidth: 100, align: 'left',
     format: value => value.toFixed(2),
   },
 ];
 
-function createData(time, attend,pass,absence,score,from) {
-  return { time, attend,pass, absence, score, from };
+function createData(time, number,name,kind,reason,proof,pass) {
+  return { time, number,name,kind,reason,proof,pass };
 }
 
 const rows = [

@@ -15,18 +15,12 @@ import AcceptanceList from './components/student_acceptance.js';
 import TAcceptanceList from './components/teacher_acceptance.js';
 import shomepage from './components/student_homepage.js';
 import Rollcall from './components/rollcall.js';
-<<<<<<< HEAD
 import RollcallRecord from './components/rollcallrecord';
-=======
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 import Login from './components/login.js';
 import Register from './components/register.js';
 import ReactApp from './components/React-app.js';
 import * as serviceWorker from './serviceWorker';
-<<<<<<< HEAD
 import Leavemanage from './components/leavemanage';
-=======
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 
 ReactDOM.render(
     <BrowserRouter>
@@ -38,23 +32,16 @@ ReactDOM.render(
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <Route path="/rollcall" component={Rollcall}/>
-<<<<<<< HEAD
             <Route path="/leavemanage" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
-=======
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
             <Route path="/homepage1" component={homepage1}/>
             <Route path="/homepage2" component={homepage2}/>
             <Route path="/question" component={QuestionList}/>
             <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
-<<<<<<< HEAD
             <Route path="/homepage" component={shomepage}/>    
                
-=======
-            <Route path="/homepage" component={shomepage}/>        
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
             <Route path="/" component={ReactApp}/>
         </Switch>
     </BrowserRouter>
