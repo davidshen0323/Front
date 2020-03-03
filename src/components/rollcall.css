@@ -10,6 +10,23 @@ body{
     padding-top: 25px;
 }
 
+<<<<<<< HEAD
+=======
+
+
+.InputTasksForm{
+    width: 900px;
+    margin: 0 auto;
+}
+
+
+
+.InputTask{
+    height: 600px;
+    background: #F2F2F2;
+    text-align: left;
+}
+>>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 /*輸入框的縮排比文字還要裡面*/
 .inputForm{
     padding-left: 75px;

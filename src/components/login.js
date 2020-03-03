@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
 import homepage1 from "./Homepage1";
 
+<<<<<<< HEAD
 
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -21,6 +22,8 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import { ListItemAvatar } from '@material-ui/core';
+=======
+>>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 class Login extends Component{
     constructor(props){
         super(props);
@@ -33,6 +36,7 @@ class Login extends Component{
         this.props.history.push('/register')
     }
 }
+<<<<<<< HEAD
     
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
@@ -61,11 +65,32 @@ const useStyles = makeStyles(theme =>({
     }
     ));
 /*--------------------------------*/
+=======
+    const useStyles = makeStyles(theme =>({
+    
+        button: {
+            margin: theme.spacing(2),
+        },
+        root:{
+            width: '70%',
+            marginTop: theme.spacing(5),
+            marginLeft: theme.spacing(25),
+            overflowX: 'auto',
+            textAlign: 'center',  
+        },
+        inputitem: {
+            textAlign:'center',
+        },
+    }
+    ));
+
+>>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 
 
 
 export default function ContainedButtons(){
         const classes = useStyles();
+<<<<<<< HEAD
         const [values, setValues] = React.useState({
             amount: '',
             password: '',
@@ -160,6 +185,31 @@ export default function ContainedButtons(){
                 </WingBlank>
                 </Paper>
                 </Grid>
+=======
+        return (
+            <div>
+                <MyMenu/>
+                <Logo/>
+                <Paper className={classes.root}>
+                <h2>我是登入頁</h2>
+                <WingBlank>
+                    <List>
+                        <InputItem >帳號</InputItem>
+                        <InputItem  type="password">密碼</InputItem>
+                    </List>
+                    <WhiteSpace/>
+                    <Button variant="contained" color="primary" component={Link}
+              to ='/homepage1' className={classes.button}>
+                    登入
+                    </Button>
+                    
+                    <Button variant="contained" color="primary" component={Link}
+              to ='/register' className={classes.button}>
+                    註冊
+                    </Button>
+                </WingBlank>
+                </Paper>
+>>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
             </div>
         )
     }

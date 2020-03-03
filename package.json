@@ -1,14 +1,25 @@
 {
+<<<<<<< HEAD
   "name": "front",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.3",
+=======
+  "name": "newtry",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.9.2",
+>>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+<<<<<<< HEAD
     "antd": "^3.26.12",
+=======
+>>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
     "antd-mobile": "^2.3.1",
     "axios": "^0.19.2",
     "react": "^16.12.0",
