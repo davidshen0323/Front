@@ -1,5 +1,5 @@
 import React from 'react';
-import MyMenu from './Menu';
+import MyMenu from '../Menu';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';

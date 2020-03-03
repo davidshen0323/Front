@@ -10,7 +10,7 @@ import Logo from './logo.js';
 
 import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
-import homepage1 from "./Homepage1";
+
 
 import {Form,Input,Icon} from 'antd';
 //import '../node_modules/antd/dist/antd.css'//不引入這個檔案那麼不顯示antd的樣式
