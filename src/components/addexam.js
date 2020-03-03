@@ -17,6 +17,8 @@ import Input from '@material-ui/core/Input';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FixedSizeList } from 'react-window';
+import Button from '@material-ui/core/Button';
+import {Link} from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -102,6 +104,9 @@ const useStyles = makeStyles(theme => ({
     fontSize:14,
     fontFamily:'微軟正黑體',
   },
+  button: {
+    margin: theme.spacing(2),
+},
 }));
 
 export default function NavTabs() {
@@ -114,7 +119,7 @@ export default function NavTabs() {
   };
 
   return (
-    <div className={classes.root}>
+    <div >
         <MyMenu/>
         
             <AppBar position="static">
@@ -131,15 +136,15 @@ export default function NavTabs() {
             </AppBar>
       <TabPanel value={value} index={0}>
         <center>考卷名稱：<Input defaultValue="" inputProps={{ 'aria-label': 'description' }} /> </center><br/>
-        <Paper className={classes.proot} elevation={3} variant="outlined" >
-          <Table>
+        <Paper className={classes.root} elevation={3} variant="outlined" >
+          <Table><center>
             <TableBody>
               <TableRow>
                 <TableCell>
                   問題
                 </TableCell>
                 <TableCell>
-                  <TextareaAutosize className={classes.textarea}  aria-label="minimum height" rowsMin={3} placeholder="請輸入問題" />
+                  <TextareaAutosize className={classes.textarea} placeholder="請輸入問題" />
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -147,7 +152,7 @@ export default function NavTabs() {
                   選項A
                 </TableCell>
                 <TableCell>
-                  <TextareaAutosize className={classes.textarea}  aria-label="minimum height" rowsMin={3} placeholder="請輸入選項" />
+                  <TextareaAutosize className={classes.textarea} placeholder="請輸入選項" />
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -155,7 +160,7 @@ export default function NavTabs() {
                   選項B
                 </TableCell>
                 <TableCell>
-                  <TextareaAutosize className={classes.textarea}  aria-label="minimum height" rowsMin={3} placeholder="請輸入選項" />
+                  <TextareaAutosize className={classes.textarea} placeholder="請輸入選項" />
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -163,7 +168,7 @@ export default function NavTabs() {
                   選項C
                 </TableCell>
                 <TableCell>
-                  <TextareaAutosize className={classes.textarea}  aria-label="minimum height" rowsMin={3} placeholder="請輸入選項" />
+                  <TextareaAutosize className={classes.textarea}  placeholder="請輸入選項" />
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -171,11 +176,13 @@ export default function NavTabs() {
                   選項D
                 </TableCell>
                 <TableCell>
-                  <TextareaAutosize className={classes.textarea}  aria-label="minimum height" rowsMin={3} placeholder="請輸入選項" />
+                  <TextareaAutosize className={classes.textarea}  placeholder="請輸入選項" />
                 </TableCell>
               </TableRow>
               </TableBody>
-            </Table>
+              </center></Table> 
+              <Button variant="contained" color="primary" className={classes.button}>新增問題</Button>
+              <Button variant="contained" color="primary" className={classes.button}>發佈考題</Button>
        
           </Paper>
       </TabPanel>
@@ -190,10 +197,10 @@ export default function NavTabs() {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>
-                <FixedSizeList height={400} width={500} itemSize={46} itemCount={20}>
+                <TableCell ><center>
+                <FixedSizeList height={400} width={400} itemSize={40} itemCount={20}>
             {renderRow}
-          </FixedSizeList>
+          </FixedSizeList></center>
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -202,4 +209,4 @@ export default function NavTabs() {
       </TabPanel>
     </div>
   );
-} 
+}
