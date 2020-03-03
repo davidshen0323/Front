@@ -24,11 +24,7 @@ export default function TopBlock(){
         return(
             <div className={classes.TopBlock}>
             <BookMark to="/" name="點名"/>
-<<<<<<< HEAD
             <BookMark component={Link} to="/rollcallrecord" name="點名紀錄"/>
-=======
-            <BookMark to="/點名紀錄" name="點名紀錄"/>
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
             <BookMark to="/假單管理" name="假單管理"/>
             <BookMark to="/班級名單" name="班級名單"/>
             </div>

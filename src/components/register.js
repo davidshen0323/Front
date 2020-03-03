@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-<<<<<<< HEAD
 import MyMenu from './Menu';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
@@ -23,17 +22,6 @@ import { ListItemAvatar } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-=======
-import Logo from './logo.js';
-import MyMenu from './Menu';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import {makeStyles} from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import {List,InputItem,WingBlank,WhiteSpace} from 'antd-mobile'
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 //import {connect} from 'react-redux'
 //import {register} from '../../redux/user.redux'
 //import '../../index.css'
@@ -65,7 +53,6 @@ class Register extends Component{
         })
     }
 }
-<<<<<<< HEAD
 
 /*------------ STYLE ------------*/
     const useStyles = makeStyles(theme =>({
@@ -77,14 +64,6 @@ class Register extends Component{
         margin: {
             margin: theme.spacing(1),
           },
-=======
-    const useStyles = makeStyles(theme =>({
-    
-        button: {
-            width:'20%',
-        },
-        
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 
         root:{
             width: '70%',
@@ -98,7 +77,6 @@ class Register extends Component{
         },
     }
     ));
-<<<<<<< HEAD
 /*--------------------------------*/
 
     export default function ContainedButtons(){
@@ -223,35 +201,6 @@ class Register extends Component{
                     
                     <List>
                     <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row class="am-list-item-middle">                    <FormControlLabel
-=======
-
-
-
-
-
-    export default function ContainedButtons(){
-        const RadioItem = Radio.RadioItem;
-        const classes = useStyles();
-        const [value, setValue] = React.useState('student');
-        const handleChange = event => {
-    setValue(event.target.value);
-  };
-        return (
-            <div>
-                <MyMenu/>
-                <Logo></Logo>
-                <Paper className={classes.root}>
-                <h2>我是註冊頁</h2>
-                <WingBlank>
-                    <List>
-                        <InputItem>帳號</InputItem>
-                        <InputItem  type="password">密碼</InputItem>
-                        <InputItem  type="password">確認密碼</InputItem>
-                    </List>
-                    <whiteSpace></whiteSpace>    
-                    <List>
-                    <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>                    <FormControlLabel
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
                         value="student"
                         control={<Radio color="primary" align="center" />}
                         label="學生"

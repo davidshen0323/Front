@@ -5,10 +5,7 @@ import  TopBlock  from "./TopBlock";
 import {HashRouter} from "react-router-dom";
 import {InputTask} from "./InputTask";
 import "./rollcall.css";
-<<<<<<< HEAD
 import "./Form.css";
-=======
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 import  InputTasksForm from './InputTasksForm';
 
 /*------------ STYLE ------------*/
