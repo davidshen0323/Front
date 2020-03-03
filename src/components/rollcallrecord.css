@@ -5,11 +5,19 @@ body{
 }
 
 
-.inputName{
-    padding-left: 50px;
-    padding-top: 25px;
+
+.rollcallrecordForm{
+    width: 900px;
+    margin: 0 auto;
 }
 
+
+
+.InputTask{
+    height: 600px;
+    background: #F2F2F2;
+    text-align: left;
+}
 /*輸入框的縮排比文字還要裡面*/
 .inputForm{
     padding-left: 75px;

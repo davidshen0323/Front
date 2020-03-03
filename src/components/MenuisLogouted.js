@@ -23,7 +23,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-
+import homepage1 from './Homepage1';
 
 const drawerWidth = 200;
 
@@ -88,11 +88,15 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
 
   },
+  list: {
+   marginLeft: 20,
+   marginRight: 20,
+  },
   
 }));
 
 
-export default function LogoutMenu() {
+export default function MyLogoutMenu() {
 
   const [Sclass, setClass] = useState([]);
 
@@ -138,8 +142,6 @@ export default function LogoutMenu() {
             >
                 <MenuIcon />
               </IconButton>
-
-
               <Typography className={classes.School} color="inherit">輔仁大學</Typography>
           <Drawer
         className={classes.drawer}
@@ -156,23 +158,10 @@ export default function LogoutMenu() {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {['我的課程', '個人資料', '設定'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        {/* <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
+          
+          <Typography className={classes.list}>請先登入以使用功能</Typography>
+        
+       
       </Drawer>
       
               <Grid container direction="row" justify="space-between">
@@ -183,7 +172,7 @@ export default function LogoutMenu() {
                   {/* <label>{Sclass[0]}</label> */}
                 </Grid>
                 <Grid item>
-                  <Button component={Link} to='/login' color="inherit">登出</Button>
+                  <Button component={Link} to='/homepage1' color="inherit">登入</Button>
                   <Button component={Link} to='/register' color="inherit">註冊</Button>
                   {/* <Button  component={Link} to='/rollcall' color="inherit">點名</Button> */}
                   {/* <Typography className={classes.title} align="right" variant="body1">登出</Typography> */}
@@ -191,7 +180,6 @@ export default function LogoutMenu() {
               </Grid>
               </Toolbar>
           </AppBar>
-
     </div>    
   )
 
