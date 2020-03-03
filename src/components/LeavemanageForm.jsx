@@ -13,7 +13,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
 import {Save,Delete} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
-import StickyHeadTable from './rollcallrecordtable';
+import LeavemanageTable from './leavemanagetable';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme => ({
@@ -36,7 +36,7 @@ export default function LeavemanageForm(){
             <div class="InputTasksForm">
                 <div class="InputTask">
                   
-                <StickyHeadTable />
+                <LeavemanageTable />
 
                 </div>
             </div>

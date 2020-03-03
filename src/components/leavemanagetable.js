@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { Button } from '@material-ui/core';
 
 const columns = [
   { id: 'time', label: '時間', minWidth: 150 },
@@ -27,7 +28,7 @@ const columns = [
   },
   {
     id: 'proof',
-    label: '證明', minWidth: 100, align: 'left',
+    label: '證明', minWidth: 50, align: 'left',
     format: value => value.toFixed(2),
   },
   {
@@ -42,18 +43,18 @@ function createData(time, number,name,kind,reason,proof,pass) {
 }
 
 const rows = [
-  createData('2019.11.05 11:05', 2, 5, 8, '計分','人臉點名'),
-  createData('2019.11.12 11:12', 5, 5, 5, '不計分','QR code點名'),
-  createData('2019.11.19 11:19', 8, 2, 5, '計分','藍牙點名'),
-  createData('2019.11.26 11:26', 7, 5, 3, '計分','手動點名'),
-  createData('2019.12.03 12:03', 9, 1, 5, '不計分','人臉點名'),
-  createData('2019.12.10 12:10', 7, 5, 3, '計分','手動點名'),
-  createData('2019.12.17 12:17', 7, 3, 5, '不計分','人臉點名'),
-  createData('2019.12 24 12:24', 8, 5, 2, '不計分','QR code點名'),
-  createData('2020.01.01 01:00', 4, 6, 5, '計分','藍牙點名'),
-  createData('2020.01.08 01:08', 7, 3, 5, '計分','人臉點名'),
-  createData('2020.01.15 01:15', 9, 1, 5, '計分','藍牙點名'),
-  createData('2020.01.22 01:22', 3, 5, 7, '不計分','手動點名'),
+  createData('2019.11.05 11:05', 406401111,'李李李', '事假', '肚子不舒服', '計分','人臉點名'),
+  createData('2019.11.12 11:12', 406401222,'沈沈沈', '病假', '肚子不舒服', '不計分','QR code點名'),
+  createData('2019.11.19 11:19', 406401333,'黃黃黃', '病假', '肚子不舒服', '計分','藍牙點名'),
+  createData('2019.11.26 11:26', 406401444,'楊楊楊', '病假', '肚子不舒服', '計分','手動點名'),
+  createData('2019.12.03 12:03', 406401111,'程程程', '事假', '肚子不舒服', '不計分','人臉點名'),
+  createData('2019.12.10 12:10', 406401111,'吳吳吳', '事假', '肚子不舒服', '計分','手動點名'),
+  createData('2019.12.17 12:17', 406401111,'李李里', '事假', '肚子不舒服', '不計分','人臉點名'),
+  createData('2019.12 24 12:24', 406401111,'嬸嬸沈', '病假', '肚子不舒服', '不計分','QR code點名'),
+  createData('2020.01.01 01:00', 406401111,'黃黃煌', '事假', '肚子不舒服', '計分','藍牙點名'),
+  createData('2020.01.08 01:08', 406401111,'楊洋洋', '病假', '肚子不舒服', '計分','人臉點名'),
+  createData('2020.01.15 01:15', 406401111,'程成程', '病假', '肚子不舒服', '計分','藍牙點名'),
+  createData('2020.01.22 01:22', 406401111,'里里里', '事假', '肚子不舒服', '不計分','手動點名'),
 ];
 
 
@@ -70,7 +71,7 @@ const useStyles = makeStyles({
 
 
 
-export default function StickyHeadTable() {
+export default function LeavemanageTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -110,7 +111,7 @@ export default function StickyHeadTable() {
                     const value = row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                        {column.format && typeof value === 'number' ? column.format(value) : value }
                       </TableCell>
                     );
                   })}
