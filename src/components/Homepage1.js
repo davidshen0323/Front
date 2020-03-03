@@ -3,9 +3,10 @@ import MyMenu from './Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { TextField, Typography, ButtonGroup, TableBody, TableCell , TableRow } from '@material-ui/core';
+import { TextField, Typography,TableBody, TableCell , TableRow } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import axios from 'axios';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -54,7 +55,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(10),
       marginTop: theme.spacing(2),
       marginRight: theme.spacing(10),
-      width: 700,
+      width: 'auto',
     },
 
     button1: {
@@ -63,6 +64,8 @@ const useStyles = makeStyles(theme => ({
     },
     
     card: {
+      marginLeft: theme.spacing(10),
+      marginTop: theme.spacing(3),
       maxWidth: '80%',
     },
    
@@ -94,12 +97,12 @@ export default function Homepage1() {
     
     <Grid container spacing={3}>
 
-        <Grid item xs={4}>
+        <Grid item md={4}>
         <Paper className={classes.photo}>photo</Paper>
         {/* <Typography className={classes.words}>沈大為</Typography> */}
         </Grid>
 
-        <Grid item xs={8}>
+        <Grid item md={8}>
         <TextField className={classes.textField} defaultValue='請輸入課程名稱'></TextField>
         <Card className={classes.card}>
           <ButtonBase

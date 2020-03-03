@@ -10,11 +10,10 @@ import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import { makeStyles } from '@material-ui/core/styles';
 import {Save,Delete} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
-import { ButtonBase } from "@material-ui/core";
+
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme => ({
     root: {
@@ -66,7 +65,7 @@ export default function InputTasksForm(){
                     labelPlacement="end"
                     />
 
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
+                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small" >
                         <InputLabel htmlFor="outlined-adornment-password">佔平時成績</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-%"
