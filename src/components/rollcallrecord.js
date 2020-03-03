@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import  TopBlock  from "./TopBlock";
 import {HashRouter} from "react-router-dom";
 import {InputTask} from "./InputTask";
-import "./rollcall.css";
+import "./rollcallrecord.css";
 import "./Form.css";
-import  InputTasksForm from './InputTasksForm';
+import  RollcallrecordForm from './RollcallrecordForm';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   });
 
 /*--------------------------------*/
-export default function Rollcall() {
+export default function RollcallRecord() {
     const classes = useStyles();
     //render() {
         return (
@@ -30,12 +30,10 @@ export default function Rollcall() {
             <HashRouter>
                 <TopBlock />
                 <br/>
-                <InputTasksForm />
+                <RollcallrecordForm />
             </HashRouter>
             
             <br></br>
             </div>
         )
     }
-//}
-//export default (Rollcall); 
