@@ -10,18 +10,10 @@ import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-<<<<<<< HEAD
 import { makeStyles } from '@material-ui/core/styles';
 import {Save,Delete} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 
-=======
-import FormHelperText from '@material-ui/core/FormHelperText';
-import { makeStyles } from '@material-ui/core/styles';
-import {Save,Delete} from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
-import { ButtonBase } from "@material-ui/core";
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme => ({
     root: {

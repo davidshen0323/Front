@@ -1,8 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import {Link} from 'react-router-dom';
-=======
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 import { makeStyles } from '@material-ui/core/styles';
 import BookMark from './BookMark';
 

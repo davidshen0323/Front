@@ -3,16 +3,10 @@ import MyMenu from './Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-<<<<<<< HEAD
 import { TextField, Typography,TableBody, TableCell , TableRow } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-=======
-import { TextField, Typography, ButtonGroup, TableBody, TableCell , TableRow } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
 import axios from 'axios';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";

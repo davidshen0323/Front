@@ -213,18 +213,10 @@ class Register extends Component{
                     labelPlacement="end"
                     />
                     </RadioGroup>
-<<<<<<< HEAD
                     </List>
 
 
 
-=======
-
-
-
-
-                    </List>
->>>>>>> 5e01c5b0362f226339f6ac86cd92feaaa9082b7c
                     <WhiteSpace/>
                     <Button variant="contained" color="primary" href="login" className={classes.button}>註冊</Button>
                     <WhiteSpace/>
