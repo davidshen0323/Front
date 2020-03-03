@@ -5,10 +5,9 @@ import './index.css';
 
 //import App from './App';
 // import ReactApp from './components/React-app.js';
-// import AcceptanceList from './components/student_acceptance_list.js';
-// import QuestionList from './components/student_question_list.js';
 import homepage1 from './components/Homepage1';
 import homepage2 from './components/Homepage2';
+import addexam from './components/addexam';
 import QuestionList from './components/student_question.js';
 import TQuestionList from './components/teacher_question.js';
 import AcceptanceList from './components/student_acceptance.js';
@@ -40,8 +39,11 @@ ReactDOM.render(
             <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
-            <Route path="/homepage" component={shomepage}/>    
-               
+
+
+            <Route path="/addexam" component={addexam}/>
+            <Route path="/homepage" component={shomepage}/>        
+
             <Route path="/" component={ReactApp}/>
         </Switch>
     </BrowserRouter>
