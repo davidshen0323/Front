@@ -5,14 +5,8 @@ body{
 }
 
 
-.inputName{
-    padding-left: 50px;
-    padding-top: 25px;
-}
 
-
-
-.InputTasksForm{
+.rollcallrecordForm{
     width: 900px;
     margin: 0 auto;
 }

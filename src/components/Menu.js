@@ -138,6 +138,8 @@ export default function LogoutMenu() {
             >
                 <MenuIcon />
               </IconButton>
+
+
               <Typography className={classes.School} color="inherit">輔仁大學</Typography>
           <Drawer
         className={classes.drawer}
@@ -189,6 +191,7 @@ export default function LogoutMenu() {
               </Grid>
               </Toolbar>
           </AppBar>
+
     </div>    
   )
 

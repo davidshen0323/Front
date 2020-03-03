@@ -6,8 +6,21 @@ import Logo from './logo.js';
 import {List,InputItem,WingBlank,WhiteSpace} from 'antd-mobile';
 import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
-import homepage1 from "./Homepage1";
+import homepage1 from "./student/Homepage1";
 
+
+import Grid from '@material-ui/core/Grid';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
+import FormControl from '@material-ui/core/FormControl';
+import clsx from 'clsx';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import { ListItemAvatar } from '@material-ui/core';
 class Login extends Component{
     constructor(props){
         super(props);
@@ -20,52 +33,133 @@ class Login extends Component{
         this.props.history.push('/register')
     }
 }
-    const useStyles = makeStyles(theme =>({
+    
+/*------------ STYLE ------------*/
+const useStyles = makeStyles(theme =>({
     
         button: {
             margin: theme.spacing(2),
+            width:'120px',
         },
+
+        margin: {
+            margin: theme.spacing(1),
+          },
+
         root:{
             width: '70%',
             marginTop: theme.spacing(5),
-            marginLeft: theme.spacing(25),
-            overflowX: 'auto',
+            //marginLeft: theme.spacing(25),
+            overflow: 'auto',
             textAlign: 'center',  
         },
-        inputitem: {
+
+        TextField:{
             textAlign:'center',
         },
+        
     }
     ));
-
+/*--------------------------------*/
 
 
 
 export default function ContainedButtons(){
         const classes = useStyles();
+        const [values, setValues] = React.useState({
+            amount: '',
+            password: '',
+            showPassword: false,
+          });
+
+          const handleChange = prop => event => {
+            setValues({ ...values, [prop]: event.target.value });
+          };
+        
+          const handleClickShowPassword = () => {
+            setValues({ ...values, showPassword: !values.showPassword });
+          };
+        
+          const handleMouseDownPassword = event => {
+            event.preventDefault();
+          };
+
         return (
             <div>
                 <MyMenu/>
-                <Logo/>
+
+                <Grid 
+                container
+                direction="column"
+                justify="center"
+                alignItems="center">
                 <Paper className={classes.root}>
-                <h2>我是登入頁</h2>
+                    <h2>我是登入頁</h2>
+                <List>
+                    <ListItemAvatar><Logo/></ListItemAvatar>
+                
+                </List>
                 <WingBlank>
+
                     <List>
-                        <InputItem >帳號</InputItem>
-                        <InputItem  type="password">密碼</InputItem>
+             
+                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
+                        <InputLabel htmlFor="outlined-adornment-account">帳號</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-account"
+                            value={values.account}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton color="inherit" edge="end">
+                                <AccountCircle />
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                            labelWidth={50}
+                        />
+                    </FormControl>
+
                     </List>
+
+                    <List>
+                        
+                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
+                        <InputLabel htmlFor="outlined-adornment-password">密碼</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton color="inherit"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end">
+                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                            labelWidth={50}
+                        />
+                    </FormControl>
+      
+
+                    </List>
+                    
+                    
                     <WhiteSpace/>
-                    <Button variant="contained" color="primary" component={Link}
-              to ='/homepage1' className={classes.button}>
+                    <Button variant="contained" color="primary" component={Link} to ='/homepage1' className={classes.button}>
                     登入
                     </Button>
                     
-                    <Button variant="contained" color="primary" component={Link}
-              to ='/register' className={classes.button}>
+                    <Button variant="contained" color="primary" component={Link} to ='/register' className={classes.button}>
                     註冊
                     </Button>
+
                 </WingBlank>
                 </Paper>
+                </Grid>
             </div>
         )
     }

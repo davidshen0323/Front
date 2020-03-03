@@ -7,12 +7,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import MyMenu from './Menu';
+import MyMenu from './teacher_menu';
 
-export default function TQuestionList() {
+export default function TAcceptanceList() {
 
   /*------------ STATE ------------*/
-  const [questions, setQuestions] = useState([]);
+  const [acceptances, setAcceptances] = useState([]);
 
   /*------------ STYLE ------------*/
   const useStyles = makeStyles({
@@ -27,13 +27,13 @@ export default function TQuestionList() {
   const classes = useStyles();
 
   /*=========== Create Table HEAD ===========*/
-  const questionList = [ 'q_std_id', 'q_content', 'q_time']
+  const acceptanceList = [ 'accept_std_id', 'accept_time', 'accept_done' ]
   const csname='專題系統開發（一）'
 
   useEffect(() => {
       async function fetchData() {
-          const result = await axios.get(`/question/all/10811000DMG741D7411023900`);
-          setQuestions(result.data);
+          const result = await axios.get(`/acceptance/hw/10811000DMG741D7411023900/Database`);
+          setAcceptances(result.data);
         //   console.log(result.data);
       }
       fetchData();
@@ -52,23 +52,23 @@ export default function TQuestionList() {
                 <TableRow>
                   <TableCell >排序</TableCell>
                   <TableCell align="center">學號</TableCell>
-                  <TableCell >問題內容</TableCell>
-                  <TableCell >最後更新時間</TableCell>
-                  <TableCell >完成問題</TableCell>
+                  <TableCell >時間</TableCell>
+                  <TableCell >狀態</TableCell>
+                  <TableCell >取消驗收</TableCell>
                 </TableRow>
             </TableHead>
 
             {/*===== TableBody =====*/}
             <TableBody>
-                {questions.map((question,index) => (
+                {acceptances.map((acceptance,index) => (
                     <TableRow key={index}>
                       <TableCell>{index+1} </TableCell>
                     {
-                        questionList.map( (list, i) =>   i === 0 ? 
+                        acceptanceList.map( (list, i) =>   i === 0 ? 
                             <TableCell key={i} component="th" scope="row" align="center" >
-                               {question[list]}
+                               {acceptance[list]}
                             </TableCell>:
-                            <TableCell key={i} align="left">{question[list]}</TableCell> 
+                            <TableCell key={i} align="left">{acceptance[list]}</TableCell> 
                             
                         )
                     }
@@ -82,3 +82,31 @@ export default function TQuestionList() {
     </Paper>
 )
 }
+
+
+
+// import React, {Component} from 'react';
+// import TableCell from '@material-ui/core/TableCell';
+// import TableRow from '@material-ui/core/TableRow';
+// import { Button } from '@material-ui/core/';
+
+
+// export default class Acceptance extends Component{
+
+//   render(){
+//     return (
+//       <TableRow>
+//         <TableCell>{this.props.acceptance.sort}</TableCell>          
+//         <TableCell>{this.props.acceptance.stuid}</TableCell>
+//         <TableCell>{this.props.acceptance.time}</TableCell>
+//         <TableCell> {this.props.acceptance.status}</TableCell>
+//         <TableCell>
+//           {(this.props.acceptance.stuid == "406401628") &&
+//              <Button>取消驗收</Button>
+//           }</TableCell>
+//       </TableRow>
+//     )
+    
+//   }
+    
+// }
