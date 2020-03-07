@@ -5,21 +5,21 @@ import './index.css';
 
 //import App from './App';
 // import ReactApp from './components/React-app.js';
-import homepage1 from './components/Homepage1';
-import homepage2 from './components/Homepage2';
-import addexam from './components/addexam';
-import QuestionList from './components/student_question.js';
-import TQuestionList from './components/teacher_question.js';
-import AcceptanceList from './components/student_acceptance.js';
-import TAcceptanceList from './components/teacher_acceptance.js';
-import shomepage from './components/student_homepage.js';
-import Rollcall from './components/rollcall.js';
-import RollcallRecord from './components/rollcallrecord';
+import homepage1 from './components/student/Homepage1';
+import homepage2 from './components/student/Homepage2';
+import addexam from './components/teacher/addexam';
+import QuestionList from './components/student/student_question';
+import TQuestionList from './components/teacher/teacher_question';
+import AcceptanceList from './components/student/student_acceptance';
+import TAcceptanceList from './components/teacher/teacher_acceptance';
+import shomepage from './components/student/student_homepage';
+import Rollcall from './components/teacher/rollcall.js';
+import RollcallRecord from './components/teacher/rollcallrecord';
 import Login from './components/login.js';
 import Register from './components/register.js';
 import ReactApp from './components/React-app.js';
 import * as serviceWorker from './serviceWorker';
-import Leavemanage from './components/leavemanage';
+import Leavemanage from './components/teacher/leavemanage';
 
 ReactDOM.render(
     <BrowserRouter>

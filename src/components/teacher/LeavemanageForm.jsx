@@ -16,22 +16,9 @@ import Button from '@material-ui/core/Button';
 import LeavemanageTable from './leavemanagetable';
 
 /*------------ STYLE ------------*/
-const useStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    margin: {
-      margin: theme.spacing(1),
-    },
-    textField: {
-      width: 150,
-    },
-  }));
-/*------------------------------*/
 
 export default function LeavemanageForm(){
-        const classes = useStyles();
+       
         return (
             <div class="InputTasksForm">
                 <div class="InputTask">
