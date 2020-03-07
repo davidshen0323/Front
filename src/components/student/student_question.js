@@ -22,6 +22,7 @@ export default function QuestionList() {
     },
     table: {
       minWidth: 450,
+      marginTop: 50,
     },
   });
   const classes = useStyles();
@@ -29,12 +30,15 @@ export default function QuestionList() {
   /*=========== Create Table HEAD ===========*/
   const questionList = [ 'q_std_id', 'q_content', 'q_time']
   const csname='專題系統開發（一）'
+  
 
   useEffect(() => {
       async function fetchData() {
-          const result = await axios.get(`/question/all/10811000DMG741D7411023900`);
+          const result = await axios.get('/question/all/2');
+         
+          console.log(result.data);
+
           setQuestions(result.data);
-        //   console.log(result.data);
       }
       fetchData();
   }, []);
@@ -43,7 +47,9 @@ export default function QuestionList() {
     <Paper className={classes.root}>
       <MyMenu/>
 
-  <center> <label>{csname}</label>  </center>
+    
+
+  {/* <center> <label>{csname}</label>  </center> */}
 
         <Table className={classes.table}>
 

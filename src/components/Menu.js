@@ -32,10 +32,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   appBar: {
+    height: 'auto',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -88,15 +90,18 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
 
   },
+  Nav: {
+    margin: 'auto',
+  }
   
 }));
 
 
 export default function LogoutMenu() {
 
-  const [Sclass, setClass] = useState([]);
+  // const [Sclass, setClass] = useState([]);
 
-  const classList = ['cs_id','cs_name'];
+  // const classList = ['cs_id','cs_name'];
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -109,14 +114,14 @@ export default function LogoutMenu() {
     setOpen(false);
   };
 
-  useEffect(() => {
-    async function fetchData() {
-        const result = await axios.get(`/class/all/10811000DMG741D7411023900`);
-        setClass(result.data);
-      //   console.log(result.data);
-    }
-    fetchData();
-}, []);
+//   useEffect(() => {
+//     async function fetchData() {
+//         const result = await axios.get(`/class/all/10811000DMG741D7411023900`);
+//         setClass(result.data);
+//       //   console.log(result.data);
+//     }
+//     fetchData();
+// }, []);
 
   const classes = useStyles();
   return (
@@ -175,16 +180,16 @@ export default function LogoutMenu() {
         </List> */}
       </Drawer>
       
-              <Grid container direction="row" justify="space-between">
-                <Grid item>
-                  {/* <Button component={Link} to='/Homepage1' color="inherit">輔仁大學</Button> */}
-                  {/* <Button  component={Link} to='/acceptance' color="inherit">排隊驗收</Button> */}
-                  {/* <Button  component={Link} to='/question' color="inherit">排隊問題</Button> */}
-                  {/* <label>{Sclass[0]}</label> */}
-                </Grid>
-                <Grid item>
+              <Grid container
+               direction="row" 
+               justify="flex-end"
+               className={classes.Nav}
+               
+               >
+                
+                <Grid item >
                   <Button component={Link} to='/login' color="inherit">登出</Button>
-                  <Button component={Link} to='/register' color="inherit">註冊</Button>
+              
                   {/* <Button  component={Link} to='/rollcall' color="inherit">點名</Button> */}
                   {/* <Typography className={classes.title} align="right" variant="body1">登出</Typography> */}
                 </Grid>
