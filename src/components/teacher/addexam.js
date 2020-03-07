@@ -62,6 +62,57 @@ function LinkTab(props) {
   );
 }
 
+function QuestionAdd(index){
+  
+  return(
+    <div style={{borderRadius:10, borderStyle:'solid', marginBottom:10, borderColor:'#D0D0D0'}}>
+  <Table><center>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  問題
+                </TableCell>
+                <TableCell>
+                  <TextareaAutosize style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請輸入問題"/>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  選項A
+                </TableCell>
+                <TableCell>
+                <TextareaAutosize style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請輸入選項"/>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  選項B
+                </TableCell>
+                <TableCell>
+                <TextareaAutosize style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請輸入選項"/>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  選項C
+                </TableCell>
+                <TableCell>
+                <TextareaAutosize style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請輸入選項"/>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  選項D
+                </TableCell>
+                <TableCell>
+                <TextareaAutosize style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請輸入選項"/>
+                </TableCell>
+              </TableRow>
+              </TableBody>
+              </center></Table> </div>
+              );
+              
+}
 
 function renderRow(props) {
   const { index, style } = props;
@@ -88,14 +139,13 @@ const useStyles = makeStyles(theme => ({
   },
   proot: {
     display: 'flex',
-    padding:20,
     
   },
   textarea:{
     borderRadius: 10,
     marginLeft: theme.spacing(2),
     width: 300,
-    padding:10,//
+    padding:10,
     fontSize:14,
     fontFamily:'微軟正黑體',
   },
@@ -136,55 +186,15 @@ export default function NavTabs() {
             </AppBar>
       <TabPanel value={value} index={0}>
         <center>考卷名稱：<Input defaultValue="" inputProps={{ 'aria-label': 'description' }} /> </center><br/>
-        <Paper className={classes.root} elevation={3} variant="outlined" >
-          <Table><center>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  問題
-                </TableCell>
-                <TableCell>
-                  <TextareaAutosize className={classes.textarea} placeholder="請輸入問題" />
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  選項A
-                </TableCell>
-                <TableCell>
-                  <TextareaAutosize className={classes.textarea} placeholder="請輸入選項" />
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  選項B
-                </TableCell>
-                <TableCell>
-                  <TextareaAutosize className={classes.textarea} placeholder="請輸入選項" />
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  選項C
-                </TableCell>
-                <TableCell>
-                  <TextareaAutosize className={classes.textarea}  placeholder="請輸入選項" />
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  選項D
-                </TableCell>
-                <TableCell>
-                  <TextareaAutosize className={classes.textarea}  placeholder="請輸入選項" />
-                </TableCell>
-              </TableRow>
-              </TableBody>
-              </center></Table> 
-              <Button variant="contained" color="primary" className={classes.button}>新增問題</Button>
-              <Button variant="contained" color="primary" className={classes.button}>發佈考題</Button>
-       
-          </Paper>
+        <div>
+          
+          <QuestionAdd/>
+          <QuestionAdd/>
+              <div style={{textAlign:'center'}}>
+              <Button variant="contained" color="primary"  style={{ margin:15 }}>新增問題</Button>
+              <Button variant="contained" color="primary" style={{ margin:15 }}>發佈考題</Button>
+              </div>
+         </div>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
