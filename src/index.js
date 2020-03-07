@@ -35,7 +35,7 @@ ReactDOM.render(
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepage1" component={homepage1}/>
             <Route path="/homepage2" component={homepage2}/>
-            <Route path="/question" component={QuestionList}/>
+            <Route path="/questions" component={QuestionList}/>
             <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
@@ -44,7 +44,7 @@ ReactDOM.render(
             <Route path="/addexam" component={addexam}/>
             <Route path="/homepage" component={shomepage}/>        
 
-            <Route path="/" component={ReactApp}/>
+            <Route exact path="/" component={ReactApp}/>
         </Switch>
     </BrowserRouter>
 , document.getElementById('root'));

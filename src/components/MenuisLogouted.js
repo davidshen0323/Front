@@ -164,20 +164,20 @@ export default function MyLogoutMenu() {
        
       </Drawer>
       
-              <Grid container direction="row" justify="space-between">
-                <Grid item>
+              {/* <Grid container direction="row" justify="space-between">
+                <Grid item> */}
                   {/* <Button component={Link} to='/Homepage1' color="inherit">輔仁大學</Button> */}
                   {/* <Button  component={Link} to='/acceptance' color="inherit">排隊驗收</Button> */}
                   {/* <Button  component={Link} to='/question' color="inherit">排隊問題</Button> */}
                   {/* <label>{Sclass[0]}</label> */}
-                </Grid>
-                <Grid item>
-                  <Button component={Link} to='/homepage1' color="inherit">登入</Button>
-                  <Button component={Link} to='/register' color="inherit">註冊</Button>
+                {/* </Grid>
+                <Grid item> */}
+                  {/* <Button component={Link} to='/homepage1' color="inherit">登入</Button>
+                  <Button component={Link} to='/register' color="inherit">註冊</Button> */}
                   {/* <Button  component={Link} to='/rollcall' color="inherit">點名</Button> */}
                   {/* <Typography className={classes.title} align="right" variant="body1">登出</Typography> */}
-                </Grid>
-              </Grid>
+                {/* </Grid>
+              </Grid> */}
               </Toolbar>
           </AppBar>
     </div>    
