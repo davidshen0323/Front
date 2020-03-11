@@ -21,6 +21,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import { ListItemAvatar } from '@material-ui/core';
+//import Image from '@material-ui-image' ;
 class Login extends Component{
     constructor(props){
         super(props);
@@ -52,11 +53,19 @@ const useStyles = makeStyles(theme =>({
             //marginLeft: theme.spacing(25),
             overflow: 'auto',
             textAlign: 'center',  
+            
         },
 
         TextField:{
             textAlign:'center',
         },
+        
+        StyleSheet:{
+            display:"flex",
+            alignItems:"center",
+            justifyContent:"center",
+        }
+
         
     }
     ));
@@ -87,18 +96,28 @@ export default function ContainedButtons(){
         return (
             <div>
                 <MyMenu/>
-
+                <br/><br/><br/>
                 <Grid 
                 container
                 direction="column"
+                
                 justify="center"
-                alignItems="center">
+                alignItems="center"
+                >
                 <Paper className={classes.root}>
                     <h2>我是登入頁</h2>
-                <List>
-                    <ListItemAvatar><Logo/></ListItemAvatar>
+
+                <div alignItems="center">
+                     <Logo/>
+                </div>
                 
-                </List>
+
+
+
+
+
+
+
                 <WingBlank>
 
                     <List>
