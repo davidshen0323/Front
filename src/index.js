@@ -13,13 +13,15 @@ import TQuestionList from './components/teacher/teacher_question';
 import AcceptanceList from './components/student/student_acceptance';
 import TAcceptanceList from './components/teacher/teacher_acceptance';
 import shomepage from './components/student/student_homepage';
-import Rollcall from './components/teacher/rollcall.js';
-import RollcallRecord from './components/teacher/rollcallrecord';
+import Rollcall from './components/teacher/rollcall/rollcall';
+import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
+import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
 import Register from './components/register.js';
 import ReactApp from './components/React-app.js';
 import * as serviceWorker from './serviceWorker';
-import Leavemanage from './components/teacher/leavemanage';
+
+import rollcallBlock from './components/teacher/rollcallBlock';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -42,7 +44,8 @@ ReactDOM.render(
 
 
             <Route path="/addexam" component={addexam}/>
-            <Route path="/homepage" component={shomepage}/>        
+            <Route path="/homepage" component={shomepage}/>
+            <Route path="/rollcallBlock" component={rollcallBlock}/>        
 
             <Route exact path="/" component={ReactApp}/>
         </Switch>

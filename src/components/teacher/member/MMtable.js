@@ -12,25 +12,27 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import {useState,useEffect} from 'react';
+import axios from 'axios';
 
 
-function createData(time, number,name,kind,reason,proof,pass) {
-    return { time, number,name,kind,reason,proof,pass };
+function createData(number,name,grade,group,detail) {
+    return { number,name,grade,group,detail};
   }
   
   const rows = [
-    createData('2019.11.05 11:05', 406401111,'李李李', '事假', '肚子不舒服', ' ','人臉點名'),
-    createData('2019.11.12 11:12', 406401222,'沈沈沈', '病假', '肚子不舒服', ' ','QR code'),
-    createData('2019.11.19 11:19', 406401333,'黃黃黃', '病假', '肚子不舒服', ' ','藍牙點名'),
-    createData('2019.11.26 11:26', 406401444,'楊楊楊', '病假', '肚子不舒服', ' ','手動點名'),
-    createData('2019.12.03 12:03', 406401111,'程程程', '事假', '肚子不舒服', ' ','人臉點名'),
-    createData('2019.12.10 12:10', 406401111,'吳吳吳', '事假', '肚子不舒服', ' ','手動點名'),
-    createData('2019.12.17 12:17', 406401111,'李李里', '事假', '肚子不舒服', ' ','人臉點名'),
-    createData('2019.12 24 12:24', 406401111,'嬸嬸沈', '病假', '肚子不舒服', ' ','QR code'),
-    createData('2020.01.01 01:00', 406401111,'黃黃煌', '事假', '肚子不舒服', ' ','藍牙點名'),
-    createData('2020.01.08 01:08', 406401111,'楊洋洋', '病假', '肚子不舒服', ' ','人臉點名'),
-    createData('2020.01.15 01:15', 406401111,'程成程', '病假', '肚子不舒服', ' ','藍牙點名'),
-    createData('2020.01.22 01:22', 406401111,'里里里', '事假', '肚子不舒服', ' ','手動點名'),
+    createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
+    createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
+    createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
+    createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
+    createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
+    createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
+    createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
+    createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
+    createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
+    createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
+    createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
+    createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
   ];
 
 
@@ -61,13 +63,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', numeric: false, disablePadding: true, label: '時間' },
-  { id: 'number', numeric: true, disablePadding: false, label: '學號' },
+  { id: 'number', numeric: false, disablePadding: true, label: '學號' },
   { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
-  { id: 'kind', numeric: true, disablePadding: false, label: '假別' },
-  { id: 'reason', numeric: true, disablePadding: false, label: '事由' },
-  { id: 'proof', numeric: true, disablePadding: false, label: '證明' },
-  { id: 'pass', numeric: true, disablePadding: false, label: '准許' },
+  { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
+  { id: 'group', numeric: true, disablePadding: false, label: '分組' },
   
 ];
 
@@ -145,23 +144,30 @@ const useStyles = makeStyles(theme => ({
 /*------------------------------------*/
 
 
-export default function LeaveMNTable() {
+export default function MemberTable() {
+
+  /*------------ STATE ------------*/
+  const [students, setMembers] = useState([]);
+ 
+
+//  useEffect(() => {
+//   async function fetchData() {
+//       const result = await axios.get(`/question/all/2`);
+//       setMembers(result.data);
+//     //   console.log(result.data);
+//   }
+//   fetchData();
+// }, []);
+
+
+
+
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [state, setState] = React.useState({
-      checkedA: true,
-      checkedB: true,
-  });
-
-
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
-  };
-
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -184,6 +190,21 @@ export default function LeaveMNTable() {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+
+/*=========== Create Table HEAD ===========*/
+ const studentList = [ 'q_std_id', 'q_content', 'q_time']
+
+ useEffect(() => {
+  async function fetchData() {
+      const result = await axios.get(`/question/all/2`);
+      setMembers(result.data);
+      console.log(result.data);
+  }
+  fetchData();
+}, []);
+
+
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -195,51 +216,52 @@ export default function LeaveMNTable() {
             size={dense ? 'small' : 'medium'}
             aria-label="enhanced table"
           >
-            <EnhancedTableHead
+            {/* <EnhancedTableHead
               classes={classes}
-              // numSelected={selected.length}
                order={order}
                orderBy={orderBy}
-              // onSelectAllClick={handleSelectAllClick}
                onRequestSort={handleRequestSort}
-              //rowCount={rows.length}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  //const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+              rowCount={rows.length}
+            /> */}
 
-                  return (
-                    <TableRow hover role="checkbox" >
+
+            {/*===== TableBody =====*/}
+            <TableBody>
+              {/* {stableSort(rows, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
+                {students.map((student, index) => (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                      {/* 碰到的時候後面會反灰 */}
+                  <TableCell>{index+1}</TableCell>
+                  {
+                  //const labelId = `enhanced-table-checkbox-${index}`;
+
+                    studentList.map( (list, i) =>   i === 0 ? 
+                    <TableCell key={i} component="th" scope="row" align="center" padding="none" >
+                    {student[list]}
+                 </TableCell>:
+                 <TableCell key={i} align="left">{student[list]}</TableCell> 
+                        )
+                  }    
+{/*                     
                     
                       <TableCell padding="default"/>
 
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.time}</TableCell>
-                      <TableCell align="left">{row.number}</TableCell>
+                        {row.number}</TableCell>
                       <TableCell align="left">{row.name}</TableCell>
-                      <TableCell align="left">{row.kind}</TableCell>
-                      <TableCell align="left">{row.reason}</TableCell>
-                      <TableCell align="left">{row.proof}</TableCell>
-                      <TableCell align="left">
-                      <FormControlLabel
-                      control={
-                        <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" />
-                      }
-                      label="准許"/>
-                    </TableCell>
+                      <TableCell align="left">{row.grade}</TableCell>
+                      <TableCell align="left">{row.group}</TableCell>
+                      <TableCell align="left">{row.detail}</TableCell>
                       
                     </TableRow>
-                  );
+                  
                 })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={6} /> */}
                 </TableRow>
-              )}
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
