@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,10 +10,16 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 function createData(time, number,name,kind,reason,proof,pass) {
     return { time, number,name,kind,reason,proof,pass };
@@ -34,7 +41,7 @@ function createData(time, number,name,kind,reason,proof,pass) {
   ];
 
 
-function descendingComparator(a, b, orderBy) {//順序升降
+function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -44,8 +51,8 @@ function descendingComparator(a, b, orderBy) {//順序升降
   return 0;
 }
 
-function getComparator(order, orderBy) {//搜尋
-  return order === 'desc'//按照筆畫多到少
+function getComparator(order, orderBy) {
+  return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -61,33 +68,30 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', numeric: false, disablePadding: true, label: '時間' },
+  { id: 'time', numeric: true, disablePadding: true, label: '時間' },
   { id: 'number', numeric: true, disablePadding: false, label: '學號' },
   { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
   { id: 'kind', numeric: true, disablePadding: false, label: '假別' },
   { id: 'reason', numeric: true, disablePadding: false, label: '事由' },
   { id: 'proof', numeric: true, disablePadding: false, label: '證明' },
-  { id: 'pass', numeric: true, disablePadding: false, label: '准許' },
+//   { id: 'pass', numeric: false, disablePadding: false, label: '准許' },
   
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort } = props;
+  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
 
   return (
     <TableHead>
-      <TableRow>
-
-
-        <TableCell padding="none" />
-          
+      <TableRow >
+        <TableCell padding='default'/>
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ='left'}
+            align={headCell.numeric? 'left' : 'right'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -103,9 +107,18 @@ function EnhancedTableHead(props) {
                 </span>
               ) : null}
             </TableSortLabel>
-
           </TableCell>
-        ))}
+          ))}
+          
+          <TableCell padding="default">准許
+          <Checkbox color="primary"
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{ 'aria-label': 'select all desserts' }}
+          />
+        </TableCell>
+        
       </TableRow>
     </TableHead>
   );
@@ -113,12 +126,75 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
+  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
 };
 
-/*---------------------------------------*/
+const useToolbarStyles = makeStyles(theme => ({
+  root: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(1),
+  },
+  highlight:
+    theme.palette.type === 'light'
+      ? {
+          color: theme.palette.primary.main,
+          backgroundColor: lighten(theme.palette.primary.light, 0.8),
+        }
+      : {
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.primary.dark,
+        },
+  title: {
+    flex: '1 1 100%',
+  },
+}));
+
+const EnhancedTableToolbar = props => {
+  const classes = useToolbarStyles();
+  const { numSelected } = props;
+
+  return (
+    <Toolbar
+      className={clsx(classes.root, {
+        [classes.highlight]: numSelected > 0,
+      })}
+    >
+      {numSelected > 0 ? (
+        <Typography className={classes.title} color="inherit" variant="subtitle1">
+          {numSelected} selected
+        </Typography>
+      ) : (
+        <Typography className={classes.title} variant="h6" id="tableTitle">
+          請假審核
+        </Typography>
+      )}
+
+      {numSelected > 0 ? (
+        <Tooltip title="確定">
+          <IconButton aria-label="CheckCircle">
+            <CheckCircle />
+          </IconButton>
+        </Tooltip>
+      ) : (
+         <Tooltip title="Filter list">
+           <IconButton aria-label="filter list">
+             <FilterListIcon />
+           </IconButton>
+         </Tooltip>
+      )}
+    </Toolbar>
+  );
+};
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+};
+/*----------------------------------------*/
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -140,33 +216,52 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: 20,
     width: 1,
+    color:'primary',
   },
 }));
-/*------------------------------------*/
-
-
-export default function LeaveMNTable() {
+/*-------------------------------------------*/
+export default function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('number');
+  const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [state, setState] = React.useState({
-      checkedA: true,
-      checkedB: true,
-  });
-
-
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
-  };
-
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
+  };
+
+  const handleSelectAllClick = event => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map(n => n.name);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const handleClick = (event, name) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1),
+      );
+    }
+
+    setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -178,16 +273,19 @@ export default function LeaveMNTable() {
     setPage(0);
   };
 
-  const handleChangeDense = event => {//改成密集的
+  const handleChangeDense = event => {
     setDense(event.target.checked);
   };
+
+  const isSelected = name => selected.indexOf(name) !== -1;
+  
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
+        <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -197,41 +295,48 @@ export default function LeaveMNTable() {
           >
             <EnhancedTableHead
               classes={classes}
-              // numSelected={selected.length}
-               order={order}
-               orderBy={orderBy}
-              // onSelectAllClick={handleSelectAllClick}
-               onRequestSort={handleRequestSort}
-              //rowCount={rows.length}
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
+              onRequestSort={handleRequestSort}
+              rowCount={rows.length}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  //const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover role="checkbox" >
-                     {/* 碰到的時候後面會反灰 */}
-                    
+                    <TableRow 
+                      hover
+                      onClick={event => handleClick(event, row.name)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.name}
+                      selected={isItemSelected}
+                      
+                    >
                       <TableCell padding="default"/>
-
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.time}</TableCell>
+                        {row.time}
+                      </TableCell>
                       <TableCell align="left">{row.number}</TableCell>
                       <TableCell align="left">{row.name}</TableCell>
                       <TableCell align="left">{row.kind}</TableCell>
                       <TableCell align="left">{row.reason}</TableCell>
                       <TableCell align="left">{row.proof}</TableCell>
-                      <TableCell align="left">
-                      <FormControlLabel
-                      control={
-                        <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" />
-                      }
-                      label="准許"/>
-                    </TableCell>
                       
+                      <TableCell align="left" padding="default">
+                    
+                        <Checkbox color="primary"
+                          checked={isItemSelected}
+                          inputProps={{ 'aria-labelledby': labelId }}
+                        />
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -253,11 +358,9 @@ export default function LeaveMNTable() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      
-      
-      <FormControlLabel  //改成密集的
+      <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense Padding"
+        label="Dense padding"
       />
     </div>
   );

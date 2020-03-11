@@ -40,7 +40,7 @@ export default function Leavemanage() {
             <div class="InputTasksForm">
                 <div class="InputTask">
                   
-                <LeaveMNTable />
+                <EnhancedTable />
 
                 </div>
             </div>
