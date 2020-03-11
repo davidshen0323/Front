@@ -20,6 +20,7 @@ import Register from './components/register.js';
 import ReactApp from './components/React-app.js';
 import * as serviceWorker from './serviceWorker';
 import Leavemanage from './components/teacher/leavemanage';
+import examresult from './components/teacher/ExamResult';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -39,7 +40,7 @@ ReactDOM.render(
             <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
-
+            <Route path="/examresult" component={examresult}/>
 
             <Route path="/addexam" component={addexam}/>
             <Route path="/homepage" component={shomepage}/>        
