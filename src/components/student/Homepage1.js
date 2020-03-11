@@ -38,13 +38,14 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.text.secondary,
     },
     paperclass: {
-      padding: theme.spacing(7),
+      padding: theme.spacing(6),
       marginTop: 50,
       textAlign: 'center',
       backgroundColor: 'lightgray',
       border: '2px',
       borderStyle: 'solid',
-      borderColor: 'darkblue',
+      borderColor: 'yellow',
+      width: '100%',
     },
 
     paperleft: {
@@ -80,11 +81,11 @@ export default function Homepage1() {
 
   const classes = useStyles();
 
-  const classList = ['cs_id','cs_name'];
+  const classList = ['cs_id','cs_name','teacher_name'];
 
   useEffect(() => {
     async function fetchData() {
-        const result = await axios.get(`/HomePage1_s/one/406401599`);
+        const result = await axios.get(`/HomePage1_s/one/406401109`);
         setClass(result.data);
         console.log(result.data);
     }
@@ -147,7 +148,7 @@ export default function Homepage1() {
       </Paper> */}
         </Grid>  
         
-        <Grid item xs={4} spacing={1}>
+        <Grid item xs={4}>
         <ButtonGroup 
           orientation="vertical"
           className={classes.button1}
@@ -157,79 +158,100 @@ export default function Homepage1() {
         </ButtonGroup>
         </Grid>  
 
-        <Grid item xs={8} spacing={1}>
-        <Paper className={classes.paperclass}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <Avatar>D</Avatar>
-          </Grid>
-          <Grid item xs>
-            <TableBody>
+        <Grid item xs={8}>
+          {/* <Paper>
             {Sclass.map((classs,index) => (
+              <Grid key ={index}>
+              {
+              classList.map( (list, i) => i === 0 ?
+              <Grid key={i}>
+              {classs[list]}
+              <Grid>
+                {classs[list]}
+              </Grid>
+              </Grid>:
+              <Grid key={i}>{classs[list]}</Grid>
+              )
+              }
+              </Grid>
+            ))
+          }
+        </Paper> */}
+        <TableBody>
+            {Sclass.map((classs,index) => (
+                <Paper className={classes.paperclass} >
               <TableRow key = {index}>
-                <TableCell>{index+1}</TableCell>
+                {/* <TableCell>{index+1}</TableCell> */}
                 {
                   classList.map( (list, i) =>  i === 0 ?
                   <TableCell key={i} component="th" scope="row" align="center">
-                    {classs[list]}
-                  </TableCell>:
+                    {/* {classs[list]} */}
+                    
+        
+            
+            {classs[list]}
+            
+            
+          
+                   </TableCell>:
                   <TableCell key={i} align="left">{classs[list]}</TableCell>
                   )
                 }
               </TableRow>
+              </Paper> 
             ))}
-            </TableBody>
-            {/* <Typography>Truncation should be conditionally applicable on this long line of text as this is a much longer line than what the container can support.</Typography> */}
+            </TableBody> 
           </Grid>
-        </Grid>
-      </Paper>
-        {/* <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-          <Typography>photo</Typography>
-          </Grid>
-          <Grid item xs>
-          <Typography>wordsaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Typography>
-          </Grid>
-          </Grid>
-        </Paper> */}
-        </Grid>  
-
-        <Grid item xs={4} spacing={1}>
-        <Paper className={classes.paperleft}>
           
-        </Paper>
-        </Grid>  
 
-        <Grid item xs={8} spacing={1}>
-        <Paper className={classes.paperclass}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <Avatar>D</Avatar>
-          </Grid>
-          <Grid item xs>
-            <Typography>Truncation should be conditionally applicable on this long line of text as this is a much longer line than what the container can support.</Typography>
-          </Grid>
-        </Grid>
-      </Paper>
-        </Grid>  
+
+            
+        {/* // <Paper className={classes.paper}>
+        // <Grid container wrap="nowrap" spacing={2}>
+        //   <Grid item>
+        //   <Typography>photo</Typography>
+        //   </Grid>
+        //   <Grid item xs>
+        //   <Typography>wordsaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Typography>
+        //   </Grid>
+        //   </Grid>
+        // </Paper>
+        // </Grid>  
+
+      //   <Grid item xs={4} spacing={1}>
+      //   <Paper className={classes.paperleft}>
+          
+      //   </Paper>
+      //   </Grid>  
+
+      //   <Grid item xs={8} spacing={1} >
+      //   <Paper className={classes.paperclass} >
+      //   <Grid container wrap="nowrap" spacing={2} >
+          
+      //     <Grid item xs>
+      //       <Typography>Truncation should be conditionally applicable on this long line of text as this is a much longer line than what the container can support.</Typography>
+      //     </Grid>
+      //   </Grid>
+      // </Paper>
+      //   </Grid>  
         
-        <Grid item xs={4} spacing={1}>
-        <Paper className={classes.paperleft}></Paper>
-        </Grid>  
+      //   <Grid item xs={4} spacing={1}>
+      //   <Paper className={classes.paperleft}></Paper>
+      //   </Grid>  
 
-        <Grid item xs={8} spacing={3}>
-        <Paper className={classes.paperclass}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <Avatar>D</Avatar>
-          </Grid>
-          <Grid item xs>
-            <Typography>Truncation should be conditionally applicable on this long line of text as this is a much longer line than what the container can support.</Typography>
-          </Grid>
-        </Grid>
-      </Paper>
-        </Grid>  
+      //   <Grid item xs={8} spacing={3}>
+      //   <Paper className={classes.paperclass}>
+      //   <Grid container wrap="nowrap" spacing={2}>
+      //     <Grid item>
+      //       <Avatar>D</Avatar>
+      //     </Grid>
+      //     <Grid item xs>
+      //       <Typography>Truncation should be conditionally applicable on this long line of text as this is a much longer line than what the container can support.</Typography>
+      //     </Grid>
+      //   </Grid>
+      // </Paper>
+      //   </Grid>
+          */}
       </Grid>
     </div>
     
