@@ -13,7 +13,16 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
 import {Save,Delete} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardTimePicker,
+    KeyboardDatePicker,
+  } from '@material-ui/pickers';
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,29 +35,86 @@ const useStyles = makeStyles(theme => ({
     textField: {
       width: 150,
     },
+    Paper:{
+        width: '100%',
+        margin: 'auto',
+        marginBottom: theme.spacing(2),
+        backgroundColor: '#F2F2F2',
+        
+    },
+    Button:{
+        width:'50%',
+    },
+    inputForm:{
+            paddingLeft:65,
+            paddingTop:10,
+    }
   }));
 /*------------------------------*/
 
 export default function InputTasksForm(){
         const classes = useStyles();
-        return (
-            <div className="InputTasksForm">
-                <div className="InputTask">
-                  
-                    <InputName className="fas fa-calendar-alt" inputName="點名日期" />
-                    <div className="inputForm">
-                        <input type="date" className="inputStyle inputDateTime" 
-                                inputlabelprops={{shrink: true,}} />
-                    </div>
+        const [selectedDate, setSelectedDate] = React.useState(new Date('2020-3-20T21:11:54'));
+        const handleDateChange = date => {
+            setSelectedDate(date);
+        };
+                return (
+           <div>
+           <Paper className={classes.Paper}>
+           <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Grid container spacing={2}  
+            direction="row"  
+            justify="center"  
+            alignItems="flex-start"
+            >
+                <Grid item sm xs={12}> 
+                    <InputName  inputName="點名日期" />
+                    <div className={classes.inputForm}>
+                        {/* <input type="date" className="inputStyle inputDateTime" 
+                                inputlabelprops={{shrink: true,}} /> */}
 
-                    <InputName className="fas fa-calendar-alt2" inputName="截止時間" />
-                    <div className="inputForm">
-                        <input type="time" className="inputStyle inputDateTime" 
-                                inputlabelprops={{shrink: true,}}/>
+<KeyboardDatePicker
+          disableToolbar
+          inputVariant="outlined"
+          size="small"
+          variant="inline"
+          format="yyyy/MM/dd"
+          margin="normal"
+          id="date-picker-inline"
+          // label="Date picker inline"
+          helperText=""
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={
+            'change date'
+          }
+        />        
                     </div>
+                </Grid>
+                <Grid item sm xs={12}>
+                    <InputName  inputName="截止時間" />
+                    <div className={classes.inputForm}>
+                        {/* <input type="time" className="inputStyle inputDateTime" 
+                                inputlabelprops={{shrink: true,}}/> */}
+<KeyboardTimePicker
+          inputVariant="outlined"
+          size="small"
+          margin="normal"
+          id="time-picker"
+          // label="Time picker"
+          value={selectedDate}
+          onChange={handleDateChange}
+          helperText=""
+          KeyboardButtonProps={
+            'change time'
+          }
+        />
 
-                    <InputName className="fas fa-score" inputName="計分方式" />
-                    <div className="inputForm">
+                    </div>
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                    <InputName inputName="計分方式" />
+                    <div className={classes.inputForm}>
                     <RadioGroup aria-label="position" name="position"   row>                    
                     
                     <FormControlLabel
@@ -71,36 +137,34 @@ export default function InputTasksForm(){
                                 id="outlined-adornment-%"
                                 //value={values.weight}
                                 //onChange={handleChange('weight')}
-                                endAdornment={<InputAdornment position="end">%</InputAdornment>}
-                                aria-describedby="outlined-%-helper-text"
-                                inputProps={{'aria-label': '%',}}
+                                endAdornment={<InputAdornment position="end">分</InputAdornment>}
+                                inputProps={{'aria-label': '分',}}
                                 labelWidth={90}
-                                margin="dense"/>                           
+                                />                           
                     </FormControl>
                     </RadioGroup>
                     </div>
+                </Grid>
+            </Grid>        
                     
 
-                    <InputName className="far fa-comment-way" inputName="點名方式" />
-                    <div className="inputForm">
+                    <InputName inputName="點名方式" />
+                    <div className={classes.inputForm}>
                         <ButtonBases/>
                     </div>
 
-                </div>
-
-
+                <br/>
                 <div>
-                    <Button variant="contained" color="secondary"  className="addButton cancelButton" startIcon={<Delete />}>
+                    <Button variant="contained" color="secondary"  className= {classes.Button} startIcon={<Delete />}>
                         取消
                     </Button>
                     
-                    <Button variant="contained" color="primary"   className="addButton saveButton" startIcon={<Save />}> 
+                    <Button variant="contained" color="primary"   className= {classes.Button} startIcon={<Save />}> 
                         確定
                     </Button>
                 </div>
-            </div>
+                </MuiPickersUtilsProvider>
+           </Paper>
+         </div>
         )
     }
-//}
-
-//export { InputTasksForm } 

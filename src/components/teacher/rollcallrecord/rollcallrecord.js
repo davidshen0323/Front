@@ -1,12 +1,7 @@
 import React from 'react';
-import MyMenu from '../../Menu';
 import { makeStyles } from '@material-ui/core/styles';
-import  TopBlock  from "../TopBlock";
-import {HashRouter} from "react-router-dom";
-import "../rollcallrecord/rollcallrecord.css";
-import "../Form.css";
-import  RollcallrecordForm from './RollcallrecordForm';
-import RollcallrecordTable from './rollcallrecordtable';
+import RollcallRDDp from './rollcallRDDp';
+import Paper from '@material-ui/core/Paper';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
@@ -15,36 +10,25 @@ const useStyles = makeStyles({
         margin:'20px',
         marginTop:'20px',
         background: '#E1E1E1',
-    }
+    },
+    Paper:{
+        width: '100%',
+        margin: 'auto',        
+    },
   });
 
 /*--------------------------------*/
 export default function RollcallRecord() {
     const classes = useStyles();
-    //render() {
+    
         return (
-            // <div>
-            // <MyMenu/>
-            // <br/><br/>
-            // <center><label><h1>專題</h1></label> </center>
-            // <HashRouter>
-            //     <TopBlock />
-            //     <br/>
-            //    <RollcallrecordForm />
-            //</HashRouter>
-            
-            // <br></br>
-            // </div>
 
-            <div class="InputTasksForm">
-                <div class="InputTask">
-                  
-                <RollcallrecordTable />
+                <div>
+                <Paper className={classes.Paper}> 
+                <RollcallRDDp/>
+                </Paper>
+                </div>
 
-
-
-            </div>
-            </div>
 
 
 

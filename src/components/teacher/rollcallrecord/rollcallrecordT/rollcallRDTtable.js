@@ -16,25 +16,25 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 
 
-// function createData(number,name,grade,group,detail) {
-//     return { number,name,grade,group,detail};
-//   }
-  
-//   const rows = [
-//     createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
-//     createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
-//     createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
-//     createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
-//   ];
+function createData(number, name,grade,pass,absence) {
+  return { number, name,grade,pass,absence };
+}
 
+
+const rows = [
+        createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
+        createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
+        createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
+        createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
+        createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
+        createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
+        createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
+        createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
+        createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
+        createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
+        createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
+        createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
+      ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -63,12 +63,12 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'number', numeric: false, disablePadding: true, label: '學號' },
-  { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
-  { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-  { id: 'group', numeric: true, disablePadding: false, label: '分組' },
-  
-];
+    { id: 'number', numeric: true, disablePadding: false, label: '學號' },
+    { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
+    { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
+    { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
+    
+  ];
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
@@ -117,7 +117,7 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-/*---------------------------------------*/
+/*----------------------------------------------*/
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -141,16 +141,16 @@ const useStyles = makeStyles(theme => ({
     width: 1,
   },
 }));
-/*------------------------------------*/
+/*---------------------------------------------*/
 
 
-export default function MemberTable() {
+export default function RollcallRDTable() {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
- 
 
-  
+
+
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -173,31 +173,32 @@ export default function MemberTable() {
     setPage(0);
   };
 
+  const handleChangeDense = event => {//改成密集的
+    setDense(event.target.checked);
+  };
 
 //  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
 
 /*=========== Create Table HEAD ===========*/
- const studentList = [ 'q_std_id', 'q_content', 'q_time']
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
 
- useEffect(() => {
-  async function fetchData() {
-      const result = await axios.get(`/question/all/2`);
-      
-      console.log(result.data);
+useEffect(() => {
+ async function fetchData() {
+     const result = await axios.get(`/rollcall/one/1`);
+     
+     console.log(result.data);
 
-      setMembers(result.data);
-  }
-  fetchData();
+     setMembers(result.data);
+ }
+ fetchData();
 }, []);
-
 
 
   return (
     <div className={classes.root}>
-      {/* <Paper className={classes.paper}> */}
-        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
-        <TableContainer>
+
+    <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
@@ -207,18 +208,17 @@ export default function MemberTable() {
             <EnhancedTableHead
               classes={classes}
                order={order}
-               orderBy={orderBy}
+               orderBy={orderBy}              
                onRequestSort={handleRequestSort}
-              //rowCount={rows.length}
             />
-
 
             {/*===== TableBody =====*/}
             <TableBody>
               {/* {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
                 {students.map((student, index) => (
-                  <TableRow hover role="checkbox">
+                    
+                  <TableRow hover role="none">
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
@@ -256,13 +256,14 @@ export default function MemberTable() {
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
-        //  count={rows.length}
+          count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       {/* </Paper> */}
+
     </div>
   );
 }

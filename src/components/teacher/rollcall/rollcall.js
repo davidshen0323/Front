@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import  TopBlock  from "../TopBlock";
 import {HashRouter} from "react-router-dom";
 import "./rollcall.css";
-import "../Form.css";
 import  InputTasksForm from './InputTasksForm';
 
 /*------------ STYLE ------------*/
