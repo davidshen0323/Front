@@ -40,7 +40,7 @@ export default function Member() {
             <div className="InputTasksForm">
                 <div className="InputTask">
                   
-                <MemberTable />
+                <MMTable />
 
                 </div>
             </div>

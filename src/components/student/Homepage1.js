@@ -85,7 +85,7 @@ export default function Homepage1() {
 
   useEffect(() => {
     async function fetchData() {
-        const result = await axios.get(`/HomePage1_s/one/406401109`);
+        const result = await axios.get(`/HomePage1_s/one/406401628`);
         setClass(result.data);
         console.log(result.data);
     }
