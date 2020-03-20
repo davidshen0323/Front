@@ -32,19 +32,19 @@ const useStyles = makeStyles(theme => ({
 export default function InputTasksForm(){
         const classes = useStyles();
         return (
-            <div class="InputTasksForm">
-                <div class="InputTask">
+            <div className="InputTasksForm">
+                <div className="InputTask">
                   
                     <InputName className="fas fa-calendar-alt" inputName="點名日期" />
                     <div className="inputForm">
                         <input type="date" className="inputStyle inputDateTime" 
-                                InputLabelProps={{shrink: true,}} />
+                                inputlabelprops={{shrink: true,}} />
                     </div>
 
                     <InputName className="fas fa-calendar-alt2" inputName="截止時間" />
                     <div className="inputForm">
                         <input type="time" className="inputStyle inputDateTime" 
-                                InputLabelProps={{shrink: true,}}/>
+                                inputlabelprops={{shrink: true,}}/>
                     </div>
 
                     <InputName className="fas fa-score" inputName="計分方式" />

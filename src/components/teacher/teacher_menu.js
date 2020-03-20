@@ -34,7 +34,7 @@ export default function MyMenu() {
               <Button  component={Link} to='/acceptance' color="inherit">排隊驗收</Button>
               <Button  component={Link} to='/tquestion' color="inherit">t排隊問題</Button>
               <Button  component={Link} to='/tacceptance' color="inherit">t排隊驗收</Button>
-              <Button  component={Link} to='/tacceptance' color="inherit">結果</Button>
+              <Button  component={Link} to='/examresult' color="inherit">結果</Button>
 
               <Typography className={classes.title} align="right" variant="body1" >教師</Typography>
               

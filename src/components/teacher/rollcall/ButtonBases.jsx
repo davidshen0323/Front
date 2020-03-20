@@ -4,31 +4,25 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 
 
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-
 
 const images = [
   {
-    url: "https://material-ui.com/static/images/cards/contemplative-reptile.jpg",
+    url: "https://image.flaticon.com/icons/svg/2313/2313049.svg",
     title: '人臉辨識',
     width: '25%',
   },
   {
-    url: '/static/images/grid-list/burgers.jpg',
+    url: "https://image.flaticon.com/icons/svg/2313/2313039.svg",
     title: 'QRcode',
     width: '25%',
   },
   {
-    url: '/static/images/grid-list/camera.jpg',
+    url: "https://image.flaticon.com/icons/svg/2313/2313041.svg",
     title: '藍牙定位',
     width: '25%',
   },
   {
-    url: '/static/images/grid-list/breakfast.jpg',
+    url: "https://image.flaticon.com/icons/svg/2311/2311961.svg",
     title: '手動點名',
     width: '25%',
   },
@@ -45,13 +39,13 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     height: 200,
     [theme.breakpoints.down('xs')]: {
-      width: '100% !important', // Overrides inline-style
-      height: 100,
+      width: '10% !important', // Overrides inline-style
+      height: 50,
     },
     '&:hover, &$focusVisible': {
       zIndex: 1,
       '& $imageBackdrop': {
-        opacity: 0.15,
+        opacity: 0.009,
       },
       '& $imageMarked': {
         opacity: 0,
@@ -64,10 +58,10 @@ const useStyles = makeStyles(theme => ({
   focusVisible: {},
   imageButton: {
     position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    left: 10,
+    right: 10,
+    top: 10,
+    bottom: 10,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -75,21 +69,21 @@ const useStyles = makeStyles(theme => ({
   },
   imageSrc: {
     position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    left: 40,
+    right: 40,
+    top: 40,
+    bottom: 40,
     backgroundSize: 'cover',
-    backgroundPosition: 'center 40%',
+    backgroundPosition: 'center 100%',
   },
-  imageBackdrop: {
+  imageBackdrop: {//最上面灰灰那部分
     position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    left: 10,
+    right: 10,
+    top: 10,
+    bottom: 10,
     backgroundColor: theme.palette.common.black,
-    opacity: 0.4,
+    opacity: 0.3,
     transition: theme.transitions.create('opacity'),
   },
   imageTitle: {
