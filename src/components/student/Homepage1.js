@@ -87,7 +87,7 @@ export default function Homepage1() {
     async function fetchData() {
         const result = await axios.get(`/HomePage1_s/one/406401628`);
         setClass(result.data);
-        console.log(result.data);
+        // console.log(result.data);
     }
     fetchData();
 }, []);
