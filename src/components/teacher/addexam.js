@@ -208,7 +208,7 @@ export default function NavTabs() {
               </TableRow>
               <TableRow>
                 <TableCell ><center>
-                <FixedSizeList height={400} width={400} itemSize={40} itemCount={20}>
+                <FixedSizeList height={400} width={300} itemSize={40} itemCount={20}>
             {renderRow}
           </FixedSizeList></center>
                 </TableCell>

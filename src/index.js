@@ -24,6 +24,11 @@ import * as serviceWorker from './serviceWorker';
 import rollcallBlock from './components/teacher/rollcallBlock';
 import post from './components/Post';
 
+import examresult from './components/teacher/ExamResult';
+import Member from './components/teacher/member/member';
+import RollcallBlock from './components/teacher/rollcallBlock';
+
+
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
@@ -45,9 +50,12 @@ ReactDOM.render(
 
             <Route path="/post" component={post}/>
             
+
+            <Route path="/examresult" component={examresult}/>
+            <Route path="/member" component={Member}/>
             <Route path="/addexam" component={addexam}/>
             <Route path="/homepage" component={shomepage}/>
-            <Route path="/rollcallBlock" component={rollcallBlock}/>        
+            <Route path="/rollcallBlock" component={RollcallBlock}/>
 
             <Route exact path="/" component={ReactApp}/>
         </Switch>
