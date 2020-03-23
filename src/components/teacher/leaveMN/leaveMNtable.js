@@ -178,9 +178,9 @@ export default function LeaveMNTable() {
     setPage(0);
   };
 
-  const handleChangeDense = event => {//改成密集的
-    setDense(event.target.checked);
-  };
+  // const handleChangeDense = event => {//改成密集的
+  //   setDense(event.target.checked);
+  // };
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -197,12 +197,9 @@ export default function LeaveMNTable() {
           >
             <EnhancedTableHead
               classes={classes}
-              // numSelected={selected.length}
                order={order}
                orderBy={orderBy}
-              // onSelectAllClick={handleSelectAllClick}
                onRequestSort={handleRequestSort}
-              //rowCount={rows.length}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
@@ -235,11 +232,11 @@ export default function LeaveMNTable() {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
+              {/* {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+              )} */}
             </TableBody>
           </Table>
         </TableContainer>
@@ -255,10 +252,10 @@ export default function LeaveMNTable() {
       </Paper>
       
       
-      <FormControlLabel  //改成密集的
+      {/* <FormControlLabel  //改成密集的
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense Padding"
-      />
+      /> */}
     </div>
   );
 }

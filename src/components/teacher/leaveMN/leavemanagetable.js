@@ -12,12 +12,9 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
@@ -74,7 +71,6 @@ const headCells = [
   { id: 'kind', numeric: true, disablePadding: false, label: '假別' },
   { id: 'reason', numeric: true, disablePadding: false, label: '事由' },
   { id: 'proof', numeric: true, disablePadding: false, label: '證明' },
-//   { id: 'pass', numeric: false, disablePadding: false, label: '准許' },
   
 ];
 
@@ -199,10 +195,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
+  // paper: {
+  //   width: '100%',
+  //   marginBottom: theme.spacing(2),
+  // },
   table: {
     minWidth: 750,
   },
@@ -220,14 +216,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 /*-------------------------------------------*/
-export default function EnhancedTable() {
+export default function LMNTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('number');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -273,10 +269,6 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const handleChangeDense = event => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = name => selected.indexOf(name) !== -1;
   
 
@@ -284,13 +276,13 @@ export default function EnhancedTable() {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
+      {/* <Paper className={classes.paper}> */}
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size='small'
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -317,7 +309,7 @@ export default function EnhancedTable() {
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.name}
-                      selected={isItemSelected}
+                      //selected={isItemSelected}
                       
                     >
                       <TableCell padding="default"/>
@@ -340,28 +332,18 @@ export default function EnhancedTable() {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+        />     
     </div>
   );
 }

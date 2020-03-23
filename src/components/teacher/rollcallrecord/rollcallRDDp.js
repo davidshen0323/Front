@@ -6,13 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import MyMenu from '../Menu';
 
-import Rollcall from './rollcall/rollcall';
-import RollcallRecord from './rollcallrecord/rollcallrecord';
-import Leavemanage from './leaveMN/leavemanage';
-import Member from './member/member';
-
+import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
+import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -26,7 +22,7 @@ function TabPanel(props) {
       aria-labelledby={`nav-tab-${index}`}
       {...other}
     >
-      {value === index && <Box p={4}>{children}</Box>}
+      {value === index && <Box p={2}>{children}</Box>}
     </Typography>
   );
 }
@@ -61,11 +57,14 @@ function LinkTab(props) {
 /*--------------------------------------------*/
 const useStyles = makeStyles(theme => ({
 
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    
-  },
+    root: {
+        width: '100%',
+    },
+    paper: {
+      width: '100%',
+      margin: 'auto',
+      marginBottom: theme.spacing(2),
+    },
   proot: {
     display: 'flex',
     padding:20,
@@ -78,7 +77,7 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------*/
 
 
-export default function NavTabs() {
+export default function RollcallRDDp() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -88,41 +87,26 @@ export default function NavTabs() {
   };
 
   return (
-    <div >
-        <MyMenu/>
-          <br/><br/><br/>
-            <center><label><h1>專題</h1></label> </center>
-            <AppBar position="static" color="inherit">
+          <div>
+            <AppBar position="static" color="inherite" >
                 <Tabs
-                variant="fullWidth"
                 value={value}
                 onChange={handleChange}
-                aria-label="nav tabs example"
                 >
-                <LinkTab label="點名" href="/rollcall" {...a11yProps(0)} />
-                <LinkTab label="點名紀錄" href="/rollcallrecord" {...a11yProps(1)} />
-                <LinkTab label="請假審核" href="/leavemanage" {...a11yProps(2)} />
-                <LinkTab label="班級名單" href="/member" {...a11yProps(3)} />
+                <LinkTab label="時間查看" href="/rollcallrecordT" {...a11yProps(0)} />
+                <LinkTab label="學生查看" href="/rollcallrecordS" {...a11yProps(1)} />
             
                 </Tabs>
             </AppBar>
 
             
       <TabPanel value={value} index={0}>
-        <Rollcall/>
+        <RollcallrecordTable/>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <RollcallRecord/>
+        <RollcallrecordSTable/>
       </TabPanel>
-
-      <TabPanel value={value} index={2}>
-        <Leavemanage/>
-      </TabPanel>
-
-      <TabPanel value={value} index={3}>
-        <Member/>
-      </TabPanel>
-    </div>
+      </div>
   );
 }

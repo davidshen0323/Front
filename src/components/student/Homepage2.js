@@ -67,15 +67,11 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
       },
       
-      image2: {
+      image: {
         height: '150px',
         width: '150px',
       },
 
-      image6: {
-        height: '150px',
-        width: '150px',
-      },
 
       
       // image: {
@@ -204,9 +200,9 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="點名"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/702/702699.svg"
+              image="https://image.flaticon.com/icons/svg/1828/1828867.svg"
               title="點名"
-              
+              className={classes.image}
               />
                 {/* <Typography>
                   點名
@@ -239,9 +235,9 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="請假審核"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/2628/2628617.svg"
+              image="https://image.flaticon.com/icons/svg/1828/1828610.svg"
               title="請假審核"
-              className={classes.image2}
+              className={classes.image}
               />
                 {/* <Typography>
                   點名
@@ -274,8 +270,9 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="班級名單"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/2660/2660301.svg"
+              image="https://image.flaticon.com/icons/svg/2312/2312129.svg"
               title="班級名單"
+              className={classes.image}
               />
                 {/* <Typography>
                   點名
@@ -311,8 +308,9 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="課堂考試"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/539/539007.svg"
+              image="https://image.flaticon.com/icons/svg/2311/2311893.svg"
               title="課堂考試"
+              className={classes.image}
               />
                 {/* <Typography>
                   點名
@@ -342,8 +340,9 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="發問Q&A"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/942/942751.svg"
+              image="https://image.flaticon.com/icons/svg/1828/1828789.svg"
               title="發問Q&A"
+              className={classes.image}
               />
                 {/* <Typography>
                   點名
@@ -377,9 +376,9 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="課堂驗收"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/2631/2631411.svg"
+              image="https://image.flaticon.com/icons/svg/2312/2312099.svg"
               title="課堂驗收"
-              className={classes.image6}
+              className={classes.image}
               />
                 {/* <Typography>
                   點名

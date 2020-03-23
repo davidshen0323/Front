@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,25 +12,31 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
+import IconButton from "@material-ui/core/IconButton";
+import RollcallRDTable from './rollcallRDTtable';
+import Fade from '@material-ui/core/Fade';
 
-function createData(time, attend,pass,absence,score,from) {
-  return { time, attend,pass, absence, score, from };
+
+
+function createData(time, attend, pass, absence, score, from) {
+  return { time, attend, pass, absence, score, from };
 }
 
 
 const rows = [
-  createData('2019.11.05 11:05', 2, 5, 8, '計分','人臉點名'),
-  createData('2019.11.12 11:12', 5, 5, 5, '不計分','QR code點名'),
-  createData('2019.11.19 11:19', 8, 2, 5, '計分','藍牙點名'),
-  createData('2019.11.26 11:26', 7, 5, 3, '計分','手動點名'),
-  createData('2019.12.03 12:03', 9, 1, 5, '不計分','人臉點名'),
-  createData('2019.12.10 12:10', 7, 5, 3, '計分','手動點名'),
-  createData('2019.12.17 12:17', 7, 3, 5, '不計分','人臉點名'),
-  createData('2019.12 24 12:24', 8, 5, 2, '不計分','QR code點名'),
-  createData('2020.01.01 01:00', 4, 6, 5, '計分','藍牙點名'),
-  createData('2020.01.08 01:08', 7, 3, 5, '計分','人臉點名'),
-  createData('2020.01.15 01:15', 9, 1, 5, '計分','藍牙點名'),
-  createData('2020.01.22 01:22', 3, 5, 7, '不計分','手動點名'),
+  createData('2019.11.05 11:05', 2, 5, 8, '計分', '人臉點名'),
+  createData('2019.11.12 11:12', 5, 5, 5, '不計分', 'QR code點名'),
+  createData('2019.11.19 11:19', 8, 2, 5, '計分', '藍牙點名'),
+  createData('2019.11.26 11:26', 7, 5, 3, '計分', '手動點名'),
+  createData('2019.12.03 12:03', 9, 1, 5, '不計分', '人臉點名'),
+  createData('2019.12.10 12:10', 7, 5, 3, '計分', '手動點名'),
+  createData('2019.12.17 12:17', 7, 3, 5, '不計分', '人臉點名'),
+  createData('2019.12 24 12:24', 8, 5, 2, '不計分', 'QR code點名'),
+  createData('2020.01.01 01:00', 4, 6, 5, '計分', '藍牙點名'),
+  createData('2020.01.08 01:08', 7, 3, 5, '計分', '人臉點名'),
+  createData('2020.01.15 01:15', 9, 1, 5, '計分', '藍牙點名'),
+  createData('2020.01.22 01:22', 3, 5, 7, '不計分', '手動點名'),
 ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -60,14 +66,14 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', label: '日期與時間', minWidth: 150,numeric: false, disablePadding: true},
-  { id: 'attend', label: '出席人數', minWidth: 50,numeric: true, disablePadding: false, },
+  { id: 'time', label: '日期與時間', minWidth: 150, numeric: false, disablePadding: true },
+  { id: 'attend', label: '出席人數', minWidth: 50, numeric: true, disablePadding: false, },
   {
-    id: 'pass',label: '請假人數', minWidth: 50,
+    id: 'pass', label: '請假人數', minWidth: 50,
     numeric: true, disablePadding: false,
   },
   {
-    id: 'absence',label: '缺席人數', minWidth: 50,
+    id: 'absence', label: '缺席人數', minWidth: 50,
     numeric: true, disablePadding: false,
   },
   {
@@ -78,6 +84,11 @@ const headCells = [
   {
     id: 'from',
     label: '來源', minWidth: 100,
+    numeric: true, disablePadding: false,
+  },
+  {
+    id: 'detail',
+    label: '詳細資料', minWidth: 100,
     numeric: true, disablePadding: false,
   },
 ];
@@ -94,11 +105,11 @@ function EnhancedTableHead(props) {
 
 
         <TableCell padding="none" />
-          
+
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ='left'}
+            align={headCell.numeric = 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -136,10 +147,9 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100%',
-    marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750,
+    width: '100%',
   },
   visuallyHidden: {
     border: 0,
@@ -152,6 +162,9 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
+  container: {
+    display: 'flex',
+  },
 }));
 /*---------------------------------------------*/
 
@@ -162,7 +175,13 @@ export default function RollcallrecordTable() {
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const [checked, setChecked] = React.useState(false);
+
+  const [choose, setChoose] = React.useState();
+
+  const [test, setTest] = React.useState('test');
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -183,26 +202,36 @@ export default function RollcallrecordTable() {
     setDense(event.target.checked);
   };
 
+  const handleChange = () => {
+    setChecked(pp => !pp);
+  };
+
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+  const testFunc = (e, id) => {
+    console.log(e.target.value);
+    setTest(e.target.value)
+  }
+
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-    <TableContainer>
+    <div className={classes.root}>  
+    
+      {/* <Paper className={classes.paper}> */}
+        
+        {/* <RollcallRDDp/> */}
+        
+        <TableContainer>
+          
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-            aria-label="enhanced table"
+            size='small'
           >
             <EnhancedTableHead
               classes={classes}
-              // numSelected={selected.length}
-               order={order}
-               orderBy={orderBy}
-              // onSelectAllClick={handleSelectAllClick}
-               onRequestSort={handleRequestSort}
-              //rowCount={rows.length}
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
@@ -212,10 +241,10 @@ export default function RollcallrecordTable() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                     {/* 碰到的時候後面會反灰 */}
-                    
-                      <TableCell padding="default"/>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code} key={labelId}>
+                      {/* 碰到的時候後面會反灰 */}
+
+                      <TableCell padding="default" />
 
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.time}</TableCell>
@@ -224,20 +253,32 @@ export default function RollcallrecordTable() {
                       <TableCell align="left">{row.absence}</TableCell>
                       <TableCell align="left">{row.score}</TableCell>
                       <TableCell align="left">{row.from}</TableCell>
-                      
+                      <TableCell align="left">
+                        {/* <FormControlLabel
+                          control={<Switch checked={checked} onChange={handleChange} />}
+                        /> */}
+
+                        <IconButton onClick={e => handleChange(e, labelId) }>
+                          <AssignmentOutlinedIcon />
+                        </IconButton>
+
+                        {/* <input type="text" value={test} onChange={e => testFunc(e, labelId)}/> */}
+
+                      </TableCell>
+
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
+              {/* {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+              )} */}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -245,13 +286,17 @@ export default function RollcallrecordTable() {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-      </Paper>
+
+
       
-      
-      <FormControlLabel  //改成密集的
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense Padding"
-      />
+
+      <div className={classes.container}>
+        <Fade in={checked}>
+          <Paper className={classes.paper}>
+            <RollcallRDTable />
+          </Paper>
+        </Fade>
+      </div>
     </div>
   );
 }
