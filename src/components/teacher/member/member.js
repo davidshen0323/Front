@@ -23,10 +23,12 @@ const useStyles = makeStyles({
 export default function Member() {
     const classes = useStyles();
         return (
+
             <div >
                 <Paper className={classes.Paper}>
                   <MMTable />
                 </Paper>
              </div>
+
         )
     }

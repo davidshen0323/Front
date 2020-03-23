@@ -13,6 +13,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import {Link} from "react-router-dom";
+import CustomDialog from "./addQA";
+
 
 
 // const images = [
@@ -168,7 +170,12 @@ const useStyles = makeStyles(theme => ({
     export default function Homepage2() {
 
         const classes = useStyles();
-
+        
+        
+        const [open, close] = React.useState(false);
+        const onClose = () => {
+          close(open ? false : true);
+        };
         return (
             <div className={classes.root}>
             <MyMenu />
@@ -327,11 +334,7 @@ const useStyles = makeStyles(theme => ({
         <Grid item xs={12} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
-              <ButtonBase
-              component={Link}
-              to ='/homepage2'
-              // className={classes.ButtonBase}
-              >
+              <ButtonBase onClick={() => close(true)}>
                 <CardContent>
               <CardMedia
               component="img"
@@ -425,6 +428,8 @@ const useStyles = makeStyles(theme => ({
                 </ButtonBase>
               ))} */}
               </Grid>
+              <CustomDialog open={open} handleClose={onClose}/>
+
             </div>
           );
           

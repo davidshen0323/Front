@@ -30,6 +30,8 @@ const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    marginBottom: 80,
+    
   },
   appBar: {
     height: 'auto',
@@ -51,7 +53,8 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   School: {
-    minWidth: 100,
+    minWidth: 65,
+    
   },
   hide: {
     display: 'none',
@@ -87,11 +90,12 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 0,
   },
   title: {
-    flexGrow: 1,
+    // flexGrow: 1,
 
   },
   Nav: {
-    margin: 'auto',
+    margin: `${theme.spacing(1)}px auto`,
+    // flexGrow: 1,
   }
   
 }));
@@ -126,7 +130,7 @@ export default function LogoutMenu() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
@@ -184,15 +188,13 @@ export default function LogoutMenu() {
                direction="row" 
                justify="flex-end"
                className={classes.Nav}
-               
-               >
+              // wrap="nowrap"
+              spacing={2}
+              >
+              <Grid item>   
+                <Button component={Link} to='/login' color="inherit">登出</Button>
+              </Grid>
                 
-                <Grid item >
-                  <Button component={Link} to='/login' color="inherit">登出</Button>
-              
-                  {/* <Button  component={Link} to='/rollcall' color="inherit">點名</Button> */}
-                  {/* <Typography className={classes.title} align="right" variant="body1">登出</Typography> */}
-                </Grid>
               </Grid>
               </Toolbar>
           </AppBar>
