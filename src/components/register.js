@@ -31,7 +31,7 @@
 //    {register}
 //)
 
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MyMenu from './Menu';
@@ -44,19 +44,10 @@ import {List} from 'antd-mobile';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
-import {Link, Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 
-// import { OutlinedInput } from '@material-ui/core';
-// import InputLabel from '@material-ui/core/InputLabel';
 
-// import useSignUpForm from './CustomHook';
-
-// const useStyles = makeStyles(theme => ({
-//     menu: {
-//         marginBottom: 'auto',
-//     }
-// }))
 
 const useStyles = makeStyles(theme =>({
     
@@ -95,7 +86,7 @@ export default function Register() {
         dpart:'',
         phone:'',
         mail:''
-
+        //宣告要接值的變數
     });
 
       
@@ -103,11 +94,11 @@ export default function Register() {
     const handleChange = user => event => {
         event.persist();
         setInputs(inputs => ({...inputs, [user]: event.target.value}));
-
+        //不知道怎麼解釋哈哈哈哈
     }
 
-    let post;
-    let history = useHistory();
+    let post; //宣告一個布林值變數
+    let history = useHistory(); //傳值跳頁的方法
     const handleSubmit = () =>
     {
         if(inputs.user.length > 0 
@@ -119,9 +110,9 @@ export default function Register() {
             && inputs.dpart.length > 0
             && inputs.phone.length > 0
             && inputs.mail.length > 0
-            && inputs.repeatpwd === inputs.pwd)
+            && inputs.repeatpwd === inputs.pwd) //每個輸入格都不為空值、驗證密碼等於密碼
             {
-                fetch('/student',{
+                fetch('/student_re',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -136,37 +127,42 @@ export default function Register() {
                     })
                 })
                 .then(res => {
-                    if (res.status === 500)
+                    async function fetchres(){
+                    const test = await res.text();  //接收後端傳來的訊息
+                    if (test === "This account has already exist!") //帳號已註冊過
                     {
-                        alert("已註冊過!")
+                        alert("已註冊過!");
                         post = false;
                         console.log(1);
                         return post;
                     }
+                    else if(test === "request failed. Email format error!") //信箱不包含@
+                    {
+                        alert("信箱格式有誤! 請輸入有效信箱!");
+                        post = false;
+                        console.log(2);
+                        return post;
+                    }
+                    else if(inputs.user.length !== 9) //學號長度不等於9
+                    {
+                        alert("學號長度有誤! 請再次確認!");
+                        post = false;
+                        console.log(3);
+                        return post;
+                    }
                     else
                     {
-                        
+                        alert("註冊成功!");
                         post = true;
                         console.log(0);
                         history.push("/login");
                         return post;                        
                     }
                     
-                })
+                } fetchres() })
                 // .then(res => console.log(post))
                 .then(res => console.log(res))
                 .catch(err => console.log(`Error with message: ${err}`))
-
-                
-                // if(post===true)
-                // {
-                // }
-                // else
-                // {
-                //      console.log(2);
-                //     return null;
-                // }
-                
             }
             
             else

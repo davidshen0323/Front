@@ -20,20 +20,20 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import { ListItemAvatar } from '@material-ui/core';
+import { ListItemAvatar, TextField } from '@material-ui/core';
 //import Image from '@material-ui-image' ;
-class Login extends Component{
-    constructor(props){
-        super(props);
-        //繫結this時間，如果不繫結，無法傳遞this
-        this.register = this.register.bind(this);
-    }
-    register(){
-        console.log(this.props);
-        //跳轉到註冊頁面
-        this.props.history.push('/register')
-    }
-}
+// class Login extends Component{
+//     constructor(props){
+//         super(props);
+//         //繫結this時間，如果不繫結，無法傳遞this
+//         this.register = this.register.bind(this);
+//     }
+//     register(){
+//         console.log(this.props);
+//         //跳轉到註冊頁面
+//         this.props.history.push('/register')
+//     }
+// }
     
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
@@ -73,25 +73,43 @@ const useStyles = makeStyles(theme =>({
 
 
 
-export default function ContainedButtons(){
+export default function Login(){
+
         const classes = useStyles();
-        const [values, setValues] = React.useState({
-            amount: '',
-            password: '',
-            showPassword: false,
+        const [inputs, setInputs] = React.useState({
+            Userid: '',
+            Userpassword: ''
           });
 
-          const handleChange = prop => event => {
-            setValues({ ...values, [prop]: event.target.value });
-          };
+          const handleChange = user => event => {
+            event.persist();
+            setInputs(inputs => ({...inputs, [user]: event.target.value }));
+          }
+          
+          let login;
+          const handleSubmit = () =>
+          {
+            if(inputs.Userid.length === 9 && inputs.Userpassword.length > 0)
+            {
+                login = true;
+                return login;
+            }
+            else
+            {
+                alert("請再次確認!");
+                login = false;
+                return login;
+            }
+          }
+
+
+        //   const handleClickShowPassword = () => {
+        //     setValues({ ...values, showPassword: !values.showPassword });
+        //   };
         
-          const handleClickShowPassword = () => {
-            setValues({ ...values, showPassword: !values.showPassword });
-          };
-        
-          const handleMouseDownPassword = event => {
-            event.preventDefault();
-          };
+        //   const handleMouseDownPassword = event => {
+        //     event.preventDefault();
+        //   };
 
         return (
             <div>
@@ -105,11 +123,36 @@ export default function ContainedButtons(){
                 alignItems="center"
                 >
                 <Paper className={classes.root}>
-                    <h2>我是登入頁</h2>
+                    <h2>登入</h2>
 
-                <div alignItems="center">
-                     <Logo/>
-                </div>
+        {/* <form action="/login" method="POST"> 
+          
+          <TextField 
+            id="username"
+            label="Userid"
+            name="username"
+            value={inputs.Userid}
+            onChange={handleChange('Userid')}
+            />
+          <TextField 
+            id="password"
+            label="Userpassword"
+            type="password"
+            name="password"
+            value={inputs.Userpassword}
+            onChange={handleChange('Userpassword')}
+            />
+          
+          <Button
+            // onClick={handleSubmit}
+            type="submit"
+            variant="contained">Submit</Button>
+            
+          </form> */}
+
+                {/* <div> */}
+                     {/* <Logo/> */}
+                {/* </div> */}
                 
 
 
@@ -118,49 +161,45 @@ export default function ContainedButtons(){
 
 
 
-                <WingBlank>
+        <WingBlank>
 
-                    <List>
+        <form action="/login" method="POST"> 
+        <List>
              
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-                        <InputLabel htmlFor="outlined-adornment-account">帳號</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-account"
-                            value={values.account}
-                            endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton color="inherit" edge="end">
-                                <AccountCircle />
-                                </IconButton>
-                            </InputAdornment>
-                            }
-                            labelWidth={50}
-                        />
-                    </FormControl>
+        <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
+            {/* <InputLabel htmlFor="outlined-adornment-account">帳號</InputLabel> */}
+          
+          <TextField 
+            id="username"
+            label="Userid"
+            name="username"
+            value={inputs.Userid}
+            onChange={handleChange('Userid')}
+            />
+          
+{/*           
+          <Button
+          // onClick={handleSubmit}
+          type="submit"
+          variant="contained">Submit</Button>
+        */}
+        </FormControl>
 
-                    </List>
+        </List>
 
-                    <List>
+        <List>
                         
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-                        <InputLabel htmlFor="outlined-adornment-password">密碼</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton color="inherit"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end">
-                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                            }
-                            labelWidth={50}
-                        />
+        <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
+            {/* <InputLabel htmlFor="outlined-adornment-password">密碼</InputLabel> */}
+            <TextField 
+                id="password"
+                label="Userpassword"
+                type="password"
+                name="password"
+                value={inputs.Userpassword}
+                onChange={handleChange('Userpassword')}
+            />
+          
                     </FormControl>
       
 
@@ -168,11 +207,17 @@ export default function ContainedButtons(){
                     
                     
                     <WhiteSpace/>
-                    <Button variant="contained" color="primary" component={Link} to ='/homepage1' className={classes.button}>
+                    <Button 
+                    type="submit"
+                    variant="contained" 
+                    color="primary" 
+                    className={classes.button}>
                     登入
                     </Button>
                     
-                    <Button variant="contained" color="primary" component={Link} to ='/register' className={classes.button}>
+                    </form> 
+
+                    <Button variant="contained" component={Link} to='/register' color="primary" className={classes.button}>
                     註冊
                     </Button>
 
