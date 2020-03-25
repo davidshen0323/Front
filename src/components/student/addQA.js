@@ -2,6 +2,10 @@ import React from "react";
 import {Dialog, Button, DialogActions, DialogContent, Typography, Radio, RadioGroup, TextareaAutosize, FormControlLabel} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+
 const useStyle = makeStyles(theme => ({
   typo: {
     marginLeft: 10,
@@ -16,8 +20,13 @@ const useStyle = makeStyles(theme => ({
   typoHeading: {
     color: "blue",
     padding: 10
-  }
+  },
 }));
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default ({ open, handleClose }) => {
   const classes = useStyle();
@@ -26,6 +35,20 @@ export default ({ open, handleClose }) => {
 
   const handleChange = event => {
     setValue(event.target.value);
+  };
+
+  const [openS, setOpenS] = React.useState(false);
+
+  const submitClick = () => {
+    setOpenS(true);
+  };
+
+  const submitClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenS(false);
   };
 
   return (
@@ -58,7 +81,12 @@ export default ({ open, handleClose }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary" autoFous>取消</Button>
-        <Button onClick={handleClose} color="primary" autoFous>確認送出</Button>
+        <Button onClick={handleClose,submitClick} color="primary" autoFous>確認送出</Button>
+        <Snackbar open={openS} autoHideDuration={3000} onClose={submitClose}>
+        <Alert onClose={submitClose} severity="success">
+          老師收到你的問題囉！
+        </Alert>
+      </Snackbar>
       </DialogActions>
     </Dialog>
   );
