@@ -57,7 +57,7 @@ ReactDOM.render(
             <Route path="/homepage" component={shomepage}/>
             <Route path="/rollcallBlock" component={RollcallBlock}/>
 
-            <Route exact path="/" component={ReactApp}/>
+            <Route exact path="/" component={Login}/>
         </Switch>
     </BrowserRouter>
 , document.getElementById('root'));
