@@ -21,7 +21,6 @@ import Register from './components/register.js';
 import ReactApp from './components/React-app.js';
 import * as serviceWorker from './serviceWorker';
 
-import rollcallBlock from './components/teacher/rollcallBlock';
 import post from './components/Post';
 
 import examresult from './components/teacher/ExamResult';

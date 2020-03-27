@@ -12,6 +12,8 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import {useState,useEffect} from 'react';
+import axios from 'axios';
 
 function createData(number,name,grade,group,detail) {
     return { number,name,grade,group,detail};
@@ -143,6 +145,11 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function MemberTable() {
+
+  /*------------ STATE ------------*/
+  const [students, setMembers] = useState([]);
+
+
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -169,9 +176,26 @@ export default function MemberTable() {
     setDense(event.target.checked);
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+ // const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  return (
+
+ /*=========== Create Table HEAD ===========*/
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
+
+useEffect(() => {
+  async function fetchData() {
+      const result = await axios.get(`/rollcall/2`);
+      
+      console.log(result.data);
+ 
+      setMembers(result.data);
+  }
+  fetchData();
+ }, []);
+
+
+
+return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
@@ -179,51 +203,52 @@ export default function MemberTable() {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size='small'
             aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}
-              // numSelected={selected.length}
                order={order}
                orderBy={orderBy}
-              // onSelectAllClick={handleSelectAllClick}
                onRequestSort={handleRequestSort}
-              //rowCount={rows.length}
             />
+             {/*===== TableBody =====*/}
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
+              {/* {stableSort(rows, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
+               {students.map((student, index) => {
                   //const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                  //const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow hover >
                      {/* 碰到的時候後面會反灰 */}
                     
-                      <TableCell padding="default"/>
+                      {/* <TableCell padding="default"/>
 
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.number}</TableCell>
                       <TableCell align="left">{row.name}</TableCell>
                       <TableCell align="left">{row.grade}</TableCell>
                       <TableCell align="left">{row.group}</TableCell>
-                      <TableCell align="left">{row.detail}</TableCell>
-                      
+                      <TableCell align="left">{row.detail}</TableCell> */}
+                      {
+                      studentList.map( (list, i) =>   i === 0 ? 
+                    <TableCell key={i} component="th" scope="row" align="center" padding="none" >
+                    {student[list]}
+                 </TableCell>:
+                 <TableCell key={i} align="left">{student[list]}</TableCell> 
+                        )}
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
+              
             </TableBody>
           </Table>
         </TableContainer>
+
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -232,12 +257,6 @@ export default function MemberTable() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      
-      
-      <FormControlLabel  //改成密集的
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense Padding"
-      />
     </div>
   );
 }

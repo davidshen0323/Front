@@ -178,11 +178,11 @@ export default function MemberTable() {
 
 
 /*=========== Create Table HEAD ===========*/
- const studentList = [ 'q_std_id', 'q_content', 'q_time']
+ const studentList = [ 'std_id', 'std_name', 'std_department']
 
  useEffect(() => {
   async function fetchData() {
-      const result = await axios.get(`/question/all/2`);
+      const result = await axios.get(`/rollcall/2`);
       
       console.log(result.data);
 
@@ -225,29 +225,12 @@ export default function MemberTable() {
                   //const labelId = `enhanced-table-checkbox-${index}`;
 
                     studentList.map( (list, i) =>   i === 0 ? 
-                    <TableCell key={i} component="th" scope="row" align="center" padding="none" >
+                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
                     {student[list]}
                  </TableCell>:
                  <TableCell key={i} align="left">{student[list]}</TableCell> 
                         )
                   }    
-{/*                     
-                    
-                      <TableCell padding="default"/>
-
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.number}</TableCell>
-                      <TableCell align="left">{row.name}</TableCell>
-                      <TableCell align="left">{row.grade}</TableCell>
-                      <TableCell align="left">{row.group}</TableCell>
-                      <TableCell align="left">{row.detail}</TableCell>
-                      
-                    </TableRow>
-                  
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} /> */}
                 </TableRow>
                 ))}
             </TableBody>
@@ -262,7 +245,6 @@ export default function MemberTable() {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-      {/* </Paper> */}
     </div>
   );
 }

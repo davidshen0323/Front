@@ -9,9 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 
@@ -67,7 +64,6 @@ const headCells = [
     { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
     { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
     { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
-    
   ];
 
 function EnhancedTableHead(props) {
@@ -79,7 +75,6 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-
 
         <TableCell padding="none" />
           
@@ -144,7 +139,7 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------------*/
 
 
-export default function RollcallRDTable() {
+export default function RollcallRDT() {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
@@ -155,7 +150,6 @@ export default function RollcallRDTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
@@ -172,13 +166,6 @@ export default function RollcallRDTable() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const handleChangeDense = event => {//改成密集的
-    setDense(event.target.checked);
-  };
-
-//  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
 
 /*=========== Create Table HEAD ===========*/
 const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
@@ -225,34 +212,19 @@ useEffect(() => {
                   //const labelId = `enhanced-table-checkbox-${index}`;
 
                     studentList.map( (list, i) =>   i === 0 ? 
-                    <TableCell key={i} component="th" scope="row" align="center" padding="none" >
+                    <TableCell key={i} component="th" scope="row" align="left">
                     {student[list]}
                  </TableCell>:
                  <TableCell key={i} align="left">{student[list]}</TableCell> 
                         )
                   }    
-{/*                     
-                    
-                      <TableCell padding="default"/>
 
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.number}</TableCell>
-                      <TableCell align="left">{row.name}</TableCell>
-                      <TableCell align="left">{row.grade}</TableCell>
-                      <TableCell align="left">{row.group}</TableCell>
-                      <TableCell align="left">{row.detail}</TableCell>
-                      
-                    </TableRow>
-                  
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} /> */}
                 </TableRow>
                 ))}
             </TableBody>
           </Table>
         </TableContainer>
+
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
@@ -262,7 +234,6 @@ useEffect(() => {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-      {/* </Paper> */}
 
     </div>
   );
