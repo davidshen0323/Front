@@ -222,7 +222,6 @@ export default function LMNTable() {
   const [orderBy, setOrderBy] = React.useState('number');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
@@ -244,19 +243,19 @@ export default function LMNTable() {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+    if (selectedIndex === -1) { //-1表示name不存在 
+      newSelected = newSelected.concat(selected, name);//加入newSelected
+    } else if (selectedIndex === 0) {//name是第一個(index=0)
+      newSelected = newSelected.concat(selected.slice(1));//抓第二個(index=1)之後的東西==把第一個刪掉
+    } else if (selectedIndex === selected.length - 1) {//name是最後一個
+      newSelected = newSelected.concat(selected.slice(0, -1));//抓從第一個(index=0)到倒數第二個==刪掉最後一個
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
         selected.slice(selectedIndex + 1),
+      //刪掉第n個
       );
     }
-
     setSelected(newSelected);
   };
 
@@ -270,21 +269,18 @@ export default function LMNTable() {
   };
 
   const isSelected = name => selected.indexOf(name) !== -1;
-  
-
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
-      {/* <Paper className={classes.paper}> */}
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
+        <TableContainer> 
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
             size='small'
             aria-label="enhanced table"
           >
+           
             <EnhancedTableHead
               classes={classes}
               numSelected={selected.length}
@@ -309,7 +305,6 @@ export default function LMNTable() {
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.name}
-                      //selected={isItemSelected}
                       
                     >
                       <TableCell padding="default"/>
