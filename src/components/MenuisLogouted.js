@@ -113,14 +113,14 @@ export default function MyLogoutMenu() {
     setOpen(false);
   };
 
-  useEffect(() => {
-    async function fetchData() {
-        const result = await axios.get(`/class/all/10811000DMG741D7411023900`);
-        setClass(result.data);
-      //   console.log(result.data);
-    }
-    fetchData();
-}, []);
+//   useEffect(() => {
+//     async function fetchData() {
+//         const result = await axios.get(`/class/all/10811000DMG741D7411023900`);
+//         setClass(result.data);
+//       //   console.log(result.data);
+//     }
+//     fetchData();
+// }, []);
 
   const classes = useStyles();
   return (
