@@ -50,7 +50,7 @@ ReactDOM.render(
             <Route path="/homepage2/:cs_id" component={homepage2}/>
             <Route path="/questions/:cs_id" component={QuestionList}/>
             <Route path="/tquestion" component={TQuestionList}/>
-            <Route path="/acceptance/:cs_id" component={AcceptanceList}/>
+            <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
 
             <Route path="/post" component={post}/>
