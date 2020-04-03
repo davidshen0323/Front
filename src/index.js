@@ -17,11 +17,15 @@ import Rollcall from './components/teacher/rollcall/rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
+
 import Register from './components/Register.js';
-// import ReactApp from './components/React-app.js';
+
+
+import selectHW from'./components/student/selectHW.js'
+import ReactApp from './components/React-app.js';
+
 import * as serviceWorker from './serviceWorker';
 
-import rollcallBlock from './components/teacher/rollcallBlock';
 import post from './components/Post';
 
 import examresult from './components/teacher/ExamResult';
@@ -57,7 +61,11 @@ ReactDOM.render(
             <Route path="/addexam" component={addexam}/>
             <Route path="/homepage" component={shomepage}/>
             <Route path="/rollcallBlock" component={RollcallBlock}/>
+ 
             <Route path="/qrcode" component={qrcode}/>
+
+            <Route path="/acceptance/${params.cs_id}/selectHW" component={selectHW}/>
+
 
             <Route exact path="/" component={Login}/>
         </Switch>

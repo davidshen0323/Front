@@ -16,6 +16,7 @@ import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import IconButton from "@material-ui/core/IconButton";
 import RollcallRDTable from './rollcallRDTtable';
 import Fade from '@material-ui/core/Fade';
+import RDTB from './RdtButton'
 
 
 
@@ -257,13 +258,13 @@ export default function RollcallrecordTable() {
                         {/* <FormControlLabel
                           control={<Switch checked={checked} onChange={handleChange} />}
                         /> */}
-
-                        <IconButton onClick={e => handleChange(e, labelId) }>
+                      
+                        {/* <IconButton onClick={e => handleChange(e, labelId) }>
                           <AssignmentOutlinedIcon />
-                        </IconButton>
+                        </IconButton> */}
 
                         {/* <input type="text" value={test} onChange={e => testFunc(e, labelId)}/> */}
-
+                        <RDTB/>
                       </TableCell>
 
                     </TableRow>
@@ -286,17 +287,6 @@ export default function RollcallrecordTable() {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-
-
-      
-
-      <div className={classes.container}>
-        <Fade in={checked}>
-          <Paper className={classes.paper}>
-            <RollcallRDTable />
-          </Paper>
-        </Fade>
-      </div>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import IconButton from "@material-ui/core/IconButton";
 import Fade from '@material-ui/core/Fade';
 import RollcallRDS from './rollcallRDStable';
+import RDSB from './RdsButton';
 
 function createData(number,name,grade,group,attend, pass, absence,detail) {
     return { number,name,grade,group,attend, pass, absence,detail};
@@ -173,15 +174,10 @@ export default function RollcallrecordSTable() {
     setPage(0);
   };
 
-  const handleChangeDense = event => {//改成密集的
-    setDense(event.target.checked);
-  };
-
   const handleChange = () => {
     setChecked(pp => !pp);
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -222,11 +218,8 @@ export default function RollcallrecordSTable() {
                       <TableCell align="left">{row.absence}</TableCell>                      
                       <TableCell align="left">
                        
-                        <IconButton onClick={e => handleChange(e, labelId) }>
-                          <AssignmentOutlinedIcon />
-                        </IconButton>
-
-                        
+                        <RDSB/>
+                       
                       </TableCell>
 
                     </TableRow>
@@ -254,13 +247,13 @@ export default function RollcallrecordSTable() {
 
 
 
-<div className={classes.container}>
+{/* <div className={classes.container}>
         <Fade in={checked}>
           <Paper className={classes.paper}>
             <RollcallRDS />
           </Paper>
         </Fade>
-      </div>
+      </div> */}
     </div>
   );
 }

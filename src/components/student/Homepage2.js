@@ -13,8 +13,12 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import CustomDialog from "./addQA";
+
 import { TextField, TableBody, TableCell , TableRow } from '@material-ui/core';
+
+import AddQA from "./addQA";
+
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -83,9 +87,12 @@ const useStyles = makeStyles(theme => ({
 
         const classes = useStyles();
 
-        const [open, close] = React.useState(false);
-        const onClose = () => {
-          close(open ? false : true);
+        
+        
+        const [openAddQA, closeAddQA] = React.useState(false);
+        const onCloseAddQA = () => {
+          closeAddQA(openAddQA ? false : true);
+
         };
         const params = useParams();
         console.log(params);
@@ -235,10 +242,11 @@ const useStyles = makeStyles(theme => ({
         <Grid item xs={12} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
+
               <ButtonBase 
                component={Link}
                to={`/questions/${params.cs_id}`}
-              onClick={() => close(true)}
+              onClick={() => closeAddQA(true)}
               >
                 <CardContent>
               <CardMedia
@@ -266,10 +274,10 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
             <ButtonBase 
             component={Link}
-            to={`/acceptance/${params.cs_id}`}>
+            to={`/acceptance/${params.cs_id}/selectHW`}>
               {/* <ButtonBase
               component={Link}
-              to='/acceptance/{params.cs_id}'> */}
+          */}
                 <CardContent>
               <CardMedia
               component="img"
@@ -294,58 +302,12 @@ const useStyles = makeStyles(theme => ({
         </Card>
         </Grid>
       </Grid>
-      <CustomDialog open={open} handleClose={onClose}/>
+      <AddQA open={openAddQA} handleClose={onCloseAddQA}/>
 
     </div>
         );
       }
-        {/* <TableBody>
-                    {Sclass.map((classs,index) => (
-                      <TableRow key = {index}>
-                        {
-                          classList.map( (list, i) =>  i === 0 ?
-                          <TableCell key={i} component="th" scope="row" align="center">
-                            <Link to={`/homepage2/${classs[list]}`}>
-                            </Link>
-                          </TableCell>:
-                          <TableCell key={i} align="left">
-                            </TableCell>
-                          )
-                        } 
-                      </TableRow>
-                      ))}     
-            </TableBody>  */}
-              {/* {images.map(image => (
-                <ButtonBase
-                focusRipple
-                key={image.title}
-                className={classes.image}
-                focusVisibleClassName={classes.focusVisible}
-                style={{
-                  width: image.width,
-                }}
-                >
-                <span
-                className={classes.imageSrc}
-                style={{
-                  backgroundImage: `url(${image.url})`,
-                }}
-                />
-                <span className={classes.imageBackdrop} />
-                <span className={classes.imageButton}>
-                <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                className={classes.imageTitle}
-                >
-                {image.title}
-                <span className={classes.imageMarked} />
-                </Typography>
-                </span>
-                </ButtonBase>
-              ))} */}
-          
-          
+        
+
         
     
