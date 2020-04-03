@@ -23,9 +23,15 @@
     "material-table": "^1.57.2",
     "material-ui-image": "^3.2.3",
 
-    "react": "^16.13.1",
-    "react-baseui": "^1.0.0",
+    "qrcode.react": "^1.0.0",
+  
+    "react-qrcode": "^0.2.5",
 
+    "react.qrcode.generator": "0.0.3",
+    
+
+    "react": "^16.13.1",
+    
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component, useEffect} from 'react';
+import {Link, useParams} from "react-router-dom";
 import MyMenu from '../Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -12,44 +13,13 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import {Link} from "react-router-dom";
+
+import { TextField, TableBody, TableCell , TableRow } from '@material-ui/core';
+
 import AddQA from "./addQA";
 
 
 
-
-// const images = [
-//     {
-//       url: 'https://image.flaticon.com/icons/svg/747/747376.svg',
-//       title: '點名',
-//       width: '80%',
-//     },
-//     {
-//       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT72slfeqf6R4oAt8AAbPcA6mDZpUcp9GZJZj8VgNhnzFv5aWp1',
-//       title: '請假審核',
-//       width: '80%',
-//     },
-//     {
-//       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR66UDYK97ylxOAQvVixVoPgCa20FEQYr_XJreCoYMi2sRDH8dl',
-//       title: '班級名單',
-//       width: '80%',
-//     },
-//     {
-//       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR66UDYK97ylxOAQvVixVoPgCa20FEQYr_XJreCoYMi2sRDH8dl',
-//       title: '課堂考試',
-//       width: '80%',
-//     },
-//     {
-//       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR66UDYK97ylxOAQvVixVoPgCa20FEQYr_XJreCoYMi2sRDH8dl',
-//       title: '發問Q&A',
-//       width: '80%',
-//     },
-//     {
-//       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR66UDYK97ylxOAQvVixVoPgCa20FEQYr_XJreCoYMi2sRDH8dl',
-//       title: '課堂驗收',
-//       width: '80%',
-//     },
-//   ];
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -72,74 +42,6 @@ const useStyles = makeStyles(theme => ({
         height: '150px',
         width: '150px',
       },
-
-
-      
-      // image: {
-      //   position: 'relative',
-        
-        
-      //   [theme.breakpoints.down('xs')]: {
-      //     width: '100% !important', // Overrides inline-style
-      //     height: '100%',
-      //   },
-      //   '&:hover, &$focusVisible': {
-      //     zIndex: 1,
-      //     '& $imageBackdrop': {
-      //       opacity: 0.15,
-      //     },
-      //     '& $imageMarked': {
-      //       opacity: 0,
-      //     },
-      //     '& $imageTitle': {
-      //       border: '4px solid currentColor',
-      //     },
-      //   },
-      // },
-      // focusVisible: {},
-      // imageButton: {
-      //   position: 'relative',
-      //   left: 0,
-      //   right: 0,
-      //   top: 0,
-      //   bottom: 0,
-      //   display: 'flex',
-      //   alignItems: 'center',
-      //   justifyContent: 'center',
-      //   color: theme.palette.common.white,
-      // },
-      // imageSrc: {
-      //   position: 'relative',
-      //   left: 0,
-      //   right: 0,
-      //   top: 0,
-      //   bottom: 0,
-      //   backgroundSize: 'cover',
-      //   backgroundPosition: 'center 100%',
-      // },
-      // imageBackdrop: {
-      //   position: 'relative',
-      //   left: 0,
-      //   right: 0,
-      //   top: 0,
-      //   bottom: 0,
-      //   backgroundColor: theme.palette.common.black,
-      //   opacity: 0.3,
-      //   transition: theme.transitions.create('opacity'),
-      // },
-      // imageTitle: {
-      //   position: 'relative',
-      //   padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
-      // },
-      // imageMarked: {
-      //   height: 3,
-      //   width: 18,
-      //   backgroundColor: theme.palette.common.white,
-      //   position: 'relative',
-      //   bottom: -2,
-      //   left: 'calc(50% - 9px)',
-      //   transition: theme.transitions.create('opacity'),
-      // },
 
       card: {
         width: 300,
@@ -168,19 +70,41 @@ const useStyles = makeStyles(theme => ({
       },
     }));
 
+    // class Homepage2 extends Component {
+    //   render() {
+    //     const { params } = this.props.match;
+    //     return <div>
+    //       <h4>class</h4>
+    //       <p>This is Class {params.cs_id}.</p>
+    //       {params.cs_id ? <b>ID: {params.cs_id}</b> : <i>ID is optional.</i>}
+    //     </div>
+    //   }
+    // }
+     
+    // export default Homepage2;
+
     export default function Homepage2() {
 
         const classes = useStyles();
+
         
         
         const [openAddQA, closeAddQA] = React.useState(false);
         const onCloseAddQA = () => {
           closeAddQA(openAddQA ? false : true);
+
         };
+        const params = useParams();
+        console.log(params);
+        
         return (
-            <div className={classes.root}>
+
+          
+          <div className={classes.root}>
             <MyMenu />
             <br></br><br></br><br></br><br></br>
+            <p>This is class {params.cs_id}</p>
+            
             <Grid
               container
               direction="row"
@@ -192,9 +116,8 @@ const useStyles = makeStyles(theme => ({
             <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
-              component={Link}
-              to ='/homepage2'
-              // className={classes.ButtonBase}
+               component={Link}
+               to={`/rollcall/${params.cs_id}`}
               >
                 <CardContent>
               <CardMedia
@@ -205,18 +128,14 @@ const useStyles = makeStyles(theme => ({
               title="點名"
               className={classes.image}
               />
-                {/* <Typography>
+                 {/* <Typography>
                   點名
                 </Typography> */}
               </CardContent>
             <CardActions>
-              {/* <Button
-              component={Link}
-              to ='/homepage2'
-              className={classes.classbutton}
-              > */}
+              
                 <Typography>點名</Typography>
-              {/* </Button> */}
+            
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -275,18 +194,12 @@ const useStyles = makeStyles(theme => ({
               title="班級名單"
               className={classes.image}
               />
-                {/* <Typography>
-                  點名
-                </Typography> */}
+                
               </CardContent>
             <CardActions>
-              {/* <Button
-              component={Link}
-              to ='/homepage2'
-              className={classes.classbutton}
-              > */}
+              
                 <Typography>班級名單</Typography>
-              {/* </Button> */}
+              
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -294,7 +207,7 @@ const useStyles = makeStyles(theme => ({
 
         </Grid>
 
-        {/* <Grid container spacing={1} direction="row" justify="center" alignItems="center"> */}
+        
         <Grid item xs={12} sm={6} md={4} lg={4}>
 
         <Card className={classes.card}>
@@ -302,7 +215,7 @@ const useStyles = makeStyles(theme => ({
               <ButtonBase
               component={Link}
               to ='/homepage2'
-              // className={classes.ButtonBase}
+              
               >
                 <CardContent>
               <CardMedia
@@ -313,18 +226,12 @@ const useStyles = makeStyles(theme => ({
               title="課堂考試"
               className={classes.image}
               />
-                {/* <Typography>
-                  點名
-                </Typography> */}
+                
               </CardContent>
             <CardActions>
-              {/* <Button
-              component={Link}
-              to ='/homepage2'
-              className={classes.classbutton}
-              > */}
+
                 <Typography>課堂考試</Typography>
-              {/* </Button> */}
+            
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -335,28 +242,26 @@ const useStyles = makeStyles(theme => ({
         <Grid item xs={12} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
-              <ButtonBase onClick={() => closeAddQA(true)}>
+
+              <ButtonBase 
+               component={Link}
+               to={`/questions/${params.cs_id}`}
+              onClick={() => closeAddQA(true)}
+              >
                 <CardContent>
               <CardMedia
               component="img"
               alt="發問Q&A"
-              // height="140"
+             
               image="https://image.flaticon.com/icons/svg/1828/1828789.svg"
               title="發問Q&A"
               className={classes.image}
               />
-                {/* <Typography>
-                  點名
-                </Typography> */}
+                
               </CardContent>
             <CardActions>
-              {/* <Button
-              component={Link}
-              to ='/homepage2'
-              className={classes.classbutton}
-              > */}
                 <Typography>發問Q&A</Typography>
-              {/* </Button> */}
+              
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -367,11 +272,12 @@ const useStyles = makeStyles(theme => ({
         <Grid item xs={12} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
-              <ButtonBase
+            <ButtonBase 
+            component={Link}
+            to={`/acceptance/${params.cs_id}/selectHW`}>
+              {/* <ButtonBase
               component={Link}
-              to ='/selectHW'
-              // className={classes.ButtonBase}
-              >
+          */}
                 <CardContent>
               <CardMedia
               component="img"
@@ -380,61 +286,28 @@ const useStyles = makeStyles(theme => ({
               image="https://image.flaticon.com/icons/svg/2312/2312099.svg"
               title="課堂驗收"
               className={classes.image}
-              />
-                {/* <Typography>
-                  點名
-                </Typography> */}
+              >
+                   
+            
+               </CardMedia>
               </CardContent>
             <CardActions>
-              {/* <Button
-              component={Link}
-              to ='/homepage2'
-              className={classes.classbutton}
-              > */}
+              
                 <Typography>課堂驗收</Typography>
-              {/* </Button> */}
+           
             </CardActions>
               </ButtonBase>
+              {/* </Link> */}
               </CardActionArea>
         </Card>
         </Grid>
-              {/* {images.map(image => (
-                <ButtonBase
-                focusRipple
-                key={image.title}
-                className={classes.image}
-                focusVisibleClassName={classes.focusVisible}
-                style={{
-                  width: image.width,
-                }}
-                >
-                <span
-                className={classes.imageSrc}
-                style={{
-                  backgroundImage: `url(${image.url})`,
-                }}
-                />
-                <span className={classes.imageBackdrop} />
-                <span className={classes.imageButton}>
-                <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                className={classes.imageTitle}
-                >
-                {image.title}
-                <span className={classes.imageMarked} />
-                </Typography>
-                </span>
-                </ButtonBase>
-              ))} */}
-              </Grid>
+      </Grid>
+      <AddQA open={openAddQA} handleClose={onCloseAddQA}/>
 
-              <AddQA open={openAddQA} handleClose={onCloseAddQA}/>
-             
-
-            </div>
-          );
-          
+    </div>
+        );
+      }
         
-    }
+
+        
+    

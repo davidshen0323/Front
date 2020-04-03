@@ -43,7 +43,7 @@ export default function AcceptanceList() {
     <Paper className={classes.root}>
       <MyMenu/>
 
-  <center> <label>{csname}</label>  </center>
+ 
 
         <Table className={classes.table}>
 
