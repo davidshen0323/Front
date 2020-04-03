@@ -9,6 +9,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import CloseIcon from '@material-ui/icons/Close';
+import clsx from 'clsx';
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import SimpleTable from './stable';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import FaceIcon from '@material-ui/icons/Face';
 
 
 function createData(time, attend, score, from) {
@@ -119,6 +132,31 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
+
+const useToolbarStyles = makeStyles(theme => ({
+  root: {
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(1),
+  },
+  title: {
+    flex: '1 1 100%',
+    marginLeft: theme.spacing(9),
+    //paddingLeft: theme.spacing(9),
+  },
+  listItemText : { 
+    fontSize:'1.5em',
+  }, 
+  listItemText2 : { 
+    fontSize:'0.8em',
+  }, 
+  inline: {
+    display: 'inline',
+    fontSize:18,
+  },
+}));
+
+
+
 /*----------------------------------------------*/
 const useStyles = makeStyles(theme => ({
   root: {
@@ -144,6 +182,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
   },
+  
 }));
 /*---------------------------------------------*/
 
@@ -177,15 +216,9 @@ export default function RollcallRDS() {
     setPage(0);
   };
 
-  const handleChangeDense = event => {//改成密集的
-    setDense(event.target.checked);
-  };
-
   const handleChange = () => {
     setChecked(pp => !pp);
   };
-
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const testFunc = (e, id) => {
     console.log(e.target.value);
@@ -198,7 +231,9 @@ export default function RollcallRDS() {
       {/* <Paper className={classes.paper}> */}
         
         {/* <RollcallRDDp/> */}
-        
+        {/* <EnhancedTableToolbar />
+        <Divider variant="fullWidth" component="li" /> */}
+      
         <TableContainer>
           
           <Table
@@ -234,11 +269,6 @@ export default function RollcallRDS() {
                     </TableRow>
                   );
                 })}
-              {/* {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )} */}
             </TableBody>
           </Table>
         </TableContainer>
