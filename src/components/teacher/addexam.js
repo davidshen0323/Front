@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import MyMenu from './teacher_menu';
+import MyMenu from '../Menu';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
@@ -173,7 +173,7 @@ export default function NavTabs() {
         <MyMenu/>
         
             <AppBar position="static">
-                <Tabs
+                <Tabs 
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
