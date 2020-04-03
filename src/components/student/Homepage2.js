@@ -13,7 +13,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import {Link} from "react-router-dom";
-import CustomDialog from "./addQA";
+import AddQA from "./addQA";
 
 
 
@@ -173,9 +173,9 @@ const useStyles = makeStyles(theme => ({
         const classes = useStyles();
         
         
-        const [open, close] = React.useState(false);
-        const onClose = () => {
-          close(open ? false : true);
+        const [openAddQA, closeAddQA] = React.useState(false);
+        const onCloseAddQA = () => {
+          closeAddQA(openAddQA ? false : true);
         };
         return (
             <div className={classes.root}>
@@ -335,7 +335,7 @@ const useStyles = makeStyles(theme => ({
         <Grid item xs={12} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
-              <ButtonBase onClick={() => close(true)}>
+              <ButtonBase onClick={() => closeAddQA(true)}>
                 <CardContent>
               <CardMedia
               component="img"
@@ -369,7 +369,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
-              to ='/homepage2'
+              to ='/selectHW'
               // className={classes.ButtonBase}
               >
                 <CardContent>
@@ -429,7 +429,9 @@ const useStyles = makeStyles(theme => ({
                 </ButtonBase>
               ))} */}
               </Grid>
-              <CustomDialog open={open} handleClose={onClose}/>
+
+              <AddQA open={openAddQA} handleClose={onCloseAddQA}/>
+             
 
             </div>
           );

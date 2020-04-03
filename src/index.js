@@ -18,6 +18,7 @@ import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
 import Register from './components/register.js';
+import selectHW from'./components/student/selectHW.js'
 import ReactApp from './components/React-app.js';
 import * as serviceWorker from './serviceWorker';
 
@@ -55,6 +56,8 @@ ReactDOM.render(
             <Route path="/addexam" component={addexam}/>
             <Route path="/homepage" component={shomepage}/>
             <Route path="/rollcallBlock" component={RollcallBlock}/>
+            <Route path="/selectHW" component={selectHW}/>
+
 
             <Route exact path="/" component={Login}/>
         </Switch>
