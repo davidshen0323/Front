@@ -98,6 +98,7 @@ export default function AddQA ({ open, handleClose })  {
         onClose={submitClose}>
         <Alert
         onClose={submitClose} severity="success">
+
           老師收到你的問題囉！
         </Alert>
       </Snackbar>

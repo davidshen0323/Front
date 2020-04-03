@@ -30,7 +30,7 @@ const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    marginBottom: 80,
+    marginBottom: 68,
     
   },
   appBar: {
