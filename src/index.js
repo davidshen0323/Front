@@ -17,8 +17,8 @@ import Rollcall from './components/teacher/rollcall/rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
-import Register from './components/register.js';
-import ReactApp from './components/React-app.js';
+import Register from './components/Register.js';
+// import ReactApp from './components/React-app.js';
 import * as serviceWorker from './serviceWorker';
 
 import rollcallBlock from './components/teacher/rollcallBlock';
@@ -28,6 +28,7 @@ import examresult from './components/teacher/ExamResult';
 import Member from './components/teacher/member/member';
 import RollcallBlock from './components/teacher/rollcallBlock';
 
+import qrcode from './components/qrcode';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -38,14 +39,14 @@ ReactDOM.render(
             
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
-            <Route path="/rollcall" component={Rollcall}/>
+            <Route path="/rollcall/:cs_id" component={Rollcall}/>
             <Route path="/leavemanage" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepage1" component={homepage1}/>
-            <Route path="/homepage2" component={homepage2}/>
-            <Route path="/questions" component={QuestionList}/>
+            <Route path="/homepage2/:cs_id" component={homepage2}/>
+            <Route path="/questions/:cs_id" component={QuestionList}/>
             <Route path="/tquestion" component={TQuestionList}/>
-            <Route path="/acceptance" component={AcceptanceList}/>
+            <Route path="/acceptance/:cs_id" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
 
             <Route path="/post" component={post}/>
@@ -56,6 +57,7 @@ ReactDOM.render(
             <Route path="/addexam" component={addexam}/>
             <Route path="/homepage" component={shomepage}/>
             <Route path="/rollcallBlock" component={RollcallBlock}/>
+            <Route path="/qrcode" component={qrcode}/>
 
             <Route exact path="/" component={Login}/>
         </Switch>

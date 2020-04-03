@@ -77,25 +77,49 @@ const useStyles = makeStyles(theme => ({
 
 export default function Homepage1() {
 
-  const [Sclass, setClass] = useState([]);//Sclass 
-
   const classes = useStyles();
 
-  const classList = ['cs_id','cs_name','teacher_name'];
+  const [Sclass, setClass] = React.useState([]);
+  
 
+  const classList = ['cs_id','cs_name','teacher_name'];
+  
   useEffect(() => {
     async function fetchData() {
-        const result = await axios.get(`/student/HomePage1_s/one/406401628`);
-        setClass(result.data);
-        // console.log(result.data);
+      const result  = await axios.get(`/student/HomePage1_s/one/`)
+      
+      setClass(result.data);
+      // console.log(result.data);
+      // console.log(result.data[0]['cs_id']);
+      
+      // const path ={result.data['cs_id']}
     }
+    
     fetchData();
-}, []);
+  }, []);
+
+  // const handleSubmit = () => {
+  //   async function getCsid(){
+  //   const csid = await axios.get(`/student/HomePage1_s/one/`);
+  //   setCsid(csid.data);
+  //   let classid = JSON.stringify(csid.data).toString();
+  //   let i;
+  //   for(i=0; i < classid.length; i++)
+  //   {
+  //   console.log(csid.data[i]['cs_id']);
+  //   }
+  // }
+  //   getCsid();
+  // }
+  
+
+
 
   return (
     <div className={classes.root}>
     <MyMenu />
     
+      {/* {console.log(Sclass)} */}
     <Grid container spacing={3}>
 
         <Grid item md={4}>
@@ -136,16 +160,6 @@ export default function Homepage1() {
           </ButtonBase>
         </Card>
 
-        {/* <Paper className={classes.paperclass}>
-        <Grid container wrap="nowrap" spacing={2} component={Link} to='/homepage2'>
-          <Grid item>
-            <Avatar>D</Avatar>
-          </Grid>
-          <Grid item xs>
-            <Typography>Truncation should be conditionally applicable on this long line of text as this is a much longer line than what the container can support.</Typography>
-          </Grid>
-        </Grid>
-      </Paper> */}
         </Grid>  
         
         <Grid item xs={4}>
@@ -177,81 +191,47 @@ export default function Homepage1() {
             ))
           }
         </Paper> */}
-        <TableBody>
-            {Sclass.map((classs,index) => (
-                <Paper className={classes.paperclass} >
-              <TableRow key = {index}>
-                {/* <TableCell>{index+1}</TableCell> */}
-                {
-                  classList.map( (list, i) =>  i === 0 ?
-                  <TableCell key={i} component="th" scope="row" align="center">
-                    {/* {classs[list]} */}
-                    
-        
-            
-            {classs[list]}
-            
-            
-          
-                   </TableCell>:
-                  <TableCell key={i} align="left">{classs[list]}</TableCell>
-                  )
-                }
-              </TableRow>
-              </Paper> 
-            ))}
+                <TableBody>
+                    {Sclass.map((classs,index) => (
+                    <Paper className={classes.paperclass} >
+         
+                        {/* {console.log(index)} */}
+            <CardActionArea>
+              <CardActions>
+                      <TableRow key = {index}>
+                      <ButtonBase>
+                        {/* {console.log(index)} */}
+
+                        {/* <TableCell>{index+1}</TableCell> */}
+                        {
+                          classList.map( (list, i) =>  i === 0 ?
+                          <TableCell key={i} component="th" scope="row" align="center">
+                        
+                            {/* {console.log(list)} */}
+                            {/* {console.log(i)} */}
+                            <Link to={`/homepage2/${classs[list]}`}>
+                            {classs[list]}
+                            </Link>
+                            
+                          </TableCell>:
+                          <TableCell key={i} align="left">
+                            {/* {console.log(i)} */}
+                            {classs[list]}
+                            
+                            </TableCell>
+                          )
+                        }
+                        
+                        </ButtonBase>
+                      </TableRow>
+                        </CardActions>
+                        </CardActionArea>
+                        {/* </Card> */}
+                      </Paper> 
+                      ))}     
             </TableBody> 
           </Grid>
-          
-
-
-            
-        {/* // <Paper className={classes.paper}>
-        // <Grid container wrap="nowrap" spacing={2}>
-        //   <Grid item>
-        //   <Typography>photo</Typography>
-        //   </Grid>
-        //   <Grid item xs>
-        //   <Typography>wordsaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Typography>
-        //   </Grid>
-        //   </Grid>
-        // </Paper>
-        // </Grid>  
-
-      //   <Grid item xs={4} spacing={1}>
-      //   <Paper className={classes.paperleft}>
-          
-      //   </Paper>
-      //   </Grid>  
-
-      //   <Grid item xs={8} spacing={1} >
-      //   <Paper className={classes.paperclass} >
-      //   <Grid container wrap="nowrap" spacing={2} >
-          
-      //     <Grid item xs>
-      //       <Typography>Truncation should be conditionally applicable on this long line of text as this is a much longer line than what the container can support.</Typography>
-      //     </Grid>
-      //   </Grid>
-      // </Paper>
-      //   </Grid>  
         
-      //   <Grid item xs={4} spacing={1}>
-      //   <Paper className={classes.paperleft}></Paper>
-      //   </Grid>  
-
-      //   <Grid item xs={8} spacing={3}>
-      //   <Paper className={classes.paperclass}>
-      //   <Grid container wrap="nowrap" spacing={2}>
-      //     <Grid item>
-      //       <Avatar>D</Avatar>
-      //     </Grid>
-      //     <Grid item xs>
-      //       <Typography>Truncation should be conditionally applicable on this long line of text as this is a much longer line than what the container can support.</Typography>
-      //     </Grid>
-      //   </Grid>
-      // </Paper>
-      //   </Grid>
-          */}
       </Grid>
     </div>
     
