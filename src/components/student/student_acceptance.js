@@ -28,11 +28,11 @@ export default function AcceptanceList() {
 
   /*=========== Create Table HEAD ===========*/
   const acceptanceList = [ 'accept_std_id', 'accept_time', 'accept_done' ]
-  const csname='專題系統開發（一）'
+  const csname='微積分作業二' //這是假的
 
   useEffect(() => {
       async function fetchData() {
-          const result = await axios.get(`/acceptance/hw/10811000DMG741D7411023900/Database`);
+          const result = await axios.get(`/student/acceptance/hw/2/DC`);
           setAcceptances(result.data);
         //   console.log(result.data);
       }
