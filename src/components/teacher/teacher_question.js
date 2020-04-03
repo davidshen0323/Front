@@ -1,84 +1,207 @@
-import React, {useState,useEffect} from 'react';
-import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import MyMenu from './teacher_menu';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles} from '@material-ui/core/styles';
+import { AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
+import MyMenu from '../Menu';
+import QAReply from './QAReply';
 
-export default function TQuestionList() {
-
-  /*------------ STATE ------------*/
-  const [questions, setQuestions] = useState([]);
-
-  /*------------ STYLE ------------*/
-  const useStyles = makeStyles({
-    root: {
-      width: '100%',
-      overflowX: 'auto',
-    },
-    table: {
-      minWidth: 450,
-    },
-  });
-  const classes = useStyles();
-
-  /*=========== Create Table HEAD ===========*/
-  const questionList = [ 'q_std_id', 'q_content', 'q_time']
-  const csname='專題系統開發（一）'
-
-  useEffect(() => {
-      async function fetchData() {
-          const result = await axios.get(`/question/all/10811000DMG741D7411023900`);
-          setQuestions(result.data);
-        //   console.log(result.data);
-      }
-      fetchData();
-  }, []);
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <Paper className={classes.root}>
-      <MyMenu/>
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`nav-tabpanel-${index}`}
+      aria-labelledby={`nav-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  );
+}
 
-  <center> <label>{csname}</label>  </center>
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
 
-        <Table className={classes.table}>
+function a11yProps(index) {
+  return {
+    id: `nav-tab-${index}`,
+    'aria-controls': `nav-tabpanel-${index}`,
+  };
+}
 
-            {/*===== TableHead =====*/}
+function LinkTab(props) {
+  return (
+    <Tab
+      component="a"
+      onClick={event => {
+        event.preventDefault();
+      }}
+      {...props}
+    />
+  );
+}
+
+const useStyles = makeStyles(theme => ({
+
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  proot: {
+    display: 'flex',
+  },
+  textarea:{
+    borderRadius: 10,
+    marginLeft: theme.spacing(2),
+    width: 300,
+    padding:10,
+    fontSize:14,
+    fontFamily:'微軟正黑體',
+  },
+  textfield:{
+    width:300,
+    fontSize:14,
+    fontFamily:'微軟正黑體',
+  },
+  button: {
+    margin: theme.spacing(2),
+},
+}));
+
+export default function TQuestionList() {
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+ 
+
+  {/* 老師回覆問題 */}
+  const [openQAReply, closeQAReply] = React.useState(false);
+  const onCloseQAReply = () => {
+    closeQAReply(openQAReply ? false : true);
+  };
+  
+
+
+  return (
+    <div >
+        <MyMenu/>
+            <AppBar position="static">
+                <Tabs
+                variant="fullWidth"
+                value={value}
+                onChange={handleChange}
+                aria-label="nav tabs example"
+                >
+                <LinkTab label="未回答" href="/drafts" {...a11yProps(0)} />
+                <LinkTab label="已回答" href="/trash" {...a11yProps(1)} />
+            
+                </Tabs>
+            </AppBar>
+      <TabPanel value={value} index={0}>
+      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
+      <Table>
             <TableHead>
                 <TableRow>
-                  <TableCell >排序</TableCell>
-                  <TableCell align="center">學號</TableCell>
-                  <TableCell >問題內容</TableCell>
-                  <TableCell >最後更新時間</TableCell>
-                  <TableCell >完成問題</TableCell>
+                    <TableCell>排序</TableCell>
+                    <TableCell>學號</TableCell>
+                    <TableCell>問題內容</TableCell>
+                    <TableCell>最後更新時間</TableCell>
+                    <TableCell>回覆</TableCell>
                 </TableRow>
             </TableHead>
-
-            {/*===== TableBody =====*/}
+            
             <TableBody>
-                {questions.map((question,index) => (
-                    <TableRow key={index}>
-                      <TableCell>{index+1} </TableCell>
-                    {
-                        questionList.map( (list, i) =>   i === 0 ? 
-                            <TableCell key={i} component="th" scope="row" align="center" >
-                               {question[list]}
-                            </TableCell>:
-                            <TableCell key={i} align="left">{question[list]}</TableCell> 
-                            
-                        )
-                    }
-                    
-                    </TableRow>
-                    
-                ))}
+                <TableRow>
+                    <TableCell>1</TableCell>
+                    <TableCell>406401628</TableCell>
+                    <TableCell>Table 怎麼做</TableCell>
+                    <TableCell>2020-04-03 11:29</TableCell>
+                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
+                </TableRow>
+                
+                <TableRow>
+                    <TableCell>2</TableCell>
+                    <TableCell>406401629</TableCell>
+                    <TableCell>我不會寫作業</TableCell>
+                    <TableCell>2020-04-03 11:30</TableCell>
+                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>3</TableCell>
+                    <TableCell>406401630</TableCell>
+                    <TableCell>網頁打不開</TableCell>
+                    <TableCell>2020-04-03 11:32</TableCell>
+                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>4</TableCell>
+                    <TableCell>406401631</TableCell>
+                    <TableCell>404是啥</TableCell>
+                    <TableCell>2020-04-03 11:35</TableCell>
+                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
+                </TableRow>
             </TableBody>
+          </Table>
+      </Box>
+      </TabPanel>
 
-        </Table>
-    </Paper>
-)
+      {/* 老師回覆問題的小框框 */}
+      <QAReply open={openQAReply} handleClose={onCloseQAReply}/>
+
+      <TabPanel value={value} index={1}>
+      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
+      <Table>
+            <TableHead>
+                <TableRow>
+                    <TableCell>排序</TableCell>
+                    <TableCell>學號</TableCell>
+                    <TableCell>問題內容</TableCell>
+                    <TableCell>最後更新時間</TableCell>
+                    <TableCell>回覆內容</TableCell>
+                </TableRow>
+            </TableHead>
+            
+            <TableBody>
+                <TableRow>
+                    <TableCell>1</TableCell>
+                    <TableCell>406401628</TableCell>
+                    <TableCell>Table 怎麼做</TableCell>
+                    <TableCell>2020-04-03 11:29</TableCell>
+                    <TableCell>妳要打"Table"</TableCell>
+                </TableRow>
+                
+                <TableRow>
+                    <TableCell>2</TableCell>
+                    <TableCell>406401629</TableCell>
+                    <TableCell>我不會寫作業</TableCell>
+                    <TableCell>2020-04-03 11:30</TableCell>
+                    <TableCell>誰叫你不認真上課</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>3</TableCell>
+                    <TableCell>406401630</TableCell>
+                    <TableCell>網頁打不開</TableCell>
+                    <TableCell>2020-04-03 11:32</TableCell>
+                    <TableCell>重開機</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>4</TableCell>
+                    <TableCell>406401631</TableCell>
+                    <TableCell>404是啥</TableCell>
+                    <TableCell>2020-04-03 11:35</TableCell>
+                    <TableCell>已於課堂上回答</TableCell>
+                </TableRow>
+            </TableBody>
+          </Table>
+      </Box>
+      </TabPanel>
+    </div>
+  );
 }

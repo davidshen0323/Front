@@ -18,7 +18,7 @@ import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
 
-import Register from './components/Register.js';
+import Register from './components/register.js';
 
 
 import selectHW from'./components/student/selectHW.js'
