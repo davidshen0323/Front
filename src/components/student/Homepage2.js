@@ -244,8 +244,8 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
 
               <ButtonBase 
-               component={Link}
-               to={`/questions/${params.cs_id}`}
+              //  component={Link}
+              //  to={`/questions/${params.cs_id}`}
               onClick={() => closeAddQA(true)}
               >
                 <CardContent>

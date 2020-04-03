@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { useParams } from "react-router-dom";
 
 
 const useStyle = makeStyles(theme => ({
@@ -25,6 +26,7 @@ const useStyle = makeStyles(theme => ({
 
 
 function Alert(props) {
+  
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
@@ -45,6 +47,8 @@ export default function AddQA ({ open, handleClose })  {
     setOpenS(true);
   };
 
+  const params = useParams();
+
   const submitClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -52,6 +56,7 @@ export default function AddQA ({ open, handleClose })  {
     handleClose(true);
     setOpenS(false);
     setInputs(1);
+   
   };
     
   
@@ -85,10 +90,15 @@ export default function AddQA ({ open, handleClose })  {
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFous>關閉視窗</Button>
-        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFous>確認送出</Button>
-        <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
-        <Alert onClose={submitClose} severity="success">
+        <Button onClick={handleClose} color="primary" autoFocus>關閉視窗</Button>
+        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus>確認送出</Button>
+        <Snackbar 
+        open={openS} 
+        autoHideDuration={1000} 
+        onClose={submitClose}>
+        <Alert
+        onClose={submitClose} severity="success">
+
           老師收到你的問題囉！
         </Alert>
       </Snackbar>
