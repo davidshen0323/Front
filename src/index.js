@@ -64,7 +64,7 @@ ReactDOM.render(
  
             <Route path="/qrcode" component={qrcode}/>
 
-            <Route path="/acceptance/${params.cs_id}/selectHW" component={selectHW}/>
+            <Route path="/selectHW/:cs_id" component={selectHW}/>
 
 
             <Route exact path="/" component={Login}/>
