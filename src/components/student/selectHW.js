@@ -1,16 +1,45 @@
-import React from 'react';
+import React , { useState, useEffect } from 'react';
 import MyMenu from '../Menu';
-import { Button,Table,TableHead,TableBody,TableCell,TableRow,Box } from '@material-ui/core';
+import { Button,Table,TableHead,TableBody,TableCell,TableRow,Box, ButtonBase } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import axios from 'axios';
 
 
 
-export default function selectHW() {
+export default function SelectHW() {
   //接值
-  const acceptanceList = [ 'hw_name', 'hw_content', 'accept_done' ]
 
+  // const classed = useStyles();
 
+  const [Acc, setAcc] = React.useState([]);
+
+  const acceptanceList = [ 'hw_name', 'hw_createtime' ]
+
+  const params = useParams();
+  const csid = params.cs_id;
+  
+  // console.log(csid);
+  useEffect(() => {
+    async function fetchData() {
+
+      const result  = await axios.get(`/student/acceptance/${csid}`)
+      
+      setAcc(result.data);
+      console.log(result.data);
+      // console.log(result.data[0]['cs_id']);
+      
+      // const path ={result.data['cs_id']}
+    }
+    
+    fetchData();
+  }, []);
+
+  console.log(Acc);
+
+  
+  
+  
   return (
     <div>
       <MyMenu/>
@@ -22,13 +51,37 @@ export default function selectHW() {
                 <TableRow>
                     <TableCell>作業名稱</TableCell>
                     <TableCell>日期</TableCell>
-                    <TableCell>分數</TableCell>
-                    <TableCell>驗收</TableCell>
+                    
                 </TableRow>
             </TableHead>
             
             <TableBody>
-                <TableRow>
+              {Acc.map((Accept,index) => (
+                <TableRow key={index}>
+                  {/* <ButtonBase 
+                  component={Link} 
+                  to={`/acceptance/${params.cs_id}/${}`}
+                  >
+                     */}
+                  {/* <TableCell>{index+1}</TableCell> */}
+                  {
+                    acceptanceList.map( (list, i) => i === 0 ?
+                    <TableCell key={i} component="th" scope="row" align="center">
+                      <ButtonBase component={Link} to={`/acceptance/${csid}/${Accept[list]}`}>
+                        {Accept[list]}      
+                      </ButtonBase>
+                      </TableCell>:
+                      <TableCell key={i} align="left"><ButtonBase component={Link} to={`/acceptance/${csid}/${Accept[list]}`}>
+                      {Accept[list]}      
+                    </ButtonBase></TableCell>
+                      )
+                    }
+                    {/* </ButtonBase> */}
+                </TableRow>
+              ))}
+              {/* </TableBody> */}
+
+                {/* <TableRow>
                     <TableCell>微積分作業一</TableCell>
                     <TableCell>20200305</TableCell>
                     <TableCell>20</TableCell>
@@ -52,7 +105,7 @@ export default function selectHW() {
                     <TableCell>20200318</TableCell>
                     <TableCell></TableCell>
                     <TableCell><Button component={Link} to ='/acceptance' variant="contained" color="primary">我要驗收</Button></TableCell>
-                </TableRow>
+                </TableRow> */}
             </TableBody>
           </Table>
       </Box>

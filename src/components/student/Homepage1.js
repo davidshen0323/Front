@@ -199,7 +199,7 @@ export default function Homepage1() {
             <CardActionArea>
               <CardActions>
                       <TableRow key = {index}>
-                      <ButtonBase>
+                      {/* <ButtonBase> */}
                         {/* {console.log(index)} */}
 
                         {/* <TableCell>{index+1}</TableCell> */}
@@ -209,9 +209,9 @@ export default function Homepage1() {
                         
                             {/* {console.log(list)} */}
                             {/* {console.log(i)} */}
-                            <Link to={`/homepage2/${classs[list]}`}>
+                            <ButtonBase component={Link} to={`/homepage2/${classs[list]}`}>
                             {classs[list]}
-                            </Link>
+                            </ButtonBase>
                             
                           </TableCell>:
                           <TableCell key={i} align="left">
@@ -222,7 +222,7 @@ export default function Homepage1() {
                           )
                         }
                         
-                        </ButtonBase>
+                        {/* </ButtonBase> */}
                       </TableRow>
                         </CardActions>
                         </CardActionArea>
