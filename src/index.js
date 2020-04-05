@@ -17,6 +17,7 @@ import Rollcall from './components/teacher/rollcall/rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
+import StuInformation from './components/student/stuInformation';
 
 import Register from './components/register.js';
 
@@ -52,6 +53,7 @@ ReactDOM.render(
             <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance/:cs_id" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
+            <Route path="/StuInformation" component={StuInformation}/>
 
             <Route path="/post" component={post}/>
             

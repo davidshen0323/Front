@@ -1,7 +1,6 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Radio, RadioGroup, TextareaAutosize, FormControlLabel} from "@material-ui/core";
+import {Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
@@ -28,14 +27,10 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function AddQA ({ open, handleClose })  {
+export default function EditEmail({ open, handleClose })  {
   const classes = useStyle();
   
-  const [value, setValue] = React.useState('name');
 
-  const handleChange = event => {
-    setValue(event.target.value);
-  };
 
   const [openS, setOpenS] = React.useState(false);
   const [inputs, setInputs] = React.useState(1);
@@ -46,7 +41,6 @@ export default function AddQA ({ open, handleClose })  {
   };
 
   const submitClose = () => {
- 
     handleClose(true);
     setOpenS(false);
     setInputs(1);
@@ -59,38 +53,34 @@ export default function AddQA ({ open, handleClose })  {
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
-            提問
+            修改Email
           </Typography>
 
+           {/* 之後要接Email */}  
+          <Typography className={classes.typo} variant="h8">
+            目前Email：406401628@mail.fju.edu.tw
+          </Typography>
+
+          <Typography className={classes.typo} variant="h8">
+            新的Email：<Input onChange={()=> setInputs(2)}  style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
+          </Typography>
           <Typography className={classes.typo} variant="body1">
-            請選擇提問方式：
+            
           </Typography>
-
-        <RadioGroup className={classes.typo} aria-label="position" name="position"  value={value } onChange={handleChange} row>
-            <FormControlLabel value="not_anonymous" control={<Radio color="primary" />} label="記名" labelPlacement="end"/>
-            <FormControlLabel value="anonymous" control={<Radio color="primary" />} label="匿名" labelPlacement="end"/>
-        </RadioGroup>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column"}}>
-          <Typography className={classes.typo} variant="body1">
-            請輸入問題內容：
-          </Typography>
-
-          <Typography className={classes.typo} variant="body1">
-            <TextareaAutosize onChange={()=> setInputs(2)} id="question" style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請輸入問題"/>
-          </Typography>
-        </div>
+        
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} color="primary" autoFous>關閉視窗</Button>
-        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFous>確認送出</Button>
+        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFous>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
         <Alert onClose={submitClose} severity="success">
-          老師收到你的問題囉！
+          已修改完成！
         </Alert>
       </Snackbar>
       </DialogActions>
     </Dialog>
+    
   );
 };
