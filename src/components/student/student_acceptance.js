@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import MyMenu from '../Menu';
+import { useParams } from 'react-router-dom';
 
 export default function AcceptanceList() {
 
@@ -30,9 +31,13 @@ export default function AcceptanceList() {
   const acceptanceList = [ 'accept_std_id', 'accept_time', 'accept_done' ]
   const csname='微積分作業二' //這是假的
 
+  const params = useParams();
+  const csid = params.cs_id;
+  const hwname = params.hw_name;
+
   useEffect(() => {
       async function fetchData() {
-          const result = await axios.get(`/student/acceptance/hw/2/DC`);
+          const result = await axios.get(`/student/acceptance/hw/${csid}/${hwname}`);
           setAcceptances(result.data);
         //   console.log(result.data);
       }
