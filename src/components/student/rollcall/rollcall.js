@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MemberTable from './membertable';
-import MMTable from './MMtable';
+import RollcallRD from './rollcallRD';
 import Paper from '@material-ui/core/Paper';
 
 /*------------ STYLE ------------*/
@@ -19,15 +18,19 @@ const useStyles = makeStyles({
   });
 
 /*--------------------------------*/
-export default function Member() {
+export default function Rollcall() {
     const classes = useStyles();
+    
         return (
 
-            <div >
-                <Paper className={classes.Paper}>
-                  <MMTable />
+                <div>
+                <Paper className={classes.Paper}> 
+                <RollcallRD/>
                 </Paper>
-             </div>
+                </div>
+
+
+
 
         )
     }

@@ -66,7 +66,7 @@ const headCells = [
   { id: 'number', numeric: false, disablePadding: true, label: '學號' },
   { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
   { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-  { id: 'group', numeric: true, disablePadding: false, label: '分組' },
+  // { id: 'group', numeric: true, disablePadding: false, label: '分組' },
   
 ];
 
@@ -155,7 +155,6 @@ export default function MemberTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
@@ -174,15 +173,12 @@ export default function MemberTable() {
   };
 
 
-//  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
-
 /*=========== Create Table HEAD ===========*/
  const studentList = [ 'std_id', 'std_name', 'std_department']
 
  useEffect(() => {
   async function fetchData() {
-      const result = await axios.get(`/rollcall/2`);
+      const result = await axios.get(`/teacher/rollcall/oneRollcall/2`);
       
       console.log(result.data);
 
@@ -195,8 +191,7 @@ export default function MemberTable() {
 
   return (
     <div className={classes.root}>
-      {/* <Paper className={classes.paper}> */}
-        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
+     
         <TableContainer>
           <Table
             className={classes.table}
@@ -209,21 +204,19 @@ export default function MemberTable() {
                order={order}
                orderBy={orderBy}
                onRequestSort={handleRequestSort}
-              //rowCount={rows.length}
+               rowCount={students.length}
             />
 
 
             {/*===== TableBody =====*/}
             <TableBody>
-              {/* {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
-                {students.map((student, index) => (
-                  <TableRow hover role="checkbox">
+              {stableSort(students, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((student, index) => (
+                  <TableRow hover>
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
-                  //const labelId = `enhanced-table-checkbox-${index}`;
-
                     studentList.map( (list, i) =>   i === 0 ? 
                     <TableCell key={i} component="th" scope="row" align="left" padding="none" >
                     {student[list]}
@@ -239,7 +232,7 @@ export default function MemberTable() {
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
-        //  count={rows.length}
+          count={students.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}

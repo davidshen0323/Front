@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
         width: '150px',
       },
 
+
       card: {
         width: 300,
         height: 300,
@@ -119,7 +120,7 @@ const useStyles = makeStyles(theme => ({
                component={Link}
                to={`/rollcall/${params.cs_id}`}
               >
-                <CardContent>
+              <CardContent>
               <CardMedia
               component="img"
               alt="點名"
@@ -150,7 +151,7 @@ const useStyles = makeStyles(theme => ({
               to ='/homepage2'
               
               >
-                <CardContent>
+              <CardContent>
               <CardMedia
               component="img"
               alt="請假審核"
@@ -159,18 +160,9 @@ const useStyles = makeStyles(theme => ({
               title="請假審核"
               className={classes.image}
               />
-                {/* <Typography>
-                  點名
-                </Typography> */}
               </CardContent>
             <CardActions>
-              {/* <Button
-              component={Link}
-              to ='/homepage2'
-              className={classes.classbutton}
-              > */}
                 <Typography>請假審核</Typography>
-              {/* </Button> */}
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -244,8 +236,10 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
 
               <ButtonBase 
+
               //  component={Link}
               //  to={`/questions/${params.cs_id}`}
+
               onClick={() => closeAddQA(true)}
               >
                 <CardContent>
