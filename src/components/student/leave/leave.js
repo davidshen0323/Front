@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MemberTable from './membertable';
-import MMTable from './MMtable';
 import Paper from '@material-ui/core/Paper';
+import Leavetable from './leavetable';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
@@ -19,13 +18,13 @@ const useStyles = makeStyles({
   });
 
 /*--------------------------------*/
-export default function Member() {
+export default function Leave() {
     const classes = useStyles();
         return (
 
             <div >
                 <Paper className={classes.Paper}>
-                  <MMTable />
+                  <Leavetable />
                 </Paper>
              </div>
 

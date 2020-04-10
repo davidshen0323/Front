@@ -1,16 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+
+import {Save,Delete} from '@material-ui/icons';
+import Button from '@material-ui/core/Button';
 
 
 function createData(number, name,grade,pass,absence) {
@@ -33,49 +37,20 @@ const rows = [
         createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
       ];
 
-function descendingComparator(a, b, orderBy) {//順序升降
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {//搜尋
-  return order === 'desc'//按照筆畫多到少
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map(el => el[0]);
-}
-
 const headCells = [
     { id: 'number', numeric: true, disablePadding: false, label: '學號' },
     { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
     { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-    { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
+    { id: 'absence', numeric: true, disablePadding: false, label: '出席狀況' },
   ];
 
-function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = property => event => {
-    onRequestSort(event, property);
-  };
 
-  return (
+
+function EnhancedTableHead(props) {
+
+    return (
     <TableHead>
       <TableRow>
-
         <TableCell padding="none" />
           
         {headCells.map(headCell => (
@@ -83,34 +58,14 @@ function EnhancedTableHead(props) {
             key={headCell.id}
             align={headCell.numeric ='left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
-            </TableSortLabel>
-
+              {headCell.label}              
           </TableCell>
         ))}
       </TableRow>
     </TableHead>
   );
 }
-
-EnhancedTableHead.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-};
 
 /*----------------------------------------------*/
 const useStyles = makeStyles(theme => ({
@@ -124,51 +79,25 @@ const useStyles = makeStyles(theme => ({
   table: {
     minWidth: 750,
   },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
+  button:{
+    margin: theme.spacing(2),
+    
   },
 }));
 /*---------------------------------------------*/
 
 
-export default function RollcallRDT() {
+export default function Handtable() {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
 
 
-
+  const [selectedValue, setSelectedValue] = React.useState('0');
   const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
 
 /*=========== Create Table HEAD ===========*/
-const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
+const studentList = [ 'std_id', 'std_name', 'std_department']
 
 useEffect(() => {
  async function fetchData() {
@@ -188,52 +117,70 @@ useEffect(() => {
     <TableContainer>
           <Table
             className={classes.table}
-            aria-labelledby="tableTitle"
             size='small'
-            aria-label="enhanced table"
           >
             <EnhancedTableHead
-              classes={classes}
-               order={order}
-               orderBy={orderBy}              
-               onRequestSort={handleRequestSort}
+              classes={classes}          
             />
 
             {/*===== TableBody =====*/}
             <TableBody>
-              {/* {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
                 {students.map((student, index) => (
                     
                   <TableRow hover role="none">
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
-                  {
-                  //const labelId = `enhanced-table-checkbox-${index}`;
 
+                  {
                     studentList.map( (list, i) =>   i === 0 ? 
                     <TableCell key={i} component="th" scope="row" align="left">
                     {student[list]}
-                 </TableCell>:
-                 <TableCell key={i} align="left">{student[list]}</TableCell> 
+                    </TableCell>:
+                    <TableCell key={i} align="left">{student[list]}</TableCell> 
                         )
-                  }    
+                  }
+                       
+                    <TableCell align="left">
+                    <FormControl component="fieldset">
+                      <RadioGroup row aria-label="position" name="position" defaultValue="top">
+                        <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
+                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
+                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
+                        <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="缺席" />
 
+                        {/* <FormControlLabel value="1" control={<Radio color="default" align="left" size="small"/>} label="出席"
+                        checked={selectedValue === '1'} onChange={handleChange} />
+
+                        <FormControlLabel value="2" control={<Radio color="default" align="left" size="small"/>} label="遲到"
+                        checked={selectedValue === '2'} onChange={handleChange} />
+
+                        <FormControlLabel value="3" control={<Radio color="default" align="left" size="small"/>} label="請假"
+                        checked={selectedValue === '3'} onChange={handleChange} />
+
+                        <FormControlLabel value="0" control={<Radio color="default" align="left" size="small"/>} label="缺席"
+                        checked={selectedValue === '0'} onChange={handleChange} /> */}
+
+                      </RadioGroup>
+                    </FormControl>
+                    </TableCell>
+                      
                 </TableRow>
                 ))}
             </TableBody>
-          </Table>
+            </Table>
+            <div align="center" >
+                    <Button variant="contained" color="secondary"  className= {classes.button} startIcon={<Delete />}>
+                        取消
+                    </Button>
+                    
+                    <Button variant="contained" color="primary"   className= {classes.button} startIcon={<Save />}> 
+                        確定
+                    </Button>
+            </div>
+          
         </TableContainer>
 
-        <TablePagination
-          rowsPerPageOptions={[10, 25]}
-          component="div"
-          count={students.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        
 
     </div>
   );
