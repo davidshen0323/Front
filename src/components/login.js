@@ -89,7 +89,7 @@ export default function Login(){
           let login;
           const handleSubmit = () =>
           {
-            if(inputs.Userid.length === 9 && inputs.Userpassword.length > 0)
+            if(inputs.Userid.length === 9 && inputs.Userid.length > 0 && inputs.Userpassword.length > 0)
             {
                 login = true;
                 return login;
@@ -211,7 +211,8 @@ export default function Login(){
                     type="submit"
                     variant="contained" 
                     color="primary" 
-                    className={classes.button}>
+                    className={classes.button}
+                    onClick={handleSubmit}>
                     登入
                     </Button>
                     
