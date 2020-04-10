@@ -9,29 +9,32 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Paper from '@material-ui/core/Paper';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 
 
-function createData(number, name,grade,pass,absence) {
-  return { number, name,grade,pass,absence };
-}
+// function createData(number,name,grade,group,detail) {
+//     return { number,name,grade,group,detail};
+//   }
+  
+//   const rows = [
+//     createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
+//     createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
+//     createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
+//     createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
+//     createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
+//     createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
+//     createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
+//     createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
+//     createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
+//     createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
+//     createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
+//     createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
+//   ];
 
-
-const rows = [
-        createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
-        createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
-        createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
-        createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
-      ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -60,11 +63,12 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'number', numeric: true, disablePadding: false, label: '學號' },
-    { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
-    { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-    { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
-  ];
+  { id: 'number', numeric: false, disablePadding: true, label: '學號' },
+  { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
+  { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
+
+  
+];
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
@@ -75,6 +79,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
+
 
         <TableCell padding="none" />
           
@@ -112,7 +117,7 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-/*----------------------------------------------*/
+/*---------------------------------------*/
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -136,16 +141,16 @@ const useStyles = makeStyles(theme => ({
     width: 1,
   },
 }));
-/*---------------------------------------------*/
+/*------------------------------------*/
 
 
-export default function RollcallRDT() {
+export default function MemberTable() {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
+ 
 
-
-
+  
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -167,25 +172,27 @@ export default function RollcallRDT() {
     setPage(0);
   };
 
+
 /*=========== Create Table HEAD ===========*/
-const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
+ const studentList = [ 'std_id', 'std_name', 'std_department']
 
-useEffect(() => {
- async function fetchData() {
-     const result = await axios.get(`/teacher/rollcall/oneRollcall/1`);
-     
-     console.log(result.data);
+ useEffect(() => {
+  async function fetchData() {
+      const result = await axios.get(`/rollcall/2`);
+      
+      console.log(result.data);
 
-     setMembers(result.data);
- }
- fetchData();
+      setMembers(result.data);
+  }
+  fetchData();
 }, []);
+
 
 
   return (
     <div className={classes.root}>
-
-    <TableContainer>
+     
+        <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
@@ -195,36 +202,33 @@ useEffect(() => {
             <EnhancedTableHead
               classes={classes}
                order={order}
-               orderBy={orderBy}              
+               orderBy={orderBy}
                onRequestSort={handleRequestSort}
+               rowCount={students.length}
             />
+
 
             {/*===== TableBody =====*/}
             <TableBody>
-              {/* {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
-                {students.map((student, index) => (
-                    
-                  <TableRow hover role="none">
+              {stableSort(students, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((student, index) => (
+                  <TableRow hover>
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
-                  //const labelId = `enhanced-table-checkbox-${index}`;
-
                     studentList.map( (list, i) =>   i === 0 ? 
-                    <TableCell key={i} component="th" scope="row" align="left">
+                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
                     {student[list]}
                  </TableCell>:
                  <TableCell key={i} align="left">{student[list]}</TableCell> 
                         )
                   }    
-
                 </TableRow>
                 ))}
             </TableBody>
           </Table>
         </TableContainer>
-
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
@@ -234,7 +238,6 @@ useEffect(() => {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-
     </div>
   );
 }
