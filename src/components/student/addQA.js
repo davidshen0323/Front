@@ -48,10 +48,10 @@ export default function AddQA ({ open, handleClose })  {
   };
 
 
-  const submitClose = () => {
+  
  
 
-  const params = useParams();
+  // const params = useParams();
 
   const submitClose = (event, reason) => {
     if (reason === "clickaway") {
