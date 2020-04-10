@@ -6,7 +6,7 @@ import './index.css';
 //import App from './App';
 // import ReactApp from './components/React-app.js';
 import homepage1 from './components/student/Homepage1';
-import homepage2 from './components/student/Homepage2';
+import function1 from './components/student/Function1';
 import addexam from './components/teacher/addexam';
 import QuestionList from './components/student/student_question';
 import TQuestionList from './components/teacher/teacher_question';
