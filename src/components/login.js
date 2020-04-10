@@ -39,33 +39,48 @@ import { ListItemAvatar, TextField } from '@material-ui/core';
 const useStyles = makeStyles(theme =>({
     
         button: {
-            margin: theme.spacing(2),
+            margin: theme.spacing(1),
             width:'120px',
+            fontFamily: 'Microsoft JhengHei',
+            color: "white",
+            backgroundColor: "#003060",
+            fontWeight:'bold',
         },
 
         margin: {
             margin: theme.spacing(1),
+            fontFamily: 'Microsoft JhengHei',
+            
           },
 
         root:{
             width: '70%',
-            marginTop: theme.spacing(5),
+            marginTop: theme.spacing(12),
+            // marginBottom: theme.spacing(12),
             //marginLeft: theme.spacing(25),
             overflow: 'auto',
-            textAlign: 'center',  
+            textAlign: 'center',
+            fontFamily: 'Microsoft JhengHei',
+            color: '#003060',
+            backgroundColor: 'white',
+        },
+
+        div: {
+            // backgroundColor:'#E0E0E0',
             
+            height: '100vh',
         },
 
         TextField:{
             textAlign:'center',
-        },
-        
-        StyleSheet:{
+            backgroundColor:'#BEBEBE',
+          },
+          
+          StyleSheet:{
             display:"flex",
             alignItems:"center",
             justifyContent:"center",
-        }
-
+          },
         
     }
     ));
@@ -112,18 +127,18 @@ export default function Login(){
         //   };
 
         return (
-            <div>
+            <div className={classes.div}>
                 <MyMenu/>
-                <br/><br/><br/>
+                
                 <Grid 
                 container
-                direction="column"
-                
+                direction="row"
                 justify="center"
                 alignItems="center"
+                
                 >
                 <Paper className={classes.root}>
-                    <h2>登入</h2>
+                    <h2>上課應用系統</h2>
 
         {/* <form action="/login" method="POST"> 
           
@@ -166,15 +181,17 @@ export default function Login(){
         <form action="/login" method="POST"> 
         <List>
              
-        <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
+        <FormControl className={clsx(classes.margin)}>
             {/* <InputLabel htmlFor="outlined-adornment-account">帳號</InputLabel> */}
           
           <TextField 
             id="username"
-            label="Userid"
+            label="學號"
             name="username"
             value={inputs.Userid}
             onChange={handleChange('Userid')}
+            size="small"
+            variant="outlined"
             />
           
 {/*           
@@ -193,11 +210,13 @@ export default function Login(){
             {/* <InputLabel htmlFor="outlined-adornment-password">密碼</InputLabel> */}
             <TextField 
                 id="password"
-                label="Userpassword"
+                label="密碼"
                 type="password"
                 name="password"
                 value={inputs.Userpassword}
                 onChange={handleChange('Userpassword')}
+                size="small"
+                variant="outlined"
             />
           
                     </FormControl>
@@ -210,7 +229,6 @@ export default function Login(){
                     <Button 
                     type="submit"
                     variant="contained" 
-                    color="primary" 
                     className={classes.button}
                     onClick={handleSubmit}>
                     登入
@@ -218,7 +236,12 @@ export default function Login(){
                     
                     </form> 
 
-                    <Button variant="contained" component={Link} to='/register' color="primary" className={classes.button}>
+                    <Button
+                    variant="contained"
+                    component={Link}
+                    to='/register'
+                    className={classes.button}
+                    >
                     註冊
                     </Button>
 
