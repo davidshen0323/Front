@@ -52,7 +52,7 @@ ReactDOM.render(
             <Route path="/leavemanage" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepage1" component={homepage1}/>
-            <Route path="/homepage2/:cs_id" component={homepage2}/>
+            <Route path="/function1/:cs_id" component={function1}/>
             <Route path="/questions/:cs_id" component={QuestionList}/>
             <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>

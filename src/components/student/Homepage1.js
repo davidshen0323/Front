@@ -3,9 +3,10 @@ import MyMenu from '../Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { TextField, Typography,TableBody, TableCell , TableRow } from '@material-ui/core';
+import { TextField, Typography,TableBody, TableCell , TableRow ,Fab } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import axios from 'axios';
 import Card from "@material-ui/core/Card";
@@ -15,7 +16,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {Link} from "react-router-dom";
-import homepage2 from "./Homepage2";
+import function1 from "./Function1";
+import CreateClass from '../teacher/createClass';
 
 const useStyles = makeStyles(theme => ({
     
@@ -73,6 +75,12 @@ const useStyles = makeStyles(theme => ({
     classbutton: {
       width: 500,
     },
+
+    fab: {
+      position: 'fixed',
+      bottom: theme.spacing(5),
+      right: theme.spacing(5),
+    },
   }));
 
 export default function Homepage1() {
@@ -111,14 +119,21 @@ export default function Homepage1() {
   // }
   //   getCsid();
   // }
-  
+     {/* 新建課程 */}
+     const [openCreateClass, closeCreateClass] = React.useState(false);
+     const onCloseCreateClass = () => {
+       closeCreateClass(openCreateClass ? false : true);
+     };
 
 
 
   return (
     <div className={classes.root}>
     <MyMenu />
-    
+     {/* 新建課程 */}
+     <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeCreateClass(true)}>
+          <AddIcon />
+        </Fab>
       {/* {console.log(Sclass)} */}
     <Grid container spacing={3}>
 
@@ -132,7 +147,7 @@ export default function Homepage1() {
         <Card className={classes.card}>
           <ButtonBase
           component={Link}
-          to ='/homepage2'
+          to ='/function1'
           >
             <CardActionArea>
               <CardMedia
@@ -151,7 +166,7 @@ export default function Homepage1() {
             <CardActions>
               <Button
               component={Link}
-              to ='/homepage2'
+              to ='/function1'
               className={classes.classbutton}
               >
                 <Typography>Test</Typography>
@@ -209,7 +224,7 @@ export default function Homepage1() {
                         
                             {/* {console.log(list)} */}
                             {/* {console.log(i)} */}
-                            <ButtonBase component={Link} to={`/homepage2/${classs[list]}`}>
+                            <ButtonBase component={Link} to={`/function1/${classs[list]}`}>
                             {classs[list]}
                             </ButtonBase>
                             
@@ -233,6 +248,8 @@ export default function Homepage1() {
           </Grid>
         
       </Grid>
+      {/* 教師新建課程 */}
+      <CreateClass open={openCreateClass} handleClose={onCloseCreateClass}/>
     </div>
     
   )
