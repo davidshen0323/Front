@@ -86,8 +86,8 @@ export default function AddQA ({ open, handleClose })  {
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFous>關閉視窗</Button>
-        <Button  disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFous>確認送出</Button>
+        <Button onClick={submitClose} color="primary">關閉視窗</Button>
+        <Button  disabled={inputs===2 ? false : true} onClick={submitClick} color="primary">確認送出</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
         <Alert  onClose={submitClose} severity="success">
           老師收到你的問題囉！
@@ -97,4 +97,4 @@ export default function AddQA ({ open, handleClose })  {
       </DialogActions>
     </Dialog>
   );
-};
+}
