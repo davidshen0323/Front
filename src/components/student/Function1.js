@@ -83,7 +83,7 @@ const useStyles = makeStyles(theme => ({
      
     // export default Homepage2;
 
-    export default function Homepage2() {
+    export default function Function1() {
 
         const classes = useStyles();
 
