@@ -30,7 +30,7 @@ const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    marginBottom: 68,
+    marginBottom: 68, //會讓menu跟下面東西的距離改變
     
   },
   appBar: {
@@ -51,10 +51,13 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    fontFamily: 'Microsoft JhengHei',
   },
   School: {
-    minWidth: 65,
-    
+    minWidth: 100,
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+    color: 'white',
   },
   hide: {
     display: 'none',
@@ -62,9 +65,13 @@ const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    
+
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor:'#E0E0E0',
+
   },
   drawerHeader: {
     display: 'flex',
@@ -72,6 +79,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+    backgroundColor: "#003060",
+
   },
   content: {
     flexGrow: 1,
@@ -96,8 +105,22 @@ const useStyles = makeStyles(theme => ({
   Nav: {
     margin: `${theme.spacing(1)}px auto`,
     // flexGrow: 1,
-  }
+  },
   
+  list: {
+    marginLeft: 20,
+    marginRight: 20,
+   },
+
+
+   toolbar: {
+     backgroundColor: "#003060",
+     
+   },
+ 
+   arrow: {
+     color:'white',
+   }
 }));
 
 
@@ -137,7 +160,7 @@ export default function LogoutMenu() {
             [classes.appBarShift]: open,
           })}
           >
-            <Toolbar>
+            <Toolbar className={classes.toolbar}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -160,16 +183,16 @@ export default function LogoutMenu() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton className={classes.arrow} onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List className={classes.list}>
           {['我的課程', '個人資料', '設定'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text} /> 
             </ListItem>
           ))}
         </List>
@@ -192,7 +215,10 @@ export default function LogoutMenu() {
               spacing={2}
               >
               <Grid item>   
-                <Button component={Link} to='/login' color="inherit">登出</Button>
+              <form action="/logout" method="POST">
+
+                <Button className={classes.menuButton} type="submit"color="inherit">登出</Button>
+              </form>
               </Grid>
                 
               </Grid>

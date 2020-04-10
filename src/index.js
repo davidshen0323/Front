@@ -6,7 +6,7 @@ import './index.css';
 //import App from './App';
 // import ReactApp from './components/React-app.js';
 import homepage1 from './components/student/Homepage1';
-import homepage2 from './components/student/Homepage2';
+import function1 from './components/student/Function1';
 import addexam from './components/teacher/addexam';
 import QuestionList from './components/student/student_question';
 import TQuestionList from './components/teacher/teacher_question';
@@ -18,7 +18,7 @@ import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
 
-import Register from './components/register.js';
+import Register from './components/Register.js';
 
 
 import selectHW from'./components/student/selectHW.js'
@@ -47,7 +47,7 @@ ReactDOM.render(
             <Route path="/leavemanage" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepage1" component={homepage1}/>
-            <Route path="/homepage2/:cs_id" component={homepage2}/>
+            <Route path="/function1/:cs_id" component={function1}/>
             <Route path="/questions/:cs_id" component={QuestionList}/>
             <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>

@@ -30,8 +30,10 @@ const drawerWidth = 200;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    
   },
   appBar: {
+    height: 'auto',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -47,9 +49,14 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    color: "white",
   },
   School: {
     minWidth: 100,
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+    color: 'white',
+
   },
   hide: {
     display: 'none',
@@ -57,9 +64,11 @@ const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor:'#E0E0E0',
   },
   drawerHeader: {
     display: 'flex',
@@ -67,6 +76,9 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+    backgroundColor: "#003060",
+    // color: "white",
+
   },
   content: {
     flexGrow: 1,
@@ -91,7 +103,18 @@ const useStyles = makeStyles(theme => ({
   list: {
    marginLeft: 20,
    marginRight: 20,
+   fontFamily: 'Microsoft JhengHei',
+   fontWeight: 'bold',
   },
+
+  toolbar: {
+    backgroundColor: "#003060",
+    
+  },
+
+  arrow: {
+    color:'white',
+  }
   
 }));
 
@@ -132,7 +155,7 @@ export default function MyLogoutMenu() {
             [classes.appBarShift]: open,
           })}
           >
-            <Toolbar>
+            <Toolbar className={classes.toolbar}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -153,7 +176,7 @@ export default function MyLogoutMenu() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton className={classes.arrow} onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>

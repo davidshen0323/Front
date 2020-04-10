@@ -15,7 +15,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {Link} from "react-router-dom";
-import homepage2 from "./Homepage2";
+import homepage2 from "./Function1";
 
 const useStyles = makeStyles(theme => ({
     
@@ -25,7 +25,9 @@ const useStyles = makeStyles(theme => ({
     },
 
     root: {
-      flexGrow: 1,
+      // flexGrow: 1,
+      margin: 'auto',
+      // backgroundColor:'#E0E0E0',
     },
     photo: {
       padding: theme.spacing(10),
@@ -38,18 +40,18 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.text.secondary,
     },
     paperclass: {
-      padding: theme.spacing(6),
+      padding: theme.spacing(5),
+      marginLeft: "auto",
+      marginRight: "auto",
       marginTop: 50,
+      marginBottom: 50,
       textAlign: 'center',
-      backgroundColor: 'lightgray',
+      backgroundColor: 'white',
       border: '2px',
       borderStyle: 'solid',
-      borderColor: 'yellow',
-      width: '100%',
-    },
-
-    paperleft: {
-      backgroundColor: 'white',
+      borderColor: 'white',
+      width: '80%',
+      borderRadius: '30pt',
     },
 
     textField: {
@@ -120,21 +122,26 @@ export default function Homepage1() {
     <MyMenu />
     
       {/* {console.log(Sclass)} */}
-    <Grid container spacing={3}>
+    <Grid
+    container
+    direction="row"
+    justify="center"
+    // alignItems="center"
+    >
 
-        <Grid item md={4}>
-        <Paper className={classes.photo}>photo</Paper>
+        {/* <Grid item md={4}> */}
+        {/* <Paper className={classes.photo}>photo</Paper> */}
         {/* <Typography className={classes.words}>沈大為</Typography> */}
-        </Grid>
+        {/* </Grid> */}
 
-        <Grid item md={8}>
-        <TextField className={classes.textField} defaultValue='請輸入課程名稱'></TextField>
-        <Card className={classes.card}>
-          <ButtonBase
+        {/* <Grid item md={8}> */}
+        {/* <TextField className={classes.textField} defaultValue='請輸入課程名稱'></TextField> */}
+        {/* <Card className={classes.card}> */}
+          {/* <ButtonBase
           component={Link}
           to ='/homepage2'
-          >
-            <CardActionArea>
+          > */}
+            {/* <CardActionArea>
               <CardMedia
               component="img"
               alt="Contemplative Reptile"
@@ -147,8 +154,8 @@ export default function Homepage1() {
                   Test
                 </Typography>
               </CardContent>
-            </CardActionArea>
-            <CardActions>
+            </CardActionArea> */}
+            {/* <CardActions>
               <Button
               component={Link}
               to ='/homepage2'
@@ -156,12 +163,12 @@ export default function Homepage1() {
               >
                 <Typography>Test</Typography>
               </Button>
-            </CardActions>
-          </ButtonBase>
-        </Card>
+            </CardActions> */}
+          {/* </ButtonBase> */}
+        {/* </Card> */}
 
-        </Grid>  
-        
+        {/* </Grid>   */}
+{/*         
         <Grid item xs={4}>
         <ButtonGroup 
           orientation="vertical"
@@ -170,37 +177,37 @@ export default function Homepage1() {
         <Button>我的課程</Button>
         <Button>個人資料管理</Button>
         </ButtonGroup>
-        </Grid>  
+        </Grid>   */}
 
-        <Grid item xs={8}>
           {/* <Paper>
             {Sclass.map((classs,index) => (
               <Grid key ={index}>
               {
-              classList.map( (list, i) => i === 0 ?
-              <Grid key={i}>
-              {classs[list]}
-              <Grid>
+                classList.map( (list, i) => i === 0 ?
+                <Grid key={i}>
                 {classs[list]}
-              </Grid>
-              </Grid>:
-              <Grid key={i}>{classs[list]}</Grid>
-              )
+                <Grid>
+                {classs[list]}
+                </Grid>
+                </Grid>:
+                <Grid key={i}>{classs[list]}</Grid>
+                )
               }
               </Grid>
-            ))
-          }
-        </Paper> */}
+              ))
+            }
+          </Paper> */}
+          <Grid item>
+            
                 <TableBody>
                     {Sclass.map((classs,index) => (
                     <Paper className={classes.paperclass} >
-         
-                        {/* {console.log(index)} */}
             <CardActionArea>
               <CardActions>
+                        {/* {console.log(index)} */}
                       <TableRow key = {index}>
                       {/* <ButtonBase> */}
-                        {/* {console.log(index)} */}
+                        {console.log(classs)}
 
                         {/* <TableCell>{index+1}</TableCell> */}
                         {
@@ -209,7 +216,7 @@ export default function Homepage1() {
                         
                             {/* {console.log(list)} */}
                             {/* {console.log(i)} */}
-                            <ButtonBase component={Link} to={`/homepage2/${classs[list]}`}>
+                            <ButtonBase component={Link} to={`/function1/${classs[list]}`}>
                             {classs[list]}
                             </ButtonBase>
                             

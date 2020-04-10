@@ -34,7 +34,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import MyMenu from './Menu';
+import MyMenu from './MenuisLogouted';
 import { makeStyles } from '@material-ui/core/styles';
 // import Radio from '@material-ui/core/Radio';
 // import RadioGroup from '@material-ui/core/RadioGroup';
@@ -44,31 +44,51 @@ import {List} from 'antd-mobile';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
-import {useHistory} from "react-router-dom";
+import {useHistory, Link} from "react-router-dom";
 
 
 
 
 const useStyles = makeStyles(theme =>({
     
+            div: {
+                // backgroundColor:'#E0E0E0',
+                height: 800,
+            },
+
             button: {
-                width:'30%',
+                
+                fontFamily: 'Microsoft JhengHei',
+                margin: 'auto',
+                marginTop: 10,
+                marginBottom: 10,
             },
             
             margin: {
-                margin: theme.spacing(3),
+                // margin: theme.spacing(3),
+                fontFamily: 'Microsoft JhengHei',
+
               },
               
             textfield: {
                 marginBottom: 10,
-                backgroundColor: 'lightgray'
+                backgroundColor: 'lightgray',
+                fontFamily: 'Microsoft JhengHei', //沒用
+
             },
             
             root:{
                 width: '70%',
+                marginTop: 100,
                 margin: 'auto',
+                marginBottom: 100,
                 overflowX: 'auto',
-                textAlign: 'center',  
+                textAlign: 'center',
+                justifyContent: 'center',  
+                fontFamily: 'Microsoft JhengHei',
+                fontWeight: 'bold',
+                color: '#003060',
+                
             },
             
         }
@@ -179,15 +199,15 @@ export default function Register() {
 
         
         return (
-            <div>
+            <div className={classes.div}>
             <MyMenu/>
             
             <Paper className={classes.root}>
                  <h2>註冊</h2>
-                 <Grid>
+                 
 
-                    {/* <Logo/>   */}
-                 </Grid>
+                
+                
                 <List>
                 
              
@@ -197,32 +217,35 @@ export default function Register() {
             <TextField
                 required
                 id="user"
-                label="user"
+                label="學號"
                 value={inputs.user}
                 onChange={handleChange('user')}
-                variant="filled"
                 className={classes.textfield}
+                size="small"
+                variant="outlined"
             />
 
             <TextField
                 required
                 id="pwd"
-                label="pwd"
+                label="密碼"
                 type="password"
                 value={inputs.pwd}
                 onChange={handleChange('pwd')}
-                variant="filled"
                 className={classes.textfield}
+                size="small"
+                variant="outlined"
             />
 
             <TextField
                 required
                 id="repeatpwd"
-                label="repeatpwd"
+                label="請再次輸入密碼"
                 type="password"
                 value={inputs.repeatpwd}
                 onChange={handleChange('repeatpwd')}
-                variant="filled"
+                size="small"
+                variant="outlined"
                 className={classes.textfield}
             />
 
@@ -231,68 +254,81 @@ export default function Register() {
             <TextField
                 required
                 id="name"
-                label="name"
+                label="姓名"
                 value={inputs.name}
                 onChange={handleChange('name')}
-                variant="filled"
+                size="small"
+                variant="outlined"
                 className={classes.textfield}
             />
             
             <TextField
                 required
                 id="gender"
-                label="gender"
+                label="性別"
                 value={inputs.gender}
                 onChange={handleChange('gender')}
-                variant="filled"
+                size="small"
+                variant="outlined"
                 className={classes.textfield}
             />
 
             <TextField
                 required
                 id="dpart"
-                label="dpart"
+                label="系所班級"
                 value={inputs.dpart}
                 onChange={handleChange('dpart')}
-                variant="filled"
+                size="small"
+                variant="outlined"
                 className={classes.textfield}
             />
 
             <TextField
                 required
                 id="phone"
-                label="phone"
+                label="電話號碼"
                 value={inputs.phone}
                 onChange={handleChange('phone')}
-                variant="filled"
+                size="small"
+                variant="outlined"
                 className={classes.textfield}
             />
 
             <TextField
                 required
                 id="mail"
-                label="mail"
+                label="電子郵件"
                 value={inputs.mail}
                 onChange={handleChange('mail')}
-                variant="filled"
+                size="small"
+                variant="outlined"
                 className={classes.textfield}
             />
               
-              </FormControl>
-  
-                </List>
-
-
-
+            <Button 
+              className={classes.button}
+            //   onClick={handleSubmit}
+              variant="contained"
+              component={Link}
+              to='/login'
+              >返回
+              </Button>
+            
 
               <Button 
-              
+              className={classes.button}
               onClick={handleSubmit}
               variant="contained"
             //   component={Link}
             //   to='/login'
               >確認送出
               </Button>
+              </FormControl>
+  
+                </List>
+
+                
             
             
             
