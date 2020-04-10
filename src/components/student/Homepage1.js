@@ -16,7 +16,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {Link} from "react-router-dom";
-import homepage2 from "./Homepage2";
+import function1 from "./Function1";
 import CreateClass from '../teacher/createClass';
 
 const useStyles = makeStyles(theme => ({
@@ -147,7 +147,7 @@ export default function Homepage1() {
         <Card className={classes.card}>
           <ButtonBase
           component={Link}
-          to ='/homepage2'
+          to ='/function1'
           >
             <CardActionArea>
               <CardMedia
@@ -166,7 +166,7 @@ export default function Homepage1() {
             <CardActions>
               <Button
               component={Link}
-              to ='/homepage2'
+              to ='/function1'
               className={classes.classbutton}
               >
                 <Typography>Test</Typography>
@@ -224,7 +224,7 @@ export default function Homepage1() {
                         
                             {/* {console.log(list)} */}
                             {/* {console.log(i)} */}
-                            <ButtonBase component={Link} to={`/homepage2/${classs[list]}`}>
+                            <ButtonBase component={Link} to={`/function1/${classs[list]}`}>
                             {classs[list]}
                             </ButtonBase>
                             
