@@ -31,9 +31,13 @@ import post from './components/Post';
 
 import examresult from './components/teacher/ExamResult';
 import Member from './components/teacher/member/member';
-import RollcallBlock from './components/teacher/rollcallBlock';
 
-import qrcode from './components/qrcode';
+import RollcallBlockT from './components/teacher/RollcallBlockT';
+import RollcallBlockS from './components/student/RollcallBlockS';
+import QRcode from './components/teacher/rollcall/QRcode/QRcode';
+import Hand from './components/teacher/rollcall/Hand/Hand';
+
+
 
 ReactDOM.render(
     <BrowserRouter>
@@ -62,9 +66,13 @@ ReactDOM.render(
             <Route path="/member" component={Member}/>
             <Route path="/addexam" component={addexam}/>
             <Route path="/homepage" component={shomepage}/>
-            <Route path="/rollcallBlock" component={RollcallBlock}/>
- 
-            <Route path="/qrcode" component={qrcode}/>
+
+            <Route path="/RollcallBlockT" component={RollcallBlockT}/>
+            <Route path="/QRcode" component={QRcode}/> 
+            <Route path="/Hand" component={Hand}/>
+
+            <Route path="/RollcallBlockS" component={RollcallBlockS}/>
+
 
             <Route path="/selectHW/:cs_id" component={selectHW}/>
 

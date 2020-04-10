@@ -3,22 +3,41 @@ import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import {withStyles } from '@material-ui/core/styles';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 
-const images = [
-  {
-    url: "https://image.flaticon.com/icons/svg/2313/2313049.svg",
-    title: '人臉辨識',
+// const images = [
+//   {
+//     url: "https://image.flaticon.com/icons/svg/2313/2313049.svg",
+//     title: '人臉辨識',
+//   },
+//   {
+//     url: "https://image.flaticon.com/icons/svg/2313/2313039.svg",
+//     title: 'QRcode',
+//   },
+//   {
+//     url: "https://image.flaticon.com/icons/svg/2311/2311961.svg",
+//     title: '手動點名',
+//   },
+// ];
+
+const StyledToggleButtonGroup = withStyles((theme) => ({
+  grouped: {
+    width:"100%",
+    height:"100%",
+    margin: theme.spacing(0.5),
+    border: 'none',
+    padding: theme.spacing(0, 1),
+    '&:not(:first-child)': {
+      borderRadius: theme.shape.borderRadius,
+    },
+    '&:first-child': {
+      borderRadius: theme.shape.borderRadius,
+    },
   },
-  {
-    url: "https://image.flaticon.com/icons/svg/2313/2313039.svg",
-    title: 'QRcode',
-  },
-  {
-    url: "https://image.flaticon.com/icons/svg/2311/2311961.svg",
-    title: '手動點名',
-  },
-];
+}))(ToggleButtonGroup);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,10 +50,6 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     width:'150px',
     height: '150px',
-    // [theme.breakpoints.down('sm')]: {
-    //   width: '100% !important', // Overrides inline-style
-    //   height:  '250px',
-    // },
     '&:hover, &$focusVisible': {
       zIndex: 1,
       '& $imageBackdrop': {
@@ -56,13 +71,12 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     color: theme.palette.common.white,
+    
   },
   imageSrc: {
     position: 'absolute',
     maxHeight:'60%',
     maxWidth:'60%',
-    // backgroundSize: 'cover',
-    // backgroundPosition: 'center 100%',
     display:'block',
     margin:'auto',
   },
@@ -73,7 +87,7 @@ const useStyles = makeStyles(theme => ({
     margin:'auto',
     display:'block',
     backgroundColor: theme.palette.common.black,
-    opacity: 0.3,
+    opacity: 0.09,
     transition: theme.transitions.create('opacity'),
   },
   imageTitle: {
@@ -83,32 +97,34 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
-export default function ButtonBases() {
+export default function ComButton(props) {
   const classes = useStyles();
+  
+  const [alignment, setAlignment] = React.useState('0');
+  
+  const handleAlignment = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
 
   return (
-    <div className={classes.root}>
-    {/* <Grid     container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-    > */}
-              
-      {images.map(image => (
-      //  <Grid item  xs={12} sm>
+    // <Grid item xs sm>
+      <div className={classes.root}>
+
+      {/* {images.map(image => ( */}
+      
         <ButtonBase
           focusRipple
-          key={image.title}
+          key={props.title}
           className={classes.image}
         >
           <img
                 className={classes.imageSrc}
                 alt="complex"
-                src={image.url}
+                src={props.url}
           />
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>
+            {props.value}
             
             <Typography
               component="span"
@@ -116,14 +132,15 @@ export default function ButtonBases() {
               color="inherit"
               className={classes.imageTitle}
             >
-              {image.title}
+              {props.title}
             </Typography>
 
           </span>
         </ButtonBase>
-        // </Grid>
-      ))}
-{/* </Grid> */}
+        {/* </Grid> */}
+       {/* ))} */}
+
     </div>
+    // </Grid>
   );
 }

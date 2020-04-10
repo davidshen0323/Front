@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MemberTable from './membertable';
-import MMTable from './MMtable';
+// import MemberTable from './membertable';
+import MMTableS from './MMtableS';
 import Paper from '@material-ui/core/Paper';
 
 /*------------ STYLE ------------*/
@@ -25,7 +25,7 @@ export default function Member() {
 
             <div >
                 <Paper className={classes.Paper}>
-                  <MMTable />
+                  <MMTableS />
                 </Paper>
              </div>
 
