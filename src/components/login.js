@@ -6,7 +6,7 @@ import Logo from './logo.js';
 import {List,InputItem,WingBlank,WhiteSpace} from 'antd-mobile';
 import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
-import homepage1 from "./student/Homepage1";
+import homepages from "./student/HomepageS";
 
 
 import Grid from '@material-ui/core/Grid';

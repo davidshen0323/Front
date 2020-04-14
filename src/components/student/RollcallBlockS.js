@@ -11,6 +11,8 @@ import MyMenu from '../Menu';
 import Rollcall from './rollcall/rollcall';
 import Leave from './leave/leave';
 import Member from './member/member';
+import Apply from './applyrecord/applyrecord';
+import ApplyRecord from './applyrecord/applyrecord';
 
 
 function TabPanel(props) {
@@ -98,25 +100,30 @@ export default function RollcallBlockS() {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="點名" href="/rollcall" {...a11yProps(0)} />
-                <LinkTab label="請假申請" href="/leavemanage" {...a11yProps(1)} />
-                <LinkTab label="班級名單" href="/member" {...a11yProps(2)} />
+                {/* <LinkTab label="點名" href="/rollcall" {...a11yProps(0)} /> */}
+                <LinkTab label="請假申請" href="/leavemanage" {...a11yProps(0)} />
+                <LinkTab label="請假申請記錄" href="/leavemanage" {...a11yProps(1)} />
+                {/* <LinkTab label="班級名單" href="/member" {...a11yProps(3)} /> */}
             
                 </Tabs>
             </AppBar>
 
             
-      <TabPanel value={value} index={0}>
+      {/* <TabPanel value={value} index={0}>
         <Rollcall/>
-      </TabPanel>
+      </TabPanel> */}
 
-      <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={0}>
         <Leave/>
       </TabPanel>
 
-      <TabPanel value={value} index={2}>
-        <Member/>
+      <TabPanel value={value} index={1}>
+        <ApplyRecord/>
       </TabPanel>
+
+      {/* <TabPanel value={value} index={3}>
+        <Member/>
+      </TabPanel> */}
 
     </div>
   );

@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
      
     // export default Homepage2;
 
-    export default function Function1() {
+    export default function FunctionS() {
 
         const classes = useStyles();
 
@@ -118,7 +118,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
                component={Link}
-               to={`/rollcall/${params.cs_id}`}
+               to={`/rollcallRD/${params.cs_id}`}
               >
               <CardContent>
               <CardMedia
@@ -148,21 +148,21 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
-              to ='/homepage2'
+              to ={`/RollcallBlockS/${params.cs_id}`}
               
               >
               <CardContent>
               <CardMedia
               component="img"
-              alt="請假審核"
+              alt="請假申請"
               // height="140"
               image="https://image.flaticon.com/icons/svg/1828/1828610.svg"
-              title="請假審核"
+              title="請假申請"
               className={classes.image}
               />
               </CardContent>
             <CardActions>
-                <Typography>請假審核</Typography>
+                <Typography>請假申請</Typography>
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -174,7 +174,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
-              to ='/homepage2'
+              to ={`/member/${params.cs_id}`}
               // className={classes.ButtonBase}
               >
                 <CardContent>
@@ -212,17 +212,17 @@ const useStyles = makeStyles(theme => ({
                 <CardContent>
               <CardMedia
               component="img"
-              alt="課堂考試"
+              alt="公告"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/2311/2311893.svg"
-              title="課堂考試"
+              image="https://image.flaticon.com/icons/svg/1827/1827489.svg"
+              title="公告"
               className={classes.image}
               />
                 
               </CardContent>
             <CardActions>
 
-                <Typography>課堂考試</Typography>
+                <Typography>公告</Typography>
             
             </CardActions>
               </ButtonBase>

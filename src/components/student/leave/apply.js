@@ -83,7 +83,7 @@ export default function Apply() {
         <AssignmentOutlinedIcon />
       </IconButton>
 
-      <Dialog onClose={handleClose}  open={open}>
+      <Dialog onClose={handleClose}  open={open} variant="inline">
         <DialogTitle  onClose={handleClose}>
           <br/>
         </DialogTitle>
@@ -93,9 +93,11 @@ export default function Apply() {
         </DialogContent>
 
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            確定
-          </Button>
+        <Button onClick={handleClose} color="secondary" autoFous>關閉視窗</Button>
+        <Button  
+        // disabled={inputs===2 ? false : true} 
+        onClick={handleClose}
+        color="primary" autoFous>確認送出</Button>
         </DialogActions>
 
       </Dialog>

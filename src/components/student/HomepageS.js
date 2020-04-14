@@ -17,7 +17,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {Link} from "react-router-dom";
 
-import function1 from "./Function1";
+import function1 from "./FunctionS";
 import CreateClass from '../teacher/createClass';
 
 
@@ -87,7 +87,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-export default function Homepage1() {
+export default function HomepageS() {
 
   const classes = useStyles();
 
