@@ -174,7 +174,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
-              to ='/homepage2'
+              to ='/StuInformation'
               // className={classes.ButtonBase}
               >
                 <CardContent>
