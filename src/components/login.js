@@ -40,6 +40,9 @@ const useStyles = makeStyles(theme =>({
     
         button: {
             margin: theme.spacing(1),
+            marginLeft: 10,
+            marginTop: 10,
+            marginBottom: 10,
             width:'120px',
             fontFamily: 'Microsoft JhengHei',
             color: "white",
@@ -235,6 +238,7 @@ export default function Login(){
                     </Button>
                     
                     </form> 
+                    </WingBlank>
 
                     <Button
                     variant="contained"
@@ -245,7 +249,6 @@ export default function Login(){
                     註冊
                     </Button>
 
-                </WingBlank>
                 </Paper>
                 </Grid>
             </div>

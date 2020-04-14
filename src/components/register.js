@@ -62,6 +62,10 @@ const useStyles = makeStyles(theme =>({
                 margin: 'auto',
                 marginTop: 10,
                 marginBottom: 10,
+                marginLeft: 10,
+                color: "white",
+                backgroundColor: "#003060",
+                fontWeight:'bold',
             },
             
             margin: {
@@ -111,10 +115,10 @@ export default function Register() {
 
       
 
-    const handleChange = user => event => {
+    const handleChange = fieldname => event => {
         event.persist();
-        setInputs(inputs => ({...inputs, [user]: event.target.value}));
-        //不知道怎麼解釋哈哈哈哈
+        setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
+        //
     }
 
     let post; //宣告一個布林值變數
@@ -305,7 +309,18 @@ export default function Register() {
                 variant="outlined"
                 className={classes.textfield}
             />
-              
+                </FormControl>
+                </List>
+
+              <Button 
+              className={classes.button}
+              onClick={handleSubmit}
+              variant="contained"
+            //   component={Link}
+            //   to='/login'
+              >確認送出
+              </Button>
+
             <Button 
               className={classes.button}
             //   onClick={handleSubmit}
@@ -316,17 +331,7 @@ export default function Register() {
               </Button>
             
 
-              <Button 
-              className={classes.button}
-              onClick={handleSubmit}
-              variant="contained"
-            //   component={Link}
-            //   to='/login'
-              >確認送出
-              </Button>
-              </FormControl>
   
-                </List>
 
                 
             
