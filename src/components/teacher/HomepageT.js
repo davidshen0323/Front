@@ -17,9 +17,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {Link} from "react-router-dom";
 
-
-import JoinClass from '../student/joinClass';
-
+import function1 from "./FunctionT";
+import CreateClass from './createClass';
 
 
 const useStyles = makeStyles(theme => ({
@@ -88,7 +87,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-export default function HomepageS() {
+export default function HomepageT() {
 
   const classes = useStyles();
 
@@ -124,12 +123,10 @@ export default function HomepageS() {
   // }
   //   getCsid();
   // }
-
-     {/* 加入課程 */}
-     const [openJoinClass, closeJoinClass] = React.useState(false);
-     const onCloseJoinClass = () => {
-       closeJoinClass(openJoinClass ? false : true);
-
+     {/* 新建課程 */}
+     const [openCreateClass, closeCreateClass] = React.useState(false);
+     const onCloseCreateClass = () => {
+       closeCreateClass(openCreateClass ? false : true);
      };
 
 
@@ -137,10 +134,8 @@ export default function HomepageS() {
   return (
     <div className={classes.root}>
     <MyMenu />
-
-     {/* 加入課程 */}
-     <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeJoinClass(true)}>
-
+     {/* 新建課程 */}
+     <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeCreateClass(true)}>
           <AddIcon />
         </Fab>
       {/* {console.log(Sclass)} */}
@@ -264,14 +259,10 @@ export default function HomepageS() {
           </Grid>
         
       </Grid>
-
-      {/* 學生加入課程 */}
-      <JoinClass open={openJoinClass} handleClose={onCloseJoinClass}/>
-
+      {/* 教師新建課程 */}
+      <CreateClass open={openCreateClass} handleClose={onCloseCreateClass}/>
     </div>
     
   )
 
-
 }
-

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import LMNTable from './leavemanagetable';
-
+import MyMenu from '../../Menu';
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         background: '#E1E1E1',
     },
     Paper:{
-        width: '100%',
+        width: '90%',
         margin: 'auto',        
     },
   });
@@ -38,6 +38,11 @@ export default function Leavemanage() {
             // <div class="InputTasksForm">
             //     <div class="InputTask">
         <div>
+
+        <MyMenu/>
+        <br/><br/><br/>
+        <center><label><h1>專題</h1></label> </center>
+
             <Paper className={classes.Paper}>
                 <LMNTable />
             </Paper>

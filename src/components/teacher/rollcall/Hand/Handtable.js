@@ -101,7 +101,7 @@ const studentList = [ 'std_id', 'std_name', 'std_department']
 
 useEffect(() => {
  async function fetchData() {
-     const result = await axios.get(`/teacher/rollcall/oneRollcall/1`);
+     const result = await axios.get(`/teacher/rollcall/oneRollcall/2`);
      
      console.log(result.data);
 

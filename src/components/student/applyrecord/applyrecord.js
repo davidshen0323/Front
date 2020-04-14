@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MyMenu from '../../Menu';
-import MemberTable from './membertable';
-import MMTable from './MMtable';
+import ApplyRDDp from './applyRDDp';
 import Paper from '@material-ui/core/Paper';
 
 /*------------ STYLE ------------*/
@@ -14,25 +12,25 @@ const useStyles = makeStyles({
         background: '#E1E1E1',
     },
     Paper:{
-        width: '90%',
+        width: '100%',
         margin: 'auto',        
     },
   });
 
 /*--------------------------------*/
-export default function Member() {
+export default function ApplyRecord() {
     const classes = useStyles();
+    
         return (
 
-            <div >
-                <MyMenu/>
-          <br/><br/><br/>
-            <center><label><h1>專題</h1></label> </center>
-
-                <Paper className={classes.Paper}>
-                  <MMTable />
+                <div>
+                <Paper className={classes.Paper}> 
+                <ApplyRDDp/>
                 </Paper>
-             </div>
+                </div>
+
+
+
 
         )
     }
