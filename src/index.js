@@ -20,8 +20,10 @@ import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
 import StuInformation from './components/student/stuInformation';
+
 import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
+
 
 
 import selectHW from'./components/student/selectHW.js'
