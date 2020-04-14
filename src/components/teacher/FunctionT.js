@@ -16,7 +16,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 import { TextField, TableBody, TableCell , TableRow } from '@material-ui/core';
 
-import AddQA from "./addQA";
+import QAReply from "./QAReply";
 
 
 
@@ -84,15 +84,15 @@ const useStyles = makeStyles(theme => ({
      
     // export default Homepage2;
 
-    export default function FunctionS() {
+    export default function FunctionT() {
 
         const classes = useStyles();
 
         
         
-        const [openAddQA, closeAddQA] = React.useState(false);
-        const onCloseAddQA = () => {
-          closeAddQA(openAddQA ? false : true);
+        const [openQAReply, closeQAReply] = React.useState(false);
+        const onCloseQAReply = () => {
+          closeQAReply(openQAReply ? false : true);
 
         };
         const params = useParams();
@@ -118,9 +118,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
                component={Link}
-
-               to={`/rollcallRD/${params.cs_id}`}
-
+               to={`/RollcallBlockT/${params.cs_id}`}
               >
               <CardContent>
               <CardMedia
@@ -150,26 +148,21 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
-
-              to ={`/RollcallBlockS/${params.cs_id}`}
-
+              to ={`/leavemanage/${params.cs_id}`}
+              
               >
               <CardContent>
               <CardMedia
               component="img"
-
-              alt="請假申請"
+              alt="請假審核"
               // height="140"
               image="https://image.flaticon.com/icons/svg/1828/1828610.svg"
-              title="請假申請"
-
+              title="請假審核"
               className={classes.image}
               />
               </CardContent>
             <CardActions>
-
-                <Typography>請假申請</Typography>
-
+                <Typography>請假審核</Typography>
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -181,9 +174,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
-
               to ={`/member/${params.cs_id}`}
-
               // className={classes.ButtonBase}
               >
                 <CardContent>
@@ -221,21 +212,17 @@ const useStyles = makeStyles(theme => ({
                 <CardContent>
               <CardMedia
               component="img"
-
               alt="公告"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/1827/1827489.svg"
+              image="https://image.flaticon.com/icons/svg/1827/1827388.svg"
               title="公告"
-
               className={classes.image}
               />
                 
               </CardContent>
             <CardActions>
 
-
                 <Typography>公告</Typography>
-
             
             </CardActions>
               </ButtonBase>
@@ -253,7 +240,7 @@ const useStyles = makeStyles(theme => ({
               //  component={Link}
               //  to={`/questions/${params.cs_id}`}
 
-              onClick={() => closeAddQA(true)}
+              onClick={() => closeQAReply(true)}
               >
                 <CardContent>
               <CardMedia
@@ -309,7 +296,7 @@ const useStyles = makeStyles(theme => ({
         </Card>
         </Grid>
       </Grid>
-      <AddQA open={openAddQA} handleClose={onCloseAddQA}/>
+      <QAReply open={openQAReply} handleClose={onCloseQAReply}/>
 
     </div>
         );

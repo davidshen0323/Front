@@ -8,7 +8,6 @@ import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 import ComButton from "../ComButton";
 import Grid from '@material-ui/core/Grid';
-import QRcodeMade from './QRcodeMade';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
@@ -26,7 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Qrcode() {
+export default function Gps() {
   const classes = useStyles();
   const rand = Math.random();
   const test = rand.toString();
@@ -118,7 +117,7 @@ let post; //宣告一個布林值變數
   return (
     <div>
       <Button  onClick={handleClickOpen} >
-       <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" className={classes.button}/>
+       <ComButton title="GPS" url="https://image.flaticon.com/icons/svg/2572/2572792.svg" className={classes.button}/>
       </Button>
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>

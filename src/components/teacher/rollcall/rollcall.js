@@ -8,7 +8,7 @@ export default function Rollcall() {
         return (
          
                  //<InputTasksForm />
-                 //<RollcallForm/>
-                <Buttons/>
+                 <RollcallForm/>
+                //<Buttons/>
         )
     }

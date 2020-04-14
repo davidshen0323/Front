@@ -17,8 +17,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {Link} from "react-router-dom";
 
-import function1 from "./Function1";
+
 import JoinClass from '../student/joinClass';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -87,7 +88,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-export default function Homepage1() {
+export default function HomepageS() {
 
   const classes = useStyles();
 
@@ -123,10 +124,12 @@ export default function Homepage1() {
   // }
   //   getCsid();
   // }
+
      {/* 加入課程 */}
      const [openJoinClass, closeJoinClass] = React.useState(false);
      const onCloseJoinClass = () => {
        closeJoinClass(openJoinClass ? false : true);
+
      };
 
 
@@ -134,8 +137,10 @@ export default function Homepage1() {
   return (
     <div className={classes.root}>
     <MyMenu />
+
      {/* 加入課程 */}
      <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeJoinClass(true)}>
+
           <AddIcon />
         </Fab>
       {/* {console.log(Sclass)} */}
@@ -259,10 +264,14 @@ export default function Homepage1() {
           </Grid>
         
       </Grid>
+
       {/* 學生加入課程 */}
       <JoinClass open={openJoinClass} handleClose={onCloseJoinClass}/>
+
     </div>
     
   )
 
+
 }
+

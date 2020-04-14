@@ -6,11 +6,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import MyMenu from '../../Menu';
-import Rollcallrecord from './rollcallrecord';
-
-//import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
-//import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
+import Fail from './Fail';
+import Pass from './Pass';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -23,7 +20,6 @@ function TabPanel(props) {
       id={`nav-tabpanel-${index}`}
       aria-labelledby={`nav-tab-${index}`}
       {...other}
-      
     >
       {value === index && <Box p={2}>{children}</Box>}
     </Typography>
@@ -80,7 +76,7 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------*/
 
 
-export default function RollcallRD() {
+export default function CheckBlock() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -91,31 +87,24 @@ export default function RollcallRD() {
 
   return (
           <div>
-
-          
-<MyMenu/>
-        <br/><br/><br/>
-        <center><label><h1>專題</h1></label> </center>
-
             <AppBar position="static" color="inherite" >
                 <Tabs
                 value={value}
                 onChange={handleChange}
-                variant="fullWidth"
                 >
-                <LinkTab label="點名中" href="/rollcallrecordT" {...a11yProps(0)} />
-                <LinkTab label="點名記錄" href="/rollcallrecordS" {...a11yProps(1)} />
+                <LinkTab label="通過" href="/Pass" {...a11yProps(0)} />
+                <LinkTab label="未通過" href="/Fail" {...a11yProps(1)} />
             
                 </Tabs>
             </AppBar>
 
             
       <TabPanel value={value} index={0}>
-        {/* <RollcallrecordTable/> */}
+        <Pass/>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <Rollcallrecord/>
+      <Fail/>
       </TabPanel>
       </div>
   );

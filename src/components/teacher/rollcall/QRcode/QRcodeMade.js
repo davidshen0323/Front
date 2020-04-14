@@ -19,9 +19,8 @@ export default function QRcodeMade() {
         </Button> */}
          
         <Typography>
-        <QRCode value ={test} size={500}/>
+        <QRCode value ={test} size={300}/>
         </Typography>
-            
           </Grid>
       </div>
     )

@@ -1,27 +1,10 @@
 import React from "react";
-//import { InputName } from "../../teacher/";
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FormControl from '@material-ui/core/FormControl';
-import clsx from 'clsx';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import {Typography, TextareaAutosize} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import {Save,Delete} from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-  } from '@material-ui/pickers';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme => ({
     root: {
@@ -42,118 +25,81 @@ const useStyles = makeStyles(theme => ({
             paddingTop:10,
     },
     inputName:{
-        paddingleft: "50px",
-        paddingtop: "25px",
-    }
+        marginLeft: 10,
+        padding: 5,
+        flex: 1
+      },
   }));
 /*------------------------------*/
 
 export default function Applytable(){
         const classes = useStyles();
-        const [selectedDate, setSelectedDate] = React.useState(new Date('2020-4-04T21:11:54'));
-        const handleDateChange = date => {
-            setSelectedDate(date);
-        };
+        const [state, setState] = React.useState({
+            age: '',
+            name: 'hai'
+          });
         
+        const handleChange = (event) => {
+        const name = event.target.name;
+        setState({
+            ...state,
+            [name]: event.target.value,
+        });
+        };
+
+
         return (           
-           <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <div>
 
-            <Grid container spacing={1}  
-            direction="row"  
-            justify="center"  
-            alignItems="flex-start"
-            >
+        <Grid container spacing={1}  
+        direction="column"  
+        justify="center"  
+        alignItems="flex-start"
+        >
 
-            <Grid item sm xs={12} row> 
-                {/* <InputName  inputName="點名日期" /> */}
-
-                <div className={classes.inputName} >
-                請假時間
+            <Grid item xs={12} row> 
+              
+                <div>
+                <Typography className={classes.inputName} variant="body1">
+                    請假類別：
+                
+                <FormControl variant="outlined" className={classes.formControl} size="small">
+                    <InputLabel>假別</InputLabel>
+                    <Select
+                    native
+                    value={state.age}
+                    onChange={handleChange}
+                    label="Age"
+                    inputProps={{
+                        name: 'age',
+                    }}
+                    >
+                    <option aria-label="None" value="" />
+                    <option value={1}>病假</option>
+                    <option value={2}>公假</option>
+                    <option value={3}>事假</option>
+                    <option value={4}>喪假</option>
+                    </Select>
+                </FormControl>
+                </Typography>
                 </div>
+            </Grid>  
 
+            <Grid item xs={12}>
+                
                 <div >
-                <KeyboardDatePicker
-                    disableToolbar
-                    inputVariant="outlined"
-                    size="small"
-                    variant="inline"
-                    format="yyyy/MM/dd"
-                    margin="normal"
-                    id="date-picker-inline"
-                    // label="Date picker inline"
-                    helperText=""
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={
-                        'change date'
-                    }
-                />        
+                <Typography className={classes.inputName} variant="body2">
+                    請假事由：
+                </Typography>
+
+                <Typography className={classes.inputName} variant="body2">
+                    <TextareaAutosize 
+                    //onChange={()=> setInputs(2)} id="question" 
+                    style={{borderRadius:10, padding:8, width:350, height:50, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請詳述請假事由"/>
+                </Typography>     
                 </div>
             </Grid>
-
-                <Grid item sm xs={12}>
-                    <div className="inputName">
-                    請假時間
-                    </div>
-                    <div className={classes.inputForm}>
-                        {/* <input type="time" className="inputStyle inputDateTime" 
-                                inputlabelprops={{shrink: true,}}/> */}
-<KeyboardTimePicker
-          inputVariant="outlined"
-          size="small"
-          margin="normal"
-          id="time-picker"
-          // label="Time picker"
-          value={selectedDate}
-          onChange={handleDateChange}
-          helperText=""
-          KeyboardButtonProps={
-            'change time'
-          }
-        />
-
-                    </div>
-                </Grid>
-                <Grid item sm={6} xs={12}>
-                    {/* <InputName inputName="計分方式" /> */}
-                    <div className={classes.inputForm}>
-                    <RadioGroup aria-label="position" name="position"   row>                    
-                    
-                    <FormControlLabel
-                        value="noscore"
-                        control={<Radio color="secondary" align="center" />}
-                        label="不計分"
-                        labelPlacement="end"
-                    />
-
-                    <FormControlLabel
-                    value="score"
-                    control={<Radio color="primary" align="center" />}
-                    label="計分"
-                    labelPlacement="end"
-                    />
-
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small" >
-                        <InputLabel htmlFor="outlined-adornment-password">佔平時成績</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-%"
-                                //value={values.weight}
-                                //onChange={handleChange('weight')}
-                                endAdornment={<InputAdornment position="end">分</InputAdornment>}
-                                inputProps={{'aria-label': '分',}}
-                                labelWidth={90}
-                                />                           
-                    </FormControl>
-                    </RadioGroup>
-                    </div>
-                </Grid>
-            </Grid>        
-                    
-
-                    
-
-                <br/>
-               
-                </MuiPickersUtilsProvider>
-        )
+        </Grid>
+        </div>
+        );
     }
