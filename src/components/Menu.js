@@ -1,31 +1,31 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button } from '@material-ui/core/';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
-import {useState,useEffect} from 'react';
-import axios from 'axios';
+// import MenuIcon from '@material-ui/icons/Menu';
+// import {useState,useEffect} from 'react';
+// import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 
 /*---drawer---*/
-import clsx from 'clsx';
-import { useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+// import clsx from 'clsx';
+// import { useTheme } from '@material-ui/core/styles';
+// import Drawer from '@material-ui/core/Drawer';
+// import CssBaseline from '@material-ui/core/CssBaseline';
+// import List from '@material-ui/core/List';
+// import Divider from '@material-ui/core/Divider';
+// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import InboxIcon from '@material-ui/icons/MoveToInbox';
+// import MailIcon from '@material-ui/icons/Mail';
 
 
-const drawerWidth = 200;
+// const drawerWidth = 200;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,71 +33,73 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 68, //會讓menu跟下面東西的距離改變
     
   },
-  appBar: {
-    height: 'auto',
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+  // appBar: {
+  //   height: 'auto',
+  //   transition: theme.transitions.create(['margin', 'width'], {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.leavingScreen,
+  //   }),
     
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
+  // },
+  // appBarShift: {
+  //   width: `calc(100% - ${drawerWidth}px)`,
+  //   marginLeft: drawerWidth,
+  //   transition: theme.transitions.create(['margin', 'width'], {
+  //     easing: theme.transitions.easing.easeOut,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+  // },
   menuButton: {
     marginRight: theme.spacing(2),
     fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
   },
   School: {
     minWidth: 100,
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
     color: 'white',
+    marginLeft: 30
   },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
+  // hide: {
+  //   display: 'none',
+  // },
+  // drawer: {
+  //   width: drawerWidth,
+  //   flexShrink: 0,
     
 
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor:'#E0E0E0',
+  // },
+  // drawerPaper: {
+  //   width: drawerWidth,
+  //   backgroundColor:'#E0E0E0',
 
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-    backgroundColor: "#003060",
+  // },
+  // drawerHeader: {
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   padding: theme.spacing(0, 1),
+  //   ...theme.mixins.toolbar,
+  //   justifyContent: 'flex-end',
+  //   backgroundColor: "#003060",
 
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
+  // },
+  // content: {
+  //   flexGrow: 1,
+  //   padding: theme.spacing(3),
+  //   transition: theme.transitions.create('margin', {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.leavingScreen,
+  //   }),
+  //   marginLeft: -drawerWidth,
+  // },
+  // contentShift: {
+  //   transition: theme.transitions.create('margin', {
+  //     easing: theme.transitions.easing.easeOut,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+  //   marginLeft: 0,
+  // },
   title: {
     // flexGrow: 1,
 
@@ -130,16 +132,16 @@ export default function LogoutMenu() {
 
   // const classList = ['cs_id','cs_name'];
 
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  // const theme = useTheme();
+  // const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  // const handleDrawerClose = () => {
+  //   setOpen(false);
+  // };
 
 //   useEffect(() => {
 //     async function fetchData() {
@@ -156,12 +158,10 @@ export default function LogoutMenu() {
         {/* <CssBaseline /> */}
         <AppBar
           position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
+          
           >
             <Toolbar className={classes.toolbar}>
-            <IconButton
+            {/* <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
@@ -169,11 +169,11 @@ export default function LogoutMenu() {
               className={clsx(classes.menuButton, open && classes.hide)}
             >
                 <MenuIcon />
-              </IconButton>
+              </IconButton> */}
 
 
               <Typography className={classes.School} color="inherit">輔仁大學</Typography>
-          <Drawer
+          {/* <Drawer
         className={classes.drawer}
         variant="persistent"
         anchor="left"
@@ -189,13 +189,13 @@ export default function LogoutMenu() {
         </div>
         <Divider />
         <List className={classes.list}>
-          {['我的課程', '個人資料', '設定'].map((text, index) => (
+          {['我的課程', '個人設定'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} /> 
             </ListItem>
           ))}
-        </List>
+        </List> */}
         {/* <Divider />
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
@@ -205,7 +205,7 @@ export default function LogoutMenu() {
             </ListItem>
           ))}
         </List> */}
-      </Drawer>
+      {/* </Drawer> */}
       
               <Grid container
                direction="row" 

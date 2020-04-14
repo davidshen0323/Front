@@ -22,6 +22,7 @@ import JoinClass from '../student/joinClass';
 
 
 
+
 const useStyles = makeStyles(theme => ({
     
     container: {
@@ -86,6 +87,12 @@ const useStyles = makeStyles(theme => ({
       bottom: theme.spacing(5),
       right: theme.spacing(5),
     },
+
+
+    cardaction: {
+      maxWidth: 600,
+    },
+
   }));
 
 export default function HomepageS() {
@@ -125,6 +132,8 @@ export default function HomepageS() {
   //   getCsid();
   // }
 
+
+
      {/* 加入課程 */}
      const [openJoinClass, closeJoinClass] = React.useState(false);
      const onCloseJoinClass = () => {
@@ -138,8 +147,10 @@ export default function HomepageS() {
     <div className={classes.root}>
     <MyMenu />
 
+
      {/* 加入課程 */}
      <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeJoinClass(true)}>
+
 
           <AddIcon />
         </Fab>
@@ -151,120 +162,43 @@ export default function HomepageS() {
     // alignItems="center"
     >
 
-        {/* <Grid item md={4}> */}
-        {/* <Paper className={classes.photo}>photo</Paper> */}
-        {/* <Typography className={classes.words}>沈大為</Typography> */}
-        {/* </Grid> */}
 
-        {/* <Grid item md={8}> */}
-        {/* <TextField className={classes.textField} defaultValue='請輸入課程名稱'></TextField> */}
-        {/* <Card className={classes.card}> */}
-          {/* <ButtonBase
-          component={Link}
-
-          to ='/function1'
-          >
-            <CardActionArea>
-
-              <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="140"
-             
-              title="Contemplative Reptile"
-              />
-              <CardContent>
-                <Typography>
-                  Test
-                </Typography>
-              </CardContent>
-            </CardActionArea> */}
-            {/* <CardActions>
-              <Button
-              component={Link}
-              to ='/function1'
-              className={classes.classbutton}
-              >
-                <Typography>Test</Typography>
-              </Button>
-            </CardActions> */}
-          {/* </ButtonBase> */}
-        {/* </Card> */}
-
-        {/* </Grid>   */}
-{/*         
-        <Grid item xs={4}>
-        <ButtonGroup 
-          orientation="vertical"
-          className={classes.button1}
-        >
-        <Button>我的課程</Button>
-        <Button>個人資料管理</Button>
-        </ButtonGroup>
-        </Grid>   */}
-
-          {/* <Paper>
-            {Sclass.map((classs,index) => (
-              <Grid key ={index}>
-              {
-                classList.map( (list, i) => i === 0 ?
-                <Grid key={i}>
-                {classs[list]}
-                <Grid>
-                {classs[list]}
-                </Grid>
-                </Grid>:
-                <Grid key={i}>{classs[list]}</Grid>
-                )
-              }
-              </Grid>
-              ))
-            }
-          </Paper> */}
           <Grid item>
             
-                <TableBody>
+                
                     {Sclass.map((classs,index) => (
-                    <Paper className={classes.paperclass} >
-            <CardActionArea>
-              <CardActions>
+                    // <Card className={classes.card}>
+            <CardActionArea className={classes.cardaction} component={Link} to={`/function1/${classs["cs_id"]}`}>
+              {/* <CardActions> */}
                         {/* {console.log(index)} */}
-                      <TableRow key = {index}>
+                      <Paper key = {index}>
+
                       {/* <ButtonBase> */}
                         {console.log(classs)}
 
                         {/* <TableCell>{index+1}</TableCell> */}
                         {
-                          classList.map( (list, i) =>  i === 0 ?
+
+                          classList.map( (list, i) =>
                           <TableCell key={i} component="th" scope="row" align="center">
-                        
-                            {/* {console.log(list)} */}
-                            {/* {console.log(i)} */}
-                            <ButtonBase component={Link} to={`/function1/${classs[list]}`}>
                             {classs[list]}
-                            </ButtonBase>
-                            
-                          </TableCell>:
-                          <TableCell key={i} align="left">
-                            {/* {console.log(i)} */}
-                            {classs[list]}
-                            
-                            </TableCell>
+                          </TableCell>
+
                           )
                         }
                         
                         {/* </ButtonBase> */}
-                      </TableRow>
-                        </CardActions>
+
+                      </Paper>
+                        {/* </CardActions> */}
                         </CardActionArea>
-                        {/* </Card> */}
-                      </Paper> 
+                        // </Card>
+                       
                       ))}     
-            </TableBody> 
+            
           </Grid>
         
       </Grid>
-
       {/* 學生加入課程 */}
       <JoinClass open={openJoinClass} handleClose={onCloseJoinClass}/>
 

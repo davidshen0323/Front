@@ -12,13 +12,14 @@ import functiont from './components/teacher/FunctionT';
 import addexam from './components/teacher/addexam';
 import QuestionList from './components/student/student_question';
 import TQuestionList from './components/teacher/teacher_question';
-import AcceptanceList from './components/student/student_acceptance';
+import AcceptanceList from './components/student/Acceptance/student_acceptance';
 import TAcceptanceList from './components/teacher/teacher_acceptance';
 import shomepage from './components/student/student_homepage';
 import Rollcall from './components/teacher/rollcall/rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
+
 import StuInformation from './components/student/information/stuInformation';
 import QAlist_T from './components/teacher/QAlist_T';
 import QAlist_S from './components/student/QAlist_S';
@@ -28,7 +29,8 @@ import Register from './components/Register.js';
 
 
 
-import selectHW from'./components/student/selectHW.js'
+
+import selectHW from'./components/student/Acceptance/selectHW.js'
 import ReactApp from './components/React-app.js';
 
 import * as serviceWorker from './serviceWorker';
