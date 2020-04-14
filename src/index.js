@@ -19,7 +19,9 @@ import Rollcall from './components/teacher/rollcall/rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
-import StuInformation from './components/student/stuInformation';
+import StuInformation from './components/student/information/stuInformation';
+import QAlist_T from './components/teacher/QAlist_T';
+import QAlist_S from './components/student/QAlist_S';
 
 import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
@@ -64,6 +66,9 @@ ReactDOM.render(
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
             <Route path="/StuInformation" component={StuInformation}/>
+            <Route path="/QAlist_T" component={QAlist_T}/>
+            <Route path="/QAlist_S" component={QAlist_S}/>
+
 
             <Route path="/post" component={post}/>
             
@@ -81,7 +86,7 @@ ReactDOM.render(
             <Route path="/RollcallRD" component={RollcallRD}/>
 
             <Route path="/selectHW/:cs_id" component={selectHW}/>
-
+            
 
             <Route exact path="/" component={Login}/>
         </Switch>

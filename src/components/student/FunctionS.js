@@ -118,7 +118,9 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
                component={Link}
+
                to={`/rollcallRD/${params.cs_id}`}
+
               >
               <CardContent>
               <CardMedia
@@ -148,21 +150,26 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
+
               to ={`/RollcallBlockS/${params.cs_id}`}
-              
+
               >
               <CardContent>
               <CardMedia
               component="img"
+
               alt="請假申請"
               // height="140"
               image="https://image.flaticon.com/icons/svg/1828/1828610.svg"
               title="請假申請"
+
               className={classes.image}
               />
               </CardContent>
             <CardActions>
+
                 <Typography>請假申請</Typography>
+
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -174,7 +181,9 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
+
               to ={`/member/${params.cs_id}`}
+
               // className={classes.ButtonBase}
               >
                 <CardContent>
@@ -212,17 +221,21 @@ const useStyles = makeStyles(theme => ({
                 <CardContent>
               <CardMedia
               component="img"
+
               alt="公告"
               // height="140"
               image="https://image.flaticon.com/icons/svg/1827/1827489.svg"
               title="公告"
+
               className={classes.image}
               />
                 
               </CardContent>
             <CardActions>
 
+
                 <Typography>公告</Typography>
+
             
             </CardActions>
               </ButtonBase>
