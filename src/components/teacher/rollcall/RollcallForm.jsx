@@ -15,6 +15,12 @@ import {Save,Delete} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import ComButton from "./ComButton";
+import QRcode from "./QRcode/QRcode";
+import Hand from "./Hand/Hand";
+import GPS from "./GPS/GPS";
 
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -23,6 +29,7 @@ import {
     KeyboardTimePicker,
     KeyboardDatePicker,
   } from '@material-ui/pickers';
+
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme => ({
     root: {
@@ -48,30 +55,62 @@ const useStyles = makeStyles(theme => ({
     inputForm:{
             paddingLeft:65,
             paddingTop:10,
-    }
+    },
+    card: {
+      width:'100%',
+      height: '100%',
+      margin: 5,
+      //marginTop: 30,
+      //marginLeft: 'auto',
+      //marginRight: 'auto',
+    },
+    cardaction: {
+      width:'100%',
+      height: '100%',
+    },
+    classbutton: {
+      width: '100%',
+    },
   }));
 /*------------------------------*/
 
 export default function RollcallForm(){
         const classes = useStyles();
-        const [selectedDate, setSelectedDate] = React.useState(new Date('2020-3-20T21:11:54'));
-        const handleDateChange = date => {
-            setSelectedDate(date);
-        };
+
         return (
-           <div>
-           {/* <Paper className={classes.Paper}> */}
-           
-            <Grid container   
-            direction="row"  
-            justify="center"  
-            alignItems="flex-start"
-            >
-                    <div >
-                        <Buttons/>
-                    </div>
-            </Grid>    
-           {/* </Paper> */}
-         </div>
+          <div className={classes.root}>
+          <Grid     container
+                     direction="row"
+                     justify="center"
+                     alignItems="center"
+                     spacing={1}
+           >
+
+              <Grid item  xs={12} sm={4}>
+              <Card className={classes.card}>
+                <CardActionArea className={classes.cardaction}>
+                <GPS/>
+                </CardActionArea>
+              </Card>
+              </Grid>
+
+              <Grid item  xs={12} sm={4}>
+              <Card className={classes.card}>
+                <CardActionArea className={classes.cardaction}>
+                <QRcode/>
+                </CardActionArea>
+              </Card>
+              </Grid>
+
+              <Grid item  xs={12} sm={4}>
+              <Card className={classes.card}>
+                <CardActionArea className={classes.cardaction}>
+                <Hand/>
+                </CardActionArea>
+              </Card>
+              </Grid>
+          </Grid>
+          </div>
+
         )
     }

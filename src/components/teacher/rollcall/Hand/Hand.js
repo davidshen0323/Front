@@ -24,6 +24,8 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import InputName from "../InputName";
+import Button from '@material-ui/core/Button';
+import ComButton from "../ComButton";
 
 
 const useStyles = makeStyles(theme => ({
@@ -40,6 +42,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 
 export default function Hand() {
@@ -62,8 +68,11 @@ export default function Hand() {
 
   return (
     <div>
-     
-      {/* <Dialog fullScreen   TransitionComponent={Transition}> */}
+     <Button  onClick={handleClickOpen} >
+     <ComButton title="手動點名" url="https://image.flaticon.com/icons/svg/2311/2311961.svg" />
+      </Button>
+      
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -150,7 +159,7 @@ export default function Hand() {
     {/* </Grid> */}
     <Grid item xs={12} sm={12}></Grid>
     
-    <IconButton  color="inherit" component={Link} to="/RollcallBlockT" align="right">
+    <IconButton  color="inherit"  onClick={handleClose}>
       <CloseIcon />
     </IconButton>  
     </MuiPickersUtilsProvider>
@@ -160,6 +169,7 @@ export default function Hand() {
         <List>
          <Handtable/>
         </List>
+        </Dialog>    
     </div>
   );
 }

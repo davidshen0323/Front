@@ -2,10 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import {withStyles } from '@material-ui/core/styles';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+// import Grid from '@material-ui/core/Grid';
+// import {withStyles } from '@material-ui/core/styles';
+// import ToggleButton from '@material-ui/lab/ToggleButton';
+// import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 
 // const images = [
@@ -23,33 +23,36 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 //   },
 // ];
 
-const StyledToggleButtonGroup = withStyles((theme) => ({
-  grouped: {
-    width:"100%",
-    height:"100%",
-    margin: theme.spacing(0.5),
-    border: 'none',
-    padding: theme.spacing(0, 1),
-    '&:not(:first-child)': {
-      borderRadius: theme.shape.borderRadius,
-    },
-    '&:first-child': {
-      borderRadius: theme.shape.borderRadius,
-    },
-  },
-}))(ToggleButtonGroup);
+// const StyledToggleButtonGroup = withStyles((theme) => ({
+//   grouped: {
+//     width:"100%",
+//     height:"100%",
+//     margin: theme.spacing(0.5),
+//     border: 'none',
+//     padding: theme.spacing(0, 1),
+//     '&:not(:first-child)': {
+//       borderRadius: theme.shape.borderRadius,
+//     },
+//     '&:first-child': {
+//       borderRadius: theme.shape.borderRadius,
+//     },
+//   },
+// }))(ToggleButtonGroup);
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    minWidth: 300,
+    minWidth:375,
     width: '100%',
   },
   image: {
-    position: 'relative',
-    width:'150px',
-    height: '150px',
+    position: 'flex',
+    width:375,
+    height: 200,
+    alignItems:'center',
+    justifyContent:'center',
+    border:'0px',
     '&:hover, &$focusVisible': {
       zIndex: 1,
       '& $imageBackdrop': {

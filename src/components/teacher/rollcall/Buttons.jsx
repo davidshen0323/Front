@@ -37,8 +37,8 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     position: 'relative',
-    width:'604px',
-    height: '200px',
+    width:595,
+    height: 200,
     // [theme.breakpoints.down('sm')]: {
     //   width: '100% !important', // Overrides inline-style
     //   height:  '250px',

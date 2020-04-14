@@ -9,26 +9,29 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Apply from './apply';
+import Paper from '@material-ui/core/Paper';
 
-function createData(time, attend, score, from) {
-  return { time, attend, score, from };
+
+
+
+function createData(time, apply,kind,reason,proof,pass) {
+  return {time, apply,kind,reason,proof,pass};
 }
 
 
 const rows = [
-  createData('2019.11.05 11:05','出席', '計分', '人臉點名'),
-  createData('2019.11.12 11:12','缺席', '不計分', 'QR code點名'),
-  createData('2019.11.19 11:19','缺席','計分', '藍牙點名'),
-  createData('2019.11.26 11:26', '缺席', '計分', '手動點名'),
-  createData('2019.12.03 12:03','出席', '不計分', '人臉點名'),
-  createData('2019.12.10 12:10','出席', '計分', '手動點名'),
-  createData('2019.12.17 12:17','出席', '不計分', '人臉點名'),
-  createData('2019.12 24 12:24', '缺席', '不計分', 'QR code點名'),
-  createData('2020.01.01 01:00', '缺席', '計分', '藍牙點名'),
-  createData('2020.01.08 01:08', '出席', '計分', '人臉點名'),
-  createData('2020.01.15 01:15', '缺席', '計分', '藍牙點名'),
-  createData('2020.01.22 01:22','出席', '不計分', '手動點名'),
+  createData('2019.11.05 11:05','2020.04.10 11:08' ,'事假', '肚子不舒服'),
+  createData('2019.11.12 11:12','2020.04.10 11:08' ,'病假', '肚子不舒服'),
+  createData('2019.11.19 11:19','2020.04.10 11:08' ,'病假', '肚子不舒服'),
+  createData('2019.11.26 11:26','2020.04.10 11:08' ,'病假', '肚子不舒服'),
+  createData('2019.12.03 12:03','2020.04.10 11:08' ,'事假', '肚子不舒服'),
+  createData('2019.12.10 12:10','2020.04.10 11:08' ,'事假', '肚子不舒服'),
+  createData('2019.12.17 12:17','2020.04.10 11:08' ,'事假', '肚子不舒服'),
+  createData('2019.12 24 12:24','2020.04.10 11:08' ,'病假', '肚子不舒服'),
+  createData('2020.01.01 01:00','2020.04.10 11:08' ,'事假', '肚子不舒服'),
+  createData('2020.01.08 01:08','2020.04.10 11:08' ,'病假', '肚子不舒服'),
+  createData('2020.01.15 01:15','2020.04.10 11:08' ,'病假', '肚子不舒服'),
+  createData('2020.01.22 01:22','2020.04.10 11:08' ,'事假', '肚子不舒服'),
 ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -58,18 +61,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', label: '日期與時間', minWidth: 150, numeric: false, disablePadding: true },
-//   { id: 'attend', label: '出席狀況', minWidth: 50, numeric: true, disablePadding: false, },
-  {
-    id: 'from',
-    label: '來源', minWidth: 100,
-    numeric: true, disablePadding: false,
-  },
-  {
-    id: 'apply',
-    label: '請假申請', minWidth: 100,
-    numeric: true, disablePadding: false,
-  },
+  { id: 'time', label: '點名時間', minWidth: 150, numeric: false, disablePadding: true },
+  { id: 'apply', label: '申請時間', minWidth: 50, numeric: true, disablePadding: false, },
+  { id: 'kind', numeric: true, disablePadding: false, label: '假別' },
+  { id: 'reason', numeric: true, disablePadding: false, label: '事由' },
 ];
 
 function EnhancedTableHead(props) {
@@ -119,9 +114,6 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-
-
-
 /*----------------------------------------------*/
 const useStyles = makeStyles(theme => ({
   root: {
@@ -131,7 +123,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   table: {
-    minWidth: 750,
+    width: '100%',
   },
   visuallyHidden: {
     border: 0,
@@ -147,16 +139,16 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
   },
-  
 }));
 /*---------------------------------------------*/
 
 
-export default function Leavetable() {
+export default function Fail() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
+  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const [checked, setChecked] = React.useState(false);
@@ -184,6 +176,8 @@ export default function Leavetable() {
     setChecked(pp => !pp);
   };
 
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+
   const testFunc = (e, id) => {
     console.log(e.target.value);
     setTest(e.target.value)
@@ -191,7 +185,11 @@ export default function Leavetable() {
 
   return (
     <div className={classes.root}>  
-          
+    
+      {/* <Paper className={classes.paper}> */}
+        
+        {/* <RollcallRDDp/> */}
+        
         <TableContainer>
           
           <Table
@@ -213,21 +211,20 @@ export default function Leavetable() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.code} key={labelId}>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code} key={labelId}>
                       {/* 碰到的時候後面會反灰 */}
 
                       <TableCell padding="default" />
 
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.time}</TableCell>
-                      <TableCell align="left">{row.from}</TableCell>
-                      <TableCell align="left" >
-                          <Apply/> 
-                      </TableCell>
-
-                    </TableRow>
+                      <TableCell align="left">{row.apply}</TableCell>
+                      <TableCell align="left">{row.kind}</TableCell>
+                      <TableCell align="left">{row.reason}</TableCell>
+                      </TableRow>
                   );
                 })}
+              
             </TableBody>
           </Table>
         </TableContainer>

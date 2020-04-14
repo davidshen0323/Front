@@ -5,8 +5,10 @@ import './index.css';
 
 //import App from './App';
 // import ReactApp from './components/React-app.js';
-import homepage1 from './components/student/Homepage1';
-import function1 from './components/student/Function1';
+import homepages from './components/student/HomepageS';
+import functions from './components/student/FunctionS';
+import homepaget from './components/teacher/HomepageT';
+import functiont from './components/teacher/FunctionT';
 import addexam from './components/teacher/addexam';
 import QuestionList from './components/student/student_question';
 import TQuestionList from './components/teacher/teacher_question';
@@ -17,9 +19,15 @@ import Rollcall from './components/teacher/rollcall/rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
-import StuInformation from './components/student/Settings/stuInformation';
 
-import Register from './components/Register';
+import StuInformation from './components/student/information/stuInformation';
+import QAlist_T from './components/teacher/QAlist_T';
+import QAlist_S from './components/student/QAlist_S';
+
+import RollcallRD from './components/student/rollcall/rollcallRD';
+import Register from './components/Register.js';
+
+
 
 
 import selectHW from'./components/student/Acceptance/selectHW.js'
@@ -32,7 +40,7 @@ import post from './components/Post';
 import examresult from './components/teacher/ExamResult';
 import Member from './components/teacher/member/member';
 
-import RollcallBlockT from './components/teacher/RollcallBlockT';
+import RollcallBlockT from './components/teacher/rollcall/RollcallBlockT';
 import RollcallBlockS from './components/student/RollcallBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
@@ -51,13 +59,18 @@ ReactDOM.render(
             <Route path="/rollcall/:cs_id" component={Rollcall}/>
             <Route path="/leavemanage" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
-            <Route path="/homepage1" component={homepage1}/>
-            <Route path="/function1/:cs_id" component={function1}/>
+            <Route path="/homepages" component={homepages}/>
+            <Route path="/functions/:cs_id" component={functions}/>
+            <Route path="/homepaget" component={homepaget}/>
+            <Route path="/functiont/:cs_id" component={functiont}/>
             <Route path="/questions/:cs_id" component={QuestionList}/>
             <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
             <Route path="/StuInformation" component={StuInformation}/>
+            <Route path="/QAlist_T" component={QAlist_T}/>
+            <Route path="/QAlist_S" component={QAlist_S}/>
+
 
             <Route path="/post" component={post}/>
             
@@ -72,10 +85,10 @@ ReactDOM.render(
             <Route path="/Hand" component={Hand}/>
 
             <Route path="/RollcallBlockS" component={RollcallBlockS}/>
-
+            <Route path="/RollcallRD" component={RollcallRD}/>
 
             <Route path="/selectHW/:cs_id" component={selectHW}/>
-
+            
 
             <Route exact path="/" component={Login}/>
         </Switch>

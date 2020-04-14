@@ -120,11 +120,11 @@ export default function InputTasksForm() {
 
                 <TextField variant="outlined" size="small" />
 
-                {/* <KeyboardDatePicker
+                <KeyboardDatePicker
           disableToolbar
           inputVariant="outlined"
           size="small"
-          variant="inline"
+          //variant="inline"
           format="yyyy/MM/dd"
           margin="normal"
           id="date-picker-inline"
@@ -135,7 +135,7 @@ export default function InputTasksForm() {
           KeyboardButtonProps={
             'change date'
           }
-        />         */}
+        />        
 
 
               </div>
@@ -143,7 +143,7 @@ export default function InputTasksForm() {
             <Grid item sm xs={12}>
               <InputName inputName="點名日期&時間" />
               <div className={classes.inputForm}>
-                <KeyboardDateTimePicker
+                {/* <KeyboardDateTimePicker
                   value={selectedDate}
                   inputVariant="outlined"
                   size="small"
@@ -156,8 +156,8 @@ export default function InputTasksForm() {
                     'change date time'
                   }
 
-                />
-                {/* <KeyboardTimePicker
+                /> */}
+                <KeyboardTimePicker
           inputVariant="outlined"
           size="small"
           margin="normal"
@@ -169,7 +169,7 @@ export default function InputTasksForm() {
           KeyboardButtonProps={
             'change time'
           }
-        /> */}
+        />
 
               </div>
             </Grid>
@@ -266,7 +266,7 @@ export default function InputTasksForm() {
               >
 
                   <ToggleButton value="0">
-                    <ComButton title="'QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" />
+                    <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" />
                   </ToggleButton>
 
                   <ToggleButton value="1">

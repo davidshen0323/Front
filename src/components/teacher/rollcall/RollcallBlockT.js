@@ -7,10 +7,12 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MyMenu from '../../Menu';
-import Rollcallrecord from './rollcallrecord';
 
-//import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
-//import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
+import Rollcall from './rollcall';
+import RollcallRecord from '../rollcallrecord/rollcallrecord';
+//import Leavemanage from '../leaveMN/leavemanage';
+//import Member from '../member/member';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -23,9 +25,8 @@ function TabPanel(props) {
       id={`nav-tabpanel-${index}`}
       aria-labelledby={`nav-tab-${index}`}
       {...other}
-      
     >
-      {value === index && <Box p={2}>{children}</Box>}
+      {value === index && <Box p={4}>{children}</Box>}
     </Typography>
   );
 }
@@ -60,14 +61,11 @@ function LinkTab(props) {
 /*--------------------------------------------*/
 const useStyles = makeStyles(theme => ({
 
-    root: {
-        width: '100%',
-    },
-    paper: {
-      width: '100%',
-      margin: 'auto',
-      marginBottom: theme.spacing(2),
-    },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    
+  },
   proot: {
     display: 'flex',
     padding:20,
@@ -80,7 +78,7 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------*/
 
 
-export default function RollcallRD() {
+export default function RollcallBlockT() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -90,33 +88,41 @@ export default function RollcallRD() {
   };
 
   return (
-          <div>
-
-          
-<MyMenu/>
-        <br/><br/><br/>
-        <center><label><h1>專題</h1></label> </center>
-
-            <AppBar position="static" color="inherite" >
+    <div >
+        <MyMenu/>
+          <br/><br/><br/>
+            <center><label><h1>專題</h1></label> </center>
+            <AppBar position="static" color="inherit">
                 <Tabs
+                variant="fullWidth"
                 value={value}
                 onChange={handleChange}
-                variant="fullWidth"
+                aria-label="nav tabs example"
                 >
-                <LinkTab label="點名中" href="/rollcallrecordT" {...a11yProps(0)} />
-                <LinkTab label="點名記錄" href="/rollcallrecordS" {...a11yProps(1)} />
+                <LinkTab label="點名" href="/rollcall" {...a11yProps(0)} />
+                <LinkTab label="點名紀錄" href="/rollcallrecord" {...a11yProps(1)} />
+                {/* <LinkTab label="請假審核" href="/leavemanage" {...a11yProps(2)} />
+                <LinkTab label="班級名單" href="/member" {...a11yProps(3)} /> */}
             
                 </Tabs>
             </AppBar>
 
             
       <TabPanel value={value} index={0}>
-        {/* <RollcallrecordTable/> */}
+        <Rollcall/>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <Rollcallrecord/>
+        <RollcallRecord/>
       </TabPanel>
-      </div>
+
+      {/* <TabPanel value={value} index={2}>
+        <Leavemanage/>
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
+        <Member/>
+      </TabPanel> */}
+    </div>
   );
 }

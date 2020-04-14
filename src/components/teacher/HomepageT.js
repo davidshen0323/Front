@@ -17,10 +17,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {Link} from "react-router-dom";
 
-
-import JoinClass from '../student/joinClass';
-
-
+import function1 from "./FunctionT";
+import CreateClass from './createClass';
 
 
 const useStyles = makeStyles(theme => ({
@@ -87,15 +85,9 @@ const useStyles = makeStyles(theme => ({
       bottom: theme.spacing(5),
       right: theme.spacing(5),
     },
-
-
-    cardaction: {
-      maxWidth: 600,
-    },
-
   }));
 
-export default function HomepageS() {
+export default function HomepageT() {
 
   const classes = useStyles();
 
@@ -131,14 +123,10 @@ export default function HomepageS() {
   // }
   //   getCsid();
   // }
-
-
-
-     {/* 加入課程 */}
-     const [openJoinClass, closeJoinClass] = React.useState(false);
-     const onCloseJoinClass = () => {
-       closeJoinClass(openJoinClass ? false : true);
-
+     {/* 新建課程 */}
+     const [openCreateClass, closeCreateClass] = React.useState(false);
+     const onCloseCreateClass = () => {
+       closeCreateClass(openCreateClass ? false : true);
      };
 
 
@@ -146,12 +134,8 @@ export default function HomepageS() {
   return (
     <div className={classes.root}>
     <MyMenu />
-
-
-     {/* 加入課程 */}
-     <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeJoinClass(true)}>
-
-
+     {/* 新建課程 */}
+     <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeCreateClass(true)}>
           <AddIcon />
         </Fab>
       {/* {console.log(Sclass)} */}
@@ -162,50 +146,123 @@ export default function HomepageS() {
     // alignItems="center"
     >
 
+        {/* <Grid item md={4}> */}
+        {/* <Paper className={classes.photo}>photo</Paper> */}
+        {/* <Typography className={classes.words}>沈大為</Typography> */}
+        {/* </Grid> */}
 
+        {/* <Grid item md={8}> */}
+        {/* <TextField className={classes.textField} defaultValue='請輸入課程名稱'></TextField> */}
+        {/* <Card className={classes.card}> */}
+          {/* <ButtonBase
+          component={Link}
+
+          to ='/function1'
+          >
+            <CardActionArea>
+
+              <CardMedia
+              component="img"
+              alt="Contemplative Reptile"
+              height="140"
+             
+              title="Contemplative Reptile"
+              />
+              <CardContent>
+                <Typography>
+                  Test
+                </Typography>
+              </CardContent>
+            </CardActionArea> */}
+            {/* <CardActions>
+              <Button
+              component={Link}
+              to ='/function1'
+              className={classes.classbutton}
+              >
+                <Typography>Test</Typography>
+              </Button>
+            </CardActions> */}
+          {/* </ButtonBase> */}
+        {/* </Card> */}
+
+        {/* </Grid>   */}
+{/*         
+        <Grid item xs={4}>
+        <ButtonGroup 
+          orientation="vertical"
+          className={classes.button1}
+        >
+        <Button>我的課程</Button>
+        <Button>個人資料管理</Button>
+        </ButtonGroup>
+        </Grid>   */}
+
+          {/* <Paper>
+            {Sclass.map((classs,index) => (
+              <Grid key ={index}>
+              {
+                classList.map( (list, i) => i === 0 ?
+                <Grid key={i}>
+                {classs[list]}
+                <Grid>
+                {classs[list]}
+                </Grid>
+                </Grid>:
+                <Grid key={i}>{classs[list]}</Grid>
+                )
+              }
+              </Grid>
+              ))
+            }
+          </Paper> */}
           <Grid item>
             
-                
+                <TableBody>
                     {Sclass.map((classs,index) => (
-                    // <Card className={classes.card}>
-            <CardActionArea className={classes.cardaction} component={Link} to={`/function1/${classs["cs_id"]}`}>
-              {/* <CardActions> */}
+                    <Paper className={classes.paperclass} >
+            <CardActionArea>
+              <CardActions>
                         {/* {console.log(index)} */}
-                      <Paper key = {index}>
-
+                      <TableRow key = {index}>
                       {/* <ButtonBase> */}
                         {console.log(classs)}
 
                         {/* <TableCell>{index+1}</TableCell> */}
                         {
-
-                          classList.map( (list, i) =>
+                          classList.map( (list, i) =>  i === 0 ?
                           <TableCell key={i} component="th" scope="row" align="center">
+                        
+                            {/* {console.log(list)} */}
+                            {/* {console.log(i)} */}
+                            <ButtonBase component={Link} to={`/function1/${classs[list]}`}>
                             {classs[list]}
-                          </TableCell>
-
+                            </ButtonBase>
+                            
+                          </TableCell>:
+                          <TableCell key={i} align="left">
+                            {/* {console.log(i)} */}
+                            {classs[list]}
+                            
+                            </TableCell>
                           )
                         }
                         
                         {/* </ButtonBase> */}
-
-                      </Paper>
-                        {/* </CardActions> */}
+                      </TableRow>
+                        </CardActions>
                         </CardActionArea>
-                        // </Card>
-                       
+                        {/* </Card> */}
+                      </Paper> 
                       ))}     
-            
+            </TableBody> 
           </Grid>
         
       </Grid>
-      {/* 學生加入課程 */}
-      <JoinClass open={openJoinClass} handleClose={onCloseJoinClass}/>
-
+      {/* 教師新建課程 */}
+      <CreateClass open={openCreateClass} handleClose={onCloseCreateClass}/>
     </div>
     
   )
 
-
 }
-
