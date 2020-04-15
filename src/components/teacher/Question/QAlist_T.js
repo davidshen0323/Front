@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
-import MyMenu from '../Menu';
+import MyMenu from '../../Menu';
+import QAReply from './QAReply';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,13 +47,18 @@ function LinkTab(props) {
 }
 
 
-export default function QAlist_S() {
+export default function QAlist_T() {
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
  
 
+  {/* 老師回覆問題 */}
+  const [openQAReply, closeQAReply] = React.useState(false);
+  const onCloseQAReply = () => {
+    closeQAReply(openQAReply ? false : true);
+  };
   
 
 
@@ -77,40 +83,50 @@ export default function QAlist_S() {
             <TableHead>
                 <TableRow>
                     <TableCell>排序</TableCell>
+                    <TableCell>學號</TableCell>
                     <TableCell>問題內容</TableCell>
                     <TableCell>最後更新時間</TableCell>
+                    <TableCell>回覆</TableCell>
                 </TableRow>
             </TableHead>
             
             <TableBody>
                 <TableRow>
                     <TableCell>1</TableCell>
+                    <TableCell>406401628</TableCell>
                     <TableCell>Table 怎麼做</TableCell>
                     <TableCell>2020-04-03 11:29</TableCell>
+                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
                 </TableRow>
                 
                 <TableRow>
                     <TableCell>2</TableCell>
+                    <TableCell>406401629</TableCell>
                     <TableCell>我不會寫作業</TableCell>
                     <TableCell>2020-04-03 11:30</TableCell>
+                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell>3</TableCell>
+                    <TableCell>406401630</TableCell>
                     <TableCell>網頁打不開</TableCell>
                     <TableCell>2020-04-03 11:32</TableCell>
+                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell>4</TableCell>
+                    <TableCell>406401631</TableCell>
                     <TableCell>404是啥</TableCell>
                     <TableCell>2020-04-03 11:35</TableCell>
+                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
                 </TableRow>
             </TableBody>
           </Table>
-          <Button style={{marginTop:'3%', marginBottom:'2%' , marginLeft:'50%'}} variant="contained" color="primary">取消問題</Button>
       </Box>
-      
       </TabPanel>
 
+      {/* 老師回覆問題的小框框 */}
+      <QAReply open={openQAReply} handleClose={onCloseQAReply}/>
 
       <TabPanel value={value} index={1}>
       <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
@@ -118,6 +134,7 @@ export default function QAlist_S() {
             <TableHead>
                 <TableRow>
                     <TableCell>排序</TableCell>
+                    <TableCell>學號</TableCell>
                     <TableCell>問題內容</TableCell>
                     <TableCell>最後更新時間</TableCell>
                     <TableCell>回覆內容</TableCell>
@@ -127,6 +144,7 @@ export default function QAlist_S() {
             <TableBody>
                 <TableRow>
                     <TableCell>1</TableCell>
+                    <TableCell>406401628</TableCell>
                     <TableCell>Table 怎麼做</TableCell>
                     <TableCell>2020-04-03 11:29</TableCell>
                     <TableCell>妳要打"Table"</TableCell>
@@ -134,18 +152,21 @@ export default function QAlist_S() {
                 
                 <TableRow>
                     <TableCell>2</TableCell>
+                    <TableCell>406401629</TableCell>
                     <TableCell>我不會寫作業</TableCell>
                     <TableCell>2020-04-03 11:30</TableCell>
                     <TableCell>誰叫你不認真上課</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell>3</TableCell>
+                    <TableCell>406401630</TableCell>
                     <TableCell>網頁打不開</TableCell>
                     <TableCell>2020-04-03 11:32</TableCell>
                     <TableCell>重開機</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell>4</TableCell>
+                    <TableCell>406401631</TableCell>
                     <TableCell>404是啥</TableCell>
                     <TableCell>2020-04-03 11:35</TableCell>
                     <TableCell>已於課堂上回答</TableCell>

@@ -9,20 +9,17 @@ import homepages from './components/student/HomepageS';
 import functions from './components/student/FunctionS';
 import homepaget from './components/teacher/HomepageT';
 import functiont from './components/teacher/FunctionT';
-import addexam from './components/teacher/addexam';
-import QuestionList from './components/student/student_question';
-import TQuestionList from './components/teacher/teacher_question';
 import AcceptanceList from './components/student/Acceptance/student_acceptance';
-import TAcceptanceList from './components/teacher/teacher_acceptance';
-import shomepage from './components/student/student_homepage';
+import TAcceptanceList from './components/teacher/Acceptance/teacher_acceptance';
+
 import Rollcall from './components/teacher/rollcall/rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
-
+import TInformation from './components/teacher/information/TInformation';
 import StuInformation from './components/student/information/stuInformation';
-import QAlist_T from './components/teacher/QAlist_T';
-import QAlist_S from './components/student/QAlist_S';
+import QAlist_T from './components/teacher/Question/QAlist_T';
+import QAlist_S from './components/student/Question/QAlist_S';
 
 import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
@@ -30,18 +27,19 @@ import Register from './components/Register.js';
 
 
 
-import selectHW from'./components/student/Acceptance/selectHW.js'
+import selectHWs from'./components/student/Acceptance/SelectHW_S.js';
+import selectHWt from'./components/teacher/Acceptance/SelectHW_T.js';
+
 import ReactApp from './components/React-app.js';
 
 import * as serviceWorker from './serviceWorker';
 
 import post from './components/Post';
 
-import examresult from './components/teacher/ExamResult';
 import Member from './components/teacher/member/member';
 
 import RollcallBlockT from './components/teacher/rollcall/RollcallBlockT';
-import RollcallBlockS from './components/student/RollcallBlockS';
+import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
@@ -63,31 +61,27 @@ ReactDOM.render(
             <Route path="/functions/:cs_id" component={functions}/>
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
-            <Route path="/questions/:cs_id" component={QuestionList}/>
-            <Route path="/tquestion" component={TQuestionList}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
             <Route path="/StuInformation" component={StuInformation}/>
+            <Route path="/TInformation" component={TInformation}/>
             <Route path="/QAlist_T" component={QAlist_T}/>
             <Route path="/QAlist_S" component={QAlist_S}/>
 
 
             <Route path="/post" component={post}/>
             
-
-            <Route path="/examresult" component={examresult}/>
             <Route path="/member" component={Member}/>
-            <Route path="/addexam" component={addexam}/>
-            <Route path="/homepage" component={shomepage}/>
 
             <Route path="/RollcallBlockT" component={RollcallBlockT}/>
             <Route path="/QRcode" component={QRcode}/> 
             <Route path="/Hand" component={Hand}/>
 
-            <Route path="/RollcallBlockS" component={RollcallBlockS}/>
+            <Route path="/LeaveBlockS" component={LeaveBlockS}/>
             <Route path="/RollcallRD" component={RollcallRD}/>
+            <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
-            <Route path="/selectHW/:cs_id" component={selectHW}/>
+            <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
             
 
             <Route exact path="/" component={Login}/>

@@ -13,7 +13,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
 import Typography from '@material-ui/core/Typography';
+import {Link, useParams} from "react-router-dom";
 
+let post; //宣告一個布林值變數
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -31,12 +33,31 @@ export default function Qrcode() {
   const rand = Math.random();
   const test = rand.toString();
   const [open, setOpen] = React.useState(false);
-
-  // const params = useParams();
-  //       console.log(params);
+  
+  const params = useParams();
+        // console.log(params);
+  const csid = params.cs_id;
 
   const handleClickOpen = () => {
     setOpen(true);
+  
+    {
+      fetch('/teacher/rollcall/addrollcall',{
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              
+              // rc_inputsource:inputs.way,
+              // qrcode: qrcode
+              cs_id: csid,
+              rc_inputsource: 'QRcode點名'
+              
+          })
+      })
+      
+  }
   };
 
   const handleClose = () => {
@@ -44,80 +65,25 @@ export default function Qrcode() {
   };
 
   
-  const [inputs, setInputs] = React.useState({
-    rc_id:'',
-    rc_inputsource:'',
+  // const [inputs, setInputs] = React.useState({
+    // rc_inputsource:'',
     //qrcode:'',
     //宣告要接值的變數
-  });
+  // });
 
-  const handleChange = user => event => {
-    event.persist();
-    setInputs(inputs => ({...inputs, [user]: event.target.value}));
-    //不知道怎麼解釋哈哈哈哈
-}
+//   const handleChange = user => event => {
+//     event.persist();
+//     setInputs(inputs => ({...inputs, [user]: event.target.value}));
+//     //不知道怎麼解釋哈哈哈哈
+// }
 
-let post; //宣告一個布林值變數
-//    let history = useHistory(); //傳值跳頁的方法
-    const handleSubmit = () =>
-    {
-            {
-                fetch('/teacher/rollcall/addrollcall',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        //rc_id:
-                        rc_inputsource:inputs.way
-                        //qrcode:inputs.qrcode
-                        
-                    })
-                })
-                .then(res => {
-                    async function fetchres(){
-                    const test = await res.text();  //接收後端傳來的訊息
-                    if (test === "This account has already exist!") //帳號已註冊過
-                    {
-                        alert("已註冊過!");
-                        post = false;
-                        console.log(1);
-                        return post;
-                    }
-                    else if(test === "request failed. Email format error!") //信箱不包含@
-                    {
-                        alert("信箱格式有誤! 請輸入有效信箱!");
-                        post = false;
-                        console.log(2);
-                        return post;
-                    }
-                    
-                    else
-                    {
-                        alert("註冊成功!");
-                        post = true;
-                        console.log(0);
-                        //history.push("/login");
-                        return post;                        
-                    }
-                    
-                } fetchres() })
-                // .then(res => console.log(post))
-                .then(res => console.log(res))
-                .catch(err => console.log(`Error with message: ${err}`))
-            }
-            
 
-            
-
-            
-            
-        }
+    
 
 
   return (
     <div>
-      <Button  onClick={handleClickOpen} >
+      <Button onClick={handleClickOpen} >
        <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" className={classes.button}/>
       </Button>
       

@@ -147,10 +147,12 @@ export default function Register() {
                         std_name: inputs.name,
                         std_gender: inputs.gender,
                         std_department: inputs.dpart,
+                        std_phone: inputs.phone,
                         std_mail: inputs.mail
                     })
                 })
                 .then(res => {
+                    
                     async function fetchres(){
                     const test = await res.text();  //接收後端傳來的訊息
                     if (test === "This account has already exist!") //帳號已註冊過

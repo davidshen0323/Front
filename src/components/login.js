@@ -107,7 +107,7 @@ export default function Login(){
           let login;
           const handleSubmit = () =>
           {
-            if(inputs.Userid.length === 9 && inputs.Userid.length > 0 && inputs.Userpassword.length > 0)
+            if(inputs.Userid.length > 0 && inputs.Userpassword.length > 0)
             {
                 login = true;
                 return login;

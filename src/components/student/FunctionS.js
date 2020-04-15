@@ -16,7 +16,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 import { TextField, TableBody, TableCell , TableRow } from '@material-ui/core';
 
-import AddQA from "./addQA";
+import AddQA from "./Question/addQA";
 
 
 
@@ -151,7 +151,7 @@ const useStyles = makeStyles(theme => ({
               <ButtonBase
               component={Link}
 
-              to ={`/RollcallBlockS/${params.cs_id}`}
+              to ={`/LeaveBlockS/${params.cs_id}`}
 
               >
               <CardContent>
@@ -281,7 +281,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
             <ButtonBase 
             component={Link}
-            to={`/selectHW/${params.cs_id}`}>
+            to={`/selectHW_S/${params.cs_id}`}>
               {/* <ButtonBase
               component={Link}
           */}
