@@ -147,6 +147,7 @@ export default function Register() {
                         std_name: inputs.name,
                         std_gender: inputs.gender,
                         std_department: inputs.dpart,
+                        std_phone: inputs.phone,
                         std_mail: inputs.mail
                     })
                 })
