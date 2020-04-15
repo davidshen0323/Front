@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 
-export default function SelectHW() {
+export default function SelectHW_T() {
   //接值
 
   const useStyles = makeStyles({
@@ -110,7 +110,7 @@ export default function SelectHW() {
       <Button
       className={classes.button}
       component={Link}
-      to={`/function1/${csid}`}
+      to={`/functiont/${csid}`}
       >
       返回
       </Button>

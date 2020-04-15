@@ -57,7 +57,7 @@ export default function EditPhone({ open, handleClose })  {
           </Typography>
 
            {/* 之後要接Phone */}  
-          <Typography className={classes.typo} variant="h8">
+          <Typography className={classes.typo} variant="h8" >
             目前電話號碼：0912345678
           </Typography>
 

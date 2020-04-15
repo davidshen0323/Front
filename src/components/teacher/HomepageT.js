@@ -17,7 +17,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import {Link} from "react-router-dom";
 
-import function1 from "./FunctionT";
 import CreateClass from './createClass';
 
 
@@ -98,7 +97,7 @@ export default function HomepageT() {
   
   useEffect(() => {
     async function fetchData() {
-      const result  = await axios.get(`/student/HomePage1_s/one/`)
+      const result  = await axios.get(`/teacher/HomePage1_s/one/`)
       
       setClass(result.data);
       // console.log(result.data);
@@ -218,44 +217,37 @@ export default function HomepageT() {
           </Paper> */}
           <Grid item>
             
-                <TableBody>
-                    {Sclass.map((classs,index) => (
-                    <Paper className={classes.paperclass} >
-            <CardActionArea>
-              <CardActions>
+                
+                {Sclass.map((classs,index) => (
+                    // <Card className={classes.card}>
+            <CardActionArea className={classes.cardaction} component={Link} to={`/functiont/${classs["cs_id"]}`}>
+              {/* <CardActions> */}
                         {/* {console.log(index)} */}
-                      <TableRow key = {index}>
+                      <Paper key = {index}>
+
                       {/* <ButtonBase> */}
                         {console.log(classs)}
 
                         {/* <TableCell>{index+1}</TableCell> */}
                         {
-                          classList.map( (list, i) =>  i === 0 ?
+
+                          classList.map( (list, i) =>
                           <TableCell key={i} component="th" scope="row" align="center">
-                        
-                            {/* {console.log(list)} */}
-                            {/* {console.log(i)} */}
-                            <ButtonBase component={Link} to={`/function1/${classs[list]}`}>
                             {classs[list]}
-                            </ButtonBase>
-                            
-                          </TableCell>:
-                          <TableCell key={i} align="left">
-                            {/* {console.log(i)} */}
-                            {classs[list]}
-                            
-                            </TableCell>
+                          </TableCell>
+
                           )
                         }
                         
                         {/* </ButtonBase> */}
-                      </TableRow>
-                        </CardActions>
+
+                      </Paper>
+                        {/* </CardActions> */}
                         </CardActionArea>
-                        {/* </Card> */}
-                      </Paper> 
+                        // </Card>
+                       
                       ))}     
-            </TableBody> 
+          
           </Grid>
         
       </Grid>

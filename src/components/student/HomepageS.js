@@ -168,7 +168,7 @@ export default function HomepageS() {
                 
                     {Sclass.map((classs,index) => (
                     // <Card className={classes.card}>
-            <CardActionArea className={classes.cardaction} component={Link} to={`/function1/${classs["cs_id"]}`}>
+            <CardActionArea className={classes.cardaction} component={Link} to={`/functions/${classs["cs_id"]}`}>
               {/* <CardActions> */}
                         {/* {console.log(index)} */}
                       <Paper key = {index}>

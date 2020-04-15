@@ -6,13 +6,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import MyMenu from '../Menu';
+import MyMenu from '../../Menu';
 
-import Rollcall from './rollcall/rollcall';
-import Leave from './leave/leave';
-import Member from './member/member';
-import Apply from './applyrecord/applyrecord';
-import ApplyRecord from './applyrecord/applyrecord';
+import Rollcall from '../rollcall/rollcall';
+import Leave from './leave';
+import Member from '../member/member';
+import Apply from '../applyrecord/applyrecord';
+import ApplyRecord from '../applyrecord/applyrecord';
 
 
 function TabPanel(props) {
@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------*/
 
 
-export default function RollcallBlockS() {
+export default function LeaveBlockS() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 

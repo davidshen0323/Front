@@ -226,7 +226,7 @@ export default function AcceptanceList() {
           <Button
       className={classes.button}
       component={Link}
-      to={`/selectHW/${params.cs_id}`}
+      to={`/selectHW_S/${params.cs_id}`}
       >
       返回
       </Button>
