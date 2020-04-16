@@ -178,7 +178,7 @@ export default function MemberTable() {
 
  useEffect(() => {
   async function fetchData() {
-      const result = await axios.get(`/rollcall/2`);
+      const result = await axios.get(`/student/rollcall/oneRollcall/2`);
       
       console.log(result.data);
 
