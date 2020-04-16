@@ -182,7 +182,7 @@ const useStyles = makeStyles(theme => ({
               <ButtonBase
               component={Link}
 
-              to ={`/member/${params.cs_id}`}
+              to ={`/members/${params.cs_id}`}
 
               // className={classes.ButtonBase}
               >

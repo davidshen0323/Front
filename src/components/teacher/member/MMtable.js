@@ -66,7 +66,7 @@ const headCells = [
   { id: 'number', numeric: false, disablePadding: true, label: '學號' },
   { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
   { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-  // { id: 'group', numeric: true, disablePadding: false, label: '分組' },
+
   
 ];
 
@@ -178,7 +178,7 @@ export default function MemberTable() {
 
  useEffect(() => {
   async function fetchData() {
-      const result = await axios.get(`/teacher/rollcall/oneRollcall/2`);
+      const result = await axios.get(`/teacher/rollcall/studentList/2`);
       
       console.log(result.data);
 

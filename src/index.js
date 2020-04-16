@@ -36,7 +36,8 @@ import * as serviceWorker from './serviceWorker';
 
 import post from './components/Post';
 
-import Member from './components/teacher/member/member';
+import MemberT from './components/teacher/member/member';
+import MemberS from './components/student/member/member';
 
 import RollcallBlockT from './components/teacher/rollcall/RollcallBlockT';
 import LeaveBlockS from './components/student/leave/LeaveBlockS';
@@ -60,6 +61,9 @@ ReactDOM.render(
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepages" component={homepages}/>
             <Route path="/functions/:cs_id" component={functions}/>
+
+
+
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
@@ -72,7 +76,8 @@ ReactDOM.render(
 
             <Route path="/post" component={post}/>
             
-            <Route path="/member" component={Member}/>
+            <Route path="/membert" component={MemberT}/>
+            <Route path="/members" component={MemberS}/>
 
             <Route path="/RollcallBlockT/:cs_id" component={RollcallBlockT}/>
             <Route path="/QRcode" component={QRcode}/> 
