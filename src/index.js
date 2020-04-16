@@ -43,6 +43,7 @@ import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
+import gps from './components/teacher/rollcall/GPS/Gps';
 
 
 ReactDOM.render(
@@ -73,7 +74,7 @@ ReactDOM.render(
             
             <Route path="/member" component={Member}/>
 
-            <Route path="/RollcallBlockT" component={RollcallBlockT}/>
+            <Route path="/RollcallBlockT/:cs_id" component={RollcallBlockT}/>
             <Route path="/QRcode" component={QRcode}/> 
             <Route path="/Hand" component={Hand}/>
 
@@ -82,7 +83,7 @@ ReactDOM.render(
             <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
             <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
-            
+            <Route path="/Gps" component={gps}/>
 
             <Route exact path="/" component={Login}/>
         </Switch>
@@ -92,7 +93,7 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();
 
 
 

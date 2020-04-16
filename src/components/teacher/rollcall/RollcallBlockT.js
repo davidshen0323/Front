@@ -10,6 +10,7 @@ import MyMenu from '../../Menu';
 
 import Rollcall from './rollcall';
 import RollcallRecord from '../rollcallrecord/rollcallrecord';
+import { useParams } from 'react-router-dom';
 //import Leavemanage from '../leaveMN/leavemanage';
 //import Member from '../member/member';
 
@@ -82,7 +83,10 @@ export default function RollcallBlockT() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+  const params = useParams();
+  const csid = params.cs_id;
 
+  // console.log(csid);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -90,8 +94,7 @@ export default function RollcallBlockT() {
   return (
     <div >
         <MyMenu/>
-          <br/><br/><br/>
-            <center><label><h1>專題</h1></label> </center>
+          
             <AppBar position="static" color="inherit">
                 <Tabs
                 variant="fullWidth"
@@ -99,8 +102,8 @@ export default function RollcallBlockT() {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="點名" href="/rollcall" {...a11yProps(0)} />
-                <LinkTab label="點名紀錄" href="/rollcallrecord" {...a11yProps(1)} />
+                <LinkTab label="點名" href={`/rollcall/${csid}`} {...a11yProps(0)} />
+                <LinkTab label="點名紀錄" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} />
                 {/* <LinkTab label="請假審核" href="/leavemanage" {...a11yProps(2)} />
                 <LinkTab label="班級名單" href="/member" {...a11yProps(3)} /> */}
             

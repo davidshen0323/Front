@@ -20,7 +20,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import ComButton from "./ComButton";
 import QRcode from "./QRcode/QRcode";
 import Hand from "./Hand/Hand";
-import GPS from "./GPS/GPS";
+// import GPS from "./GPS/Gps";
 
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -29,6 +29,7 @@ import {
     KeyboardTimePicker,
     KeyboardDatePicker,
   } from '@material-ui/pickers';
+import { useParams } from "react-router-dom";
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme => ({
@@ -77,6 +78,11 @@ const useStyles = makeStyles(theme => ({
 export default function RollcallForm(){
         const classes = useStyles();
 
+        const params = useParams();
+        const csid = params.cs_id;
+
+        console.log(csid);
+
         return (
           <div className={classes.root}>
           <Grid     container
@@ -89,7 +95,7 @@ export default function RollcallForm(){
               <Grid item  xs={12} sm={4}>
               <Card className={classes.card}>
                 <CardActionArea className={classes.cardaction}>
-                <GPS/>
+                {/* <GPS/> */}
                 </CardActionArea>
               </Card>
               </Grid>
