@@ -8,14 +8,14 @@ import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 import ComButton from "../ComButton";
 import Grid from '@material-ui/core/Grid';
-import QRcodeMade from './QRcodeMade';
+// import QRcodeMade from './QRcodeMade';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
 import Typography from '@material-ui/core/Typography';
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
-let post; //宣告一個布林值變數
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -30,18 +30,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function Qrcode() {
   const classes = useStyles();
-  const rand = Math.random();
-  const test = rand.toString();
   const [open, setOpen] = React.useState(false);
   
   const params = useParams();
-        // console.log(params);
-  const csid = params.cs_id;
-
+  // console.log(params);
+  // const csid = params.cs_id;
+  console.log(params.cs_id);
+  
+  const rand = Math.random();
+  const test = rand.toString();
   const handleClickOpen = () => {
     setOpen(true);
-  
-    {
+      console.log(test);
+      // console.log('QRcode點名');
+    
       fetch('/teacher/rollcall/addrollcall',{
           method: 'POST',
           headers: {
@@ -50,18 +52,32 @@ export default function Qrcode() {
           body: JSON.stringify({
               
               // rc_inputsource:inputs.way,
-              // qrcode: qrcode
-              cs_id: csid,
+              qrcode: test,
+              cs_id: params.cs_id,
               rc_inputsource: 'QRcode點名'
               
           })
       })
       
-  }
+  
   };
 
   const handleClose = () => {
     setOpen(false);
+    fetch('/teacher/rollcall/updateQRcode',{
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          
+          // rc_inputsource:inputs.way,
+          qrcode: '',
+          // cs_id: params.cs_id,
+          // rc_inputsource: 'QRcode點名'
+          
+      })
+  })
   };
 
   
@@ -84,7 +100,7 @@ export default function Qrcode() {
   return (
     <div>
       <Button onClick={handleClickOpen} >
-       <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" className={classes.button}/>
+       <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" />
       </Button>
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
