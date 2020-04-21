@@ -103,8 +103,8 @@ const useStyles = makeStyles(theme => ({
           
           <div className={classes.root}>
             <MyMenu />
-            <br></br><br></br><br></br><br></br>
-            <p>This is class {params.cs_id}</p>
+            {/* <br></br><br></br><br></br><br></br> */}
+            {/* <p>This is class {params.cs_id}</p> */}
             
             <Grid
               container
@@ -237,8 +237,8 @@ const useStyles = makeStyles(theme => ({
 
               <ButtonBase 
 
-              //  component={Link}
-              //  to={`/questions/${params.cs_id}`}
+               component={Link}
+               to={`/QAlist_T/${params.cs_id}`}
 
               onClick={() => closeQAReply(true)}
               >

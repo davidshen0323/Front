@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
 import MyMenu from '../../Menu';
 import QAReply from './QAReply';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,6 +55,24 @@ export default function QAlist_T() {
     setValue(newValue);
   };
  
+  const params = useParams();
+  const csid = params.cs_id;
+
+  const [question, setQuestion] = React.useState([]);
+  
+  const questionlist = ['q_std_id','q_content','q_asktime'];
+  const solved_qlist = ['q_std_id','q_content','q_asktime','q_reply'];
+
+  useEffect(() => {
+    async function fetchData() {
+      const result  = await axios.get(`/teacher/question/all/${csid}`)
+      setQuestion(result.data);
+      console.log(result.data);
+    
+    }
+    
+    fetchData();
+  }, []);
 
   {/* 老師回覆問題 */}
   const [openQAReply, closeQAReply] = React.useState(false);
@@ -91,35 +111,37 @@ export default function QAlist_T() {
             </TableHead>
             
             <TableBody>
-                <TableRow>
+            {question.map((Ques,index) => Ques[ "q_solved"] === "0" ?
+            (
+                <TableRow key={index}>
+                 <TableCell>{index+1}</TableCell>
+                  {
+                    questionlist.map( (list, i) => 
+                    
+                    <TableCell key={i} component="th" scope="row" align="center">
+                      {Ques[list]}
+                      <Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >
+                        回覆
+                      </Button>
+                     </TableCell>
+                      )
+                    }
+                    
+                </TableRow>
+              )
+              :
+              <div></div>
+              )}
+
+                {/* <TableRow>
                     <TableCell>1</TableCell>
                     <TableCell>406401628</TableCell>
                     <TableCell>Table 怎麼做</TableCell>
                     <TableCell>2020-04-03 11:29</TableCell>
                     <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
-                </TableRow>
+                </TableRow> */}
                 
-                <TableRow>
-                    <TableCell>2</TableCell>
-                    <TableCell>406401629</TableCell>
-                    <TableCell>我不會寫作業</TableCell>
-                    <TableCell>2020-04-03 11:30</TableCell>
-                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>3</TableCell>
-                    <TableCell>406401630</TableCell>
-                    <TableCell>網頁打不開</TableCell>
-                    <TableCell>2020-04-03 11:32</TableCell>
-                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>4</TableCell>
-                    <TableCell>406401631</TableCell>
-                    <TableCell>404是啥</TableCell>
-                    <TableCell>2020-04-03 11:35</TableCell>
-                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
-                </TableRow>
+               
             </TableBody>
           </Table>
       </Box>
@@ -142,35 +164,31 @@ export default function QAlist_T() {
             </TableHead>
             
             <TableBody>
-                <TableRow>
-                    <TableCell>1</TableCell>
-                    <TableCell>406401628</TableCell>
-                    <TableCell>Table 怎麼做</TableCell>
-                    <TableCell>2020-04-03 11:29</TableCell>
-                    <TableCell>妳要打"Table"</TableCell>
+            {question.map((Ques,k) =>  Ques[ "q_solved"] === "1" ? (
+                <TableRow key={k}>
+                 <TableCell>{k+1}</TableCell>
+                  {
+                    solved_qlist.map( (list, i) => 
+                    
+                    <TableCell key={i} component="th" scope="row" align="center">
+                      {Ques[list]}
+                      </TableCell>
+                      )
+                    }
+                    
                 </TableRow>
+              ):
+              <div></div>
+              )}
                 
-                <TableRow>
+                {/* <TableRow>
                     <TableCell>2</TableCell>
                     <TableCell>406401629</TableCell>
                     <TableCell>我不會寫作業</TableCell>
                     <TableCell>2020-04-03 11:30</TableCell>
                     <TableCell>誰叫你不認真上課</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>3</TableCell>
-                    <TableCell>406401630</TableCell>
-                    <TableCell>網頁打不開</TableCell>
-                    <TableCell>2020-04-03 11:32</TableCell>
-                    <TableCell>重開機</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>4</TableCell>
-                    <TableCell>406401631</TableCell>
-                    <TableCell>404是啥</TableCell>
-                    <TableCell>2020-04-03 11:35</TableCell>
-                    <TableCell>已於課堂上回答</TableCell>
-                </TableRow>
+                </TableRow> */}
+                
             </TableBody>
           </Table>
       </Box>

@@ -14,6 +14,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
 import Typography from '@material-ui/core/Typography';
 import {useParams} from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 
 
@@ -31,18 +34,50 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Qrcode() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  
+  // const [geo, setGeo] = React.useState({
+  //   latitude: '',
+  //   longitude: '',
+  // });
+
   const params = useParams();
   // console.log(params);
   // const csid = params.cs_id;
   console.log(params.cs_id);
   
-  const rand = Math.random();
-  const test = rand.toString();
+  // const rand = Math.random();
+  // const test = rand.toString();
+  const test = uuidv4(); //qrcode亂碼
+  
+  
   const handleClickOpen = () => {
     setOpen(true);
-      console.log(test);
-      // console.log('QRcode點名');
+
+    //   function gps() {
+    // //以下抓定位
+    //   if (!navigator.geolocation){
+    //     // output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+    //     alert("Geolocation is not supported by your browser");     
+    //     return;
+    // }
+    //   function success(position) {
+    //   const latitude  = position.coords.latitude;
+    //   const longitude = position.coords.longitude;
+    //     return(latitude + longitude);
+    //   };
+      
+    //   function error() {
+    //   alert("未授權，無法取得位置");
+    //   };
+      
+    //   const watchid = navigator.geolocation.watchPosition(success, error);
+    
+    //   return(
+    //     <div></div>
+    //   )
+    //   }
+    // console.log(test);
+    // console.log('QRcode點名');
+    console.log(test);
     
       fetch('/teacher/rollcall/addrollcall',{
           method: 'POST',
@@ -54,8 +89,9 @@ export default function Qrcode() {
               // rc_inputsource:inputs.way,
               qrcode: test,
               cs_id: params.cs_id,
-              rc_inputsource: 'QRcode點名'
-              
+              rc_inputsource: 'QRcode點名',
+              // longitude: longitude,
+              // latitude: latitude
           })
       })
       
@@ -99,6 +135,7 @@ export default function Qrcode() {
 
   return (
     <div>
+      
       <Button onClick={handleClickOpen} >
        <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" />
       </Button>

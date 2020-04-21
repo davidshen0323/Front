@@ -99,9 +99,9 @@ export default function Login(){
             Userpassword: ''
           });
 
-          const handleChange = user => event => {
+          const handleChange = fieldname => event => {
             event.persist();
-            setInputs(inputs => ({...inputs, [user]: event.target.value }));
+            setInputs(inputs => ({...inputs, [fieldname]: event.target.value }));
           }
           
           let login;

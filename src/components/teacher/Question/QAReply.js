@@ -30,7 +30,7 @@ function Alert(props) {
 export default function AcceptScore({ open, handleClose })  {
   const classes = useStyle();
   
-
+  
 
   const [openS, setOpenS] = React.useState(false);
   const [inputs, setInputs] = React.useState(1);
