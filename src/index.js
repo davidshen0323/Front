@@ -23,9 +23,8 @@ import QAlist_S from './components/student/Question/QAlist_S';
 
 import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
-
-
-
+import ViewAnnouncements from './components/student/announcement/viewAnnouncements';
+import ViewAnnouncementt from './components/teacher/announcement/viewAnnouncementt';
 
 import selectHWs from'./components/student/Acceptance/SelectHW_S.js';
 import selectHWt from'./components/teacher/Acceptance/SelectHW_T.js';
@@ -44,7 +43,7 @@ import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
-import gps from './components/teacher/rollcall/GPS/Gps';
+import gps from './components/teacher/rollcall/GPS/GPS';
 
 
 ReactDOM.render(
@@ -67,12 +66,14 @@ ReactDOM.render(
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
+            <Route path="/ViewAnnouncements/:cs_id" component={ViewAnnouncements}/>
+            <Route path="/ViewAnnouncementt/:cs_id" component={ViewAnnouncementt}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
             <Route path="/StuInformation" component={StuInformation}/>
             <Route path="/TInformation" component={TInformation}/>
-            <Route path="/QAlist_T" component={QAlist_T}/>
-            <Route path="/QAlist_S" component={QAlist_S}/>
-
+            <Route path="/QAlist_T/:cs_id" component={QAlist_T}/>
+            <Route path="/QAlist_S/:cs_id" component={QAlist_S}/>
+            
 
             <Route path="/post" component={post}/>
             

@@ -206,7 +206,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
-              to ='/homepage2'
+              to ={`/ViewAnnouncementt/${params.cs_id}`}
               
               >
                 <CardContent>
@@ -237,10 +237,9 @@ const useStyles = makeStyles(theme => ({
 
               <ButtonBase 
 
-              //  component={Link}
-              //  to={`/questions/${params.cs_id}`}
+               component={Link}
+               to={`/QAlist_T/${params.cs_id}`}
 
-              onClick={() => closeQAReply(true)}
               >
                 <CardContent>
               <CardMedia
