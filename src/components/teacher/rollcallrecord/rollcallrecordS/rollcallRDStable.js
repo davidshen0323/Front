@@ -9,40 +9,33 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import CloseIcon from '@material-ui/icons/Close';
-import clsx from 'clsx';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import SimpleTable from './stable';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import FaceIcon from '@material-ui/icons/Face';
+import {useState,useEffect} from 'react';
+import axios from 'axios';
 
 
-function createData(time, attend, score, from) {
-  return { time, attend, score, from };
-}
+
+// function createData(time, attend, score, from) {
+//   return { time, attend, score, from };
+// }
 
 
-const rows = [
-  createData('2019.11.05 11:05','出席', '計分', '人臉點名'),
-  createData('2019.11.12 11:12','缺席', '不計分', 'QR code點名'),
-  createData('2019.11.19 11:19','缺席','計分', '藍牙點名'),
-  createData('2019.11.26 11:26', '缺席', '計分', '手動點名'),
-  createData('2019.12.03 12:03','出席', '不計分', '人臉點名'),
-  createData('2019.12.10 12:10','出席', '計分', '手動點名'),
-  createData('2019.12.17 12:17','出席', '不計分', '人臉點名'),
-  createData('2019.12 24 12:24', '缺席', '不計分', 'QR code點名'),
-  createData('2020.01.01 01:00', '缺席', '計分', '藍牙點名'),
-  createData('2020.01.08 01:08', '出席', '計分', '人臉點名'),
-  createData('2020.01.15 01:15', '缺席', '計分', '藍牙點名'),
-  createData('2020.01.22 01:22','出席', '不計分', '手動點名'),
-];
+// const rows = [
+//   createData('2019.11.05 11:05','出席', '人臉點名'),
+//   createData('2019.11.05 11:05','出席', '人臉點名'),
+//   createData('2019.11.05 11:05','出席', '人臉點名'),
+//   createData('2019.11.05 11:05','出席', '人臉點名'),
+//   createData('2019.11.12 11:12','缺席', 'QR code點名'),
+//   createData('2019.11.19 11:19','缺席', '藍牙點名'),
+//   createData('2019.11.26 11:26', '缺席','手動點名'),
+//   createData('2019.12.03 12:03','出席', '人臉點名'),
+//   createData('2019.12.10 12:10','出席', '手動點名'),
+//   createData('2019.12.17 12:17','出席', '人臉點名'),
+//   createData('2019.12 24 12:24', '缺席','QR code點名'),
+//   createData('2020.01.01 01:00', '缺席', '藍牙點名'),
+//   createData('2020.01.08 01:08', '出席', '人臉點名'),
+//   createData('2020.01.15 01:15', '缺席', '藍牙點名'),
+//   createData('2020.01.22 01:22','出席', '手動點名'),
+// ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -71,18 +64,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', label: '日期與時間', minWidth: 150, numeric: false, disablePadding: true },
-  { id: 'attend', label: '出/缺席', minWidth: 50, numeric: true, disablePadding: false, },
-  {
-    id: 'score',
-    label: '計分設定', minWidth: 100,
-    numeric: true, disablePadding: false,
-  },
-  {
-    id: 'from',
-    label: '來源', minWidth: 100,
-    numeric: true, disablePadding: false,
-  },
+  { id: 'time', label: '日期與時間', numeric: true, disablePadding: false },
+  { id: 'score',label: '出席狀況', numeric: true, disablePadding: false },
+  { id: 'from', label: '來源', numeric: true, disablePadding: false},
 ];
 
 function EnhancedTableHead(props) {
@@ -133,30 +117,6 @@ EnhancedTableHead.propTypes = {
 };
 
 
-const useToolbarStyles = makeStyles(theme => ({
-  root: {
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(1),
-  },
-  title: {
-    flex: '1 1 100%',
-    marginLeft: theme.spacing(9),
-    //paddingLeft: theme.spacing(9),
-  },
-  listItemText : { 
-    fontSize:'1.5em',
-  }, 
-  listItemText2 : { 
-    fontSize:'0.8em',
-  }, 
-  inline: {
-    display: 'inline',
-    fontSize:18,
-  },
-}));
-
-
-
 /*----------------------------------------------*/
 const useStyles = makeStyles(theme => ({
   root: {
@@ -188,18 +148,17 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function RollcallRDS() {
+
+  /*------------ STATE ------------*/
+  const [rollcalls, setRollcalls] = useState([]);
+
+
+
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const [checked, setChecked] = React.useState(false);
-
-  const [choose, setChoose] = React.useState();
-
-  const [test, setTest] = React.useState('test');
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -216,72 +175,75 @@ export default function RollcallRDS() {
     setPage(0);
   };
 
-  const handleChange = () => {
-    setChecked(pp => !pp);
-  };
+/*=========== Create Table HEAD ===========*/
+const rollcallsList = [ 'rc_starttime', 'tl_type_name', 'rc_inputsource']
 
-  const testFunc = (e, id) => {
-    console.log(e.target.value);
-    setTest(e.target.value)
-  }
+useEffect(() => {
+ async function fetchData() {
+     const result = await axios.get(`/teacher/rollcall/personalRecord/10811000DMG741D7411023900/406401599`);
+     
+     console.log(result.data);
+
+     setRollcalls(result.data);
+ }
+ fetchData();
+}, []);
+
 
   return (
-    <div className={classes.root}>  
-    
-      {/* <Paper className={classes.paper}> */}
-        
-        {/* <RollcallRDDp/> */}
-        {/* <EnhancedTableToolbar />
-        <Divider variant="fullWidth" component="li" /> */}
-      
-        <TableContainer>
-          
+    <div className={classes.root}>
+
+    <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
             size='small'
+            aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
+               order={order}
+               orderBy={orderBy}              
+               onRequestSort={handleRequestSort}
             />
+
+            {/*===== TableBody =====*/}
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(rollcalls, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  //const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
+                .map((rollcall, index) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code} key={labelId}>
-                      {/* 碰到的時候後面會反灰 */}
+                  <TableRow hover >
+                     {/* 碰到的時候後面會反灰 */}
+                  <TableCell>{index+1}</TableCell>
+                  {
+                  //const labelId = `enhanced-table-checkbox-${index}`;
 
-                      <TableCell padding="default" />
+                    rollcallsList.map( (list, i) =>   i === 0 ? 
+                    <TableCell key={i} component="th" scope="row" align="left">
+                    {rollcall[list]}
+                 </TableCell>:
+                 <TableCell key={i} align="left">{rollcall[list]}</TableCell> 
+                        )
+                  }    
 
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.time}</TableCell>
-                      <TableCell align="left">{row.attend}</TableCell>
-                      <TableCell align="left">{row.score}</TableCell>
-                      <TableCell align="left">{row.from}</TableCell>
-
-                    </TableRow>
-                  );
+                </TableRow>
+                );
                 })}
             </TableBody>
           </Table>
         </TableContainer>
+
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
-          count={rows.length}
+          count={rollcalls.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-      {/* </Paper> */}    
+
     </div>
   );
 }

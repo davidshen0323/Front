@@ -14,6 +14,10 @@ import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import RollcallRDT from './rollcallRDTtable';
 import TTable from '../rollcallrecordT/ttable';
 import Grid from '@material-ui/core/Grid';
+import {useState,useEffect} from 'react';
+import axios from 'axios';
+import {useLocation} from "react-router-dom";
+
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -29,14 +33,38 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const RCID = props =>{
+  const location=useLocation();
 
+useEffect(()=> {
+  console.log(location.pathname);
+  console.log(location.state.detail);
+},[location]);
+};
 
 
 export default function RDTB() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+ /*------------ STATE ------------*/
+ const [students, setStudent] = React.useState([]);
+ 
+ /*=========== Create Table HEAD ===========*/
+const studentList = [ 'record_time','rc_inputsource']
 
-  const handleClickOpen = () => {
+useEffect(() => {
+ async function fetchData() {
+     const result = await axios.get(`/teacher/rollcall/oneRollcall/1`);
+     console.log(result.data);
+     
+     setStudent(result.data);
+ }
+ fetchData();
+}, []);
+
+  const [rollcallrecord,setRollcallrecord] = useState(localStorage.getItem('rollcallrecord'));
+ 
+ const handleClickOpen = () => {
     setOpen(true);
   };
 
@@ -46,7 +74,13 @@ export default function RDTB() {
 
   return (
     <div>
-     <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+    <input value={rollcallrecord}/>
+    
+
+
+
+
+     <IconButton variant="outlined" color="primary" onClick={handleClickOpen} >
       <AssignmentOutlinedIcon />
       </IconButton>
 
@@ -54,7 +88,7 @@ export default function RDTB() {
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+            <IconButton edge="start" color="inherit" onClick={handleClose} >
               <CloseIcon />
             </IconButton>  
         
@@ -65,10 +99,9 @@ export default function RDTB() {
           alignItems="center"
         >
         
-        <Grid item xs={12} sm={8}>
-           
+            
         <ListItem alignItems="flex-start">
-           
+          
         <ListItemText
           primary="日期與時間"
           secondary={
@@ -76,22 +109,11 @@ export default function RDTB() {
                 component="span"
                 variant="body2"
                 className={classes.inline}>
-              	2019.11.05 11:05
+              	{/* {rollcallrecord.record_time} */}
           </Typography>
           }
-        />
 
-        <ListItemText
-          primary="計分設定"
-          secondary={
-          <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}>
-                計分
-          </Typography>
-          }
-        />         
+        />
            
         <ListItemText
           primary="來源"
@@ -100,7 +122,7 @@ export default function RDTB() {
                 component="span"
                 variant="body2"
                 className={classes.inline}>
-              人臉辨識
+              {/* {rollcallrecord.rc_inputsource} */}
           </Typography>
           }
         />
@@ -110,12 +132,12 @@ export default function RDTB() {
 
 
 
-        <Grid item sm={3}>
+        {/* <Grid item sm={3}>
             <ListItem>
               <TTable/>
             </ListItem>
-        </Grid>
-    </Grid>
+        </Grid> */}
+
     </Toolbar>
 
     </AppBar>

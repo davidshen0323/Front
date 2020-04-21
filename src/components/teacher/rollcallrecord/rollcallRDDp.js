@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
+import { useParams } from 'react-router-dom';
 import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
 import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
 
@@ -53,34 +53,13 @@ function LinkTab(props) {
 }
 
 
-
-/*--------------------------------------------*/
-const useStyles = makeStyles(theme => ({
-
-    root: {
-        width: '100%',
-    },
-    paper: {
-      width: '100%',
-      margin: 'auto',
-      marginBottom: theme.spacing(2),
-    },
-  proot: {
-    display: 'flex',
-    padding:20,
-    
-  },
-  button: {
-    margin: theme.spacing(2),
-},
-}));
-/*---------------------------------------*/
-
-
 export default function RollcallRDDp() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  
+  const params = useParams();
+  const csid = params.cs_id;
 
+  console.log(csid);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

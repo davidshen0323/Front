@@ -25,8 +25,6 @@ import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
 
 
-
-
 import selectHWs from'./components/student/Acceptance/SelectHW_S.js';
 import selectHWt from'./components/teacher/Acceptance/SelectHW_T.js';
 
@@ -44,53 +42,46 @@ import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
-import gps from './components/teacher/rollcall/GPS/Gps';
+import gps from './components/teacher/rollcall/GPS/GPS';
 
 
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
-            {/* <Route path="/" component={homepage1}/> */}
-            {/* <Route path="/question" component={QuestionList}/> */}
-            {/* <Route path="/acceptance" component={AcceptanceList}/> */}
-            
-            <Route path="/login" component={Login}/>
-            <Route path="/register" component={Register}/>
-            <Route path="/rollcall/:cs_id" component={Rollcall}/>
-            <Route path="/leavemanage" component={Leavemanage}/>
-            <Route path="/rollcallrecord" component={RollcallRecord}/> 
-            <Route path="/homepages" component={homepages}/>
-            <Route path="/functions/:cs_id" component={functions}/>
+        <Route exact path="/" component={Login}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/register" component={Register}/>
+        <Route path="/post" component={post}/>
+                
+        {/*------------------ Teacher-----------------*/}
+        <Route path="/homepaget" component={homepaget}/>
+        <Route path="/functiont/:cs_id" component={functiont}/>
+        <Route path="/RollcallBlockT/:cs_id" component={RollcallBlockT}/>
+        <Route path="/rollcall/:cs_id" component={Rollcall}/>
+        <Route path="/QRcode" component={QRcode}/> 
+        <Route path="/Hand" component={Hand}/> 
+        <Route path="/Gps" component={gps}/>
+        <Route path="/rollcallrecord/:rc_id" component={RollcallRecord}/>
+        <Route path="/leavemanage" component={Leavemanage}/>
+        <Route path="/membert" component={MemberT}/>
+        <Route path="/TInformation" component={TInformation}/>
+        <Route pah="/QAlist_T" component={QAlist_T}/>
+        <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
+        <Route path="/tacceptance" component={TAcceptanceList}/>
 
 
+        {/*------------------ Student-----------------*/}
+        <Route path="/homepages" component={homepages}/>           
+        <Route path="/functions/:cs_id" component={functions}/>
+        <Route path="/RollcallRD" component={RollcallRD}/>
+        <Route path="/LeaveBlockS" component={LeaveBlockS}/>
+        <Route path="/members" component={MemberS}/>
+        <Route path="/StuInformation" component={StuInformation}/>
+        <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
+        <Route path="/QAlist_S" component={QAlist_S}/>
+        <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
-            <Route path="/homepaget" component={homepaget}/>
-            <Route path="/functiont/:cs_id" component={functiont}/>
-            <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
-            <Route path="/tacceptance" component={TAcceptanceList}/>
-            <Route path="/StuInformation" component={StuInformation}/>
-            <Route path="/TInformation" component={TInformation}/>
-            <Route path="/QAlist_T" component={QAlist_T}/>
-            <Route path="/QAlist_S" component={QAlist_S}/>
-
-
-            <Route path="/post" component={post}/>
-            
-            <Route path="/membert" component={MemberT}/>
-            <Route path="/members" component={MemberS}/>
-
-            <Route path="/RollcallBlockT/:cs_id" component={RollcallBlockT}/>
-            <Route path="/QRcode" component={QRcode}/> 
-            <Route path="/Hand" component={Hand}/>
-
-            <Route path="/LeaveBlockS" component={LeaveBlockS}/>
-            <Route path="/RollcallRD" component={RollcallRD}/>
-            <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
-
-            <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
-            <Route path="/Gps" component={gps}/>
-
-            <Route exact path="/" component={Login}/>
+           
         </Switch>
     </BrowserRouter>
 , document.getElementById('root'));

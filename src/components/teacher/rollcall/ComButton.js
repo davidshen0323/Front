@@ -103,12 +103,6 @@ const useStyles = makeStyles(theme => ({
 export default function ComButton(props) {
   const classes = useStyles();
   
-  const [alignment, setAlignment] = React.useState('0');
-  
-  const handleAlignment = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
-
   return (
     // <Grid item xs sm>
       <div className={classes.root}>

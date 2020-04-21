@@ -59,28 +59,7 @@ function LinkTab(props) {
 
 
 
-/*--------------------------------------------*/
-const useStyles = makeStyles(theme => ({
-
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    
-  },
-  proot: {
-    display: 'flex',
-    padding:20,
-    
-  },
-  button: {
-    margin: theme.spacing(2),
-},
-}));
-/*---------------------------------------*/
-
-
 export default function RollcallBlockT() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const params = useParams();

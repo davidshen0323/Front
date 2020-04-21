@@ -11,27 +11,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-
-function createData(number, name,grade,pass,absence) {
-  return { number, name,grade,pass,absence };
-}
-
-
-const rows = [
-        createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
-        createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
-        createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
-        createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
-      ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -144,6 +125,10 @@ export default function RollcallRDT() {
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
 
+  const params = useParams();
+   console.log(params);
+  // const rcid = params.rc_id;
+  console.log(params.rc_id);
 
 
   const classes = useStyles();
@@ -201,11 +186,11 @@ useEffect(() => {
 
             {/*===== TableBody =====*/}
             <TableBody>
-              {/* {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
-                {students.map((student, index) => (
-                    
-                  <TableRow hover role="none">
+              {stableSort(students, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((student, index) => {
+                  return (
+                  <TableRow hover >
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
@@ -220,7 +205,8 @@ useEffect(() => {
                   }    
 
                 </TableRow>
-                ))}
+                );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
