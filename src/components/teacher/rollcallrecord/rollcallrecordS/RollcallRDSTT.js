@@ -1,21 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
-import RollcallRDS from './rollcallRDStable';
 import STable from '../rollcallrecordS/stable';
-import RollcallRDSTT from './RollcallRDSTT';
 import Grid from '@material-ui/core/Grid';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
@@ -42,7 +33,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 
-export default function RDSB() {
+export default function RollcallRDSTT() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [rollcallrecordtitle, setRollcallrecordtitle] = useState([]);
@@ -70,49 +61,61 @@ export default function RDSB() {
 
   return (
     <div>
-     <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
-      <AssignmentOutlinedIcon />
-      </IconButton>
+     <Grid container 
+            direction="row"
+            justify="center"
+            alignItems="flex-start"
+          >
+        <Grid item sm={8}>
+            
+              {/* <InputName inputName="點名名稱" />
+              <div className={classes.inputForm}> */}
 
+          <ListItem alignItems="flex-start">
+           
+         {/*  <ListItemText
+          primary="學號"
+          secondary= */}
+          {
+            rollcallrecordList.map( (list, i) => 
+          <Typography
+                key={i}
+                component="span"
+                variant="body2"
+                className={classes.inline}>
+              {rollcallrecordtitle[list]}
+              
+          </Typography>
+          
+            )
+          }{console.log(rollcallrecordList)}
+        {/* /> */}
 
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>  
+        <ListItemText
+          primary="姓名"
+          secondary={
+          <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}>
+              李李李
+          </Typography>
+          }
+        />
         
-      <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-        >
-        
-          <Grid item xs={12} sm={8}>
 
-         <ListItem>
-            <RollcallRDSTT/>
         </ListItem>
-          </Grid>
 
 
 
-          <Grid item sm={2}>
+          {/* <Grid item sm={2}>
           <ListItem>
               <STable/>
             </ListItem>
-          </Grid>
+          </Grid> </div>*/}
         </Grid>
-
-    </Toolbar>
-
-        </AppBar>
-
-        <List>
-          <RollcallRDS/>
-        </List>
-      </Dialog>
+ 
+      </Grid>
     </div>
   );
 }

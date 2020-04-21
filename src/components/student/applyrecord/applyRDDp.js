@@ -54,31 +54,7 @@ function LinkTab(props) {
 
 
 
-/*--------------------------------------------*/
-const useStyles = makeStyles(theme => ({
-
-    root: {
-        width: '100%',
-    },
-    paper: {
-      width: '100%',
-      margin: 'auto',
-      marginBottom: theme.spacing(2),
-    },
-  proot: {
-    display: 'flex',
-    padding:20,
-    
-  },
-  button: {
-    margin: theme.spacing(2),
-},
-}));
-/*---------------------------------------*/
-
-
 export default function ApplyRDDp() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
 

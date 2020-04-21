@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,12 +9,20 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import RDTB from './RdtButton'
 import {useState,useEffect} from 'react';
 import axios from 'axios';
-import RDT from './RDT';
-import { useParams } from 'react-router-dom';
-import {useHistory} from "react-router-dom";
+import Dialog from '@material-ui/core/Dialog';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
+
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -44,13 +52,11 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', label: '日期與時間', numeric: false, disablePadding: true },
-  { id: 'attend', label: '出席人數', numeric: false, disablePadding: true },
-  { id: 'pass', label: '請假人數', numeric: false, disablePadding: true },
-  { id: 'absence', label: '缺席人數', numeric: false, disablePadding: true},
-  { id: 'from', label: '來源', numeric: false, disablePadding: true},
-  { id: 'detail',label: '詳細資料', numeric: false, disablePadding: true},
-];
+    { id: 'number', numeric: true, disablePadding: false, label: '學號' },
+    { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
+    { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
+    { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
+  ];
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
@@ -62,13 +68,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
 
-
         <TableCell padding="none" />
-
+          
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric = 'left'}
+            align={headCell.numeric ='left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -106,9 +111,10 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100%',
+    marginBottom: theme.spacing(2),
   },
   table: {
-    width: '100%',
+    minWidth: 750,
   },
   visuallyHidden: {
     border: 0,
@@ -121,142 +127,143 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
+  appBar: {
+    position: 'relative',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
 }));
 /*---------------------------------------------*/
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
-export default function RollcallrecordTable() {
+
+
+export default function RDT() {
 
   /*------------ STATE ------------*/
-  const [rollcallrecord, setRollcallrecord] = React.useState([]);
-  const params = useParams();
- 
+  const [students, setMembers] = React.useState([]);
+
+
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  
-  //const [test, setTest] = React.useState('test');
-  
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  
+
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
- const [rcid,setRcid]=useState([]);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-  const handleSubmit=(event) => {
-    // const rcidd ={
-    //   rcid:rollcallrecord.rc_id,
-    // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    localStorage.setItem('rollcallrecord','{rollcallrecord.rc_id}');
-  }
-  
+/*=========== Create Table HEAD ===========*/
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
+useEffect(() => {
+ async function fetchData() {
+     const result = await axios.get(`/teacher/rollcall/oneRollcall/1`);
+     
+     console.log(result.data);
+     setMembers(result.data);
+ }
+ fetchData();
+}, []);
 
-
-
-  /*=========== Create Table HEAD ===========*/
-  const rollcallrecordList = [ 'rc_starttime', 'present', 'absent', 'otherwise',  'rc_inputsource','rc_id']
-  
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get(`/teacher/rollcall/allRollcall/${params.cs_id}`);
-      
-      console.log(result.data);
-      
-      setRollcallrecord(result.data);
-    }
-    fetchData();
-  }, []);
-  
-  let history = useHistory(); //傳值跳頁的方法
-
-
-  // console.log(rollcallrecord.rc_id);
-  
-  // const testFunc = (e, id) => {
-  //   console.log(e.target.value);
-  //   setTest(e.target.value)
-  // }
 
   return (
-    <div className={classes.root}>  
-        
-        <TableContainer>
-          
+    <div className={classes.root}>
+        <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+      <AssignmentOutlinedIcon />
+      </IconButton>
+
+
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} >
+              <CloseIcon />
+            </IconButton>  
+            
+            </Toolbar>
+            </AppBar>
+
+            <List>
+
+    <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
             size='small'
+            aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
+               order={order}
+               orderBy={orderBy}              
+               onRequestSort={handleRequestSort}
             />
 
-              {/*===== TableBody =====*/}
+            {/*===== TableBody =====*/}
             <TableBody>
-              {stableSort(rollcallrecord, getComparator(order, orderBy))
+              {stableSort(students, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((rollcallrecord, index) => {
+                .map((student, index) => {
                   return (
-                    <TableRow hover >
-                      {/* 碰到的時候後面會反灰 */}
-                      <TableCell>{index+1}</TableCell>
+                  <TableRow hover >
+                     {/* 碰到的時候後面會反灰 */}
+                  <TableCell>{index+1}</TableCell>
                   {
-                    rollcallrecordList.map( (list, i) =>   i < 5 ? 
-                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
-                    {rollcallrecord[list]}
+                  //const labelId = `enhanced-table-checkbox-${index}`;
+
+                    studentList.map( (list, i) =>   i === 0 ? 
+                    <TableCell key={i} component="th" scope="row" align="left">
+                    {student[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left" onClick={handleSubmit}><RDTB/></TableCell> 
+                 <TableCell key={i} align="left">{student[list]}</TableCell> 
                         )
-                  }   
+                  }    
 
-
-
-                      {/* <TableCell padding="default" />
-
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.time}</TableCell>
-                      <TableCell align="left">{row.attend}</TableCell>
-                      <TableCell align="left">{row.pass}</TableCell>
-                      <TableCell align="left">{row.absence}</TableCell>
-                      <TableCell align="left">{row.score}</TableCell>
-                      <TableCell align="left">{row.from}</TableCell> */}
-                      {/* <TableCell align="left" >
-                        
-                        <RDTB/>
-                      </TableCell> */}
-
-                    </TableRow>
-                  );
+                </TableRow>
+                );
                 })}
             </TableBody>
           </Table>
         </TableContainer>
+
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
-          count={rollcallrecord.length}
+          count={students.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+    </List>
+    
+    </Dialog>
     </div>
   );
 }

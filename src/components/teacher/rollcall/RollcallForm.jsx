@@ -1,34 +1,11 @@
 import React from "react";
-import { InputName } from "./InputName";
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Buttons from './Buttons';
-
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FormControl from '@material-ui/core/FormControl';
-import clsx from 'clsx';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
-import {Save,Delete} from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import ComButton from "./ComButton";
 import QRcode from "./QRcode/QRcode";
 import Hand from "./Hand/Hand";
 // import GPS from "./GPS/Gps";
-
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-  } from '@material-ui/pickers';
 import { useParams } from "react-router-dom";
 
 /*------------ STYLE ------------*/

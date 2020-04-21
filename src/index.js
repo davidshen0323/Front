@@ -23,8 +23,10 @@ import QAlist_S from './components/student/Question/QAlist_S';
 
 import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
+
 import ViewAnnouncements from './components/student/announcement/viewAnnouncements';
 import ViewAnnouncementt from './components/teacher/announcement/viewAnnouncementt';
+
 
 import selectHWs from'./components/student/Acceptance/SelectHW_S.js';
 import selectHWt from'./components/teacher/Acceptance/SelectHW_T.js';
@@ -49,6 +51,7 @@ import gps from './components/teacher/rollcall/GPS/GPS';
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
+
             {/* <Route path="/" component={homepage1}/> */}
             {/* <Route path="/question" component={QuestionList}/> */}
             {/* <Route path="/acceptance" component={AcceptanceList}/> */}
@@ -92,6 +95,7 @@ ReactDOM.render(
             <Route path="/Gps" component={gps}/>
 
             <Route exact path="/" component={Login}/>
+
         </Switch>
     </BrowserRouter>
 , document.getElementById('root'));
