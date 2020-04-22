@@ -11,31 +11,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-
-
-// function createData(time, attend, score, from) {
-//   return { time, attend, score, from };
-// }
-
-
-// const rows = [
-//   createData('2019.11.05 11:05','出席', '人臉點名'),
-//   createData('2019.11.05 11:05','出席', '人臉點名'),
-//   createData('2019.11.05 11:05','出席', '人臉點名'),
-//   createData('2019.11.05 11:05','出席', '人臉點名'),
-//   createData('2019.11.12 11:12','缺席', 'QR code點名'),
-//   createData('2019.11.19 11:19','缺席', '藍牙點名'),
-//   createData('2019.11.26 11:26', '缺席','手動點名'),
-//   createData('2019.12.03 12:03','出席', '人臉點名'),
-//   createData('2019.12.10 12:10','出席', '手動點名'),
-//   createData('2019.12.17 12:17','出席', '人臉點名'),
-//   createData('2019.12 24 12:24', '缺席','QR code點名'),
-//   createData('2020.01.01 01:00', '缺席', '藍牙點名'),
-//   createData('2020.01.08 01:08', '出席', '人臉點名'),
-//   createData('2020.01.15 01:15', '缺席', '藍牙點名'),
-//   createData('2020.01.22 01:22','出席', '手動點名'),
-// ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -122,9 +99,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
-  paper: {
-    width: '100%',
-  },
   table: {
     minWidth: 750,
   },
@@ -139,20 +113,15 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
-  container: {
-    display: 'flex',
-  },
-  
 }));
 /*---------------------------------------------*/
 
 
-export default function RollcallRDS() {
+export default function RollcallRDS(props) {
 
   /*------------ STATE ------------*/
   const [rollcalls, setRollcalls] = useState([]);
-
-
+  const params = useParams();
 
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
@@ -180,7 +149,7 @@ const rollcallsList = [ 'rc_starttime', 'tl_type_name', 'rc_inputsource']
 
 useEffect(() => {
  async function fetchData() {
-     const result = await axios.get(`/teacher/rollcall/personalRecord/10811000DMG741D7411023900/406401599`);
+     const result = await axios.get(`/teacher/rollcall/personalRecord/${params.cs_id}/`+props.stdid);
      
      console.log(result.data);
 
