@@ -16,7 +16,6 @@ import TTable from '../rollcallrecordT/ttable';
 import Grid from '@material-ui/core/Grid';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
-import {useLocation} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,36 +32,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const RCID = props =>{
-  const location=useLocation();
+// const RCID = props =>{
+//   const location=useLocation();
 
-useEffect(()=> {
-  console.log(location.pathname);
-  console.log(location.state.detail);
-},[location]);
-};
+// useEffect(()=> {
+//   console.log(location.pathname);
+//   console.log(location.state.detail);
+// },[location]);
+// };
 
 
-export default function RDTB() {
+export default function RDTB(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
- /*------------ STATE ------------*/
- const [students, setStudent] = React.useState([]);
- 
- /*=========== Create Table HEAD ===========*/
-const studentList = [ 'record_time','rc_inputsource']
 
-useEffect(() => {
- async function fetchData() {
-     const result = await axios.get(`/teacher/rollcall/oneRollcall/1`);
-     console.log(result.data);
-     
-     setStudent(result.data);
- }
- fetchData();
-}, []);
-
-  const [rollcallrecord,setRollcallrecord] = useState(localStorage.getItem('rollcallrecord'));
  
  const handleClickOpen = () => {
     setOpen(true);
@@ -74,23 +57,15 @@ useEffect(() => {
 
   return (
     <div>
-    <input value={rollcallrecord}/>
-    
-
-
-
-
-     <IconButton variant="outlined" color="primary" onClick={handleClickOpen} >
+    <IconButton variant="outlined" color="primary" onClick={handleClickOpen} >
       <AssignmentOutlinedIcon />
-      </IconButton>
+    </IconButton>
 
 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} >
-              <CloseIcon />
-            </IconButton>  
+            
         
       <Grid
           container
@@ -98,8 +73,14 @@ useEffect(() => {
           justify="flex-start"
           alignItems="center"
         >
+
+      <Grid item={1}>
+        <IconButton edge="start" color="inherit" onClick={handleClose} >
+              <CloseIcon />
+            </IconButton>  
+      </Grid>  
         
-            
+        <Grid item xs={8}>
         <ListItem alignItems="flex-start">
           
         <ListItemText
@@ -109,7 +90,7 @@ useEffect(() => {
                 component="span"
                 variant="body2"
                 className={classes.inline}>
-              	{/* {rollcallrecord.record_time} */}
+                {props.time}
           </Typography>
           }
 
@@ -122,27 +103,65 @@ useEffect(() => {
                 component="span"
                 variant="body2"
                 className={classes.inline}>
-              {/* {rollcallrecord.rc_inputsource} */}
+                  {props.resource}
           </Typography>
           }
         />
+
         </ListItem>
 
         </Grid>
 
 
 
-        {/* <Grid item sm={3}>
+        <Grid item xs={3} >
+        {/* present={props.present} absent={props.absent} otherwise={props.otherwise} */}
+        
             <ListItem>
-              <TTable/>
-            </ListItem>
-        </Grid> */}
+              <ListItemText
+                  primary="出席"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.present}
+                  </Typography>
+                  }
+                />
 
+              <ListItemText
+                  primary="請假"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.absent}
+                  </Typography>
+                  }
+                />
+
+              <ListItemText
+                  primary="缺席"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.otherwise}
+                  </Typography>
+                  }
+                />
+
+        </ListItem>
+        </Grid>
+</Grid>
     </Toolbar>
 
     </AppBar>
         <List>
-          <RollcallRDT/>
+          <RollcallRDT id={props.id}/>
         </List>
     </Dialog>
     </div>

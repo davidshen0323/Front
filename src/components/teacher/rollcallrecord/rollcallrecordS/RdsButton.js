@@ -1,11 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -28,10 +26,6 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     flex: 1,
   },
-  inputForm: {
-    paddingLeft: 65,
-    paddingTop: 10,
-  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -42,10 +36,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 
-export default function RDSB() {
+export default function RDSB(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [rollcallrecordtitle, setRollcallrecordtitle] = useState([]);
+
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -53,20 +48,7 @@ export default function RDSB() {
   const handleClose = () => {
     setOpen(false);
   };
-
-   /*=========== Create Table HEAD ===========*/
- const rollcallrecordList = [ 'std_id', 'std_name', 'std_department']
  
- useEffect(() => {
-  async function fetchData() {
-      const result = await axios.get(`/teacher/rollcall/studentList/10811000DMG741D7411023900`);
-      
-      console.log(result.data);
- 
-      setRollcallrecordtitle(result.data);
-  }
-  fetchData();
- }, []);
 
   return (
     <div>
@@ -78,9 +60,7 @@ export default function RDSB() {
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>  
+             
         
       <Grid
           container
@@ -88,29 +68,107 @@ export default function RDSB() {
           justify="flex-start"
           alignItems="center"
         >
-        
-          <Grid item xs={12} sm={8}>
+        <Grid item={1}>
+        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton> 
+        </Grid>
 
-         <ListItem>
-            <RollcallRDSTT/>
+          <Grid item  sm={8}>
+         <ListItem alignItems="flex-start">
+
+         <ListItemText
+          primary="學號"
+          secondary={
+          <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}>
+                {props.stdid}
+          </Typography>
+          }
+
+        />
+
+<ListItemText
+          primary="姓名"
+          secondary={
+          <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}>
+                {props.name}
+          </Typography>
+          }
+
+        />
+
+<ListItemText
+          primary="系級"
+          secondary={
+          <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}>
+                {props.department}
+          </Typography>
+          }
+
+        />
+
         </ListItem>
           </Grid>
 
 
+          <Grid item xs={3} >
+        {/* present={props.present} absent={props.absent} otherwise={props.otherwise} */}
+        
+            <ListItem>
+              <ListItemText
+                  primary="出席"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.present}
+                  </Typography>
+                  }
+                />
 
-          <Grid item sm={2}>
-          <ListItem>
-              <STable/>
-            </ListItem>
-          </Grid>
+              <ListItemText
+                  primary="請假"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.absent}
+                  </Typography>
+                  }
+                />
+
+              <ListItemText
+                  primary="缺席"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.otherwise}
+                  </Typography>
+                  }
+                />
+
+        </ListItem>
         </Grid>
-
+</Grid>
     </Toolbar>
 
         </AppBar>
 
         <List>
-          <RollcallRDS/>
+          <RollcallRDS stdid={props.stdid}/>
         </List>
       </Dialog>
     </div>

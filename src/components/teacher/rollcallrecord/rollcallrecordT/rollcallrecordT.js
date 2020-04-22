@@ -9,12 +9,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import RDTB from './RdtButton'
+import RDTB from './RdtButton';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
-import RDT from './RDT';
 import { useParams } from 'react-router-dom';
-import {useHistory} from "react-router-dom";
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -104,9 +102,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
-  paper: {
-    width: '100%',
-  },
   table: {
     width: '100%',
   },
@@ -154,19 +149,6 @@ export default function RollcallrecordTable() {
     setPage(0);
   };
 
- const [rcid,setRcid]=useState([]);
-
-  const handleSubmit=(event) => {
-    // const rcidd ={
-    //   rcid:rollcallrecord.rc_id,
-    // };
-
-    localStorage.setItem('rollcallrecord','{rollcallrecord.rc_id}');
-  }
-  
-
-
-
   /*=========== Create Table HEAD ===========*/
   const rollcallrecordList = [ 'rc_starttime', 'present', 'absent', 'otherwise',  'rc_inputsource','rc_id']
   
@@ -181,10 +163,7 @@ export default function RollcallrecordTable() {
     fetchData();
   }, []);
   
-  let history = useHistory(); //傳值跳頁的方法
 
-
-  // console.log(rollcallrecord.rc_id);
   
   // const testFunc = (e, id) => {
   //   console.log(e.target.value);
@@ -222,27 +201,19 @@ export default function RollcallrecordTable() {
                     <TableCell key={i} component="th" scope="row" align="left" padding="none" >
                     {rollcallrecord[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left" onClick={handleSubmit}><RDTB/></TableCell> 
+                 <TableCell key={i} align="left" >
+                   <RDTB 
+                   id={rollcallrecord['rc_id']} 
+                   time={rollcallrecord ['rc_starttime']}
+                   resource={rollcallrecord['rc_inputsource']}
+                   present={rollcallrecord['present']}
+                   absent={rollcallrecord['absent']}
+                   otherwise={rollcallrecord['otherwise']}
+                   />
+                 </TableCell> 
                         )
                   }   
-
-
-
-                      {/* <TableCell padding="default" />
-
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.time}</TableCell>
-                      <TableCell align="left">{row.attend}</TableCell>
-                      <TableCell align="left">{row.pass}</TableCell>
-                      <TableCell align="left">{row.absence}</TableCell>
-                      <TableCell align="left">{row.score}</TableCell>
-                      <TableCell align="left">{row.from}</TableCell> */}
-                      {/* <TableCell align="left" >
-                        
-                        <RDTB/>
-                      </TableCell> */}
-
-                    </TableRow>
+                   </TableRow>
                   );
                 })}
             </TableBody>

@@ -120,7 +120,7 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------------*/
 
 
-export default function RollcallRDT() {
+export default function RollcallRDT(props) {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
@@ -157,7 +157,7 @@ const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
 
 useEffect(() => {
  async function fetchData() {
-     const result = await axios.get(`/teacher/rollcall/oneRollcall/1`);
+     const result = await axios.get(`/teacher/rollcall/oneRollcall/`+props.id);
      
      console.log(result.data);
 

@@ -103,9 +103,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
-  paper: {
-    width: '100%',
-  },
   table: {
     minWidth: '100%',
   },
@@ -127,7 +124,6 @@ const useStyles = makeStyles(theme => ({
 export default function RollcallrecordSTable() {
    /*------------ STATE ------------*/
    const [rollcallrecord, setRollcallrecord] = useState([]);
-
    const params = useParams();
    // console.log(params);
    // const csid = params.cs_id;
@@ -140,7 +136,7 @@ export default function RollcallrecordSTable() {
    const [page, setPage] = React.useState(0);
    const [rowsPerPage, setRowsPerPage] = React.useState(10);
  
-   const [test, setTest] = React.useState('test');
+   //const [test, setTest] = React.useState('test');
  
    const handleRequestSort = (event, property) => {
      const isAsc = orderBy === property && order === 'asc';
@@ -158,7 +154,7 @@ export default function RollcallrecordSTable() {
    };
  
  /*=========== Create Table HEAD ===========*/
- const rollcallrecordList = [ 'std_id', 'std_name', 'std_department', 'present', 'absent', 'otherwise']
+ const rollcallrecordList = [ 'std_id', 'std_name', 'std_department', 'present', 'absent', 'otherwise','std_id']
  
  useEffect(() => {
   async function fetchData() {
@@ -203,48 +199,27 @@ export default function RollcallrecordSTable() {
                      <TableRow hover >
                        {/* 碰到的時候後面會反灰 */}
                        <TableCell>{index+1}</TableCell>
-                   {
-                     rollcallrecordList.map( (list, i) =>   i === 0 ? 
-                     <TableCell key={i} component="th" scope="row" align="left" padding="none" >
-                     {rollcallrecord[list]}
-                  </TableCell>:
-                  <TableCell key={i} align="left">{rollcallrecord[list]}</TableCell> 
-                         )
-                   }   
- 
- 
- 
-                       {/* <TableCell padding="default" />
- 
-                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                         {row.time}</TableCell>
-                       <TableCell align="left">{row.attend}</TableCell>
-                       <TableCell align="left">{row.pass}</TableCell>
-                       <TableCell align="left">{row.absence}</TableCell>
-                       <TableCell align="left">{row.score}</TableCell>
-                       <TableCell align="left">{row.from}</TableCell> */}
-                       <TableCell align="left">
-                         {/* <FormControlLabel
-                           control={<Switch checked={checked} onChange={handleChange} />}
-                         /> */}
-                       
-                         {/* <IconButton onClick={e => handleChange(e, labelId) }>
-                           <AssignmentOutlinedIcon />
-                         </IconButton> */}
- 
-                         {/* <input type="text" value={test} onChange={e => testFunc(e, labelId)}/> */}
-                         <RDSB/>
-                       </TableCell>
- 
-                     </TableRow>
-                   );
-                 })}
-               {/* {emptyRows > 0 && (
-                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                   <TableCell colSpan={6} />
-                 </TableRow>
-               )} */}
-             </TableBody>
+                  {
+                    rollcallrecordList.map( (list, i) =>   i < 6 ? 
+                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    {rollcallrecord[list]}
+                 </TableCell>:
+                 <TableCell key={i} align="left" >
+                   <RDSB 
+                   stdid={rollcallrecord['std_id']} 
+                   name={rollcallrecord ['std_name']}
+                   department={rollcallrecord['std_department']}
+                   present={rollcallrecord['present']}
+                   absent={rollcallrecord['absent']}
+                   otherwise={rollcallrecord['otherwise']}
+                   />
+                 </TableCell> 
+                        )
+                  }   
+                   </TableRow>
+                  );
+                })}
+                </TableBody>
            </Table>
          </TableContainer>
          <TablePagination
