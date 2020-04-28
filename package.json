@@ -17,6 +17,7 @@
         "baseui": "^9.64.1",
         "cors": "^2.8.5",
         "date-fns": "^2.11.0",
+        "i": "^0.3.6",
         "material-table": "^1.57.2",
         "material-ui-image": "^3.2.3",
         "qrcode.react": "^1.0.0",
@@ -35,6 +36,7 @@
         "smart-webcomponents-community": "^7.4.0",
         "styletron-engine-atomic": "^1.4.6",
         "styletron-react": "^5.2.7",
+        "use-position": "0.0.7",
         "uuid": "^7.0.3"
     },
     "scripts": {

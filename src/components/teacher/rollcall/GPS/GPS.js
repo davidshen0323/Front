@@ -170,13 +170,13 @@
     
 // }
 
-import React from "react";
-import GeoFindMe from "./FindGeo";
+// import React from "react";
+// import GeoFindMe from "./FindGeo";
 
-export default function Gps()  {
+// export default function Gps()  {
 
-  return (
-    <GeoFindMe/>
-  );
-};
+//   return (
+//     <GeoFindMe />
+//   );
+// };
 

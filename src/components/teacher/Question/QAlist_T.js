@@ -5,6 +5,8 @@ import MyMenu from '../../Menu';
 import QAReply from './QAReply';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import QaReply from './QAReply';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,8 +62,9 @@ export default function QAlist_T() {
 
   const [question, setQuestion] = React.useState([]);
   
-  const questionlist = ['q_std_id','q_content','q_asktime'];
-  const solved_qlist = ['q_std_id','q_content','q_asktime','q_reply'];
+  const questionlist = ['q_std_id','q_content','q_asktime', 'q_sovled'];
+  const solved_qlist = ['q_std_id','q_content','q_replytime','q_reply'];
+
 
   useEffect(() => {
     async function fetchData() {
@@ -102,27 +105,33 @@ export default function QAlist_T() {
       <Table>
             <TableHead>
                 <TableRow>
-                    <TableCell>排序</TableCell>
-                    <TableCell>學號</TableCell>
-                    <TableCell>問題內容</TableCell>
-                    <TableCell>最後更新時間</TableCell>
-                    <TableCell>回覆</TableCell>
+                    {/* <TableCell>排序</TableCell> */}
+                    <TableCell component="th" scope="row" align="center">學號</TableCell>
+                    <TableCell component="th" scope="row" align="center">問題內容</TableCell>
+                    <TableCell component="th" scope="row" align="center">最後更新時間</TableCell>
+                    <TableCell component="th" scope="row" align="center">回覆</TableCell>
                 </TableRow>
             </TableHead>
             
             <TableBody>
-            {question.map((Ques,index) => Ques[ "q_solved"] === "0" ?
+            {question.map((Ques,index) => Ques["q_solved"] === "0" ?
             (
                 <TableRow key={index}>
-                 <TableCell>{index+1}</TableCell>
+                 {/* <TableCell>{index+1}</TableCell> */}
                   {
-                    questionlist.map( (list, i) => 
+                    questionlist.map( (list, i) => i < 3 ?
                     
                     <TableCell key={i} component="th" scope="row" align="center">
                       {Ques[list]}
-                      <Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >
-                        回覆
-                      </Button>
+                     </TableCell>
+                     :
+                     <TableCell key={i}>
+                      <QaReply
+                      id={Ques['q_id']}
+                      stdid={Ques['q_std_id']}
+                      time={Ques['q_asktime']}
+                      content={Ques['q_content']}
+                      />
                      </TableCell>
                       )
                     }
@@ -148,25 +157,27 @@ export default function QAlist_T() {
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
-      <QAReply open={openQAReply} handleClose={onCloseQAReply}/>
+      {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
 
       <TabPanel value={value} index={1}>
       <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
       <Table>
             <TableHead>
                 <TableRow>
-                    <TableCell>排序</TableCell>
-                    <TableCell>學號</TableCell>
-                    <TableCell>問題內容</TableCell>
-                    <TableCell>最後更新時間</TableCell>
-                    <TableCell>回覆內容</TableCell>
+                    {/* <TableCell>排序</TableCell> */}
+                    <TableCell component="th" scope="row" align="center">學號</TableCell>
+                    <TableCell component="th" scope="row" align="center">問題內容</TableCell>
+                    <TableCell component="th" scope="row" align="center">最後更新時間</TableCell>
+                    <TableCell component="th" scope="row" align="center">回覆內容</TableCell>
                 </TableRow>
             </TableHead>
             
             <TableBody>
-            {question.map((Ques,k) =>  Ques[ "q_solved"] === "1" ? (
+            {
+            
+            question.map((Ques,k) =>  Ques[ "q_solved"] === "1" ? (
                 <TableRow key={k}>
-                 <TableCell>{k+1}</TableCell>
+                 
                   {
                     solved_qlist.map( (list, i) => 
                     
@@ -179,16 +190,8 @@ export default function QAlist_T() {
                 </TableRow>
               ):
               <div></div>
-              )}
-                
-                {/* <TableRow>
-                    <TableCell>2</TableCell>
-                    <TableCell>406401629</TableCell>
-                    <TableCell>我不會寫作業</TableCell>
-                    <TableCell>2020-04-03 11:30</TableCell>
-                    <TableCell>誰叫你不認真上課</TableCell>
-                </TableRow> */}
-                
+              ).reverse()}
+               
             </TableBody>
           </Table>
       </Box>
