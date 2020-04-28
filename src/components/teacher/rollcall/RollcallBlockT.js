@@ -73,13 +73,11 @@ export default function RollcallBlockT() {
   return (
     <div >
         <MyMenu/>
-          
             <AppBar position="static" color="inherit">
                 <Tabs
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
-                aria-label="nav tabs example"
                 >
                 <LinkTab label="點名" href={`/rollcall/${csid}`} {...a11yProps(0)} />
                 <LinkTab label="點名紀錄" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} />
@@ -97,14 +95,6 @@ export default function RollcallBlockT() {
       <TabPanel value={value} index={1}>
         <RollcallRecord/>
       </TabPanel>
-
-      {/* <TabPanel value={value} index={2}>
-        <Leavemanage/>
-      </TabPanel>
-
-      <TabPanel value={value} index={3}>
-        <Member/>
-      </TabPanel> */}
     </div>
   );
 }

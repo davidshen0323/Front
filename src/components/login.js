@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme =>({
             marginLeft: 10,
             marginTop: 10,
             marginBottom: 10,
-            width:'120px',
+            width:'100px',
             fontFamily: 'Microsoft JhengHei',
             color: "white",
             backgroundColor: "#003060",
@@ -57,9 +57,10 @@ const useStyles = makeStyles(theme =>({
           },
 
         root:{
-            width: '70%',
+            width: '80%',
+            height:'50vh',
             marginTop: theme.spacing(12),
-            // marginBottom: theme.spacing(12),
+            marginBottom: theme.spacing(12),
             //marginLeft: theme.spacing(25),
             overflow: 'auto',
             textAlign: 'center',
@@ -69,8 +70,6 @@ const useStyles = makeStyles(theme =>({
         },
 
         div: {
-            // backgroundColor:'#E0E0E0',
-            
             height: '100vh',
         },
 
@@ -182,11 +181,9 @@ export default function Login(){
         <WingBlank>
 
         <form action="/login" method="POST"> 
-        <List>
-             
+
+        <List>     
         <FormControl className={clsx(classes.margin)}>
-            {/* <InputLabel htmlFor="outlined-adornment-account">帳號</InputLabel> */}
-          
           <TextField 
             id="username"
             label="學號"
@@ -196,21 +193,12 @@ export default function Login(){
             size="small"
             variant="outlined"
             />
-          
-{/*           
-          <Button
-          // onClick={handleSubmit}
-          type="submit"
-          variant="contained">Submit</Button>
-        */}
+         
         </FormControl>
-
         </List>
 
-        <List>
-                        
-        <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
-            {/* <InputLabel htmlFor="outlined-adornment-password">密碼</InputLabel> */}
+        <List>          
+        <FormControl className={clsx(classes.margin)} >
             <TextField 
                 id="password"
                 label="密碼"
@@ -221,14 +209,12 @@ export default function Login(){
                 size="small"
                 variant="outlined"
             />
-          
-                    </FormControl>
-      
-
-                    </List>
+        </FormControl>
+        </List>
                     
                     
-                    <WhiteSpace/>
+                    {/* <WhiteSpace/> */}
+        <List>
                     <Button 
                     type="submit"
                     variant="contained" 
@@ -237,8 +223,6 @@ export default function Login(){
                     登入
                     </Button>
                     
-                    </form> 
-                    </WingBlank>
 
                     <Button
                     variant="contained"
@@ -248,7 +232,12 @@ export default function Login(){
                     >
                     註冊
                     </Button>
-
+    </List>
+    <List>
+      
+    </List>
+    </form> 
+    </WingBlank>
                 </Paper>
                 </Grid>
             </div>

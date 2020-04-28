@@ -8,7 +8,6 @@ import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 import ComButton from "../../../ComButton";
 import Grid from '@material-ui/core/Grid';
-// import QRcodeMade from './QRcodeMade';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
@@ -100,7 +99,7 @@ export default function Qrcode() {
   return (
     <div>
       <Button onClick={handleClickOpen} >
-       <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" />
+       <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/1827/1827680.svg" />
       </Button>
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
