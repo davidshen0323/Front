@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MyMenu from '../../Menu';
-import MemberTable from './membertable';
 import MMTable from './MMtable';
 import Paper from '@material-ui/core/Paper';
 

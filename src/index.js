@@ -24,7 +24,8 @@ import QAlist_S from './components/student/Question/QAlist_S';
 import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
 
-
+import ViewAnnouncements from './components/student/announcement/viewAnnouncements';
+import ViewAnnouncementt from './components/teacher/announcement/viewAnnouncementt';
 
 
 import selectHWs from'./components/student/Acceptance/SelectHW_S.js';
@@ -36,19 +37,23 @@ import * as serviceWorker from './serviceWorker';
 
 import post from './components/Post';
 
-import Member from './components/teacher/member/member';
+import MemberT from './components/teacher/member/member';
+import MemberS from './components/student/member/member';
 
 import RollcallBlockT from './components/teacher/rollcall/RollcallBlockT';
 import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
+
 import gps from './components/teacher/rollcall/GPS/Gps';
 import findgeo from './components/teacher/rollcall/GPS/FindGeo';
+
 
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
+
             {/* <Route path="/" component={homepage1}/> */}
             {/* <Route path="/question" component={QuestionList}/> */}
             {/* <Route path="/acceptance" component={AcceptanceList}/> */}
@@ -60,9 +65,14 @@ ReactDOM.render(
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepages" component={homepages}/>
             <Route path="/functions/:cs_id" component={functions}/>
+
+
+
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
+            <Route path="/ViewAnnouncements/:cs_id" component={ViewAnnouncements}/>
+            <Route path="/ViewAnnouncementt/:cs_id" component={ViewAnnouncementt}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
             <Route path="/StuInformation" component={StuInformation}/>
             <Route path="/TInformation" component={TInformation}/>
@@ -72,7 +82,8 @@ ReactDOM.render(
 
             <Route path="/post" component={post}/>
             
-            <Route path="/member" component={Member}/>
+            <Route path="/membert" component={MemberT}/>
+            <Route path="/members" component={MemberS}/>
 
             <Route path="/RollcallBlockT/:cs_id" component={RollcallBlockT}/>
             <Route path="/QRcode" component={QRcode}/> 
@@ -87,6 +98,7 @@ ReactDOM.render(
             <Route path="/FindGeo" component={findgeo}/>
 
             <Route exact path="/" component={Login}/>
+
         </Switch>
     </BrowserRouter>
 , document.getElementById('root'));

@@ -7,7 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ING from './ING/ING';
-import CheckBlock from './Check/CheckBlock';
+import Fail from './Check/Fail';
+import Pass from './Check/Pass';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,31 +54,7 @@ function LinkTab(props) {
 
 
 
-/*--------------------------------------------*/
-const useStyles = makeStyles(theme => ({
-
-    root: {
-        width: '100%',
-    },
-    paper: {
-      width: '100%',
-      margin: 'auto',
-      marginBottom: theme.spacing(2),
-    },
-  proot: {
-    display: 'flex',
-    padding:20,
-    
-  },
-  button: {
-    margin: theme.spacing(2),
-},
-}));
-/*---------------------------------------*/
-
-
 export default function ApplyRDDp() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
 
@@ -94,7 +71,8 @@ export default function ApplyRDDp() {
                 variant="fullWidth"
                 >
                 <LinkTab label="審核中" href="/ING" {...a11yProps(0)} />
-                <LinkTab label="已審核" href="/CheckBlock" {...a11yProps(1)} />
+                <LinkTab label="未通過" href="/CheckBlock" {...a11yProps(1)} />
+                <LinkTab label="已通過" href="/CheckBlock" {...a11yProps(2)} />
             
                 </Tabs>
             </AppBar>
@@ -105,7 +83,11 @@ export default function ApplyRDDp() {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-       <CheckBlock/>
+       <Fail/>
+      </TabPanel>
+
+      <TabPanel value={value} index={2}>
+       <Pass/>
       </TabPanel>
       </div>
   );

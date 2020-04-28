@@ -9,31 +9,20 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import Dialog from '@material-ui/core/Dialog';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 
-
-// function createData(number,name,grade,group,detail) {
-//     return { number,name,grade,group,detail};
-//   }
-  
-//   const rows = [
-//     createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
-//     createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
-//     createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
-//     createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
-//   ];
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -63,12 +52,11 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'number', numeric: false, disablePadding: true, label: '學號' },
-  { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
-  { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-
-  
-];
+    { id: 'number', numeric: true, disablePadding: false, label: '學號' },
+    { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
+    { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
+    { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
+  ];
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
@@ -79,7 +67,6 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-
 
         <TableCell padding="none" />
           
@@ -117,7 +104,7 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-/*---------------------------------------*/
+/*----------------------------------------------*/
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -140,17 +127,29 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
+  appBar: {
+    position: 'relative',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
 }));
-/*------------------------------------*/
+/*---------------------------------------------*/
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
 
-export default function MemberTable() {
+
+export default function RDT() {
 
   /*------------ STATE ------------*/
-  const [students, setMembers] = useState([]);
- 
+  const [students, setMembers] = React.useState([]);
 
-  
+
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -172,27 +171,47 @@ export default function MemberTable() {
     setPage(0);
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 /*=========== Create Table HEAD ===========*/
- const studentList = [ 'std_id', 'std_name', 'std_department']
-
- useEffect(() => {
-  async function fetchData() {
-      const result = await axios.get(`/student/rollcall/oneRollcall/2`);
-      
-      console.log(result.data);
-
-      setMembers(result.data);
-  }
-  fetchData();
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
+useEffect(() => {
+ async function fetchData() {
+     const result = await axios.get(`/teacher/rollcall/oneRollcall/1`);
+     
+     console.log(result.data);
+     setMembers(result.data);
+ }
+ fetchData();
 }, []);
-
 
 
   return (
     <div className={classes.root}>
-     
-        <TableContainer>
+        <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+      <AssignmentOutlinedIcon />
+      </IconButton>
+
+
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} >
+              <CloseIcon />
+            </IconButton>  
+            
+            </Toolbar>
+            </AppBar>
+
+            <List>
+
+    <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
@@ -202,33 +221,37 @@ export default function MemberTable() {
             <EnhancedTableHead
               classes={classes}
                order={order}
-               orderBy={orderBy}
+               orderBy={orderBy}              
                onRequestSort={handleRequestSort}
-               rowCount={students.length}
             />
-
 
             {/*===== TableBody =====*/}
             <TableBody>
               {stableSort(students, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((student, index) => (
-                  <TableRow hover>
+                .map((student, index) => {
+                  return (
+                  <TableRow hover >
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
+                  //const labelId = `enhanced-table-checkbox-${index}`;
+
                     studentList.map( (list, i) =>   i === 0 ? 
-                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    <TableCell key={i} component="th" scope="row" align="left">
                     {student[list]}
                  </TableCell>:
                  <TableCell key={i} align="left">{student[list]}</TableCell> 
                         )
                   }    
+
                 </TableRow>
-                ))}
+                );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
+
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
@@ -238,6 +261,9 @@ export default function MemberTable() {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+    </List>
+    
+    </Dialog>
     </div>
   );
 }
