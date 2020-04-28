@@ -25,7 +25,7 @@ import {
 } from '@material-ui/pickers';
 import InputName from "../InputName";
 import Button from '@material-ui/core/Button';
-import ComButton from "../ComButton";
+import ComButton from "../../../ComButton";
 
 
 const useStyles = makeStyles(theme => ({
@@ -60,11 +60,6 @@ export default function Hand() {
     setOpen(false);
   };
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2020-3-20T21:11:54'));
-  const handleDateChange = date => {
-    setSelectedDate(date);
-  };
-  
 
   return (
     <div>

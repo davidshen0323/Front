@@ -41,10 +41,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'number', numeric: true, disablePadding: false, label: '學號' },
-    { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
-    { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-    { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
+  { id: 'number', numeric: true, disablePadding: false, label: '學號' },
+  { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
+  { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
+  { id: 'absence', numeric: true, disablePadding: false, label: '出席狀況' },
   ];
 
 function EnhancedTableHead(props) {
@@ -175,7 +175,6 @@ useEffect(() => {
             className={classes.table}
             aria-labelledby="tableTitle"
             size='small'
-            aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}

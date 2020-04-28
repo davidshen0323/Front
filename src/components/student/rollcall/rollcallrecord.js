@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 // function createData(time, attend, score, from) {
 //   return { time, attend, score, from };
@@ -171,7 +172,10 @@ export default function Rollcallrecord() {
   /*------------ STATE ------------*/
   const [rollcallrecord, setRollcallrecord] = useState([]);
 
+  const params = useParams();
+  const csid = params.cs_id;
 
+  console.log(csid);
 
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
@@ -197,11 +201,11 @@ export default function Rollcallrecord() {
   };
 
   /*=========== Create Table HEAD ===========*/
-const rollcallrecordList = [ 'record_time','rc_inputsource','tl_type_name']
+const rollcallrecordList = [ 'record_time','tl_type_name','rc_inputsource']
 
 useEffect(() => {
  async function fetchData() {
-     const result = await axios.get(`/student/rollcall/allRollcall/10811000DMG741D7411023900`);
+     const result = await axios.get(`/student/rollcall/personalRecord/${params.cs_id}`);
      
      console.log(result.data);
 
