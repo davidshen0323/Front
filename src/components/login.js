@@ -1,26 +1,27 @@
-import React,{Component} from 'react';
+import React from 'react';
 import MyMenu from './MenuisLogouted';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
-import Logo from './logo.js';
-import {List,InputItem,WingBlank,WhiteSpace} from 'antd-mobile';
+// import Logo from './logo.js';
+import {List,WingBlank,WhiteSpace} from 'antd-mobile';
 import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
 
 
 
 import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+// import Visibility from '@material-ui/icons/Visibility';
+// import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import { ListItemAvatar, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+// import InputLabel from '@material-ui/core/InputLabel';
+// import OutlinedInput from '@material-ui/core/OutlinedInput';
+// import InputAdornment from '@material-ui/core/InputAdornment';
+// import IconButton from '@material-ui/core/IconButton';
+// import { ListItemAvatar, TextField } from '@material-ui/core';
 //import Image from '@material-ui-image' ;
 // class Login extends Component{
 //     constructor(props){
@@ -99,9 +100,9 @@ export default function Login(){
             Userpassword: ''
           });
 
-          const handleChange = user => event => {
+          const handleChange = fieldname => event => {
             event.persist();
-            setInputs(inputs => ({...inputs, [user]: event.target.value }));
+            setInputs(inputs => ({...inputs, [fieldname]: event.target.value }));
           }
           
           let login;
@@ -121,14 +122,6 @@ export default function Login(){
           }
 
 
-        //   const handleClickShowPassword = () => {
-        //     setValues({ ...values, showPassword: !values.showPassword });
-        //   };
-        
-        //   const handleMouseDownPassword = event => {
-        //     event.preventDefault();
-        //   };
-
         return (
             <div className={classes.div}>
                 <MyMenu/>
@@ -143,41 +136,6 @@ export default function Login(){
                 <Paper className={classes.root}>
                     <h2>上課應用系統</h2>
 
-        {/* <form action="/login" method="POST"> 
-          
-          <TextField 
-            id="username"
-            label="Userid"
-            name="username"
-            value={inputs.Userid}
-            onChange={handleChange('Userid')}
-            />
-          <TextField 
-            id="password"
-            label="Userpassword"
-            type="password"
-            name="password"
-            value={inputs.Userpassword}
-            onChange={handleChange('Userpassword')}
-            />
-          
-          <Button
-            // onClick={handleSubmit}
-            type="submit"
-            variant="contained">Submit</Button>
-            
-          </form> */}
-
-                {/* <div> */}
-                     {/* <Logo/> */}
-                {/* </div> */}
-                
-
-
-
-
-
-
 
         <WingBlank>
 
@@ -185,7 +143,6 @@ export default function Login(){
         <List>
              
         <FormControl className={clsx(classes.margin)}>
-            {/* <InputLabel htmlFor="outlined-adornment-account">帳號</InputLabel> */}
           
           <TextField 
             id="username"
@@ -197,12 +154,7 @@ export default function Login(){
             variant="outlined"
             />
           
-{/*           
-          <Button
-          // onClick={handleSubmit}
-          type="submit"
-          variant="contained">Submit</Button>
-        */}
+
         </FormControl>
 
         </List>
@@ -210,7 +162,7 @@ export default function Login(){
         <List>
                         
         <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
-            {/* <InputLabel htmlFor="outlined-adornment-password">密碼</InputLabel> */}
+           
             <TextField 
                 id="password"
                 label="密碼"
@@ -256,4 +208,4 @@ export default function Login(){
     }
 
 
-//export default Login
+

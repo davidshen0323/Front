@@ -17,15 +17,15 @@
         "baseui": "^9.64.1",
         "cors": "^2.8.5",
         "date-fns": "^2.11.0",
+        "i": "^0.3.6",
         "material-table": "^1.57.2",
         "material-ui-image": "^3.2.3",
         "qrcode.react": "^1.0.0",
         "react": "^16.13.1",
         "react-baseui": "^1.0.0",
         "react-dom": "^16.13.1",
-
-        "smart-webcomponents-community": "^7.4.0",
-
+        "react-geolocation": "^1.0.4",
+        "react-load-script": "0.0.6",
         "react-qr-reader": "^2.2.1",
         "react-qrcode": "^0.2.5",
         "react-router-dom": "^5.1.2",
@@ -33,9 +33,11 @@
         "react-window": "^1.8.5",
         "react.qrcode.generator": "0.0.3",
         "reaviz": "^8.0.6",
-
+        "smart-webcomponents-community": "^7.4.0",
         "styletron-engine-atomic": "^1.4.6",
-        "styletron-react": "^5.2.7"
+        "styletron-react": "^5.2.7",
+        "use-position": "0.0.7",
+        "uuid": "^7.0.3"
     },
     "scripts": {
         "start": "react-scripts start",
