@@ -1,35 +1,4 @@
-// import React,{ useState, Component} from 'react';
-// import MyMenu from './Menu';
-// import Button from '@material-ui/core/Button';
-// import {makeStyles} from '@material-ui/core/styles';
-// import Logo from './logo.js';
-// import {List,InputItem,WingBlank,WhiteSpace} from 'antd-mobile';
-// import Paper from '@material-ui/core/Paper';
 
-// import Grid from '@material-ui/core/Grid';
-// import AccountCircle from '@material-ui/icons/AccountCircle';
-// import Visibility from '@material-ui/icons/Visibility';
-// import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
-// import FormControl from '@material-ui/core/FormControl';
-// import clsx from 'clsx';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import OutlinedInput from '@material-ui/core/OutlinedInput';
-// import InputAdornment from '@material-ui/core/InputAdornment';
-// import IconButton from '@material-ui/core/IconButton';
-// import { ListItemAvatar, TextField } from '@material-ui/core';
-
-// import Radio from '@material-ui/core/Radio';
-// import RadioGroup from '@material-ui/core/RadioGroup';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import {connect} from 'react-redux'
-//import {register} from '../../redux/user.redux'
-//import '../../index.css'
-
-//@connect(
-//    state => state.user,
-//    {register}
-//)
 
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
@@ -42,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 // import Logo from './logo.js';
 import {List} from 'antd-mobile';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
 import {useHistory, Link} from "react-router-dom";
 

@@ -69,6 +69,11 @@ const useStyles = makeStyles(theme => ({
       //   justify: 'center',
       //   marginLeft: 500,
       },
+
+      Cardtext: {
+        fontFamily: 'Microsoft JhengHei',
+        fontWeight: 'bold',
+      }
     }));
 
     // class Homepage2 extends Component {
@@ -103,8 +108,8 @@ const useStyles = makeStyles(theme => ({
           
           <div className={classes.root}>
             <MyMenu />
-            <br></br><br></br><br></br><br></br>
-            <p>This is class {params.cs_id}</p>
+            {/* <br></br><br></br><br></br><br></br> */}
+            {/* <p>This is class {params.cs_id}</p> */}
             
             <Grid
               container
@@ -135,7 +140,7 @@ const useStyles = makeStyles(theme => ({
               </CardContent>
             <CardActions>
               
-                <Typography>點名</Typography>
+                <Typography className={classes.Cardtext}>點名</Typography>
             
             </CardActions>
               </ButtonBase>
@@ -162,7 +167,7 @@ const useStyles = makeStyles(theme => ({
               />
               </CardContent>
             <CardActions>
-                <Typography>請假審核</Typography>
+                <Typography className={classes.Cardtext}>請假審核</Typography>
             </CardActions>
               </ButtonBase>
               </CardActionArea>
@@ -190,7 +195,7 @@ const useStyles = makeStyles(theme => ({
               </CardContent>
             <CardActions>
               
-                <Typography>班級名單</Typography>
+                <Typography className={classes.Cardtext}>班級名單</Typography>
               
             </CardActions>
               </ButtonBase>
@@ -222,7 +227,7 @@ const useStyles = makeStyles(theme => ({
               </CardContent>
             <CardActions>
 
-                <Typography>公告</Typography>
+                <Typography className={classes.Cardtext}>公告</Typography>
             
             </CardActions>
               </ButtonBase>
@@ -253,7 +258,7 @@ const useStyles = makeStyles(theme => ({
                 
               </CardContent>
             <CardActions>
-                <Typography>發問Q&A</Typography>
+                <Typography className={classes.Cardtext}>發問Q&A</Typography>
               
             </CardActions>
               </ButtonBase>
@@ -286,7 +291,7 @@ const useStyles = makeStyles(theme => ({
               </CardContent>
             <CardActions>
               
-                <Typography>課堂驗收</Typography>
+                <Typography className={classes.Cardtext}>課堂驗收</Typography>
            
             </CardActions>
               </ButtonBase>
