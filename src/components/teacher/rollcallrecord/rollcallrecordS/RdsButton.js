@@ -12,7 +12,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import RollcallRDS from './rollcallRDStable';
-import STable from '../rollcallrecordS/stable';
 import RollcallRDSTT from './RollcallRDSTT';
 import Grid from '@material-ui/core/Grid';
 import {useState,useEffect} from 'react';
@@ -143,7 +142,7 @@ export default function RDSB(props) {
                         component="span"
                         variant="body2"
                         className={classes.inline}>
-                          {props.absent}
+                          {props.otherwise}
                   </Typography>
                   }
                 />
@@ -155,7 +154,7 @@ export default function RDSB(props) {
                         component="span"
                         variant="body2"
                         className={classes.inline}>
-                          {props.otherwise}
+                          {props.otherwiseabsent}
                   </Typography>
                   }
                 />

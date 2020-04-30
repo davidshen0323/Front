@@ -42,7 +42,7 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'number', numeric: false, disablePadding: true, label: '學號' },
+  { id: 'number', numeric: true, disablePadding: false, label: '學號' },
   { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
   { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
   { id: 'attend', numeric: true, disablePadding: false, label: '出席' },
@@ -154,7 +154,7 @@ export default function RollcallrecordSTable() {
    };
  
  /*=========== Create Table HEAD ===========*/
- const rollcallrecordList = [ 'std_id', 'std_name', 'std_department', 'present', 'absent', 'otherwise','std_id']
+ const rollcallrecordList = [ 'std_id', 'std_name', 'std_department', 'present', 'otherwise', 'absent','std_id']
  
  useEffect(() => {
   async function fetchData() {
@@ -177,7 +177,6 @@ export default function RollcallrecordSTable() {
      <div className={classes.root}>  
          
          <TableContainer>
-           
            <Table
              className={classes.table}
              aria-labelledby="tableTitle"
@@ -201,7 +200,7 @@ export default function RollcallrecordSTable() {
                        <TableCell>{index+1}</TableCell>
                   {
                     rollcallrecordList.map( (list, i) =>   i < 6 ? 
-                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    <TableCell key={i} component="th" scope="row" align="left"  >
                     {rollcallrecord[list]}
                  </TableCell>:
                  <TableCell key={i} align="left" >

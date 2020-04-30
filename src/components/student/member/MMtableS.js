@@ -17,26 +17,6 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 
-// function createData(number,name,grade,group,detail) {
-//     return { number,name,grade,group,detail};
-//   }
-  
-//   const rows = [
-//     createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
-//     createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
-//     createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
-//     createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
-//     createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
-//   ];
-
-
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -150,7 +130,10 @@ export default function MemberTable( props ) {
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
  
-
+  const params = useParams();
+  // console.log(params);
+  // const csid = params.cs_id;
+  console.log(params.cs_id);
   
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
@@ -183,7 +166,9 @@ export default function MemberTable( props ) {
 
  useEffect(() => {
   async function fetchData() {
+
       const result = await axios.get(`/student/rollcall/studentList/${csid}`);
+
       
       console.log(result.data);
 

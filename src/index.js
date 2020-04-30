@@ -90,7 +90,7 @@ ReactDOM.render(
             <Route path="/Hand" component={Hand}/>
 
             <Route path="/LeaveBlockS" component={LeaveBlockS}/>
-            <Route path="/RollcallRD" component={RollcallRD}/>
+            <Route path="/RollcallRD/:cs_id" component={RollcallRD}/>
             <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
             <Route path="/selectHW_T/:cs_id" component={selectHWt}/>

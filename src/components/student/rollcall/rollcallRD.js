@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MyMenu from '../MenuS';
 import Rollcallrecord from './rollcallrecord';
+import RollcallForm from './rollcallForm';
+import { useParams } from "react-router-dom";
 
 //import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
 //import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
@@ -59,20 +61,17 @@ function LinkTab(props) {
 export default function RollcallRD() {
   const [value, setValue] = React.useState(0);
 
+  const params = useParams();
+  const csid = params.cs_id;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-          <div>
-
-          
-<MyMenu/>
-        <br/><br/><br/>
-        <center><label><h1>專題</h1></label> </center>
-
-            <AppBar position="static" color="inherite" >
+          <div>     
+      <MyMenu/>
+         <AppBar position="static" color="inherite" >
                 <Tabs
                 value={value}
                 onChange={handleChange}
@@ -86,7 +85,7 @@ export default function RollcallRD() {
 
             
       <TabPanel value={value} index={0}>
-        {/* <RollcallrecordTable/> */}
+       <RollcallForm/>
       </TabPanel>
 
       <TabPanel value={value} index={1}>

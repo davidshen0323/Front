@@ -6,7 +6,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
-import ComButton from "../ComButton";
+import ComButton from "../../../ComButton";
 import Grid from '@material-ui/core/Grid';
 // import QRcodeMade from './QRcodeMade';
 import AppBar from '@material-ui/core/AppBar';
@@ -197,7 +197,9 @@ export default function Qrcode() {
 
     <Grid>
           
+
       <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
+
         點名
       </Button>
     </Grid>

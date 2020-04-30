@@ -12,7 +12,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import RollcallRDT from './rollcallRDTtable';
-import TTable from '../rollcallrecordT/ttable';
 import Grid from '@material-ui/core/Grid';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
@@ -137,7 +136,7 @@ export default function RDTB(props) {
                         component="span"
                         variant="body2"
                         className={classes.inline}>
-                          {props.absent}
+                          {props.otherwise}
                   </Typography>
                   }
                 />
@@ -149,7 +148,7 @@ export default function RDTB(props) {
                         component="span"
                         variant="body2"
                         className={classes.inline}>
-                          {props.otherwise}
+                          {props.absent}
                   </Typography>
                   }
                 />

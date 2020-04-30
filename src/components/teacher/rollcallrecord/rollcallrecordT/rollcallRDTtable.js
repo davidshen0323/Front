@@ -13,6 +13,11 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -41,10 +46,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'number', numeric: true, disablePadding: false, label: '學號' },
-    { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
-    { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-    { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
+  { id: 'number', numeric: true, disablePadding: false, label: '學號' },
+  { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
+  { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
+  { id: 'absence', numeric: true, disablePadding: false, label: '出席狀況' },
   ];
 
 function EnhancedTableHead(props) {
@@ -153,7 +158,7 @@ export default function RollcallRDT(props) {
   };
 
 /*=========== Create Table HEAD ===========*/
-const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name','tl_type_id']
 
 useEffect(() => {
  async function fetchData() {
@@ -175,7 +180,6 @@ useEffect(() => {
             className={classes.table}
             aria-labelledby="tableTitle"
             size='small'
-            aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}
@@ -196,11 +200,22 @@ useEffect(() => {
                   {
                   //const labelId = `enhanced-table-checkbox-${index}`;
 
-                    studentList.map( (list, i) =>   i === 0 ? 
+                    studentList.map( (list, i) =>   i < 4 ? 
                     <TableCell key={i} component="th" scope="row" align="left">
                     {student[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left">{student[list]}</TableCell> 
+                //  <TableCell key={i} align="left">{student[list]}</TableCell> 
+                <TableCell align="left">
+                    <FormControl component="fieldset">
+                      <RadioGroup row  defaultValue="{student[list]}">
+                        <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
+                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
+                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
+                        <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="缺席" />
+
+                      </RadioGroup>
+                    </FormControl>
+                    </TableCell>
                         )
                   }    
 
