@@ -44,7 +44,7 @@ import RollcallBlockT from './components/teacher/rollcall/RollcallBlockT';
 import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
-
+/////////////////////
 
 
 // import gps from './components/teacher/rollcall/GPS/Gps';
