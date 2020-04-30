@@ -323,7 +323,7 @@ const useStyles = makeStyles(theme => ({
         </Card>
         </Grid>
       </Grid>
-      <AddQA open={openAddQA} handleClose={onCloseAddQA}/>
+      {/* <AddQA open={openAddQA} handleClose={onCloseAddQA}/> */}
 
     </div>
         );

@@ -88,13 +88,15 @@ const useStyles = makeStyles((theme) => ({
   },
 
   tablecell: {
-    width: 'auto',
-    // margin: 'auto',
+    width: '200pt',
+    margin: 'auto',
     // marginTop: '500pt',
     // paddingTop: "30pt",
     // paddingBottom: "30pt",
     // paddingInline: "30pt",
     borderColor: "white",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
   },
 }));
 
@@ -252,7 +254,7 @@ export default function HomepageT() {
                   component="th"
                   scope="row"
                   align="center"
-                  cariant="body"
+                  variant="body"
                   className={classes.tablecell}
                 >
                   {classs[list]}

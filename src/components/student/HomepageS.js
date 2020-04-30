@@ -99,13 +99,15 @@ const useStyles = makeStyles(theme => ({
       maxWidth: 600,
     },
     tablecell: {
-      width: 'auto',
-      // margin: 'auto',
-      // marginTop: '500pt',
-      // paddingTop: "30pt",
-      // paddingBottom: "30pt",
-      // paddingInline: "30pt",
-      borderColor: "white",
+      width: '200pt',
+    margin: 'auto',
+    // marginTop: '500pt',
+    // paddingTop: "30pt",
+    // paddingBottom: "30pt",
+    // paddingInline: "30pt",
+    borderColor: "white",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
     },
   }));
 

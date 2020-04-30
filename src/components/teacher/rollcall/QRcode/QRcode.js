@@ -197,7 +197,9 @@ export default function Qrcode() {
 
     <Grid>
           
-      <Button onClick={handleSubmit}  style={{marginTop:'3%', marginBottom:'2%' , marginLeft:'50%', fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
+
+      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
+
         點名
       </Button>
     </Grid>

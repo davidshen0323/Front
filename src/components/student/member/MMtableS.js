@@ -16,6 +16,7 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -124,7 +125,7 @@ const useStyles = makeStyles(theme => ({
 /*------------------------------------*/
 
 
-export default function MemberTable() {
+export default function MemberTable( props ) {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
@@ -159,9 +160,15 @@ export default function MemberTable() {
 /*=========== Create Table HEAD ===========*/
  const studentList = [ 'std_id', 'std_name', 'std_department']
 
+  const csid = props.csid
+  
+  console.log(csid)
+
  useEffect(() => {
   async function fetchData() {
-      const result = await axios.get(`/teacher/rollcall/studentList/${params.cs_id}`);
+
+      const result = await axios.get(`/student/rollcall/studentList/${csid}`);
+
       
       console.log(result.data);
 
