@@ -19,6 +19,7 @@ import FormControl from '@material-ui/core/FormControl';
 import {Save,Delete} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router-dom';
+import {useHistory} from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -139,6 +140,49 @@ const [orderBy, setOrderBy] = React.useState('calories');
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+
+/*-------------------------------------------------------------------*/
+const [inputs, setInputs] = React.useState({
+  tl_type_name:'0',
+  //宣告要接值的變數
+});
+
+const handleSubmit = () => {
+  fetch('/student_re',{
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        std_id: inputs.user,
+        std_phone: inputs.phone,
+        std_mail: inputs.mail
+    })
+})
+.then(res => {
+    async function fetchres(){
+    const test = await res.text();
+    alert("點名成功!");
+                post = true;
+                console.log(0);
+                history.push("/RollcallBlockT");
+                return post;  
+} fetchres() })
+.then(res => console.log(res))
+.catch(err => console.log(`Error with message: ${err}`))
+
+};
+
+let post; //宣告一個布林值變數
+let history = useHistory(); //傳值跳頁的方法
+
+const handleChange = fieldname => event => {
+  event.persist();
+  setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
+  //
+}
+/*-------------------------------------------------------------------*/
+
 const handleRequestSort = (event, property) => {
   const isAsc = orderBy === property && order === 'asc';
   setOrder(isAsc ? 'desc' : 'asc');
@@ -202,7 +246,7 @@ useEffect(() => {
                        
                     <TableCell align="left">
                     <FormControl component="fieldset">
-                      <RadioGroup row aria-label="position" name="position" defaultValue="top">
+                      <RadioGroup row  defaultValue="0">
                         <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
                         <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
                         <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
@@ -223,7 +267,7 @@ useEffect(() => {
                         取消
                     </Button>
                     
-                    <Button variant="contained" color="primary"   className= {classes.button} startIcon={<Save />}> 
+                    <Button variant="contained" color="primary"   className= {classes.button} startIcon={<Save />} onClick={handleSubmit}> 
                         確定
                     </Button>
             </div>

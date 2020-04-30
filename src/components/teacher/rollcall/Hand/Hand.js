@@ -7,25 +7,14 @@ import List from '@material-ui/core/List';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Handtable from './Handtable';
 // import TTable from '../rollcallrecordT/ttable';
 import Grid from '@material-ui/core/Grid';
-import {Link} from "react-router-dom";
-import Score from '../../Score';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  DateTimePicker,
-  KeyboardDateTimePicker,
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-import InputName from "../InputName";
 import Button from '@material-ui/core/Button';
 import ComButton from "../../../ComButton";
+import {useParams} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -52,8 +41,29 @@ export default function Hand() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  const params = useParams();
+  // console.log(params);
+  // const csid = params.cs_id;
+  console.log(params.cs_id);
+
   const handleClickOpen = () => {
     setOpen(true);
+      // console.log('QRcode點名');
+    
+      fetch('/teacher/rollcall/addrollcall',{
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              
+              // rc_inputsource:inputs.way,
+              cs_id: params.cs_id,
+              rc_inputsource: '手動點名'
+              
+          })
+      })
+      
   };
 
   const handleClose = () => {
@@ -70,7 +80,6 @@ export default function Hand() {
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
 {/*         
       <Grid
           container
@@ -157,7 +166,6 @@ export default function Hand() {
     <IconButton  color="inherit"  onClick={handleClose}>
       <CloseIcon />
     </IconButton>  
-    </MuiPickersUtilsProvider>
     </Toolbar>
 
     </AppBar>
