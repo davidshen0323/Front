@@ -7,10 +7,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
+//import Link from "@material-ui/core/Link";
 import List from '@material-ui/core/List';
 import {makeStyles} from '@material-ui/core/styles';
-import {useHistory} from "react-router-dom";
+import {useHistory, Link} from "react-router-dom";
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme =>({
 /*--------------------------------*/
 
 export default function ForgetPw() {
-    const classes = useStyles();
+  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     user:'',
@@ -43,6 +43,17 @@ export default function ForgetPw() {
     mail:''
     //宣告要接值的變數
 });
+
+
+const handleChange = fieldname => event => {
+  event.persist();
+  setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
+  //
+}
+
+  let put; //宣告一個布林值變數
+  let history = useHistory(); //傳值跳頁的方法
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,13 +63,14 @@ export default function ForgetPw() {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = () =>
+   {
     if(inputs.user.length > 0
        && inputs.phone.length > 0
        && inputs.mail.length > 0 )
        {
-        fetch('/student_re',{
-            method: 'POST',
+        fetch('/sendStudentEmailWithNewPassword/',{
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -69,22 +81,23 @@ export default function ForgetPw() {
             })
         })
         .then(res => {
+
             async function fetchres(){
             const test = await res.text();
             if(test ==="request failed. Email or Phone Number has round!")
             {
                 alert("請重新確認及填寫資料!");
-                        post = false;
+                        put = false;
                         console.log(1);
-                        return post;
+                        return put;
             }
             else
             {
                 alert("填寫成功!");
-                post = true;
+                put = true;
                 console.log(0);
                 history.push("/login");
-                return post;                        
+                return put;                        
             }
         } fetchres() })
         .then(res => console.log(res))
@@ -92,21 +105,16 @@ export default function ForgetPw() {
        }
        else
             {
-                alert("請再次確認!!")
+                 alert("請再次確認2!!")
             }    
         
        }
   
-
-  let post; //宣告一個布林值變數
-  let history = useHistory(); //傳值跳頁的方法
+      
 
 
-  const handleChange = fieldname => event => {
-    event.persist();
-    setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-    //
-}
+
+
 
   return (
     <div >
@@ -167,6 +175,7 @@ export default function ForgetPw() {
           <Button onClick={handleSubmit} color="primary">
             確認送出
           </Button>
+          {console.log(inputs.user)}
         </DialogActions>
       </Dialog>
     </div>
