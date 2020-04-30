@@ -1,10 +1,12 @@
-import React,{Component} from 'react';
+import React from 'react';
 import MyMenu from './MenuisLogouted';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
+
 import {WingBlank} from 'antd-mobile';
 import Link from "@material-ui/core/Link";
 import List from '@material-ui/core/List';
+
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
@@ -89,9 +91,9 @@ export default function Login(){
             Userpassword: ''
           });
 
-          const handleChange = user => event => {
+          const handleChange = fieldname => event => {
             event.persist();
-            setInputs(inputs => ({...inputs, [user]: event.target.value }));
+            setInputs(inputs => ({...inputs, [fieldname]: event.target.value }));
           }
           
           let login;
@@ -111,14 +113,6 @@ export default function Login(){
           }
 
 
-        //   const handleClickShowPassword = () => {
-        //     setValues({ ...values, showPassword: !values.showPassword });
-        //   };
-        
-        //   const handleMouseDownPassword = event => {
-        //     event.preventDefault();
-        //   };
-
         return (
             <div className={classes.div}>
                 <MyMenu/>
@@ -133,41 +127,6 @@ export default function Login(){
                 <Paper className={classes.root}>
                     <h2>上課應用系統</h2>
 
-        {/* <form action="/login" method="POST"> 
-          
-          <TextField 
-            id="username"
-            label="Userid"
-            name="username"
-            value={inputs.Userid}
-            onChange={handleChange('Userid')}
-            />
-          <TextField 
-            id="password"
-            label="Userpassword"
-            type="password"
-            name="password"
-            value={inputs.Userpassword}
-            onChange={handleChange('Userpassword')}
-            />
-          
-          <Button
-            // onClick={handleSubmit}
-            type="submit"
-            variant="contained">Submit</Button>
-            
-          </form> */}
-
-                {/* <div> */}
-                     {/* <Logo/> */}
-                {/* </div> */}
-                
-
-
-
-
-
-
 
         <WingBlank>
 
@@ -175,6 +134,7 @@ export default function Login(){
 
         <List>     
         <FormControl className={clsx(classes.margin)}>
+
           <TextField 
             id="username"
             label="學號"
@@ -184,7 +144,6 @@ export default function Login(){
             size="small"
             variant="outlined"
             />
-         
         </FormControl>
         </List>
 
@@ -237,4 +196,4 @@ export default function Login(){
     }
 
 
-//export default Login
+
