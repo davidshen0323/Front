@@ -8,7 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import MyMenu from '../../Menu';
+import MyMenu from '../MenuS';
 import { useParams, Link } from 'react-router-dom';
 import { Box, Grid, Button } from '@material-ui/core';
 import {useHistory} from "react-router-dom";

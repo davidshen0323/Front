@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import LMNTable from './leavemanagetable';
-import MyMenu from '../../Menu';
+import MyMenu from '../../teacher/MenuT';
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 

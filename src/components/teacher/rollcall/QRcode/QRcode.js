@@ -34,7 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Qrcode() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [qrcode , setQrcode] = React.useState(uuidv4());
+  const [qrcode , setQrcode] = React.useState('0');
   
   
   const params = useParams();
@@ -62,9 +62,15 @@ export default function Qrcode() {
       const handleClickOpen = () => {
         setOpen(true);
         setQrcode(uuidv4());
+  
+  };
+
+  const handleChangeQR = () => {
+    
+  }
+
+  const handleSubmit = () => {
     // setQrcode(uuidv4());
-    // console.log(latitude.toString());
-    // console.log(longitude.toString());
     
     fetch('/teacher/rollcall/addrollcall',{
       method: 'POST',
@@ -75,6 +81,7 @@ export default function Qrcode() {
           
           // rc_inputsource:inputs.way,
           qrcode: qrcode,
+          // @ts-ignore
           cs_id: params.cs_id,
           rc_inputsource: 'QRcode點名',
           gps_point: latitude + ","  + longitude
@@ -93,18 +100,14 @@ export default function Qrcode() {
     else if(rq === "request successful! the rollcall has already added!") 
     {
         alert("點名成功!");
-        console.log(2);   
+        console.log(2);
+        // setQrcode(null);   
     }
     
     
 } fetchres() })
-
-  
-  
-  };
-
-  const handleChangeQR = () => {
     
+
   }
 
   const [rcid, setRcid] = React.useState({
@@ -132,6 +135,9 @@ export default function Qrcode() {
             // rc_inputsource: 'QRcode點名'
             
         })
+    })
+    .then(res => {
+        setQrcode('0');
     })
     })
   };
@@ -189,6 +195,12 @@ export default function Qrcode() {
         {/* <QRcodeMade /> */}
     </Grid>    
 
+    <Grid>
+          <Button style={{marginTop:'3%', marginBottom:'2%' , marginLeft:'50%', fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">取消問題</Button>
+      <Button onClick={handleSubmit} >
+        點名
+      </Button>
+    </Grid>
       
         </Grid>
       </Backdrop>

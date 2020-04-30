@@ -7,7 +7,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import MyMenu from '../../Menu';
+import MyMenu from '../../student/MenuS';
 
 export default function TAcceptanceList() {
 
@@ -43,7 +43,7 @@ export default function TAcceptanceList() {
     <Paper className={classes.root}>
       <MyMenu/>
 
-  <center> <label>{csname}</label>  </center>
+  {/* <center> <label>{csname}</label>  </center> */}
 
         <Table className={classes.table}>
 

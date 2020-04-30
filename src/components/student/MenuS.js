@@ -1,7 +1,7 @@
 import React from 'react';
 // import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button } from '@material-ui/core/';
+import { AppBar, Toolbar, Button, Link } from '@material-ui/core/';
 import Typography from '@material-ui/core/Typography';
 
 import Grid from '@material-ui/core/Grid';
@@ -95,6 +95,7 @@ export default function LoginMenu() {
               <Button 
                 variant="contained"
                 className={classes.button}
+                href="/homepages"
               >
                 我的課程
               </Button>
@@ -102,6 +103,7 @@ export default function LoginMenu() {
               <Button 
                 variant="contained"
                 className={classes.button}
+                href="/StuInformation"
               >
                 基本資料
                 </Button>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import {Link, useParams} from "react-router-dom";
 import AddAnnouncement from './addAnnouncement';
 import AddIcon from '@material-ui/icons/Add';
-import MyMenu from '../../Menu';
+import MyMenu from '../../teacher/MenuT';
 
 
 const useStyles = makeStyles((theme) => ({
