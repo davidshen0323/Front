@@ -12,8 +12,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import RollcallRDT from './rollcallRDTtable';
-import TTable from '../rollcallrecordT/ttable';
 import Grid from '@material-ui/core/Grid';
+import {useState,useEffect} from 'react';
+import axios from 'axios';
+
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -29,14 +31,22 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+// const RCID = props =>{
+//   const location=useLocation();
+
+// useEffect(()=> {
+//   console.log(location.pathname);
+//   console.log(location.state.detail);
+// },[location]);
+// };
 
 
-
-export default function RDTB() {
+export default function RDTB(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+ 
+ const handleClickOpen = () => {
     setOpen(true);
   };
 
@@ -46,17 +56,15 @@ export default function RDTB() {
 
   return (
     <div>
-     <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+    <IconButton variant="outlined" color="primary" onClick={handleClickOpen} >
       <AssignmentOutlinedIcon />
-      </IconButton>
+    </IconButton>
 
 
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>  
+            
         
       <Grid
           container
@@ -64,11 +72,16 @@ export default function RDTB() {
           justify="flex-start"
           alignItems="center"
         >
+
+      <Grid item={1}>
+        <IconButton edge="start" color="inherit" onClick={handleClose} >
+              <CloseIcon />
+            </IconButton>  
+      </Grid>  
         
-        <Grid item xs={12} sm={8}>
-           
+        <Grid item xs={8}>
         <ListItem alignItems="flex-start">
-           
+          
         <ListItemText
           primary="日期與時間"
           secondary={
@@ -76,22 +89,11 @@ export default function RDTB() {
                 component="span"
                 variant="body2"
                 className={classes.inline}>
-              	2019.11.05 11:05
+                {props.time}
           </Typography>
           }
-        />
 
-        <ListItemText
-          primary="計分設定"
-          secondary={
-          <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}>
-                計分
-          </Typography>
-          }
-        />         
+        />
            
         <ListItemText
           primary="來源"
@@ -100,27 +102,65 @@ export default function RDTB() {
                 component="span"
                 variant="body2"
                 className={classes.inline}>
-              人臉辨識
+                  {props.resource}
           </Typography>
           }
         />
+
         </ListItem>
 
         </Grid>
 
 
 
-        <Grid item sm={3}>
+        <Grid item xs={3} >
+        {/* present={props.present} absent={props.absent} otherwise={props.otherwise} */}
+        
             <ListItem>
-              <TTable/>
-            </ListItem>
+              <ListItemText
+                  primary="出席"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.present}
+                  </Typography>
+                  }
+                />
+
+              <ListItemText
+                  primary="請假"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.otherwise}
+                  </Typography>
+                  }
+                />
+
+              <ListItemText
+                  primary="缺席"
+                  secondary={
+                  <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}>
+                          {props.absent}
+                  </Typography>
+                  }
+                />
+
+        </ListItem>
         </Grid>
-    </Grid>
+</Grid>
     </Toolbar>
 
     </AppBar>
         <List>
-          <RollcallRDT/>
+          <RollcallRDT id={props.id}/>
         </List>
     </Dialog>
     </div>

@@ -1,26 +1,19 @@
-import React,{Component} from 'react';
+import React from 'react';
 import MyMenu from './MenuisLogouted';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
-import Logo from './logo.js';
-import {List,InputItem,WingBlank,WhiteSpace} from 'antd-mobile';
-import Paper from '@material-ui/core/Paper';
+
+import {WingBlank} from 'antd-mobile';
 import {Link} from "react-router-dom";
-import homepage1 from "./student/Homepage1";
+import List from '@material-ui/core/List';
 
-
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
 import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import { ListItemAvatar, TextField } from '@material-ui/core';
+import {TextField } from '@material-ui/core';
+import ForgetPw from './forgetpw';
+
 //import Image from '@material-ui-image' ;
 // class Login extends Component{
 //     constructor(props){
@@ -39,33 +32,50 @@ import { ListItemAvatar, TextField } from '@material-ui/core';
 const useStyles = makeStyles(theme =>({
     
         button: {
-            margin: theme.spacing(2),
-            width:'120px',
+            margin: theme.spacing(1),
+            marginLeft: 10,
+            marginTop: 10,
+            marginBottom: 10,
+            width:'100px',
+            fontFamily: 'Microsoft JhengHei',
+            color: "white",
+            backgroundColor: "#003060",
+            fontWeight:'bold',
         },
 
         margin: {
             margin: theme.spacing(1),
+            fontFamily: 'Microsoft JhengHei',
+            
           },
 
         root:{
-            width: '70%',
-            marginTop: theme.spacing(5),
+            width: '80%',
+            height:'60vh',
+            marginTop: theme.spacing(12),
+            marginBottom: theme.spacing(12),
             //marginLeft: theme.spacing(25),
             overflow: 'auto',
-            textAlign: 'center',  
-            
+            textAlign: 'center',
+            fontFamily: 'Microsoft JhengHei',
+            color: '#003060',
+            backgroundColor: 'white',
+        },
+
+        div: {
+            height: '100vh',
         },
 
         TextField:{
             textAlign:'center',
-        },
-        
-        StyleSheet:{
+            backgroundColor:'#BEBEBE',
+          },
+          
+          StyleSheet:{
             display:"flex",
             alignItems:"center",
             justifyContent:"center",
-        }
-
+          },
         
     }
     ));
@@ -81,15 +91,15 @@ export default function Login(){
             Userpassword: ''
           });
 
-          const handleChange = user => event => {
+          const handleChange = fieldname => event => {
             event.persist();
-            setInputs(inputs => ({...inputs, [user]: event.target.value }));
+            setInputs(inputs => ({...inputs, [fieldname]: event.target.value }));
           }
           
           let login;
           const handleSubmit = () =>
           {
-            if(inputs.Userid.length === 9 && inputs.Userid.length > 0 && inputs.Userpassword.length > 0)
+            if(inputs.Userid.length > 0 && inputs.Userpassword.length > 0)
             {
                 login = true;
                 return login;
@@ -103,126 +113,82 @@ export default function Login(){
           }
 
 
-        //   const handleClickShowPassword = () => {
-        //     setValues({ ...values, showPassword: !values.showPassword });
-        //   };
-        
-        //   const handleMouseDownPassword = event => {
-        //     event.preventDefault();
-        //   };
-
         return (
-            <div>
+            <div className={classes.div}>
                 <MyMenu/>
-                <br/><br/><br/>
+                
                 <Grid 
                 container
-                direction="column"
-                
+                direction="row"
                 justify="center"
                 alignItems="center"
+                
                 >
                 <Paper className={classes.root}>
-                    <h2>登入</h2>
-
-        {/* <form action="/login" method="POST"> 
-          
-          <TextField 
-            id="username"
-            label="Userid"
-            name="username"
-            value={inputs.Userid}
-            onChange={handleChange('Userid')}
-            />
-          <TextField 
-            id="password"
-            label="Userpassword"
-            type="password"
-            name="password"
-            value={inputs.Userpassword}
-            onChange={handleChange('Userpassword')}
-            />
-          
-          <Button
-            // onClick={handleSubmit}
-            type="submit"
-            variant="contained">Submit</Button>
-            
-          </form> */}
-
-                {/* <div> */}
-                     {/* <Logo/> */}
-                {/* </div> */}
-                
-
-
-
-
-
+                    <h2>上課應用系統</h2>
 
 
         <WingBlank>
 
         <form action="/login" method="POST"> 
-        <List>
-             
-        <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
-            {/* <InputLabel htmlFor="outlined-adornment-account">帳號</InputLabel> */}
-          
+
+        <List>     
+        <FormControl className={clsx(classes.margin)}>
+
           <TextField 
             id="username"
-            label="Userid"
+            label="學號"
             name="username"
             value={inputs.Userid}
             onChange={handleChange('Userid')}
+            size="small"
+            variant="outlined"
             />
-          
-{/*           
-          <Button
-          // onClick={handleSubmit}
-          type="submit"
-          variant="contained">Submit</Button>
-        */}
         </FormControl>
-
         </List>
 
-        <List>
-                        
-        <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
-            {/* <InputLabel htmlFor="outlined-adornment-password">密碼</InputLabel> */}
+        <List>          
+        <FormControl className={clsx(classes.margin)} >
             <TextField 
                 id="password"
-                label="Userpassword"
+                label="密碼"
                 type="password"
                 name="password"
                 value={inputs.Userpassword}
                 onChange={handleChange('Userpassword')}
+                size="small"
+                variant="outlined"
             />
-          
-                    </FormControl>
-      
+        </FormControl>
+        </List>
+                    
+                    
+                    {/* <WhiteSpace/> */}
+        <List>
+                    <Button
+                    variant="contained"
+                    component={Link}
+                    to='/register'
+                    className={classes.button}
+                    >
+                    註冊
+                    </Button>
+                    
 
-                    </List>
-                    
-                    
-                    <WhiteSpace/>
                     <Button 
                     type="submit"
                     variant="contained" 
-                    color="primary" 
                     className={classes.button}
                     onClick={handleSubmit}>
                     登入
                     </Button>
-                    
-                    </form> 
-
-                    <Button variant="contained" component={Link} to='/register' color="primary" className={classes.button}>
-                    註冊
-                    </Button>
-
-                </WingBlank>
+                    <ForgetPw className={classes.button}/>
+    </List>
+    {/* <List >
+      <ForgetPw />
+    </List> */}
+    </form> 
+    </WingBlank>
                 </Paper>
                 </Grid>
             </div>
@@ -230,4 +196,4 @@ export default function Login(){
     }
 
 
-//export default Login
+

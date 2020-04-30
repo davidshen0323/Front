@@ -1,13 +1,20 @@
 import React from "react"
+import { makeStyles } from '@material-ui/core/styles';
 
-class InputName extends React.Component{
-    render(){
+/*------------ STYLE ------------*/
+const useStyles = makeStyles((theme) => ({
+    inputName:{
+        paddingLeft: 50,
+        paddingTop: 25,
+    }
+  }));
+  /*------------------------------*/
+
+export default function InputName(props) {
+    const classes = useStyles();
         return(
-            <div className="inputName">
-              {this.props.inputName}
+            <div className={classes.inputName}>
+              {props.inputName}
             </div>
         )
     }
-}
-
-export {InputName}

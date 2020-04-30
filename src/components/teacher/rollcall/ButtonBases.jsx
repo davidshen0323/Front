@@ -2,29 +2,20 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 
 
 const images = [
   {
     url: "https://image.flaticon.com/icons/svg/2313/2313049.svg",
     title: '人臉辨識',
-    // width: '25%',
   },
   {
     url: "https://image.flaticon.com/icons/svg/2313/2313039.svg",
     title: 'QRcode',
-    // width: '25%',
-  },
-  {
-    url: "https://image.flaticon.com/icons/svg/2313/2313041.svg",
-    title: '藍牙定位',
-    // width: '25%',
   },
   {
     url: "https://image.flaticon.com/icons/svg/2311/2311961.svg",
     title: '手動點名',
-    // width: '25%',
   },
 ];
 
@@ -56,8 +47,6 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
-  focusVisible: {},
-
   imageButton: {
     position: 'absolute',
     height:'100%',
@@ -98,23 +87,19 @@ export default function ButtonBases() {
 
   return (
     <div className={classes.root}>
-    <Grid     container
+    {/* <Grid     container
               direction="row"
               justify="center"
               alignItems="center"
               spacing={1}
-    >
+    > */}
               
       {images.map(image => (
-       <Grid item  xs={12} sm>
+      //  <Grid item  xs={12} sm>
         <ButtonBase
           focusRipple
           key={image.title}
           className={classes.image}
-          focusVisibleClassName={classes.focusVisible}
-          // style={{
-          //   width: image.width,
-          // }}
         >
           <img
                 className={classes.imageSrc}
@@ -135,12 +120,9 @@ export default function ButtonBases() {
 
           </span>
         </ButtonBase>
-        </Grid>
+        // </Grid>
       ))}
-
-
-
-</Grid>
+{/* </Grid> */}
     </div>
   );
 }

@@ -11,27 +11,13 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
-function createData(number, name,grade,pass,absence) {
-  return { number, name,grade,pass,absence };
-}
-
-
-const rows = [
-        createData( 406401111,'李李李', '資訊管理學系 3年級', '01'),
-        createData( 406401222,'沈沈沈', '資訊管理學系 3年級', '01'),
-        createData( 406401333,'黃黃黃', '資訊管理學系 3年級', '01'),
-        createData( 406401444,'楊楊楊', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'程程程', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'吳吳吳', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'李李里', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'嬸嬸沈', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'黃黃煌', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'楊洋洋', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'程成程', '資訊管理學系 3年級', '01'),
-        createData( 406401111,'里里里', '資訊管理學系 3年級', '01'),
-      ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -60,10 +46,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'number', numeric: true, disablePadding: false, label: '學號' },
-    { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
-    { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-    { id: 'absence', numeric: true, disablePadding: false, label: '出/缺席' },
+  { id: 'number', numeric: true, disablePadding: false, label: '學號' },
+  { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
+  { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
+  { id: 'absence', numeric: true, disablePadding: false, label: '出席狀況' },
   ];
 
 function EnhancedTableHead(props) {
@@ -139,11 +125,15 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------------*/
 
 
-export default function RollcallRDT() {
+export default function RollcallRDT(props) {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
 
+  const params = useParams();
+   console.log(params);
+  // const rcid = params.rc_id;
+  console.log(params.rc_id);
 
 
   const classes = useStyles();
@@ -168,11 +158,11 @@ export default function RollcallRDT() {
   };
 
 /*=========== Create Table HEAD ===========*/
-const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name','tl_type_id']
 
 useEffect(() => {
  async function fetchData() {
-     const result = await axios.get(`/rollcall/one/1`);
+     const result = await axios.get(`/teacher/rollcall/oneRollcall/`+props.id);
      
      console.log(result.data);
 
@@ -190,7 +180,6 @@ useEffect(() => {
             className={classes.table}
             aria-labelledby="tableTitle"
             size='small'
-            aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}
@@ -201,26 +190,38 @@ useEffect(() => {
 
             {/*===== TableBody =====*/}
             <TableBody>
-              {/* {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
-                {students.map((student, index) => (
-                    
-                  <TableRow hover role="none">
+              {stableSort(students, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((student, index) => {
+                  return (
+                  <TableRow hover >
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
                   //const labelId = `enhanced-table-checkbox-${index}`;
 
-                    studentList.map( (list, i) =>   i === 0 ? 
+                    studentList.map( (list, i) =>   i < 4 ? 
                     <TableCell key={i} component="th" scope="row" align="left">
                     {student[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left">{student[list]}</TableCell> 
+                //  <TableCell key={i} align="left">{student[list]}</TableCell> 
+                <TableCell align="left">
+                    <FormControl component="fieldset">
+                      <RadioGroup row  defaultValue="{student[list]}">
+                        <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
+                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
+                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
+                        <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="缺席" />
+
+                      </RadioGroup>
+                    </FormControl>
+                    </TableCell>
                         )
                   }    
 
                 </TableRow>
-                ))}
+                );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
@@ -228,7 +229,7 @@ useEffect(() => {
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
-          count={rows.length}
+          count={students.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
