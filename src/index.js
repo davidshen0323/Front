@@ -46,8 +46,9 @@ import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
 
-import gps from './components/teacher/rollcall/GPS/GPS';
-import findgeo from './components/teacher/rollcall/GPS/FindGeo';
+
+// import gps from './components/teacher/rollcall/GPS/Gps';
+// import findgeo from './components/teacher/rollcall/GPS/FindGeo';
 
 
 ReactDOM.render(
@@ -94,8 +95,8 @@ ReactDOM.render(
             <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
             <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
-            <Route path="/Gps" component={gps}/>
-            <Route path="/FindGeo" component={findgeo}/>
+            {/* <Route path="/Gps" component={gps}/>
+            <Route path="/FindGeo" component={findgeo}/> */}
 
             <Route exact path="/" component={Login}/>
 

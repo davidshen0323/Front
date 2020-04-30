@@ -1,16 +1,18 @@
 import React , { useState, useEffect } from 'react';
-import MyMenu from '../../Menu';
-import { Button, Table, TableHead, TableBody, TableCell, TableRow,Box, ButtonBase, makeStyles, Grid, CardActionArea } from '@material-ui/core';
+import MyMenu from '../MenuT';
+import { Button, Table, TableHead, TableBody, TableCell, TableRow,Box, ButtonBase, makeStyles, Grid, CardActionArea, Fab } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
+import AddAccept from './addAcceptance';
+import AddIcon from '@material-ui/icons/Add';
 
 
 
 export default function SelectHW_T() {
   //接值
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles(theme => ({
     backbut: {
       margin:'auto',
       marginTop: 30,
@@ -34,7 +36,16 @@ export default function SelectHW_T() {
     buttonbase: {
       width: '100%',
     },
-  });
+    fab: {
+      position: 'fixed',
+      bottom: theme.spacing(5),
+      right: theme.spacing(5),
+    },
+    typo: {
+      fontFamily: 'Microsoft JhengHei',
+      fontWeight:'bold'
+    }
+  }));
   
   const classes = useStyles();
 
@@ -63,20 +74,26 @@ export default function SelectHW_T() {
 
   console.log(Acc);
 
-  
+  const [openCreateHw, closeCreateHw] = React.useState(false);
+  const onCloseCreateHw = () => {
+    closeCreateHw(openCreateHw ? false : true);
+  };  
   
   
   return (
     <div>
       <MyMenu/>
+      <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeCreateHw(true)}>
+          <AddIcon />
+        </Fab>
       <Typography className={classes.selehw} variant="h5" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%'}}>請選擇作業：</Typography>
       <Box border={1} mx="auto" width="60%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
           
           <Table>
             <TableHead>
                 <TableRow>
-                    <TableCell align="center">作業名稱</TableCell>
-                    <TableCell align="center">日期</TableCell>
+                    <TableCell align="center" className={classes.typo}>作業名稱</TableCell>
+                    <TableCell align="center" className={classes.typo}>日期</TableCell>
                     
                 </TableRow>
             </TableHead>
@@ -115,6 +132,7 @@ export default function SelectHW_T() {
       返回
       </Button>
       </Grid>
+      <AddAccept open={openCreateHw} handleClose={onCloseCreateHw}/>
 
     </div>
   )

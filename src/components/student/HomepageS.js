@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import MyMenu from '../Menu';
+import MyMenu from './MenuS';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -74,8 +74,14 @@ const useStyles = makeStyles(theme => ({
     
     card: {
       marginLeft: theme.spacing(10),
-      marginTop: theme.spacing(3),
+      // marginTop: theme.spacing(3),
       maxWidth: '80%',
+      marginTop: theme.spacing(6),
+      width: 'auto',
+      padding: theme.spacing(3),
+      borderRadius: "25px",
+      borderStyle: "solid",
+      borderColor: "black",
     },
    
     classbutton: {
@@ -92,7 +98,17 @@ const useStyles = makeStyles(theme => ({
     cardaction: {
       maxWidth: 600,
     },
-
+    tablecell: {
+      width: '200pt',
+    margin: 'auto',
+    // marginTop: '500pt',
+    // paddingTop: "30pt",
+    // paddingBottom: "30pt",
+    // paddingInline: "30pt",
+    borderColor: "white",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+    },
   }));
 
 export default function HomepageS() {
@@ -168,10 +184,10 @@ export default function HomepageS() {
                 
                     {Sclass.map((classs,index) => (
                     // <Card className={classes.card}>
-            <CardActionArea className={classes.cardaction} component={Link} to={`/functions/${classs["cs_id"]}`}>
+            <CardActionArea className={classes.card} component={Link} to={`/functions/${classs["cs_id"]}`}>
               {/* <CardActions> */}
                         {/* {console.log(index)} */}
-                      <Paper key = {index}>
+                      {/* <Paper key = {index}> */}
 
                       {/* <ButtonBase> */}
                         {console.log(classs)}
@@ -180,7 +196,7 @@ export default function HomepageS() {
                         {
 
                           classList.map( (list, i) =>
-                          <TableCell key={i} component="th" scope="row" align="center">
+                          <TableCell key={i} component="th" scope="row" align="center" className={classes.tablecell}>
                             {classs[list]}
                           </TableCell>
 
@@ -189,7 +205,7 @@ export default function HomepageS() {
                         
                         {/* </ButtonBase> */}
 
-                      </Paper>
+                      {/* </Paper> */}
                         {/* </CardActions> */}
                         </CardActionArea>
                         // </Card>

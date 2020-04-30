@@ -3,7 +3,7 @@ import {  ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails ,Containe
 import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
 import {Link, useParams} from "react-router-dom";
-import MyMenu from '../../Menu';
+import MyMenu from '../MenuS';
 
 
 const useStyles = makeStyles((theme) => ({

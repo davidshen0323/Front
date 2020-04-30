@@ -28,7 +28,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function AddQA ({ open, handleClose })  {
+export default function AddQA ()  {
   const classes = useStyle();
   
   
@@ -38,22 +38,22 @@ export default function AddQA ({ open, handleClose })  {
     ques:'',
   });
   
+  const [open, setOpen] = React.useState(false);
+
+  const params = useParams();
+  const csid = params.cs_id;
   
   const handleChange = fieldname => event => {
     event.persist();
     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-    
-}
+    }
   
-  const params = useParams();
-  const csid = params.cs_id;
 
 
 
   const handleSubmit = () => {
     
-    
-
+    setOpenS(true);
     fetch('/student/question',{
       method: 'POST',
       headers: {
@@ -64,10 +64,7 @@ export default function AddQA ({ open, handleClose })  {
           cs_id: csid
       })
   })
-    setOpenS(true);
   };
-
-  
 
   const submitClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -76,11 +73,28 @@ export default function AddQA ({ open, handleClose })  {
     handleClose(true);
     setOpenS(false);
   };
+  
+  const handleClickOpen = () => {
+    setOpen(true);
+  }
+  
+  const handleClose = () => {
+    setOpen(false);
+  }
     
  
 
   return (
-    
+    <div>
+
+    <Button 
+      onClick = {handleClickOpen}
+      variant = "contained" 
+      color = "primary" 
+      style={{marginLeft:'50%', fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} 
+    >
+    我要發問
+  </Button>
 
     <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
       <DialogContent>
@@ -128,6 +142,6 @@ export default function AddQA ({ open, handleClose })  {
       </Snackbar>
       </DialogActions>
     </Dialog>
-      
+      </div>
   );
 }
