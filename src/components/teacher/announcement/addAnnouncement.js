@@ -145,7 +145,14 @@ let history = useHistory(); //傳值跳頁的方法
           </Typography>
 
           <Typography className={classes.typo} variant="body1">
-            <TextareaAutosize id="content" value={inputs.content} onChange={handleChange('content')} style={{borderRadius:10, padding:8, width:350, height:250, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請輸入公告內容"/>
+            <TextareaAutosize
+            id="content" 
+            value={inputs.content} 
+            onChange={handleChange('content')} 
+            style={{borderRadius:10, padding:8, width:350, height:250, fontSize:14, fontFamily:'微軟正黑體'}}
+            rowsMin={5}
+            placeholder="請輸入公告內容"
+            />
           </Typography>
         </div>
       </DialogContent>

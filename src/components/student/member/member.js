@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // import MemberTable from './membertable';
 import MMTableS from './MMtableS';
 import Paper from '@material-ui/core/Paper';
-import MyMenu from '../../Menu';
+import MyMenu from '../MenuS';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({

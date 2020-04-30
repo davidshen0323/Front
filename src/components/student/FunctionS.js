@@ -1,10 +1,14 @@
+// @ts-ignore
 import React, { Component, useEffect} from 'react';
 import {Link, useParams} from "react-router-dom";
-import MyMenu from '../Menu';
+import MyMenu from './MenuS';
 import { makeStyles } from '@material-ui/core/styles';
+// @ts-ignore
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+// @ts-ignore
 import axios from 'axios';
+// @ts-ignore
 import Button from "@material-ui/core/Button";
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
@@ -14,6 +18,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
+// @ts-ignore
 import { TextField, TableBody, TableCell , TableRow } from '@material-ui/core';
 
 import AddQA from "./Question/addQA";
@@ -21,6 +26,7 @@ import AddQA from "./Question/addQA";
 
 
 
+// @ts-ignore
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -125,6 +131,7 @@ const useStyles = makeStyles(theme => ({
               <ButtonBase
                component={Link}
 
+               // @ts-ignore
                to={`/rollcallRD/${params.cs_id}`}
 
               >
@@ -157,6 +164,7 @@ const useStyles = makeStyles(theme => ({
               <ButtonBase
               component={Link}
 
+              // @ts-ignore
               to ={`/LeaveBlockS/${params.cs_id}`}
 
               >
@@ -188,6 +196,7 @@ const useStyles = makeStyles(theme => ({
               <ButtonBase
               component={Link}
 
+              // @ts-ignore
               to ={`/members/${params.cs_id}`}
 
               // className={classes.ButtonBase}
@@ -221,6 +230,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
+              // @ts-ignore
               to={`/ViewAnnouncements/${params.cs_id}`}
               >
                 <CardContent>
@@ -255,6 +265,7 @@ const useStyles = makeStyles(theme => ({
 
             <ButtonBase
               component={Link}
+              // @ts-ignore
               to={`/QAlist_S/${params.cs_id}`}
               >
                 <CardContent>
@@ -283,6 +294,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
             <ButtonBase 
             component={Link}
+            // @ts-ignore
             to={`/selectHW_S/${params.cs_id}`}>
               {/* <ButtonBase
               component={Link}

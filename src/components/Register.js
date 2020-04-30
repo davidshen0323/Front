@@ -87,7 +87,7 @@ export default function Register() {
     const handleChange = fieldname => event => {
         event.persist();
         setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-        //
+        
     }
 
     let post; //宣告一個布林值變數

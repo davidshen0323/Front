@@ -32,19 +32,25 @@ export default function QaReply( props )  {
   const classes = useStyle();
   
   
-
+  
   const [openS, setOpenS] = React.useState(false);
   const [inputs, setInputs] = React.useState(1);
   
   const [reply, setReply] = React.useState({
     reply: '',
   })
-
+  
   const params = useParams();
   const csid = params.cs_id;
-
+  
   const [open, setOpen] = React.useState(false);
-
+  
+  const handleChange = fieldname => event => {
+    setInputs(2);
+    event.persist();
+    setReply(reply => ({...reply, [fieldname]: event.target.value}));
+    //
+}
   
   const submitSaved = () => {
   
@@ -84,12 +90,6 @@ export default function QaReply( props )  {
 
   };
 
-  const handleChange = fieldname => event => {
-    setInputs(2);
-    event.persist();
-    setReply(reply => ({...reply, [fieldname]: event.target.value}));
-    //
-}
 
   const submitClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -135,12 +135,12 @@ export default function QaReply( props )  {
             回覆問題
           </Typography>
            
-          <Typography className={classes.typo} variant="h8">
+          <Typography className={classes.typo} variant="body1">
             學生問題：
           </Typography>
 
           {/* 之後要接問題 */}  
-          <Typography className={classes.typo} variant="h8">
+          <Typography className={classes.typo} variant="body1">
             <TextareaAutosize disabled style={{borderRadius:10, padding:8, width:250, height:40, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5} >
               {props.content}
             </TextareaAutosize>

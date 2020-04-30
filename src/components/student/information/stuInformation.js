@@ -4,17 +4,25 @@ import { Table, TableHead, TableRow, TableCell, Typography, Box, Button } from '
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import MyMenu from '../../Menu';
+import MyMenu from '../MenuS';
 import EditEmail from './editEmail';
 import EditPhone from './editPhone';
 import EditPassword from'./editPassword';
 import UploadImg from './uploadImg';
 import axios from 'axios';
+import { makeStyles } from "@material-ui/styles";
 
+const useStyle = makeStyles(theme => ({
+  typo: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold'
+  },
+}));
 
 
 export default function StuInformation() {
    {/* 學生修改Email */}
+   const classes = useStyle();
    const [openEditEmail, closeEditEmail] = React.useState(false);
    const onCloseEditEmail = () => {
      closeEditEmail(openEditEmail ? false : true);
@@ -58,51 +66,51 @@ export default function StuInformation() {
         <MyMenu/>
             
         <Box border={1} mx="auto" marginTop="6%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC">
-            <Typography  variant="h4" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}}>學生基本資料</Typography>
+            <Typography  variant="h4" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}} className={classes.typo}>學生基本資料</Typography>
             </Box>
 
             <Box border={1} mx="auto" marginTop="2%" marginBottom="3%" width={'96%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC">
             <Table >
                     <TableRow >
-                        <TableCell width="40%" align="center">頭像</TableCell>
-                        <TableCell width="40%" >{information.std_image}</TableCell>
+                        <TableCell width="40%" align="center" className={classes.typo}>頭像</TableCell>
+                        <TableCell width="40%"  className={classes.typo}>{information.std_image}</TableCell>
                         <TableCell width="20%"><Button onClick={() => closeUploadImg(true)} variant="outlined" color="primary">上傳大頭照</Button></TableCell>
                         
                     </TableRow>
                     <TableRow >
-                        <TableCell width="40%" align="center">姓名</TableCell>
-                        <TableCell width="40%">{information.std_name}</TableCell>
+                        <TableCell width="40%" align="center" className={classes.typo}>姓名</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information.std_name}</TableCell>
                         <TableCell width="20%"></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center">學號</TableCell>
-                        <TableCell width="40%">{information.std_id}</TableCell>
+                        <TableCell align="center" className={classes.typo}>學號</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information.std_id}</TableCell>
+                        <TableCell width="20%"></TableCell>
+                    </TableRow>
+                    <TableRow> 
+                        <TableCell align="center" className={classes.typo}>系級</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information.std_department}</TableCell>
                         <TableCell width="20%"></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center">系級</TableCell>
-                        <TableCell width="40%">{information.std_department}</TableCell>
+                        <TableCell align="center" className={classes.typo}>性別</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information.std_gender}</TableCell>
                         <TableCell width="20%"></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center">性別</TableCell>
-                        <TableCell width="40%">{information.std_gender}</TableCell>
-                        <TableCell width="20%"></TableCell>
+                        <TableCell align="center" className={classes.typo}>Email</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information.std_mail}</TableCell>
+                        <TableCell width="20%"><Button onClick={() => closeEditEmail(true)} variant="outlined" color="primary" className={classes.typo}>修改Email</Button></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center">Email</TableCell>
-                        <TableCell width="40%">{information.std_mail}</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeEditEmail(true)} variant="outlined" color="primary">修改Email</Button></TableCell>
+                        <TableCell align="center" className={classes.typo}>手機號碼</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information.std_phone}</TableCell>
+                        <TableCell width="20%"><Button onClick={() => closeEditPhone(true)} variant="outlined" color="primary" className={classes.typo}>修改手機號碼</Button></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center">手機號碼</TableCell>
-                        <TableCell width="40%">{information.std_phone}</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeEditPhone(true)} variant="outlined" color="primary">修改手機號碼</Button></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell align="center">密碼</TableCell>
+                        <TableCell align="center" className={classes.typo}>密碼</TableCell>
                         <TableCell width="40%">********</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeEditPassword(true)} variant="outlined" color="primary">更改密碼</Button></TableCell>
+                        <TableCell width="20%"><Button onClick={() => closeEditPassword(true)} variant="outlined" color="primary" className={classes.typo}>更改密碼</Button></TableCell>
                     </TableRow>
                 </Table>
             </Box>

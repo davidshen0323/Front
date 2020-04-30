@@ -77,8 +77,8 @@ export default function CreateClass({ open, handleClose })  {
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFous>關閉視窗</Button>
-        <Button disabled={inputs.cs_id===''|| inputs.cs_name==='' ? true : false} onClick={submitClick} color="primary" autoFous>儲存</Button>
+        <Button onClick={submitClose} color="primary" autoFocus>關閉視窗</Button>
+        <Button disabled={inputs.cs_id===''|| inputs.cs_name==='' ? true : false} onClick={submitClick} color="primary" autoFocus>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
         <Alert onClose={submitClose} severity="success">
           已建立課程！

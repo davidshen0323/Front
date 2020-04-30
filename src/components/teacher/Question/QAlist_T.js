@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
-import MyMenu from '../../Menu';
-import QAReply from './QAReply';
+import MyMenu from '../MenuT';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import QaReply from './QAReply';
@@ -125,7 +124,7 @@ export default function QAlist_T() {
                       {Ques[list]}
                      </TableCell>
                      :
-                     <TableCell key={i}>
+                     <TableCell key={i} align="center">
                       <QaReply
                       id={Ques['q_id']}
                       stdid={Ques['q_std_id']}
