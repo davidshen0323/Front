@@ -21,7 +21,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 // @ts-ignore
 import { TextField, TableBody, TableCell , TableRow } from '@material-ui/core';
 
-import AddQA from "./Question/addQA";
+import AddQA from "./Question/AddQA";
 
 
 
@@ -323,7 +323,7 @@ const useStyles = makeStyles(theme => ({
         </Card>
         </Grid>
       </Grid>
-      <AddQA open={openAddQA} handleClose={onCloseAddQA}/>
+      {/* <AddQA open={openAddQA} handleClose={onCloseAddQA}/> */}
 
     </div>
         );

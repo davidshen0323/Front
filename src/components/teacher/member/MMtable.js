@@ -14,6 +14,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
 // function createData(number,name,grade,group,detail) {
@@ -144,7 +145,7 @@ const useStyles = makeStyles(theme => ({
 /*------------------------------------*/
 
 
-export default function MemberTable() {
+export default function MemberTable( props ) {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
@@ -176,9 +177,13 @@ export default function MemberTable() {
 /*=========== Create Table HEAD ===========*/
  const studentList = [ 'std_id', 'std_name', 'std_department']
 
+  const csid = props.csid
+  
+  console.log(csid)
+
  useEffect(() => {
   async function fetchData() {
-      const result = await axios.get(`/teacher/rollcall/studentList/2`);
+      const result = await axios.get(`/teacher/rollcall/studentList/${csid}`);
       
       console.log(result.data);
 
