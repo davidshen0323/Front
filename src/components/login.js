@@ -2,25 +2,16 @@ import React,{Component} from 'react';
 import MyMenu from './MenuisLogouted';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
-import Logo from './logo.js';
-import {List,InputItem,WingBlank,WhiteSpace} from 'antd-mobile';
+import {WingBlank} from 'antd-mobile';
+import Link from "@material-ui/core/Link";
+import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
-import {Link} from "react-router-dom";
-
-
-
 import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
 import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import { ListItemAvatar, TextField } from '@material-ui/core';
+import {TextField } from '@material-ui/core';
+import ForgetPw from './forgetpw';
+
 //import Image from '@material-ui-image' ;
 // class Login extends Component{
 //     constructor(props){
@@ -58,7 +49,7 @@ const useStyles = makeStyles(theme =>({
 
         root:{
             width: '80%',
-            height:'50vh',
+            height:'60vh',
             marginTop: theme.spacing(12),
             marginBottom: theme.spacing(12),
             //marginLeft: theme.spacing(25),
@@ -215,15 +206,6 @@ export default function Login(){
                     
                     {/* <WhiteSpace/> */}
         <List>
-                    <Button 
-                    type="submit"
-                    variant="contained" 
-                    className={classes.button}
-                    onClick={handleSubmit}>
-                    登入
-                    </Button>
-                    
-
                     <Button
                     variant="contained"
                     component={Link}
@@ -232,10 +214,20 @@ export default function Login(){
                     >
                     註冊
                     </Button>
+                    
+
+                    <Button 
+                    type="submit"
+                    variant="contained" 
+                    className={classes.button}
+                    onClick={handleSubmit}>
+                    登入
+                    </Button>
+                    <ForgetPw className={classes.button}/>
     </List>
-    <List>
-      
-    </List>
+    {/* <List >
+      <ForgetPw />
+    </List> */}
     </form> 
     </WingBlank>
                 </Paper>

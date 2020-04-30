@@ -6,7 +6,6 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
-import STable from '../rollcallrecordS/stable';
 import Grid from '@material-ui/core/Grid';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
@@ -106,13 +105,6 @@ export default function RollcallRDSTT() {
 
         </ListItem>
 
-
-
-          {/* <Grid item sm={2}>
-          <ListItem>
-              <STable/>
-            </ListItem>
-          </Grid> </div>*/}
         </Grid>
  
       </Grid>

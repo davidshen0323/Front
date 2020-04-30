@@ -150,7 +150,7 @@ export default function RollcallrecordTable() {
   };
 
   /*=========== Create Table HEAD ===========*/
-  const rollcallrecordList = [ 'rc_starttime', 'present', 'absent', 'otherwise',  'rc_inputsource','rc_id']
+  const rollcallrecordList = [ 'rc_starttime', 'present', 'otherwise', 'absent', 'rc_inputsource','rc_id']
   
   useEffect(() => {
     async function fetchData() {

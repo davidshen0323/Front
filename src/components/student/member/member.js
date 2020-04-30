@@ -14,7 +14,7 @@ const useStyles = makeStyles({
         background: '#E1E1E1',
     },
     Paper:{
-        width: '100%',
+        width: '90%',
         margin: 'auto',        
     },
   });

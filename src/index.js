@@ -81,7 +81,7 @@ ReactDOM.render(
             <Route path="/post" component={post}/>
             
             <Route path="/membert/:cs_id" component={MemberT}/>
-            <Route path="/members" component={MemberS}/>
+            <Route path="/members/:cs_id" component={MemberS}/>
 
             <Route path="/RollcallBlockT/:cs_id" component={RollcallBlockT}/>
             <Route path="/QRcode" component={QRcode}/> 

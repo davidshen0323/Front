@@ -39,6 +39,7 @@ export default function Qrcode() {
   
   const rand = Math.random();
   const test = rand.toString();
+  
   const handleClickOpen = () => {
     setOpen(true);
       console.log(test);
