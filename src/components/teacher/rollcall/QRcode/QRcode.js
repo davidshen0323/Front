@@ -189,6 +189,15 @@ export default function Qrcode() {
         {/* <QRcodeMade /> */}
     </Grid>    
 
+<<<<<<< HEAD
+=======
+    <Grid>
+          
+      <Button onClick={handleSubmit}  style={{marginTop:'3%', marginBottom:'2%' , marginLeft:'50%', fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
+        點名
+      </Button>
+    </Grid>
+>>>>>>> 2da1eb928aacbd1e88386f1c3ab4d8d471ce42ad
       
         </Grid>
       </Backdrop>

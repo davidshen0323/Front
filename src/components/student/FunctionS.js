@@ -16,7 +16,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 import { TextField, TableBody, TableCell , TableRow } from '@material-ui/core';
 
-import AddQA from "./Question/addQA";
+import AddQA from "./Question/AddQA";
 
 
 
