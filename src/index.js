@@ -46,7 +46,7 @@ import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
 
-import gps from './components/teacher/rollcall/GPS/Gps';
+import gps from './components/teacher/rollcall/GPS/GPS';
 import findgeo from './components/teacher/rollcall/GPS/FindGeo';
 
 
