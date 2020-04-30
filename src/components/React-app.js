@@ -1,5 +1,5 @@
 import React from 'react';
-import MyMenu from './Menu';
+import MyMenu from './MenuisLogouted';
 import Login from './login';
 export default function ReactApp() {
 

@@ -16,25 +16,27 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+import CancelIcon from '@material-ui/icons/Cancel';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import Grid from '@material-ui/core/Grid';
 
-function createData(time, number,name,kind,reason,proof,pass) {
-    return { time, number,name,kind,reason,proof,pass };
+function createData(time, number,name,kind,reason,pass) {
+    return { time, number,name,kind,reason,pass };
   }
   
   const rows = [
-    createData('2019.11.05 11:05', 406401111,'李李李', '事假', '肚子不舒服', ' ','人臉點名'),
-    createData('2019.11.12 11:12', 406401222,'沈沈沈', '病假', '肚子不舒服', ' ','QR code'),
-    createData('2019.11.19 11:19', 406401333,'黃黃黃', '病假', '肚子不舒服', ' ','藍牙點名'),
-    createData('2019.11.26 11:26', 406401444,'楊楊楊', '病假', '肚子不舒服', ' ','手動點名'),
-    createData('2019.12.03 12:03', 406401111,'程程程', '事假', '肚子不舒服', ' ','人臉點名'),
-    createData('2019.12.10 12:10', 406401111,'吳吳吳', '事假', '肚子不舒服', ' ','手動點名'),
-    createData('2019.12.17 12:17', 406401111,'李李里', '事假', '肚子不舒服', ' ','人臉點名'),
-    createData('2019.12 24 12:24', 406401111,'嬸嬸沈', '病假', '肚子不舒服', ' ','QR code'),
-    createData('2020.01.01 01:00', 406401111,'黃黃煌', '事假', '肚子不舒服', ' ','藍牙點名'),
-    createData('2020.01.08 01:08', 406401111,'楊洋洋', '病假', '肚子不舒服', ' ','人臉點名'),
-    createData('2020.01.15 01:15', 406401111,'程成程', '病假', '肚子不舒服', ' ','藍牙點名'),
-    createData('2020.01.22 01:22', 406401111,'里里里', '事假', '肚子不舒服', ' ','手動點名'),
+    createData('2019.11.05 11:05', 406401111,'李李李', '事假', '肚子不舒服'),
+    createData('2019.11.12 11:12', 406401222,'沈沈沈', '病假', '肚子不舒服'),
+    createData('2019.11.19 11:19', 406401333,'黃黃黃', '病假', '肚子不舒服'),
+    createData('2019.11.26 11:26', 406401444,'楊楊楊', '病假', '肚子不舒服'),
+    createData('2019.12.03 12:03', 406401111,'程程程', '事假', '肚子不舒服'),
+    createData('2019.12.10 12:10', 406401111,'吳吳吳', '事假', '肚子不舒服'),
+    createData('2019.12.17 12:17', 406401111,'李李里', '事假', '肚子不舒服'),
+    createData('2019.12 24 12:24', 406401111,'嬸嬸沈', '病假', '肚子不舒服'),
+    createData('2020.01.01 01:00', 406401111,'黃黃煌', '事假', '肚子不舒服'),
+    createData('2020.01.08 01:08', 406401111,'楊洋洋', '病假', '肚子不舒服'),
+    createData('2020.01.15 01:15', 406401111,'程成程', '病假', '肚子不舒服'),
+    createData('2020.01.22 01:22', 406401111,'里里里', '事假', '肚子不舒服'),
   ];
 
 
@@ -70,7 +72,6 @@ const headCells = [
   { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
   { id: 'kind', numeric: true, disablePadding: false, label: '假別' },
   { id: 'reason', numeric: true, disablePadding: false, label: '事由' },
-  { id: 'proof', numeric: true, disablePadding: false, label: '證明' },
   
 ];
 
@@ -106,8 +107,8 @@ function EnhancedTableHead(props) {
           </TableCell>
           ))}
           
-          <TableCell padding="default">准許
-          <Checkbox color="primary"
+          <TableCell padding="default">
+          <Checkbox color="default"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
@@ -132,8 +133,8 @@ EnhancedTableHead.propTypes = {
 
 const useToolbarStyles = makeStyles(theme => ({
   root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
   },
   highlight:
     theme.palette.type === 'light'
@@ -171,11 +172,23 @@ const EnhancedTableToolbar = props => {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="確定">
-          <IconButton aria-label="CheckCircle">
+        <Grid
+        container
+        direction="row"
+        justify="flex-end"
+        alignItems="center"
+      >
+        <Tooltip title="准許">
+          <IconButton color="primary" fontSize="large">
             <CheckCircle />
           </IconButton>
         </Tooltip>
+        <Tooltip title="不通過">
+          <IconButton color="secondary" fontSize="large">
+            <CancelIcon />
+          </IconButton>
+        </Tooltip>
+        </Grid>
       ) : (
          <Tooltip title="Filter list">
            <IconButton aria-label="filter list">
@@ -314,12 +327,10 @@ export default function LMNTable() {
                       <TableCell align="left">{row.number}</TableCell>
                       <TableCell align="left">{row.name}</TableCell>
                       <TableCell align="left">{row.kind}</TableCell>
-                      <TableCell align="left">{row.reason}</TableCell>
-                      <TableCell align="left">{row.proof}</TableCell>
-                      
+                      <TableCell align="left">{row.reason}</TableCell>                      
                       <TableCell align="left" padding="default">
                     
-                        <Checkbox color="primary"
+                        <Checkbox color="inherite"
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
