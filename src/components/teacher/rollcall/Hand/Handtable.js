@@ -123,7 +123,7 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------------*/
 
 
-export default function Handtable() {
+export default function Handtable(props) {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
@@ -147,9 +147,18 @@ const [inputs, setInputs] = React.useState({
   //宣告要接值的變數
 });
 
+const changeState =(event,id) =>{
+  const stuIndex = students.findIndex(s=>s.std_id==id)
+  var newlist = [...students]
+  newlist[stuIndex].tl_type_id = parseInt(event.target.value)
+
+  setMembers(newlist)
+  console.log('newlist[stuIndex]',newlist[stuIndex])
+}
+
 const handleSubmit = () => {
   fetch('/student_re',{
-    method: 'POST',
+    method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -198,11 +207,11 @@ const handleChangeRowsPerPage = event => {
   setPage(0);
 };
 /*=========== Create Table HEAD ===========*/
-const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name']
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name','tl_type_id']
 
 useEffect(() => {
  async function fetchData() {
-     const result = await axios.get(`/teacher/rollcall/studentList/${params.cs_id}`);
+     const result = await axios.get(`/teacher/rollcall/oneRollcall/{rc_id}`+props.id);
      
      console.log(result.data);
 
@@ -210,6 +219,8 @@ useEffect(() => {
  }
  fetchData();
 }, []);
+
+
 
 
   return (
@@ -245,8 +256,8 @@ useEffect(() => {
                    
                        
                     <TableCell align="left">
-                    <FormControl component="fieldset">
-                      <RadioGroup row  defaultValue="1">
+                    <FormControl component="fieldset" onChange={(e)=>changeState(e,student.std_id)}>
+                      <RadioGroup row  value={student.tl_type_id+''}>
                         <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
                         <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
                         <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
