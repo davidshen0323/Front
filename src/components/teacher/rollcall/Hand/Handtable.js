@@ -246,7 +246,7 @@ useEffect(() => {
                        
                     <TableCell align="left">
                     <FormControl component="fieldset">
-                      <RadioGroup row  defaultValue="0">
+                      <RadioGroup row  defaultValue="1">
                         <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
                         <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
                         <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
