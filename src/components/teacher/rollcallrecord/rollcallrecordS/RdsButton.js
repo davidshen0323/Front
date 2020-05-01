@@ -154,7 +154,7 @@ export default function RDSB(props) {
                         component="span"
                         variant="body2"
                         className={classes.inline}>
-                          {props.otherwiseabsent}
+                          {props.absent}
                   </Typography>
                   }
                 />

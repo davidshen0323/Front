@@ -56,8 +56,8 @@ export default function Hand() {
               'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-              qrcode:'',
-              gps_point:'',
+              qrcode:"12345",
+              gps_point:"25.015369,121.427966",
               // rc_inputsource:inputs.way,
               cs_id: params.cs_id,
               rc_inputsource: '手動點名'
@@ -70,6 +70,11 @@ export default function Hand() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [rcid, setRcid] = React.useState({
+    rcid:'',
+  })
+  const Rcid = ['rc_id'];
 
 
   return (
