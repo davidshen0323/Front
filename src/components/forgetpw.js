@@ -38,7 +38,7 @@ export default function ForgetPw() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = React.useState({
-    user:'',
+    id:'',
     phone:'',
     mail:''
     //宣告要接值的變數
@@ -65,19 +65,22 @@ const handleChange = fieldname => event => {
 
   const handleSubmit = () =>
    {
-    if(inputs.user.length > 0
-       && inputs.phone.length > 0
-       && inputs.mail.length > 0 )
-       {
+    // if(inputs.user.length > 0
+    //    && inputs.phone.length > 0
+    //    && inputs.mail.length > 0 )
+    //    {
+      console.log(inputs.id)
+      console.log(inputs.mail);
+      console.log(inputs.phone);
         fetch('/sendStudentEmailWithNewPassword/',{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                std_id: inputs.user,
+                std_id: inputs.id,
+                std_mail: inputs.mail,
                 std_phone: inputs.phone,
-                std_mail: inputs.mail
             })
         })
         .then(res => {
@@ -103,12 +106,12 @@ const handleChange = fieldname => event => {
         .then(res => console.log(res))
         .catch(err => console.log(`Error with message: ${err}`))
        }
-       else
-            {
-                 alert("請再次確認2!!")
-            }    
+      //  else
+      //       {
+      //            alert("請再次確認2!!")
+      //       }    
         
-       }
+      //  }
   
       
 
@@ -139,16 +142,16 @@ const handleChange = fieldname => event => {
           <List >
           <TextField
           autoFocus
-          id="outlined-password-input"
+          id="id"
           label="學號"
           variant="outlined"
           size="small"
           className={classes.block}
-          value={inputs.user}
-          onChange={handleChange('user')}
+          value={inputs.id}
+          onChange={handleChange('id')}
         />
         <TextField
-          id="outlined-password-input"
+          id="phone"
           label="手機"
           variant="outlined"
           size="small"
@@ -158,14 +161,15 @@ const handleChange = fieldname => event => {
         />
           </List>
           <TextField
+            id="mail"
             variant="outlined"
             size="small"
             label="Email Address"
             type="email"
             fullWidth
             className={classes.block2}
-            value={inputs.email}
-          onChange={handleChange('email')}
+            value={inputs.mail}
+          onChange={handleChange('mail')}
           />
         </DialogContent>
         <DialogActions>
@@ -175,7 +179,7 @@ const handleChange = fieldname => event => {
           <Button onClick={handleSubmit} color="primary">
             確認送出
           </Button>
-          {console.log(inputs.user)}
+          {/* {console.log(inputs.user)} */}
         </DialogActions>
       </Dialog>
     </div>

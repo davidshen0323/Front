@@ -15,6 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ComButton from "../../../ComButton";
 import {useParams} from "react-router-dom";
+import { cs } from 'date-fns/locale';
 
 
 const useStyles = makeStyles(theme => ({
@@ -48,7 +49,6 @@ export default function Hand() {
 
   const handleClickOpen = () => {
     setOpen(true);
-      // console.log('QRcode點名');
     
       fetch('/teacher/rollcall/addrollcall',{
           method: 'POST',
@@ -56,7 +56,8 @@ export default function Hand() {
               'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-              
+              qrcode:'',
+              gps_point:'',
               // rc_inputsource:inputs.way,
               cs_id: params.cs_id,
               rc_inputsource: '手動點名'
