@@ -7,7 +7,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import MyMenu from '../../student/MenuS';
+import MyMenu from '../MenuT';
+import { useParams, Link } from 'react-router-dom';
+import { Box, Grid, Button } from '@material-ui/core';
+import {useHistory} from "react-router-dom";
 
 export default function TAcceptanceList() {
 
@@ -23,38 +26,67 @@ export default function TAcceptanceList() {
     table: {
       minWidth: 450,
     },
+    // backbut: {
+    //   width: 100,
+    //   margin:'auto',
+    //   marginTop: 20,
+    //   fontFamily: 'Microsoft JhengHei',
+    //   backgroundColor: '#E0E0E0',
+    // },
+    button: {
+      width: 100,
+      margin:'auto',
+      marginTop: 20,
+      // marginLeft: 10,
+      marginBottom: 10,
+      fontFamily: 'Microsoft JhengHei',
+      color: "white",
+      backgroundColor: "#003060",
+      fontWeight:'bold',
+    },
   });
   const classes = useStyles();
 
   /*=========== Create Table HEAD ===========*/
-  const acceptanceList = [ 'accept_std_id', 'accept_time', 'accept_done' ]
-  const csname='專題系統開發（一）'
+  const acceptanceList = [ 'std_id', 'accept_time', 'accept_done' ]
+  
+
+  const params = useParams();
+  const csid = params.cs_id;
+  const hwname = params.hw_name;
+  
 
   useEffect(() => {
       async function fetchData() {
-          const result = await axios.get(`/acceptance/hw/10811000DMG741D7411023900/Database`);
+          const result = await axios.get(`/teacher/acceptance/hw/${csid}/${hwname}`);
           setAcceptances(result.data);
         //   console.log(result.data);
       }
       fetchData();
   }, []);
 
+   console.log(acceptances);
+
+  let history = useHistory(); //傳值跳頁的方法
+  
   return (
-    <Paper className={classes.root}>
+    <div>
+  
       <MyMenu/>
 
-  {/* <center> <label>{csname}</label>  </center> */}
+      <Box border={1} mx="auto" width="60%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
+ 
 
         <Table className={classes.table}>
 
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
-                  <TableCell >排序</TableCell>
+                  <TableCell align="center">排序</TableCell>
                   <TableCell align="center">學號</TableCell>
-                  <TableCell >時間</TableCell>
-                  <TableCell >狀態</TableCell>
-                  <TableCell >取消驗收</TableCell>
+                  <TableCell align="center">時間</TableCell>
+                  <TableCell align="center">狀態</TableCell>
+                  
                 </TableRow>
             </TableHead>
 
@@ -62,15 +94,26 @@ export default function TAcceptanceList() {
             <TableBody>
                 {acceptances.map((acceptance,index) => (
                     <TableRow key={index}>
-                      <TableCell>{index+1} </TableCell>
+                      <TableCell align="center">{index+1} </TableCell>
+                      
                     {
-                        acceptanceList.map( (list, i) =>   i === 0 ? 
+                        
+                        acceptanceList.map( (list, i) =>
                             <TableCell key={i} component="th" scope="row" align="center" >
                                {acceptance[list]}
-                            </TableCell>:
-                            <TableCell key={i} align="left">{acceptance[list]}</TableCell> 
-                            
-                        )
+                            </TableCell>
+                              
+                        //     {/* {acceptanceList.map( (list, i) => acceptance[list][4] === true ?
+                        //     <TableCell>
+                        //       <p>已驗收過</p>
+                        //     </TableCell>
+                        //     :
+                        //     <TableCell>
+                        //       <p>尚未驗收</p>
+                        //     </TableCell>
+                        //     ) */}
+                        //       </TableCell> 
+                         )
                     }
                     
                     </TableRow>
@@ -79,9 +122,49 @@ export default function TAcceptanceList() {
             </TableBody>
 
         </Table>
-    </Paper>
+        </Box>
+
+        <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        spacing={2}
+        >
+{/*           
+          
+          <Button 
+          onClick={handleSubmit}
+          className={classes.button}
+          >
+            我要驗收
+          </Button>
+          
+          
+           */}
+          {/* <Button
+          onClick={handledelete}
+          className={classes.button}
+          >  
+            取消驗收
+          </Button> */}
+{/* 
+          <Button
+      className={classes.button}
+      component={Link}
+      to={`/selectHW_T/${params.cs_id}`}
+      >
+      返回
+      </Button>
+           */}
+
+
+        </Grid>
+        </div>
+       
 )
 }
+
 
 
 

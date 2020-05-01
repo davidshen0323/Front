@@ -11,7 +11,6 @@ import homepaget from './components/teacher/HomepageT';
 import functiont from './components/teacher/FunctionT';
 import AcceptanceList from './components/student/Acceptance/student_acceptance';
 import TAcceptanceList from './components/teacher/Acceptance/teacher_acceptance';
-
 import Rollcall from './components/teacher/rollcall/rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
@@ -71,6 +70,8 @@ ReactDOM.render(
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
+            <Route path="/acceptancet/:cs_id/:hw_name" component={TAcceptanceList}/>
+
             <Route path="/ViewAnnouncements/:cs_id" component={ViewAnnouncements}/>
             <Route path="/ViewAnnouncementt/:cs_id" component={ViewAnnouncementt}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
