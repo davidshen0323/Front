@@ -17,6 +17,7 @@ import {useParams} from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { usePosition } from 'use-position';
 import { GetApp } from '@material-ui/icons';
+import axios from 'axios';
 
 
 
@@ -62,16 +63,17 @@ export default function Qrcode() {
       const handleClickOpen = () => {
         setOpen(true);
         setQrcode(uuidv4());
-  
-  };
-
-  const handleChangeQR = () => {
-    
-  }
-
-  const handleSubmit = () => {
-    // setQrcode(uuidv4());
-    
+        
+      };
+      
+      const handleChangeQR = () => {
+        
+      }
+      const [rcid, setRcid] = React.useState(0)
+      
+      const handleSubmit = () => {
+        // setQrcode(uuidv4());
+        
     fetch('/teacher/rollcall/addrollcall',{
       method: 'POST',
       headers: {
@@ -84,7 +86,7 @@ export default function Qrcode() {
           // @ts-ignore
           cs_id: params.cs_id,
           rc_inputsource: 'QRcode點名',
-          gps_point: latitude + ","  + longitude
+          gps_point: longitude + ","  + latitude
       })
   })
   .then(res => {
@@ -106,22 +108,30 @@ export default function Qrcode() {
     
     
 } fetchres() })
+  .then(res => {
+  async function fetchData() {
+    const result = await axios.get(`/teacher/rollcall/findRCID/${qrcode}/`)
+    setRcid(result.data[0]["rc_id"]);
+  
+    console.log(result.data[0]["rc_id"]);
+    }
+    fetchData()
+})
     
 
   }
-
-  const [rcid, setRcid] = React.useState({
-    rcid:'',
-  })
-  const Rcid = ['rc_id'];
-
+  // const Rcid = ['rc_id'];
+  
+  
   const handleClose = () => {
+    
     setOpen(false);
-    fetch('/teacher/rollcall/findRCID/')
-    .then(response => response.json())
-    .then(data => setRcid(data.rc_id))
-    .then(res => {
-
+    
+    
+    // .then(res => {
+      // console.log(rcid)
+      // async function putData() {
+      
       fetch('/teacher/rollcall/updateQRcode',{
         method: 'PUT',
         headers: {
@@ -136,10 +146,13 @@ export default function Qrcode() {
             
         })
     })
-    .then(res => {
-        setQrcode('0');
-    })
-    })
+    //   .then(res => {
+    //       setQrcode('0');
+    //   })
+    // }
+    // putData();
+     
+    
   };
 
   
@@ -162,7 +175,7 @@ export default function Qrcode() {
   return (
 
     <div>
-      
+      {/* {console.log(rcid)} */}
       <Button onClick={handleClickOpen} >
        <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" />
       </Button>

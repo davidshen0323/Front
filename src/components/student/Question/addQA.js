@@ -70,8 +70,11 @@ export default function AddQA ()  {
     if (reason === "clickaway") {
       return;
     }
+
     handleClose(true);
     setOpenS(false);
+    window.location.reload();
+
   };
   
   const handleClickOpen = () => {

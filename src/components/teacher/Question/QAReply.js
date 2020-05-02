@@ -98,6 +98,8 @@ export default function QaReply( props )  {
     handleClose(true);
     setOpenS(false);
     setInputs(1);
+    window.location.reload();
+
   };
     
   

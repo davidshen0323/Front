@@ -87,7 +87,9 @@ export default function AcceptanceList() {
     if(test === "登記驗收成功")
     {
       alert("登記驗收成功!")
-      history.push(`/acceptance/${csid}/${hwname}`)
+      // history.push(`/acceptance/${csid}/${hwname}`)
+      window.location.reload();
+
       // history.push(`/acceptance/${csid}/${hwname}`);
 
     }
@@ -129,7 +131,9 @@ export default function AcceptanceList() {
       else
       {
           alert("取消驗收成功!");    
-          history.push(`/acceptance/${csid}/${hwname}`);                      
+          // history.push(`/acceptance/${csid}/${hwname}`);     
+          window.location.reload();
+
       }
       
   } fetchres() })
