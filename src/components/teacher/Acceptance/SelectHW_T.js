@@ -60,7 +60,7 @@ export default function SelectHW_T() {
   useEffect(() => {
     async function fetchData() {
 
-      const result  = await axios.get(`/student/acceptance/${csid}`)
+      const result  = await axios.get(`/teacher/acceptance/${csid}`)
       
       setAcc(result.data);
       console.log(result.data);
@@ -106,7 +106,7 @@ export default function SelectHW_T() {
                     acceptanceList.map( (list, i) => 
                     
                     <TableCell key={i} component="th" scope="row" align="center">
-                      <ButtonBase className={classes.buttonbase} component={Link} to={`/acceptance/${csid}/${Accept['hw_name']}`}>
+                      <ButtonBase className={classes.buttonbase} component={Link} to={`/acceptancet/${csid}/${Accept['hw_name']}`}>
                       {Accept[list]}      
                     </ButtonBase>
                       </TableCell>

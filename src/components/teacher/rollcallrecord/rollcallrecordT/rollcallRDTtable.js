@@ -17,6 +17,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import { Button } from '@material-ui/core';
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -125,15 +126,15 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------------*/
 
 
-export default function RollcallRDT(props) {
+export default function RollcallRDT( props ) {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
 
-  const params = useParams();
-   console.log(params);
+  // const params = useParams();
+  //  console.log(params);
   // const rcid = params.rc_id;
-  console.log(params.rc_id);
+  // console.log(params.rc_id);
 
 
   const classes = useStyles();
@@ -157,14 +158,42 @@ export default function RollcallRDT(props) {
     setPage(0);
   };
 
+  const handleSubmit = (student) =>
+   {
+     console.log('student',student['std_id'])
+     console.log(props.id)
+        fetch(`/teacher/rollcall/updateRollcall/`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              std_id: student.std_id,
+              rc_id: props.id,
+              tl_type_id: student.tl_type_id
+        })
+       })
+      }
+      
+
+  const changeState =(event,id) =>{
+    const stuIndex = students.findIndex(s=>s.std_id==id)
+    var newlist = [...students]
+    newlist[stuIndex].tl_type_id = parseInt(event.target.value)
+
+    setMembers(newlist)
+    handleSubmit(students[stuIndex])
+    console.log(' newlist[stuIndex]', students[stuIndex])
+  }
 /*=========== Create Table HEAD ===========*/
 const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name','tl_type_id']
 
 useEffect(() => {
  async function fetchData() {
      const result = await axios.get(`/teacher/rollcall/oneRollcall/`+props.id);
-     
-     console.log(result.data);
+     const data = result.data;
+     console.log(result.data)
+     console.log(data.tl_type_id);
 
      setMembers(result.data);
  }
@@ -206,13 +235,14 @@ useEffect(() => {
                  </TableCell>:
                 //  <TableCell key={i} align="left">{student[list]}</TableCell> 
                 <TableCell align="left">
-                    <FormControl component="fieldset">
-                      <RadioGroup row  defaultValue="{student[list]}">
+                    <FormControl component="fieldset" onChange={(e)=>changeState(e,student.std_id)}>
+                      <RadioGroup row  value={student.tl_type_id+''} >
                         <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
-                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
-                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
-                        <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="缺席" />
-
+                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="病假" />
+                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="事假" />
+                        <FormControlLabel value="4" control={<Radio color="primary" size="small"/>} label="喪假" />
+                        <FormControlLabel value="5" control={<Radio color="primary" size="small"/>} label="公假" />
+                        <FormControlLabel value="0"  control={<Radio color="primary" size="small"/>} label="缺席" />
                       </RadioGroup>
                     </FormControl>
                     </TableCell>
@@ -225,6 +255,10 @@ useEffect(() => {
             </TableBody>
           </Table>
         </TableContainer>
+
+        {/* <Button onClick={studentarray}>
+            確定
+        </Button> */}
 
         <TablePagination
           rowsPerPageOptions={[10, 25]}
