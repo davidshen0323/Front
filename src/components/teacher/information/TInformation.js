@@ -75,32 +75,32 @@ export default function TInformation() {
                     </TableRow>
                     <TableRow >
                         <TableCell width="40%" align="center" className={classes.typo}>姓名</TableCell>
-                        <TableCell width="40%" className={classes.typo}>{information.teacher_name}</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information["teacher_name"]}</TableCell>
                         <TableCell width="20%"></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell align="center" className={classes.typo}>學號</TableCell>
-                        <TableCell width="40%" className={classes.typo}>{information.teacher_id}</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information["teacher_id"]}</TableCell>
                         <TableCell width="20%"></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell align="center" className={classes.typo}>系級</TableCell>
-                        <TableCell width="40%" className={classes.typo}>{information.teacher_department}</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information["teacher_department"]}</TableCell>
                         <TableCell width="20%"></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell align="center" className={classes.typo}>性別</TableCell>
-                        <TableCell width="40%" className={classes.typo}>{information.teacher_gender}</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information["teacher_gender"]}</TableCell>
                         <TableCell width="20%"></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell align="center" className={classes.typo}>Email</TableCell>
-                        <TableCell width="40%" className={classes.typo}>{information.teacher_mail}</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information["teacher_mail"]}</TableCell>
                         <TableCell width="20%"><Button onClick={() => closeEditEmail(true)} variant="outlined" color="primary" className={classes.typo}>修改Email</Button></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell align="center" className={classes.typo}>手機號碼</TableCell>
-                        <TableCell width="40%" className={classes.typo}>{information.teacher_phone}</TableCell>
+                        <TableCell width="40%" className={classes.typo}>{information["teacher_phone"]}</TableCell>
                         <TableCell width="20%"><Button onClick={() => closeEditPhone(true)} variant="outlined" color="primary" className={classes.typo}>修改手機號碼</Button></TableCell>
                     </TableRow>
                     <TableRow>
