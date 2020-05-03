@@ -7,10 +7,16 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
+import  {Typography, TextareaAutosize} from '@material-ui/core';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
-import Applytable from './applytable';
+//import Applytable from './applytable';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const styles = (theme) => ({
   root: {
@@ -65,16 +71,42 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Apply() {
+export default function Apply(props) {
     const classes = useStyles();
-
     const [open, setOpen] = React.useState(false);
+
+    const [state, setState] = React.useState({
+        tl_type_id:'',
+        leave_reason:'',    
+    });
+  
+  const handleChange = (event) => {
+  const name = event.target.name;
+  setState({
+      ...state,
+      [name]: event.target.value,
+  });
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = () =>{
+    fetch('/student/takeleave',{
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          rc_id:props.id,
+          tl_content:"",
+          tl_type_id:"",
+      })
+  })
   };
 
   return (
@@ -84,32 +116,97 @@ export default function Apply() {
       </IconButton>
 
       <Dialog onClose={handleClose}  open={open} variant="inline">
-        <DialogTitle  onClose={handleClose}>
-          <br/>
+        <DialogTitle  edge="start"onClose={handleClose}>
+        
+        <ListItem alignItems="flex-start">
+          
+          <ListItemText
+            primary="日期與時間"
+            secondary={
+            <Typography
+                  component="span"
+                  variant="body2"
+                  className={classes.inline}>
+                  {props.time}
+            </Typography>
+            }
+  
+          />
+             <ListItem>
+          <Typography className={classes.inputName} >
+            來源:
+        </Typography>
+            <Typography
+                  
+                  className={classes.inline}>
+                    {props.resource}
+            </Typography>
+          </ListItem>  
+          
+          </ListItem>
         </DialogTitle>
 
         <DialogContent dividers>
-          <Applytable/>
+        <Grid container spacing={1}  
+        direction="column"  
+        justify="center"  
+        alignItems="flex-start"
+        >
+
+            <Grid item xs={12} row> 
+              
+                <div>
+                <Typography className={classes.inputName} variant="body1">
+                    請假類別：
+                
+                <FormControl variant="outlined" className={classes.formControl} size="small">
+                    <InputLabel>假別</InputLabel>
+                    <Select
+                    native
+                    value={state.age}
+                    onChange={handleChange}
+                    label="Age"
+                    inputProps={{
+                        name: 'age',
+                    }}
+                    >
+                    <option value="" />
+                    <option value={1}>病假</option>
+                    <option value={2}>公假</option>
+                    <option value={3}>事假</option>
+                    <option value={4}>喪假</option>
+                    </Select>
+                </FormControl>
+                </Typography>
+                </div>
+            </Grid>  
+
+            <Grid item xs={12}>
+                
+                <div >
+                <Typography className={classes.inputName} variant="body2">
+                    請假事由：
+                </Typography>
+
+                <Typography className={classes.inputName} variant="body2">
+                    <TextareaAutosize 
+                    //onChange={()=> setInputs(2)} id="question" 
+                    style={{borderRadius:10, padding:8, width:350, height:50, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請詳述請假事由"/>
+                </Typography>     
+                </div>
+            </Grid>
+        </Grid>
         </DialogContent>
 
         <DialogActions>
         <Button onClick={handleClose} color="secondary" autoFous>關閉視窗</Button>
         <Button  
         // disabled={inputs===2 ? false : true} 
-        onClick={handleClose}
+        onClick={handleSubmit}
         color="primary" autoFous>確認送出</Button>
         </DialogActions>
 
       </Dialog>
-      {/* <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-      <DialogTitle className={classes.form} onClose={handleClose}/>
-        <Applytable/>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            確定
-          </Button>
-        </DialogActions>
-      </Dialog> */}
     </div>
   );
 }

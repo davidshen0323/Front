@@ -9,30 +9,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
+//import Apply from './apply';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import {useEffect} from 'react';
 
-
-
-
-function createData(time, apply,kind,reason,proof,pass) {
-  return {time, apply,kind,reason,proof,pass};
-}
-
-
-const rows = [
-  createData('2019.11.05 11:05','2020.04.10 11:08' ,'事假', '肚子不舒服'),
-  createData('2019.11.12 11:12','2020.04.10 11:08' ,'病假', '肚子不舒服'),
-  createData('2019.11.19 11:19','2020.04.10 11:08' ,'病假', '肚子不舒服'),
-  createData('2019.11.26 11:26','2020.04.10 11:08' ,'病假', '肚子不舒服'),
-  createData('2019.12.03 12:03','2020.04.10 11:08' ,'事假', '肚子不舒服'),
-  createData('2019.12.10 12:10','2020.04.10 11:08' ,'事假', '肚子不舒服'),
-  createData('2019.12.17 12:17','2020.04.10 11:08' ,'事假', '肚子不舒服'),
-  createData('2019.12 24 12:24','2020.04.10 11:08' ,'病假', '肚子不舒服'),
-  createData('2020.01.01 01:00','2020.04.10 11:08' ,'事假', '肚子不舒服'),
-  createData('2020.01.08 01:08','2020.04.10 11:08' ,'病假', '肚子不舒服'),
-  createData('2020.01.15 01:15','2020.04.10 11:08' ,'病假', '肚子不舒服'),
-  createData('2020.01.22 01:22','2020.04.10 11:08' ,'事假', '肚子不舒服'),
-];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -61,10 +42,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', label: '點名時間', minWidth: 150, numeric: false, disablePadding: true },
-  { id: 'apply', label: '申請時間', minWidth: 50, numeric: true, disablePadding: false, },
-  { id: 'kind', numeric: true, disablePadding: false, label: '假別' },
-  { id: 'reason', numeric: true, disablePadding: false, label: '事由' },
+  { id: 'time', label: '點名時間', numeric: false, disablePadding: true },
+  { id: 'applytime', label: '申請時間', numeric: false, disablePadding: true },
+  { id: 'type', label: '假別', numeric: false, disablePadding: true},
+  { id: 'reason',label: '事由', numeric: false, disablePadding: true},
 ];
 
 function EnhancedTableHead(props) {
@@ -114,6 +95,9 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
+
+
+
 /*----------------------------------------------*/
 const useStyles = makeStyles(theme => ({
   root: {
@@ -123,7 +107,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   table: {
-    width: '100%',
+    minWidth: 750,
   },
   visuallyHidden: {
     border: 0,
@@ -139,21 +123,20 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
   },
+  
 }));
 /*---------------------------------------------*/
 
 
-export default function INGTable() {
+export default function Leavetable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [ing,setIng] = React.useState([]);
+  const params =useParams();
 
-  const [checked, setChecked] = React.useState(false);
-
-  const [choose, setChoose] = React.useState();
 
   const [test, setTest] = React.useState('test');
 
@@ -172,29 +155,36 @@ export default function INGTable() {
     setPage(0);
   };
 
-  const handleChange = () => {
-    setChecked(pp => !pp);
-  };
+  // const handleChange = () => {
+  //   setChecked(pp => !pp);
+  // };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  // const testFunc = (e, id) => {
+  //   console.log(e.target.value);
+  //   setTest(e.target.value)
+  // }
 
-  const testFunc = (e, id) => {
-    console.log(e.target.value);
-    setTest(e.target.value)
-  }
+   /*=========== Create Table HEAD ===========*/
+   const ingList = [ 'rc_starttime','rc_inputsource','rc_id']
+  
+   useEffect(() => {
+     async function fetchData() {
+       const result = await axios.get(`/student/takeleave/TakeleaveRecord/${params.cs_id}/`);
+       
+       console.log(result.data);
+       
+       setIng(result.data);
+     }
+     fetchData();
+   }, []);
 
   return (
     <div className={classes.root}>  
-    
-      {/* <Paper className={classes.paper}> */}
-        
-        {/* <RollcallRDDp/> */}
-        
+          
         <TableContainer>
           
           <Table
             className={classes.table}
-            aria-labelledby="tableTitle"
             size='small'
           >
             <EnhancedTableHead
@@ -204,34 +194,33 @@ export default function INGTable() {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(ing, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
+                .map((ing, index) => {
                   //const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code} key={labelId}>
+                    <TableRow hover >
                       {/* 碰到的時候後面會反灰 */}
-
-                      <TableCell padding="default" />
-
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.time}</TableCell>
-                      <TableCell align="left">{row.apply}</TableCell>
-                      <TableCell align="left">{row.kind}</TableCell>
-                      <TableCell align="left">{row.reason}</TableCell>
-                      </TableRow>
+                      <TableCell>{index+1}</TableCell>
+                      {
+                    ingList.map( (list, i) =>    
+                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    {ing[list]}
+                 </TableCell>
+                    )   
+                }
+                    </TableRow>
                   );
                 })}
-              
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
-          count={rows.length}
+          count={ing.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}

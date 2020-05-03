@@ -10,26 +10,10 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Apply from './apply';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import {useEffect} from 'react';
 
-function createData(time, attend, score, from) {
-  return { time, attend, score, from };
-}
-
-
-const rows = [
-  createData('2019.11.05 11:05','出席', '計分', '人臉點名'),
-  createData('2019.11.12 11:12','缺席', '不計分', 'QR code點名'),
-  createData('2019.11.19 11:19','缺席','計分', '藍牙點名'),
-  createData('2019.11.26 11:26', '缺席', '計分', '手動點名'),
-  createData('2019.12.03 12:03','出席', '不計分', '人臉點名'),
-  createData('2019.12.10 12:10','出席', '計分', '手動點名'),
-  createData('2019.12.17 12:17','出席', '不計分', '人臉點名'),
-  createData('2019.12 24 12:24', '缺席', '不計分', 'QR code點名'),
-  createData('2020.01.01 01:00', '缺席', '計分', '藍牙點名'),
-  createData('2020.01.08 01:08', '出席', '計分', '人臉點名'),
-  createData('2020.01.15 01:15', '缺席', '計分', '藍牙點名'),
-  createData('2020.01.22 01:22','出席', '不計分', '手動點名'),
-];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -58,18 +42,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', label: '日期與時間', minWidth: 150, numeric: false, disablePadding: true },
-//   { id: 'attend', label: '出席狀況', minWidth: 50, numeric: true, disablePadding: false, },
-  {
-    id: 'from',
-    label: '來源', minWidth: 100,
-    numeric: true, disablePadding: false,
-  },
-  {
-    id: 'apply',
-    label: '請假申請', minWidth: 100,
-    numeric: true, disablePadding: false,
-  },
+  { id: 'time', label: '日期與時間', numeric: false, disablePadding: true },
+  { id: 'from', label: '來源', numeric: false, disablePadding: true},
+  { id: 'apply',label: '請假申請', numeric: false, disablePadding: true},
 ];
 
 function EnhancedTableHead(props) {
@@ -158,10 +133,9 @@ export default function Leavetable() {
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [leave,setLeave] = React.useState([]);
+  const params =useParams();
 
-  const [checked, setChecked] = React.useState(false);
-
-  const [choose, setChoose] = React.useState();
 
   const [test, setTest] = React.useState('test');
 
@@ -180,14 +154,28 @@ export default function Leavetable() {
     setPage(0);
   };
 
-  const handleChange = () => {
-    setChecked(pp => !pp);
-  };
+  // const handleChange = () => {
+  //   setChecked(pp => !pp);
+  // };
 
-  const testFunc = (e, id) => {
-    console.log(e.target.value);
-    setTest(e.target.value)
-  }
+  // const testFunc = (e, id) => {
+  //   console.log(e.target.value);
+  //   setTest(e.target.value)
+  // }
+
+   /*=========== Create Table HEAD ===========*/
+   const leaveList = [ 'rc_starttime','rc_inputsource','rc_id']
+  
+   useEffect(() => {
+     async function fetchData() {
+       const result = await axios.get(`/student/takeleave/StudentAbsence/${params.cs_id}/`);
+       
+       console.log(result.data);
+       
+       setLeave(result.data);
+     }
+     fetchData();
+   }, []);
 
   return (
     <div className={classes.root}>  
@@ -206,25 +194,28 @@ export default function Leavetable() {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(leave, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  //const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                .map((leave, index) => {
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.code} key={labelId}>
+                    <TableRow hover >
                       {/* 碰到的時候後面會反灰 */}
-
-                      <TableCell padding="default" />
-
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.time}</TableCell>
-                      <TableCell align="left">{row.from}</TableCell>
-                      <TableCell align="left" >
-                          <Apply/> 
+                      <TableCell>{index+1}</TableCell>
+                      {
+                    leaveList.map( (list, i) =>   i < 2 ? 
+                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    {leave[list]}
+                 </TableCell>:
+                 <TableCell key={i} align="left" >
+                   <Apply
+                   id={leave['rc_id']}
+                   time={leave['rc_starttime']}
+                   resource={leave['rc_inputsource']} 
+                   />
                       </TableCell>
-
+                    )
+                      }
                     </TableRow>
                   );
                 })}
@@ -234,7 +225,7 @@ export default function Leavetable() {
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
-          count={rows.length}
+          count={leave.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
