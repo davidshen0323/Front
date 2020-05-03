@@ -1,22 +1,12 @@
-
-
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import {Button, TextField, Paper} from '@material-ui/core/';
 import MyMenu from './MenuisLogouted';
 import { makeStyles } from '@material-ui/core/styles';
-// import Radio from '@material-ui/core/Radio';
-// import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 // import Logo from './logo.js';
 import {List} from 'antd-mobile';
-import Paper from '@material-ui/core/Paper';
-// import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
 import {useHistory, Link} from "react-router-dom";
-
-
-
 
 const useStyles = makeStyles(theme =>({
     

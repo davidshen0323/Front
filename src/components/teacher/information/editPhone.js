@@ -30,18 +30,17 @@ function Alert(props) {
 export default function EditPhone({ open, handleClose })  {
   const classes = useStyle();
   
-
-
+  // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
+  // 失敗小紅1
+  const [openErr1, setOpenErr1] = React.useState(false);
   const [inputs, setInputs] = React.useState(1);
   const [phone, setPhone] = React.useState({
     tphone: '',
   })
 
   const submitClick = () => {
-  
-    setOpenS(true);
-    
+      
     fetch('/teacher/resetPhone',{
       method: 'PUT',
       headers: {
@@ -58,13 +57,16 @@ export default function EditPhone({ open, handleClose })  {
       const test = await res.text();  //接收後端傳來的訊息
       if (test === "phone格式不正確，請輸入10位數字的電話號碼") //帳號已註冊過
       {
-          alert("phone格式不正確，請輸入10位數字的電話號碼");
+          //alert("phone格式不正確，請輸入10位數字的電話號碼");
           console.log(1);
+          setOpenErr1(true);
       }
       else
       {
-          alert("更改成功!");
+          //alert("更改成功!");
           console.log(0);
+          setOpenS(true);
+          setOpenErr1(false);
           window.location.reload();        
       }
       
@@ -75,7 +77,9 @@ export default function EditPhone({ open, handleClose })  {
   const submitClose = () => {
     handleClose(true);
     setOpenS(false);
+    setOpenErr1(false);
     setInputs(1);
+    phone.tphone='';
   };
    
   const handleChange = fieldname => event => {
@@ -118,11 +122,18 @@ export default function EditPhone({ open, handleClose })  {
       <DialogActions>
         <Button onClick={submitClose} color="primary" autoFocus>關閉視窗</Button>
         <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus>儲存</Button>
-        <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
-        <Alert onClose={submitClose} severity="success">
-          已修改完成！
-        </Alert>
-      </Snackbar>
+        {/* 成功小綠框 */}
+        <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
+          <Alert severity="success">
+            更改成功！
+          </Alert>
+        </Snackbar>
+        {/* 失敗小紅框1 */}
+        <Snackbar open={openErr1} style={{marginBottom:100}}>
+          <Alert severity="error" onClose={submitClose}>
+            電話格式不正確，請輸入10位數字的電話號碼！
+          </Alert>
+        </Snackbar>
       </DialogActions>
     </Dialog>
     

@@ -1,5 +1,5 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Radio, RadioGroup, TextareaAutosize, FormControlLabel, TextField, FormControl, Paper} from "@material-ui/core";
+import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -138,11 +138,10 @@ export default function AddQA ()  {
           確認送出
           </Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
-        <Alert onClose={submitClose} severity="success">
-          老師收到你的問題囉！
-          
-        </Alert>
-      </Snackbar>
+          <Alert onClose={submitClose} severity="success">
+            老師收到你的問題囉！
+          </Alert>
+        </Snackbar>
       </DialogActions>
     </Dialog>
       </div>

@@ -1,5 +1,5 @@
-import React,{useState, useRef, forwardRef} from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Input, RootRef} from "@material-ui/core";
+import React,{useState} from "react";
+import {Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -8,8 +8,6 @@ import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import QrReader from 'react-qr-reader'
-
-
 
 const ExpansionPanel = withStyles({
     root: {
@@ -167,22 +165,12 @@ export default function JoinClass({ open, handleClose })  {
                     <Typography>
                       {/* <QrReader facingMode="user"  delay={300} onError={handleError} onScan={handleScan} style={{ width:250}}/> */}
                       <QrReader
-                       // ref={qr}
                         facingMode="environment"
                         delay={300}
                         style={{width:250}}
                         onError={handleError}
                         onScan={handleScan}
-                      //  onChange={openImageDialog}
-                      //  legacyMode
                       />
-
-                    {/* <input type="button" value="Submit QR Code" onClick={openImageDialog()} /> */}
-
-
-                    {/* <Button onclick={rollcall} disabled={change===1?false:true} variant="outlined" color="primary" value={scan}>加入課程</Button> */}
-                    {/* <input type="button" value="Submit QR Code" onClick={openImageDialog} /> */}
-
                     </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
