@@ -167,7 +167,7 @@ export default function MemberTable( props ) {
  useEffect(() => {
   async function fetchData() {
 
-      const result = await axios.get(`/teacher/rollcall/studentList/${csid}`);
+      const result = await axios.get(`/teacher/Course/studentList/${csid}/`);
 
       
       console.log(result.data);
