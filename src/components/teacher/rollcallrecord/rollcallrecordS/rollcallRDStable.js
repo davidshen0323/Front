@@ -13,6 +13,11 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -143,9 +148,35 @@ export default function RollcallRDS(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  const handleSubmit = (rollcall) =>
+  {
+    console.log('rollcall',rollcall['std_id'])
+    console.log(props.id)
+       fetch(`/teacher/rollcall/updateRollcall/`,{
+           method: 'PUT',
+           headers: {
+               'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({
+             std_id: rollcall.std_id,
+             rc_id: props.id,
+             tl_type_id: rollcall.tl_type_id
+       })
+      })
+     }
+     
 
+ const changeState =(event,id) =>{
+   const stuIndex = rollcalls.findIndex(s=>s.std_id==id)
+   var newlist = [...rollcalls]
+   newlist[stuIndex].tl_type_id = parseInt(event.target.value)
+
+   setRollcalls(newlist)
+   handleSubmit(rollcalls[stuIndex])
+   console.log(' newlist[stuIndex]', rollcalls[stuIndex])
+ }
 /*=========== Create Table HEAD ===========*/
-const rollcallsList = [ 'rc_starttime', 'tl_type_name', 'rc_inputsource']
+const rollcallsList = [ 'rc_starttime', 'rc_inputsource', 'tl_type_name','tl_type_id']
 
 useEffect(() => {
  async function fetchData() {
@@ -188,11 +219,24 @@ useEffect(() => {
                   {
                   //const labelId = `enhanced-table-checkbox-${index}`;
 
-                    rollcallsList.map( (list, i) =>   i === 0 ? 
+                    rollcallsList.map( (list, i) =>   i < 3 ? 
                     <TableCell key={i} component="th" scope="row" align="left">
                     {rollcall[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left">{rollcall[list]}</TableCell> 
+                 <TableCell align="left">
+                 <FormControl component="fieldset" onChange={(e)=>changeState(e,rollcall.std_id)}>
+                   <RadioGroup row  value={rollcall.tl_type_id+''} >
+                     <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
+                     <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遠距" />
+                     <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="遲到" />
+                     <FormControlLabel value="4" control={<Radio color="primary" size="small"/>} label="病假" />
+                     <FormControlLabel value="5" control={<Radio color="primary" size="small"/>} label="事假" />
+                     <FormControlLabel value="6" control={<Radio color="primary" size="small"/>} label="喪假" />
+                     <FormControlLabel value="7" control={<Radio color="primary" size="small"/>} label="公假" />
+                     <FormControlLabel value="0"  control={<Radio color="primary" size="small"/>} label="缺席" />
+                   </RadioGroup>
+                 </FormControl>
+                 </TableCell>
                         )
                   }    
 

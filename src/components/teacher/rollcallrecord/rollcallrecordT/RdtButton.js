@@ -13,6 +13,7 @@ import Slide from '@material-ui/core/Slide';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import RollcallRDT from './rollcallRDTtable';
 import Grid from '@material-ui/core/Grid';
+import Ttable from './Ttable';
 
 
 const useStyles = makeStyles(theme => ({
@@ -114,7 +115,7 @@ export default function RDTB(props) {
         <Grid item xs={3} >
         {/* present={props.present} absent={props.absent} otherwise={props.otherwise} */}
         
-            <ListItem>
+            {/* <ListItem>
               <ListItemText
                   primary="出席"
                   secondary={
@@ -133,7 +134,7 @@ export default function RDTB(props) {
                   <Typography
                         component="span"
                         variant="body2"
-                        className={classes.inline}>
+                        className={classes.F}>
                           {props.otherwise}
                   </Typography>
                   }
@@ -151,7 +152,8 @@ export default function RDTB(props) {
                   }
                 />
 
-        </ListItem>
+        </ListItem> */}
+        <Ttable id={props.id}/>
         </Grid>
 </Grid>
     </Toolbar>

@@ -44,10 +44,10 @@ export default function Qrcode() {
   
     //宣告要接值的變數
 });
-  const params = useParams();
+  // const params = useParams();
   // console.log(params);
   // const csid = params.cs_id;
-  console.log(params.cs_id);
+  // console.log(params.cs_id);
    
   
   //QRcode
@@ -65,6 +65,7 @@ export default function Qrcode() {
    }
   const handleClickOpen = () => {
     setOpen(true);  
+    setScan("");
   };
 
   const handleClose = () => {
@@ -79,22 +80,39 @@ export default function Qrcode() {
 }   
 
 const submitClick = () => {
-setOpen(true);
-
-fetch('/student/rollcall/QRcodeRollcall',{
+setOpen(false);
+console.log(scan)
+fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
   method: 'PUT',
   headers: {
       'Content-Type': 'application/json',
   },
-  body: JSON.stringify({
-      
-      qrcode: scan,
-      //cs_id: params.cs_id,
-      // rc_inputsource: 'QRcode點名'
-      
-  })
+  body: JSON.stringify({})
 })
-};
+.then(res => {
+                    
+  async function fetchres(){
+  const rq = await res.text();  //接收後端傳來的訊息
+  if (rq === "request failed. This rollcall was closed by teacher!")
+  {
+      alert("點名失敗! 老師已關閉點名!");
+      console.log(1);
+      
+  }
+  else if(rq === "request successful! the QRcode rollcall record has already added!") 
+  {
+      alert("點名成功!");
+      console.log(2);
+      // setQrcode(null);   
+    }
+    
+    
+  } })
+    
+      
+  
+    }
+  
      
 
 
