@@ -1,7 +1,6 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Radio, RadioGroup, TextareaAutosize, FormControlLabel, Input} from "@material-ui/core";
+import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
@@ -161,22 +160,22 @@ export default function AddAccept({ open, handleClose })  {
         <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus className={classes.button}>確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
-        <Alert severity="success">
-          新增作業成功！
-        </Alert>
-      </Snackbar>
+          <Alert severity="success">
+            新增作業成功！
+          </Alert>
+        </Snackbar>
         {/* 失敗小紅框1 */}
-        <Snackbar open={openErr1} autoHideDuration={2000}  style={{marginBottom:100}}>
-        <Alert severity="error">
-          作業名稱與內容不得為空！
-        </Alert>
-      </Snackbar>
-       {/* 失敗小紅框2 */}
-       <Snackbar open={openErr2} autoHideDuration={2000}  style={{marginBottom:100}}>
-        <Alert severity="error">
-          這堂課已有此作業，請更改作業名稱！
-        </Alert>
-      </Snackbar>
+        <Snackbar open={openErr1} style={{marginBottom:100}}>
+          <Alert severity="error">
+            作業名稱與內容不得為空！
+          </Alert>
+        </Snackbar>
+        {/* 失敗小紅框2 */}
+        <Snackbar open={openErr2} style={{marginBottom:100}}>
+          <Alert severity="error">
+            這堂課已有此作業，請更改作業名稱！
+          </Alert>
+        </Snackbar>
       </DialogActions>
     </Dialog>
     

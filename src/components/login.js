@@ -1,17 +1,10 @@
 import React from 'react';
 import MyMenu from './MenuisLogouted';
-import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
-
 import {WingBlank} from 'antd-mobile';
 import {Link} from "react-router-dom";
-import List from '@material-ui/core/List';
-
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
+import {Button, Grid, List, Paper, FormControl, TextField} from '@material-ui/core/';
 import clsx from 'clsx';
-import {TextField } from '@material-ui/core';
 import ForgetPw from './forgetpw';
 
 //import Image from '@material-ui-image' ;
