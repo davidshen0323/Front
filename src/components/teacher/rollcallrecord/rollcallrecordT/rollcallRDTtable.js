@@ -187,7 +187,7 @@ export default function RollcallRDT( props ) {
   }
 /*=========== Create Table HEAD ===========*/
 const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name','tl_type_id']
-
+// console.log(props.id)
 useEffect(() => {
  async function fetchData() {
      const result = await axios.get(`/teacher/rollcall/oneRollcall/`+props.id);

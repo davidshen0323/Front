@@ -74,7 +74,7 @@ export default function Applytable(){
                         name: 'age',
                     }}
                     >
-                    <option aria-label="None" value="" />
+                    <option value="" />
                     <option value={1}>病假</option>
                     <option value={2}>公假</option>
                     <option value={3}>事假</option>

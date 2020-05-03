@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,7 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ComButton from "../../../ComButton";
 import {useParams} from "react-router-dom";
-import { cs } from 'date-fns/locale';
+import { usePosition } from 'use-position';
+import axios from 'axios';
 
 
 const useStyles = makeStyles(theme => ({
@@ -45,8 +44,17 @@ export default function Hand() {
   const params = useParams();
   // console.log(params);
   // const csid = params.cs_id;
-  console.log(params.cs_id);
+  // console.log(params.cs_id);
 
+  const watch = true;
+  const {
+    latitude,
+    longitude,
+    // error,
+  } = usePosition(watch);
+
+  const [rcid, setRcid] = React.useState(0)
+  
   const handleClickOpen = () => {
     setOpen(true);
     
@@ -57,24 +65,64 @@ export default function Hand() {
           },
           body: JSON.stringify({
               qrcode:"12345",
-              gps_point:"25.015369,121.427966",
+              gps_point:longitude + ","  + latitude,
               // rc_inputsource:inputs.way,
               cs_id: params.cs_id,
               rc_inputsource: '手動點名'
               
           })
       })
+      .then(res => {
+                    
+        async function fetchres(){
+        //const rq = await res.text();  //接收後端傳來的訊息
+        // if (rq === 'request failed. teacher not in this class!')
+        // {
+        //     alert("點名失敗! 您不是此課程的老師!");
+        //     console.log(1);
+            
+        // }
+        // else if(rq === "request successful! the rollcall has already added!") 
+        // {
+        //     alert("點名成功!");
+        //     console.log(2);
+        //     // setQrcode(null);   
+        // }
+        
+        
+    } fetchres() })
+      .then(res => {
+      async function fetchData() {
+        const result = await axios.get(`/teacher/rollcall/findRCID/12345/`)
+        setRcid(result.data[0]["rc_id"]);
+        
+        // console.log(result.data[0]["rc_id"]);
+        }
+        fetchData()
+    })
       
   };
 
   const handleClose = () => {
     setOpen(false);
+    console.log(rcid)
+    fetch('/teacher/rollcall/updateQRcode',{
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          
+          rc_id: rcid,
+          qrcode: '',
+          //cs_id: params.cs_id,
+          // rc_inputsource: 'QRcode點名'
+          
+      })
+  })
   };
 
-  const [rcid, setRcid] = React.useState({
-    rcid:'',
-  })
-  const Rcid = ['rc_id'];
+
 
 
   return (
@@ -86,87 +134,7 @@ export default function Hand() {
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-{/*         
-      <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-        >
 
-<Grid item sm xs={12}>
-              <InputName inputName="點名日期&時間" />
-              <div className={classes.inputForm}>
-                <KeyboardDateTimePicker
-                  value={selectedDate}
-                  inputVariant="outlined"
-                  size="small"
-                  variant="inline"
-                  format="yyyy/MM/dd hh:mm a"
-                  //margin="normal"
-                  onChange={handleDateChange}
-                  helperText=""
-                  KeyboardButtonProps={
-                    'change date time'
-                  }
-
-                />
-
-              </div>
-            </Grid>
-            <Grid item sm={6} xs={12}>
-              <InputName inputName="計分方式" />
-              <div className={classes.inputForm}>
-
-                <Score />
-                </div></Grid> */}
-
-
-
-        
-        {/* <Grid item xs={12} sm>
-           
-        <ListItem alignItems="flex-start">
-           
-        <ListItemText
-          primary="日期與時間"
-          secondary={
-            <KeyboardDateTimePicker
-            value={selectedDate}
-            inputVariant="outlined"
-            size="small"
-            variant="inline"
-            format="yyyy/MM/dd hh:mm a"
-            //margin="normal"
-            onChange={handleDateChange}
-            helperText=""
-            KeyboardButtonProps={
-              'change date time'
-            }
-
-          />
-          }
-        />
-
-        <ListItemText
-          primary="計分設定"
-          secondary={
-            <Score/>
-          }
-        />         
-           
-        
-        </ListItem>
-
-        </Grid> */}
-
-        {/* <Grid item sm={3}>
-            <ListItem>
-              <TTable/>
-            </ListItem>
-        </Grid> */}
-
-    {/* </Grid> */}
     <Grid item xs={12} sm={12}></Grid>
     
     <IconButton  color="inherit"  onClick={handleClose}>
@@ -176,7 +144,7 @@ export default function Hand() {
 
     </AppBar>
         <List>
-         <Handtable/>
+         <Handtable id={rcid}/>
         </List>
         </Dialog>    
     </div>

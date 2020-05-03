@@ -56,6 +56,7 @@ const handleChange = fieldname => event => {
   };
 
   const handleSubmit = () =>
+  
    {
     // if(inputs.user.length > 0
     //    && inputs.phone.length > 0
@@ -97,14 +98,14 @@ const handleChange = fieldname => event => {
         } fetchres() })
         .then(res => console.log(res))
         .catch(err => console.log(`Error with message: ${err}`))
-       }
+       
       //  else
       //       {
       //            alert("請再次確認2!!")
       //       }    
         
       //  }
-  
+  setOpen(false);}
       
 
 
