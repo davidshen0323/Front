@@ -97,9 +97,6 @@ export default function ViewAnnouncementt() {
                     </ExpansionPanel>
                     
                 ))}
-              
-
-
 
             </Container>
             <Box  mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>

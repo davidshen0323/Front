@@ -5,7 +5,6 @@ import MyMenu from './MenuT';
 import { makeStyles } from '@material-ui/core/styles';
 // @ts-ignore
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 // @ts-ignore
 import axios from 'axios';
 // @ts-ignore
@@ -17,11 +16,10 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-
-// @ts-ignore
-import { TextField, TableBody, TableCell , TableRow } from '@material-ui/core';
-
-import QAReply from "./Question/QAReply";
+import { v4 as uuidv4 } from 'uuid';
+import OpenJoinClass from './OpenJoinClass';
+import AddIcon from "@material-ui/icons/Add";
+import {Fab, Grid} from "@material-ui/core";
 
 
 
@@ -79,7 +77,12 @@ const useStyles = makeStyles(theme => ({
       Cardtext: {
         fontFamily: 'Microsoft JhengHei',
         fontWeight: 'bold',
-      }
+      },
+      fab: {
+        position: "fixed",
+        bottom: theme.spacing(5),
+        right: theme.spacing(5),
+      },
     }));
 
     // class Homepage2 extends Component {
@@ -99,16 +102,16 @@ const useStyles = makeStyles(theme => ({
 
         const classes = useStyles();
 
-        
-        
-        const [openQAReply, closeQAReply] = React.useState(false);
-        const onCloseQAReply = () => {
-          closeQAReply(openQAReply ? false : true);
-
-        };
         const params = useParams();
-        console.log(params);
+        //console.log(params);
         
+        const [qrcode , setQrcode] = React.useState('0');
+        console.log(qrcode);
+        //教師開放加入課程
+        const [openJoinClass, closeJoinClass] = React.useState(false);
+        const onCloseJoinClass = () => {
+          closeJoinClass(openJoinClass ? false : true);
+        };
         return (
 
           
@@ -116,7 +119,16 @@ const useStyles = makeStyles(theme => ({
             <MyMenu />
             {/* <br></br><br></br><br></br><br></br> */}
             {/* <p>This is class {params.cs_id}</p> */}
-            
+            {/* 新建課程 */}
+            <Fab
+              color="primary"
+              aria-label="add"
+              className={classes.fab}
+              onClick={() => closeJoinClass(true)}
+            >
+              <AddIcon />
+            </Fab>
+
             <Grid
               container
               direction="row"
@@ -313,7 +325,9 @@ const useStyles = makeStyles(theme => ({
         </Grid>
       </Grid>
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
-
+      
+      {/* 教師開放加入課程 */}
+      <OpenJoinClass open={openJoinClass} handleClose={onCloseJoinClass} />
     </div>
         );
       }
