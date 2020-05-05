@@ -1,8 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import LMNTable from './leavemanagetable';
+import LMNTable from './LMNTable';
+import Leavemanagetable from './leavemanagetable';
 import MyMenu from '../../teacher/MenuT';
+import { useParams } from 'react-router-dom';
+
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 
@@ -20,7 +23,7 @@ const useStyles = makeStyles({
 /*--------------------------------*/
 export default function Leavemanage() {
     const classes = useStyles();
-    //render() {
+    const params = useParams();
         return (
             // <div>
             // <MyMenu/>
@@ -44,7 +47,8 @@ export default function Leavemanage() {
         <center><label><h1>專題</h1></label> </center>
 
             <Paper className={classes.Paper}>
-                <LMNTable />
+                {/* <LMNTable /> */}
+                <Leavemanagetable csid={params.cs_id}/>
             </Paper>
         </div>
             // </div>

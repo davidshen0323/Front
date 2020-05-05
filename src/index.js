@@ -60,7 +60,7 @@ ReactDOM.render(
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <Route path="/rollcall/:cs_id" component={Rollcall}/>
-            <Route path="/leavemanage" component={Leavemanage}/>
+            <Route path="/leavemanage/:cs_id" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepages" component={homepages}/>
             <Route path="/functions/:cs_id" component={functions}/>
