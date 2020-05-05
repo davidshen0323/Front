@@ -284,9 +284,9 @@ export default function Leavemanagetable(props) {
 
   const handleSubmit = (leave) =>
    {
-     console.log('stdid',leaves['std_id'])
-     console.log('rcid'.leaves['rc_id'])
-     console.log('typeid',leaves['tl_type_id'])
+     console.log('stdid',leave['std_id'])
+     //console.log('rc_id'.leave['rc_id'])
+     console.log('state',leave['tl_state'])
         fetch(`/teacher/takeleave/`,{
             method: 'PUT',
             headers: {
@@ -295,7 +295,7 @@ export default function Leavemanagetable(props) {
             body: JSON.stringify({
               rc_id: leave.rc_id,
               std_id: leave.std_id,
-              tl_state: leave.tl_type_id
+              tl_state: leave.tl_state,
         })
        })
       }
@@ -304,7 +304,7 @@ export default function Leavemanagetable(props) {
   const changeState =(event,id) =>{
     const stuIndex = leaves.findIndex(s=>s.std_id==id)
     var newlist = [...leaves]
-    newlist[stuIndex].tl_type_id = parseInt(event.target.value)
+    newlist[stuIndex].tl_state = parseInt(event.target.value)
 
     setLeaves(newlist)
     handleSubmit(leaves[stuIndex])
