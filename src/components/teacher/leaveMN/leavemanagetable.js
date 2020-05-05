@@ -284,9 +284,9 @@ export default function Leavemanagetable(props) {
 
   const handleSubmit = (leave) =>
    {
-     console.log('stdid',leaves['std_id'])
-     console.log('rcid'.leaves['rc_id'])
-     console.log('typeid',leaves['tl_type_id'])
+     console.log('stdid',leave['std_id'])
+     console.log('rc_id',leave['rc_id'])
+     console.log('state',leave['tl_state'])
         fetch(`/teacher/takeleave/`,{
             method: 'PUT',
             headers: {
@@ -295,16 +295,16 @@ export default function Leavemanagetable(props) {
             body: JSON.stringify({
               rc_id: leave.rc_id,
               std_id: leave.std_id,
-              tl_state: leave.tl_type_id
+              tl_state: leave.tl_state,
         })
        })
       }
       
 
   const changeState =(event,id) =>{
-    const stuIndex = leaves.findIndex(s=>s.std_id==id)
+    const stuIndex = leaves.findIndex(s=>s.tl_content==id)
     var newlist = [...leaves]
-    newlist[stuIndex].tl_type_id = parseInt(event.target.value)
+    newlist[stuIndex].tl_state = parseInt(event.target.value)
 
     setLeaves(newlist)
     handleSubmit(leaves[stuIndex])
@@ -369,11 +369,11 @@ export default function Leavemanagetable(props) {
                     {leave[list]}
                  </TableCell>:
                  <TableCell align="left">
-                 <FormControl component="fieldset" onChange={(e)=>changeState(e,leave.std_id)}>
-                   <RadioGroup row  value={leave.tl_state+''} >
+                 <FormControl component="fieldset" onChange={(e)=>changeState(e,leave.tl_content)}>
+                   <RadioGroup row value={leave.tl_state+''} >
                      <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="通過" />
                      <FormControlLabel value="2" control={<Radio color="secondary" size="small"/>} label="未通過" />
-                     {/* <FormControlLabel value="0"  control={<Radio color="primary" size="small"/>} label="未審核" /> */}
+                     <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="未審核" />
                    </RadioGroup>
                  </FormControl>
                  </TableCell>

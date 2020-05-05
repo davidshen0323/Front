@@ -47,8 +47,8 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'time', label: '日期與時間', numeric: true, disablePadding: false },
-  { id: 'score',label: '出席狀況', numeric: true, disablePadding: false },
   { id: 'from', label: '來源', numeric: true, disablePadding: false},
+  { id: 'score',label: '出席狀況', numeric: true, disablePadding: false },
 ];
 
 function EnhancedTableHead(props) {
@@ -150,8 +150,9 @@ export default function RollcallRDS(props) {
   };
   const handleSubmit = (rollcall) =>
   {
-    console.log('rollcall',rollcall['std_id'])
-    console.log(props.id)
+    console.log('stdid',rollcall['std_id'])
+    console.log('rcid',rollcall['rc_id'])
+    console.log('typeid',rollcall['tl_type_id'])
        fetch(`/teacher/rollcall/updateRollcall/`,{
            method: 'PUT',
            headers: {
@@ -159,7 +160,7 @@ export default function RollcallRDS(props) {
            },
            body: JSON.stringify({
              std_id: rollcall.std_id,
-             rc_id: props.id,
+             rc_id: rollcall.rc_id,
              tl_type_id: rollcall.tl_type_id
        })
       })
@@ -176,7 +177,7 @@ export default function RollcallRDS(props) {
    console.log(' newlist[stuIndex]', rollcalls[stuIndex])
  }
 /*=========== Create Table HEAD ===========*/
-const rollcallsList = [ 'rc_starttime', 'rc_inputsource', 'tl_type_name','tl_type_id']
+const rollcallsList = [ 'rc_starttime', 'rc_inputsource','tl_type_id']
 
 useEffect(() => {
  async function fetchData() {
@@ -219,7 +220,7 @@ useEffect(() => {
                   {
                   //const labelId = `enhanced-table-checkbox-${index}`;
 
-                    rollcallsList.map( (list, i) =>   i < 3 ? 
+                    rollcallsList.map( (list, i) =>   i < 2 ? 
                     <TableCell key={i} component="th" scope="row" align="left">
                     {rollcall[list]}
                  </TableCell>:
