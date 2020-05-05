@@ -14,11 +14,17 @@ import Typography from '@material-ui/core/Typography';
 import {useParams} from "react-router-dom";
 import { usePosition } from 'use-position';
 import axios from 'axios';
+import {useState,useEffect} from 'react';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
+  },
+  gpslogo:{
+    width: '150px',
+    height:'150px',
   },
 }));
 
@@ -29,9 +35,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function GPS() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [gps,setGps] = React.useState([]);
 
   const params = useParams();
-  console.log(params);
+  //console.log(params.cs_id);
 
 
   const watch = true;
@@ -42,18 +49,17 @@ export default function GPS() {
       } = usePosition(watch);
 
 
-      const [rcid, setRcid] = React.useState(0)
+      // const [rcid, setRcid] = React.useState(0)
 
       const handleSubmit = () => {
-        // setQrcode(uuidv4());
-        
+        console.log("rcid",gps.rc_id)
     fetch('/student/rollcall/GPSRollcall',{
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          rc_id: params.cs_id,
+          rc_id: gps.rc_id,
           gps_point: longitude + ","  + latitude
       })
   })
@@ -82,19 +88,8 @@ export default function GPS() {
     
     
 } fetchres() })
-  .then(res => {
-  async function fetchData() {
-    const result = await axios.get(`/teacher/rollcall/findRCID/1/`)
-    setRcid(result.data[0]["rc_id"]);
-  
-    console.log(result.data[0]["rc_id"]);
-    }
-    fetchData()
-})
-    
 
   }
-
 
 
   const handleClickOpen = () => {
@@ -103,41 +98,19 @@ export default function GPS() {
 
   const handleClose = () => {
     setOpen(false);
-   
-    
-    // .then(res => {
-      // console.log(rcid)
-      // async function putData() {
-      
-      fetch('/teacher/rollcall/updateQRcode',{
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            
-            rc_id: rcid,
-            qrcode: '',
-            // cs_id: params.cs_id,
-            // rc_inputsource: 'QRcode點名'
-            
-        })
-    })
   };
 
-  
-  const [inputs, setInputs] = React.useState({
-    rc_id:'',
-    rc_inputsource:'',
-    //qrcode:'',
-    //宣告要接值的變數
-  });
 
-  const handleChange = user => event => {
-    event.persist();
-    setInputs(inputs => ({...inputs, [user]: event.target.value}));
-    //不知道怎麼解釋哈哈哈哈
-}
+useEffect(() => {
+  async function fetchData() {
+      const result = await axios.get(`/student/rollcall/allGPSRollcall/${params.cs_id}`);
+      
+      console.log(result.data);
+ 
+      setGps(result.data);
+  }
+  fetchData();
+ }, []);
 
 
   return (
@@ -167,10 +140,10 @@ export default function GPS() {
       >
 
     <Grid item  xs={12}>
+      <LocationOnIcon color='disabled' className={classes.gpslogo}/>
       <Typography>
-      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
-
-點名
+      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary" alignItems="center">
+    我要點名!
 </Button>
       </Typography>
         

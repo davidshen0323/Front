@@ -106,7 +106,7 @@ export default function Hand() {
   const handleClose = () => {
     setOpen(false);
     console.log(rcid)
-    fetch('/teacher/rollcall/updateQRcode',{
+    fetch('/teacher/rollcall/closedRollcall',{
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json',
@@ -114,9 +114,6 @@ export default function Hand() {
       body: JSON.stringify({
           
           rc_id: rcid,
-          qrcode: '',
-          //cs_id: params.cs_id,
-          // rc_inputsource: 'QRcode點名'
           
       })
   })
