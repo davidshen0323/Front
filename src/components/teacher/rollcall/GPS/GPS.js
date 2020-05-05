@@ -108,7 +108,7 @@ export default function GPS() {
       // console.log(rcid)
       // async function putData() {
       
-      fetch('/teacher/rollcall/updateQRcode',{
+      fetch('/teacher/rollcall/closedRollcall',{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -116,10 +116,7 @@ export default function GPS() {
         body: JSON.stringify({
             
             rc_id: rcid,
-            qrcode: '',
-            // cs_id: params.cs_id,
-            // rc_inputsource: 'QRcode點名'
-            
+                        
         })
     })
   };

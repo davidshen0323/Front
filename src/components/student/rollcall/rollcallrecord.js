@@ -201,7 +201,7 @@ export default function Rollcallrecord() {
   };
 
   /*=========== Create Table HEAD ===========*/
-const rollcallrecordList = [ 'record_time','tl_type_name','rc_inputsource']
+const rollcallrecordList = [ 'rc_starttime','tl_type_name','rc_inputsource']
 
 useEffect(() => {
  async function fetchData() {
