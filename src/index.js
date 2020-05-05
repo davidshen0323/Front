@@ -19,7 +19,7 @@ import TInformation from './components/teacher/information/TInformation';
 import StuInformation from './components/student/information/stuInformation';
 import QAlist_T from './components/teacher/Question/QAlist_T';
 import QAlist_S from './components/student/Question/QAlist_S';
-
+import Loading from './components/Loading';
 import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
 
@@ -64,9 +64,7 @@ ReactDOM.render(
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepages" component={homepages}/>
             <Route path="/functions/:cs_id" component={functions}/>
-
-
-
+            <Route path="/loading" component={Loading}/>
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>

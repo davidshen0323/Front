@@ -122,9 +122,6 @@ export default function AddQA ()  {
              rowsMin={5}
              placeholder="請輸入問題"
              />
-             
-             
-    
           </Typography>
         </div>
       </DialogContent>
