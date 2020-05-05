@@ -28,19 +28,20 @@ export default function Ttable( props ) {
   console.log(props.id);
 
   useEffect(() => {
-    // async function fetchData() {
-    //   const result = await axios.get(`/teacher/rollcall/oneRollcall/Summary/${props.id}/`);
+    async function fetchData() {
+      const result = await axios.get(`/teacher/rollcall/oneRollcall/Summary/${props.id}/`);
       
-    //   console.log(result.data);
+      console.log(result.data);
       
-    //   setAttend(result.data);
-    // }
-      function fetchData() {
-          const result = fetch('/teacher/rollcall/oneRollcall/Summary/'+props.id+'/')
-          setAttend(result);
-
-          console.log(result);
+      setAttend(result.data);
     }
+      // function fetchData() {
+      //     const result = fetch('/teacher/rollcall/oneRollcall/Summary/'+props.id+'/')
+          
+      //     console.log(result.data);
+      //     setAttend(result);
+
+    //}
     fetchData();
   }, [props.id]);
   
