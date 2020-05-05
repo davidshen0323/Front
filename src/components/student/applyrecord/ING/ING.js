@@ -9,10 +9,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-//import Apply from './apply';
+import Write from './Write';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {useEffect} from 'react';
+
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -46,6 +47,7 @@ const headCells = [
   { id: 'applytime', label: '申請時間', numeric: false, disablePadding: true },
   { id: 'type', label: '假別', numeric: false, disablePadding: true},
   { id: 'reason',label: '事由', numeric: false, disablePadding: true},
+  { id: 'write',label: '修改', numeric: false, disablePadding: true},
 ];
 
 function EnhancedTableHead(props) {
@@ -128,7 +130,7 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------------*/
 
 
-export default function Leavetable() {
+export default function Ing() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -165,7 +167,7 @@ export default function Leavetable() {
   // }
 
    /*=========== Create Table HEAD ===========*/
-   const ingList = [ 'rc_starttime','rc_inputsource','rc_id']
+   const ingList = [ 'rc_starttime', 'tl_createtime', 'tl_type_name', 'tl_content','tl_content']
   
    useEffect(() => {
      async function fetchData() {
@@ -196,24 +198,35 @@ export default function Leavetable() {
             <TableBody>
               {stableSort(ing, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((ing, index) => {
-                  //const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
-                  return (
+                .map( (ing, index) => ing["tl_state"]===0 ?
+                (
+                
+                
                     <TableRow hover >
                       {/* 碰到的時候後面會反灰 */}
-                      <TableCell>{index+1}</TableCell>
+                      <TableCell></TableCell>
                       {
-                    ingList.map( (list, i) =>    
+                    ingList.map( (list, i) =>   i < 4 ? 
                     <TableCell key={i} component="th" scope="row" align="left" padding="none" >
                     {ing[list]}
+                 </TableCell>:
+                 <TableCell key={i} align="left" >
+                   <Write 
+                   id={ing['rc_id']}
+                   time={ing['rc_starttime']}
+                   applytime={ing['tl_createtime']}
+                   type={ing['tl_type_id']}
+                   content={ing['tl_content']}
+                   />
                  </TableCell>
                     )   
                 }
                     </TableRow>
-                  );
-                })}
+                )
+                :
+                <div></div>
+                 
+                )}
             </TableBody>
           </Table>
         </TableContainer>

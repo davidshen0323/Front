@@ -8,7 +8,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import  {Typography, TextareaAutosize} from '@material-ui/core';
-import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
+import CreateIcon from '@material-ui/icons/Create';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -69,14 +69,13 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Apply(props) {
+export default function Write(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
-    const [inputs, setInputs] = React.useState({
-        typeid:'',
-        tl_content:'',    
-    });
+    const [inputs, setInputs] = React.useState(
+      {content:props.content,}
+    );
   
     const handleChange = fieldname => event => {
       event.persist();
@@ -94,6 +93,10 @@ export default function Apply(props) {
 
   const handleClickOpen = () => {
     setOpen(true);
+    console.log(props.time)
+    console.log(props.applytime);
+    console.log(props.type)
+    console.log(props.content)
   };
   const handleClose = () => {
     setOpen(false);
@@ -101,18 +104,16 @@ export default function Apply(props) {
 
   const handleSubmit = () =>{
     setOpen(false);
-    console.log(props.id);
-    console.log(inputs.tl_content);
-    console.log(inputs.typeid);
-    fetch('/student/takeleave',{
-      method: 'POST',
+    
+    console.log(inputs.content);
+    fetch('/student/takeleave/UpdateContent',{
+      method: 'PUT',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          rc_id:props.id,
-          tl_content:inputs.tl_content,
-          tl_type_id:inputs.typeid,
+        rc_id:props.id,
+        tl_content:inputs.content,
       })
   })
   };
@@ -120,7 +121,7 @@ export default function Apply(props) {
   return (
     <div className={classes.root}>
       <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
-        <AssignmentOutlinedIcon />
+        <CreateIcon />
       </IconButton>
 
       <Dialog onClose={handleClose}  open={open} variant="inline" fullWidth maxWidth="sm">
@@ -130,7 +131,7 @@ export default function Apply(props) {
           
         <ListItem>
           <Typography className={classes.inputName} >
-            日期時間:
+            點名時間:
         </Typography>
             <Typography
                   className={classes.inline}>
@@ -141,12 +142,12 @@ export default function Apply(props) {
 
              <ListItem>
           <Typography className={classes.inputName} >
-            來源:
+            申請時間:
         </Typography>
             <Typography
                   
                   className={classes.inline}>
-                    {props.resource}
+                    {props.applytime}
             </Typography>
           </ListItem>  
           
@@ -167,15 +168,12 @@ export default function Apply(props) {
                     請假類別：
                 
                 <FormControl variant="outlined" className={classes.formControl} size="small">
-                    <InputLabel>假別</InputLabel>
+                    {/* <InputLabel>假別</InputLabel> */}
                     <Select
                     native
-                    value={inputs.typeid}
-                    onChange={handleChange('typeid')}
-                    inputProps={{
-                        name: 'typeid',
-                        id:'typeid'
-                    }}
+                    value={props.type}
+                    // onChange={handleChange('typeid')}
+                   disabled
                     >
                     <option value="" />
                     <option value={4}>病假</option>
@@ -199,8 +197,8 @@ export default function Apply(props) {
                     <TextareaAutosize 
                     //onChange={()=> setInputs(2)} id="question" 
                     style={{borderRadius:10, padding:8, width:550, height:50, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請詳述請假事由"
-                    value={inputs.tl_content}
-                    onChange={handleChange('tl_content')}/>
+                    value={inputs.content}
+                    onChange={handleChange('content')}/>
                 </Typography>     
                 </div>
             </Grid>
