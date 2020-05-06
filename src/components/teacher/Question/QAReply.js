@@ -35,6 +35,7 @@ export default function QaReply( props )  {
   
   const [openS, setOpenS] = React.useState(false);
   const [inputs, setInputs] = React.useState(1);
+  const [open, setOpen] = React.useState(false);
   
   const [reply, setReply] = React.useState({
     reply: '',
@@ -43,7 +44,6 @@ export default function QaReply( props )  {
   const params = useParams();
   const csid = params.cs_id;
   
-  const [open, setOpen] = React.useState(false);
   
   const handleChange = fieldname => event => {
     setInputs(2);
