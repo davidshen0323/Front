@@ -119,9 +119,6 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
-  container: {
-    display: 'flex',
-  },
   
 }));
 /*---------------------------------------------*/
@@ -184,7 +181,6 @@ export default function Leavetable() {
           
           <Table
             className={classes.table}
-            aria-labelledby="tableTitle"
             size='small'
           >
             <EnhancedTableHead

@@ -8,10 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MyMenu from '../MenuS';
 
-import Rollcall from '../rollcall/rollcall';
 import Leave from './leave';
-import Member from '../member/member';
-import Apply from '../applyrecord/applyrecord';
 import ApplyRecord from '../applyrecord/applyrecord';
 
 
@@ -59,28 +56,9 @@ function LinkTab(props) {
 
 
 
-/*--------------------------------------------*/
-const useStyles = makeStyles(theme => ({
-
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    
-  },
-  proot: {
-    display: 'flex',
-    padding:20,
-    
-  },
-  button: {
-    margin: theme.spacing(2),
-},
-}));
-/*---------------------------------------*/
 
 
 export default function LeaveBlockS() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
 
@@ -91,8 +69,7 @@ export default function LeaveBlockS() {
   return (
     <div >
         <MyMenu/>
-          <br/><br/><br/>
-            <center><label><h1>專題</h1></label> </center>
+          
             <AppBar position="static" color="inherit">
                 <Tabs
                 variant="fullWidth"
@@ -100,18 +77,13 @@ export default function LeaveBlockS() {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                {/* <LinkTab label="點名" href="/rollcall" {...a11yProps(0)} /> */}
+               
                 <LinkTab label="請假申請" href="/leavemanage" {...a11yProps(0)} />
                 <LinkTab label="請假申請記錄" href="/leavemanage" {...a11yProps(1)} />
-                {/* <LinkTab label="班級名單" href="/member" {...a11yProps(3)} /> */}
+                
             
                 </Tabs>
             </AppBar>
-
-            
-      {/* <TabPanel value={value} index={0}>
-        <Rollcall/>
-      </TabPanel> */}
 
       <TabPanel value={value} index={0}>
         <Leave/>
@@ -121,9 +93,6 @@ export default function LeaveBlockS() {
         <ApplyRecord/>
       </TabPanel>
 
-      {/* <TabPanel value={value} index={3}>
-        <Member/>
-      </TabPanel> */}
 
     </div>
   );
