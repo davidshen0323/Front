@@ -1,11 +1,7 @@
 import React from 'react';
 // import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button, Link } from '@material-ui/core/';
-import Typography from '@material-ui/core/Typography';
-
-import Grid from '@material-ui/core/Grid';
-
+import { AppBar, Toolbar, Button, Grid, Typography} from '@material-ui/core/';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 
    toolbar: {
-     backgroundColor: "#003060",
+     backgroundColor: '#003060',
   
    },
 

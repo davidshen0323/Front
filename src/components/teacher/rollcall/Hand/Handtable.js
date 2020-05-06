@@ -123,15 +123,15 @@ const useStyles = makeStyles(theme => ({
 /*---------------------------------------------*/
 
 
-export default function Handtable(props) {
+export default function Handtable( props ) {
 
   /*------------ STATE ------------*/
   const [students, setMembers] = useState([]);
-
+  const [rcid, setRcid] = useState();
 const params = useParams();
 // console.log(params);
 // const csid = params.cs_id;
-console.log(params.cs_id);
+// console.log(params.cs_id);
  
 
 const classes = useStyles();
@@ -147,40 +147,6 @@ const [inputs, setInputs] = React.useState({
   //宣告要接值的變數
 });
 
-const changeState =(event,id) =>{
-  const stuIndex = students.findIndex(s=>s.std_id==id)
-  var newlist = [...students]
-  newlist[stuIndex].tl_type_id = parseInt(event.target.value)
-
-  setMembers(newlist)
-  console.log('newlist[stuIndex]',newlist[stuIndex])
-}
-
-const handleSubmit = () => {
-  fetch('/student_re',{
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        std_id: inputs.user,
-        std_phone: inputs.phone,
-        std_mail: inputs.mail
-    })
-})
-.then(res => {
-    async function fetchres(){
-    const test = await res.text();
-    alert("點名成功!");
-                post = true;
-                console.log(0);
-                history.push("/RollcallBlockT");
-                return post;  
-} fetchres() })
-.then(res => console.log(res))
-.catch(err => console.log(`Error with message: ${err}`))
-
-};
 
 let post; //宣告一個布林值變數
 let history = useHistory(); //傳值跳頁的方法
@@ -206,19 +172,49 @@ const handleChangeRowsPerPage = event => {
   setRowsPerPage(parseInt(event.target.value, 10));
   setPage(0);
 };
+
+
+const handleSubmit = (student) =>
+   {
+     console.log('student',student['std_id'])
+     console.log(props.id)
+        fetch(`/teacher/rollcall/updateRollcall/`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              std_id: student.std_id,
+              rc_id: props.id,
+              tl_type_id: student.tl_type_id
+        })
+       })
+      }
+      
+
+  const changeState =(event,id) =>{
+    const stuIndex = students.findIndex(s=>s.std_id==id)
+    var newlist = [...students]
+    newlist[stuIndex].tl_type_id = parseInt(event.target.value)
+
+    setMembers(newlist)
+    handleSubmit(students[stuIndex])
+    console.log(' newlist[stuIndex]', students[stuIndex])
+  }
 /*=========== Create Table HEAD ===========*/
-const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name','tl_type_id']
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_id']
+console.log(props.id)
 
 useEffect(() => {
  async function fetchData() {
-     const result = await axios.get(`/teacher/rollcall/oneRollcall/{rc_id}`+props.id);
+     const result = await axios.get(`/teacher/rollcall/oneRollcall/${props.id}`);
      
      console.log(result.data);
 
      setMembers(result.data);
  }
  fetchData();
-}, []);
+}, [props.id]);
 
 
 
@@ -259,8 +255,7 @@ useEffect(() => {
                     <FormControl component="fieldset" onChange={(e)=>changeState(e,student.std_id)}>
                       <RadioGroup row  value={student.tl_type_id+''}>
                         <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
-                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
-                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
+                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遠距" />
                         <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="缺席" />
 
                       </RadioGroup>
@@ -273,7 +268,7 @@ useEffect(() => {
               })}
             </TableBody>
             </Table>
-            <div align="center" >
+            {/* <div align="center" >
                     <Button variant="contained" color="secondary"  className= {classes.button} startIcon={<Delete />}>
                         取消
                     </Button>
@@ -282,7 +277,7 @@ useEffect(() => {
                         確定
                     </Button>
             </div>
-          
+           */}
         </TableContainer>
 
         <TablePagination

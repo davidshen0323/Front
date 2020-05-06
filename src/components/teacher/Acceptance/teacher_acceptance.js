@@ -1,15 +1,11 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+
+import {Table, TableBody, TableCell, TableHead, TableRow, Box, Grid} from "@material-ui/core";
 import MyMenu from '../MenuT';
-import { useParams } from 'react-router-dom';
-import { Box, Grid, AppBar, Tabs, Typography, Tab } from '@material-ui/core';
+import { useParams} from 'react-router-dom';
+
 import {useHistory} from "react-router-dom";
 import AcceptScore from "./acceptScore";
 import PropTypes from 'prop-types';

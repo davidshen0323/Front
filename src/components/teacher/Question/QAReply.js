@@ -1,5 +1,5 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Radio, RadioGroup, TextareaAutosize, FormControlLabel, Input} from "@material-ui/core";
+import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -30,13 +30,12 @@ function Alert(props) {
 
 export default function QaReply( props )  {
   const classes = useStyle();
-  
-  
-  
   const [openS, setOpenS] = React.useState(false);
   const [inputs, setInputs] = React.useState(1);
+
   const [open, setOpen] = React.useState(false);
   
+
   const [reply, setReply] = React.useState({
     reply: '',
   })
@@ -81,7 +80,7 @@ export default function QaReply( props )  {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          q_reply: "老師已回覆過類似問題!",
+          q_reply: "老師已回覆過類似問題！",
           cs_id: csid,
           q_std_id: props.stdid,
           q_asktime: props.time
@@ -92,9 +91,6 @@ export default function QaReply( props )  {
 
 
   const submitClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
     handleClose(true);
     setOpenS(false);
     setInputs(1);
@@ -143,9 +139,9 @@ export default function QaReply( props )  {
 
           {/* 之後要接問題 */}  
           <Typography className={classes.typo} variant="body1">
-            <TextareaAutosize disabled style={{borderRadius:10, padding:8, width:250, height:40, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5} >
+            <Typography disabled style={{borderRadius:10, padding:8, width:250, height:40, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5} >
               {props.content}
-            </TextareaAutosize>
+            </Typography>
           </Typography>
 
           <Typography className={classes.typo} variant="body1">

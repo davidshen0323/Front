@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import QRcode from "./QRcode/QRcode";
 import Hand from "./Hand/Hand";
-// import GPS from "./GPS/Gps";
+import GPS from "./GPS/GPS";
 import { useParams } from "react-router-dom";
 
 /*------------ STYLE ------------*/
@@ -72,7 +72,7 @@ export default function RollcallForm(){
               <Grid item  xs={12} sm={4}>
               <Card className={classes.card}>
                 <CardActionArea className={classes.cardaction}>
-                {/* <GPS/> */}
+                <GPS/>
                 </CardActionArea>
               </Card>
               </Grid>

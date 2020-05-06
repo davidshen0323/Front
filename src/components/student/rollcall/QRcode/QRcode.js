@@ -13,8 +13,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
 import Typography from '@material-ui/core/Typography';
 import {useParams} from "react-router-dom";
-
-
+import QrReader from 'react-qr-reader'
+import MuiAlert from "@material-ui/lab/Alert";
+import {useState} from  "react";
+import Snackbar from "@material-ui/core/Snackbar";
+import {DialogActions} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -27,73 +30,90 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+
 export default function Qrcode() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [change, setChange] = React.useState(0);  
+  const [inputs, setInputs] = React.useState({
+    cs_id:'',
   
-  const params = useParams();
+    //宣告要接值的變數
+});
+  // const params = useParams();
   // console.log(params);
   // const csid = params.cs_id;
-  console.log(params.cs_id);
+  // console.log(params.cs_id);
+   
   
-  const rand = Math.random();
-  const test = rand.toString();
+  //QRcode
+   const [scan, setScan] = useState();
+
+   function handleScan (scan) {
+     if(scan){
+       setScan(scan);
+       setChange(1);
+     }
+   }
+ 
+   function handleError (err) {
+     console.error(err);
+   }
   const handleClickOpen = () => {
-    setOpen(true);
-      console.log(test);
-      // console.log('QRcode點名');
-    
-      fetch('/teacher/rollcall/addrollcall',{
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              
-              // rc_inputsource:inputs.way,
-              qrcode: test,
-              cs_id: params.cs_id,
-              rc_inputsource: 'QRcode點名'
-              
-          })
-      })
-      
-  
+    setOpen(true);  
+    setScan("");
   };
 
   const handleClose = () => {
     setOpen(false);
-    fetch('/teacher/rollcall/updateQRcode',{
-      method: 'PUT',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-          
-          // rc_inputsource:inputs.way,
-          qrcode: '',
-          // cs_id: params.cs_id,
-          // rc_inputsource: 'QRcode點名'
-          
-      })
-  })
   };
 
-  
-  // const [inputs, setInputs] = React.useState({
-    // rc_inputsource:'',
-    //qrcode:'',
-    //宣告要接值的變數
-  // });
+  const handleChange = cs_id => event => {
+    event.persist();
+    setInputs(inputs => ({...inputs, [cs_id]: event.target.value}));
+    //不知道怎麼解釋哈哈哈哈
+    setChange(1);
+}   
 
-//   const handleChange = user => event => {
-//     event.persist();
-//     setInputs(inputs => ({...inputs, [user]: event.target.value}));
-//     //不知道怎麼解釋哈哈哈哈
-// }
-
-
+const submitClick = () => {
+setOpen(false);
+console.log(scan)
+fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
+  method: 'PUT',
+  headers: {
+      'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({})
+})
+.then(res => {
+                    
+  async function fetchres(){
+  const rq = await res.text();  //接收後端傳來的訊息
+  if (rq === "request failed. This rollcall was closed by teacher!")
+  {
+      alert("點名失敗! 老師已關閉點名!");
+      console.log(1);
+      
+  }
+  else if(rq === "request successful! the QRcode rollcall record has already added!") 
+  {
+      alert("點名成功!");
+      console.log(2);
+      // setQrcode(null);   
+    }
     
+    
+  } })
+    
+      
+  
+    }
+  
+     
 
 
   return (
@@ -124,14 +144,30 @@ export default function Qrcode() {
 
     <Grid item  xs={12}>
       <Typography>
-        <QRCode value ={test} size={300}/>
+      <QrReader
+        // ref={qr}
+        facingMode="environment"
+        delay={300}
+        style={{width:250}}
+        onError={handleError}
+        onScan={handleScan}
+      />
       </Typography>
         
         {/* <QRcodeMade /> */}
     </Grid>    
 
       
-        </Grid>
+       
+        <DialogActions>
+        <Button disabled={change===0 ? true : false} onClick={submitClick} color="primary" >我要點名!</Button>
+        {/* <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          已加入課程！
+        </Alert>
+      </Snackbar> */}
+      </DialogActions>
+ </Grid>
       </Backdrop>
 
         

@@ -1,9 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Table, TableHead, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
-
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import React, {useEffect} from 'react';
+import { Table, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
 import MyMenu from '../MenuS';
 import EditEmail from './editEmail';
 import EditPhone from './editPhone';

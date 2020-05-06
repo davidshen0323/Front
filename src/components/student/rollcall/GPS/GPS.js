@@ -10,16 +10,21 @@ import ComButton from "../../../ComButton";
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import QRCode from 'qrcode.react';
 import Typography from '@material-ui/core/Typography';
 import {useParams} from "react-router-dom";
-
-
+import { usePosition } from 'use-position';
+import axios from 'axios';
+import {useState,useEffect} from 'react';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
+  },
+  gpslogo:{
+    width: '150px',
+    height:'150px',
   },
 }));
 
@@ -27,79 +32,91 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Qrcode() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  
-  const params = useParams();
-  // console.log(params);
-  // const csid = params.cs_id;
-  console.log(params.cs_id);
-  
-  const rand = Math.random();
-  const test = rand.toString();
-  const handleClickOpen = () => {
-    setOpen(true);
-      console.log(test);
-      // console.log('QRcode點名');
-    
-      fetch('/teacher/rollcall/addrollcall',{
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              
-              // rc_inputsource:inputs.way,
-              qrcode: test,
-              cs_id: params.cs_id,
-              rc_inputsource: 'QRcode點名'
-              
-          })
-      })
-      
-  
-  };
+export default function GPS() {
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const [gps,setGps] = React.useState([]);
 
-  const handleClose = () => {
-    setOpen(false);
-    fetch('/teacher/rollcall/updateQRcode',{
+  const params = useParams();
+  //console.log(params.cs_id);
+
+
+  const watch = true;
+      const {
+        latitude,
+        longitude,
+        // error,
+      } = usePosition(watch);
+
+
+      // const [rcid, setRcid] = React.useState(0)
+
+      const handleSubmit = () => {
+        console.log("rcid",gps.rc_id)
+    fetch('/student/rollcall/GPSRollcall',{
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          
-          // rc_inputsource:inputs.way,
-          qrcode: '',
-          // cs_id: params.cs_id,
-          // rc_inputsource: 'QRcode點名'
-          
+          rc_id: gps.rc_id,
+          gps_point: longitude + ","  + latitude
       })
   })
+  .then(res => {
+                    
+    async function fetchres(){
+    const rq = await res.text();  //接收後端傳來的訊息
+    if (rq === 'request failed. This rollcall was closed by teacher!')
+    {
+        alert("點名失敗! 老師已關閉點名!");
+        console.log(1);
+        
+    }
+    else if(rq === 'request failed. GPS point distance too far!') 
+    {
+        alert("點名失敗! 您不再範圍內!");
+        console.log(2);
+        // setQrcode(null);   
+    }
+    else if(rq === 'request successful! the GPS rollcall record has already added!') 
+    {
+        alert("點名成功!");
+        console.log(3);
+        // setQrcode(null);   
+    }
+    
+    
+} fetchres() })
+
+  }
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  
-  // const [inputs, setInputs] = React.useState({
-    // rc_inputsource:'',
-    //qrcode:'',
-    //宣告要接值的變數
-  // });
-
-//   const handleChange = user => event => {
-//     event.persist();
-//     setInputs(inputs => ({...inputs, [user]: event.target.value}));
-//     //不知道怎麼解釋哈哈哈哈
-// }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
-    
+useEffect(() => {
+  async function fetchData() {
+      const result = await axios.get(`/student/rollcall/allGPSRollcall/${params.cs_id}`);
+      
+      console.log(result.data);
+ 
+      setGps(result.data);
+  }
+  fetchData();
+ }, []);
 
 
   return (
     <div>
-      <Button onClick={handleClickOpen} >
-       <ComButton title="GPS" url="https://image.flaticon.com/icons/svg/2807/2807144.svg" />
+      <Button  onClick={handleClickOpen} >
+       <ComButton title="GPS" url="https://image.flaticon.com/icons/svg/2807/2807144.svg" className={classes.button}/>
       </Button>
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
@@ -123,11 +140,13 @@ export default function Qrcode() {
       >
 
     <Grid item  xs={12}>
+      <LocationOnIcon color='disabled' className={classes.gpslogo}/>
       <Typography>
-        <QRCode value ={test} size={300}/>
+      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary" alignItems="center">
+    我要點名!
+</Button>
       </Typography>
         
-        {/* <QRcodeMade /> */}
     </Grid>    
 
       
@@ -139,3 +158,5 @@ export default function Qrcode() {
     </div>
   );
 }
+
+

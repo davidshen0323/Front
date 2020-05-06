@@ -19,7 +19,7 @@ import TInformation from './components/teacher/information/TInformation';
 import StuInformation from './components/student/information/stuInformation';
 import QAlist_T from './components/teacher/Question/QAlist_T';
 import QAlist_S from './components/student/Question/QAlist_S';
-
+import Loading from './components/Loading';
 import RollcallRD from './components/student/rollcall/rollcallRD';
 import Register from './components/Register.js';
 
@@ -60,13 +60,11 @@ ReactDOM.render(
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <Route path="/rollcall/:cs_id" component={Rollcall}/>
-            <Route path="/leavemanage" component={Leavemanage}/>
+            <Route path="/leavemanage/:cs_id" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepages" component={homepages}/>
             <Route path="/functions/:cs_id" component={functions}/>
-
-
-
+            <Route path="/loading" component={Loading}/>
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
             <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
@@ -90,7 +88,7 @@ ReactDOM.render(
             <Route path="/QRcode" component={QRcode}/> 
             <Route path="/Hand" component={Hand}/>
 
-            <Route path="/LeaveBlockS" component={LeaveBlockS}/>
+            <Route path="/LeaveBlockS/:cs_id" component={LeaveBlockS}/>
             <Route path="/RollcallRD/:cs_id" component={RollcallRD}/>
             <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
