@@ -9,7 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import {useState,useEffect} from 'react';
@@ -103,10 +102,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
   table: {
     minWidth: 750,
   },
@@ -187,7 +182,6 @@ export default function MemberTable( props ) {
             className={classes.table}
             aria-labelledby="tableTitle"
             size='small'
-            aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}

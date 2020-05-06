@@ -21,7 +21,19 @@ const useStyle = makeStyles(theme => ({
     color: "blue",
     padding: 10
   },
-}));
+  button: {
+   // margin: theme.spacing(1),
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    width:'100px',
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+     backgroundColor: "#003060",
+    fontWeight:'bold',
+},
+}
+));
 
 
 function Alert(props) {
@@ -94,7 +106,7 @@ export default function AddQA ()  {
       onClick = {handleClickOpen}
       variant = "contained" 
       color = "primary" 
-      style={{marginLeft:'50%', fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} 
+      className={classes.button}
     >
     我要發問
   </Button>

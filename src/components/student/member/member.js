@@ -8,14 +8,12 @@ import { useParams } from 'react-router-dom';
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 
-    body:{
-        margin:'20px',
-        marginTop:'20px',
-        background: '#E1E1E1',
-    },
     Paper:{
         width: '90%',
-        margin: 'auto',        
+        margin: 'auto', 
+        marginTop:'5%',   
+        marginBottom:'5%',
+        boxShadow:"1px 1px 1px 1px #9E9E9E",    
     },
   });
 
@@ -28,9 +26,7 @@ export default function Member() {
 
             <div >
                 <MyMenu/>
-          <br/><br/><br/>
-            {/* <center><label><h1>專題</h1></label> </center> */}
-
+          <br/>
                 <Paper className={classes.Paper}>
                   <MMTable
                     csid={params.cs_id}
