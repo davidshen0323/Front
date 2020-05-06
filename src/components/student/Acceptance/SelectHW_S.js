@@ -40,7 +40,7 @@ export default function SelectHW() {
 
   const [Acc, setAcc] = React.useState([]);
 
-  const acceptanceList = [ 'hw_name', 'hw_createtime' ]
+  const acceptanceList = [ 'hw_name', 'hw_createtime', 'accept_score' ]
 
   const params = useParams();
   const csid = params.cs_id;
@@ -77,6 +77,7 @@ export default function SelectHW() {
                 <TableRow>
                     <TableCell align="center">作業名稱</TableCell>
                     <TableCell align="center">日期</TableCell>
+                    <TableCell align="center">分數</TableCell>
                     
                 </TableRow>
             </TableHead>
@@ -98,7 +99,24 @@ export default function SelectHW() {
                     }
                     {/* </ButtonBase> */}
                 </TableRow>
-              ))}
+              )
+              // :
+              // <TableRow key={index}>
+                 
+              //     {
+              //       acceptanceList.map( (list, i) => 
+                    
+              //       <TableCell key={i} component="th" scope="row" align="center">
+              //         {/* <ButtonBase className={classes.buttonbase} component={Link} to={`/acceptance/${csid}/${Accept['hw_name']}`}> */}
+              //         {Accept[list]}      
+              //       {/* </ButtonBase> */}
+              //         </TableCell>
+                    
+              //         )
+              //       }
+              //       {/* </ButtonBase> */}
+              //   </TableRow>
+              )}
              
             </TableBody>
           </Table>

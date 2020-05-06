@@ -180,16 +180,16 @@ export default function AcceptanceList({ open }) {
                   <TableCell align="center">排序</TableCell>
                   <TableCell align="center">學號</TableCell>
                   <TableCell align="center">時間</TableCell>
-                  <TableCell align="center">狀態</TableCell>
+                  {/* <TableCell align="center">狀態</TableCell> */}
                   
                 </TableRow>
             </TableHead>
 
             {/*===== TableBody =====*/}
             <TableBody>
-                {acceptances.map((acceptance,index) => (
+                {acceptances.map((acceptance,index) => acceptance["accept_done"] === false ? (
                     <TableRow key={index}>
-                      <TableCell>{index+1} </TableCell>
+                      <TableCell align="center">{index+1}</TableCell>
                       
                     {
                         
@@ -220,7 +220,12 @@ export default function AcceptanceList({ open }) {
                     
                     </TableRow>
                     
-                ))}
+                )
+                :
+                <TableRow>
+
+                </TableRow>
+                )}
             </TableBody>
 
         </Table>
