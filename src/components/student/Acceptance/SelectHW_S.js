@@ -4,6 +4,7 @@ import { Button, Table, TableHead, TableBody, TableCell, TableRow,Box, ButtonBas
 import Typography from '@material-ui/core/Typography';
 import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
 
 
 
@@ -11,6 +12,13 @@ export default function SelectHW() {
   //接值
 
   const useStyles = makeStyles({
+    Paper:{
+      width: '90%',
+      margin: 'auto', 
+      marginTop:'5%',   
+      marginBottom:'5%',
+      boxShadow:"1px 1px 1px 1px #9E9E9E",    
+  },
     backbut: {
       margin:'auto',
       marginTop: 30,
@@ -69,8 +77,9 @@ export default function SelectHW() {
   return (
     <div>
       <MyMenu/>
+      <br/>
       <Typography className={classes.selehw} variant="h5" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%'}}>請選擇作業：</Typography>
-      <Box border={1} mx="auto" width="60%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
+      <Paper className={classes.Paper}>
           
           <Table>
             <TableHead>
@@ -120,18 +129,18 @@ export default function SelectHW() {
              
             </TableBody>
           </Table>
-      </Box>
+      </Paper>
       <Grid
         container
         justify="center"
       >
-      <Button
+      {/* <Button
       className={classes.button}
       component={Link}
       to={`/functions/${csid}`}
       >
       返回
-      </Button>
+      </Button> */}
       </Grid>
 
     </div>

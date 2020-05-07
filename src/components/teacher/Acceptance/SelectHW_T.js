@@ -6,6 +6,7 @@ import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
 import AddAccept from './addAcceptance';
 import AddIcon from '@material-ui/icons/Add';
+import Paper from '@material-ui/core/Paper';
 
 
 
@@ -13,6 +14,13 @@ export default function SelectHW_T() {
   //接值
 
   const useStyles = makeStyles(theme => ({
+    Paper:{
+      width: '90%',
+      margin: 'auto', 
+      marginTop:'5%',   
+      marginBottom:'5%',
+      boxShadow:"1px 1px 1px 1px #9E9E9E",    
+  },
     backbut: {
       margin:'auto',
       marginTop: 30,
@@ -86,8 +94,9 @@ export default function SelectHW_T() {
       <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeCreateHw(true)}>
           <AddIcon />
         </Fab>
+        <br/>
       <Typography className={classes.selehw} variant="h5" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%'}}>請選擇作業：</Typography>
-      <Box border={1} mx="auto" width="60%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
+      <Paper className={classes.Paper}>
           
           <Table>
             <TableHead>
@@ -119,18 +128,18 @@ export default function SelectHW_T() {
              
             </TableBody>
           </Table>
-      </Box>
+      </Paper>
       <Grid
         container
         justify="center"
       >
-      <Button
+      {/* <Button
       className={classes.button}
       component={Link}
       to={`/functiont/${csid}`}
       >
       返回
-      </Button>
+      </Button> */}
       </Grid>
       <AddAccept open={openCreateHw} handleClose={onCloseCreateHw}/>
 

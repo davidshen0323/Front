@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     "&$expanded": {
       margin: 10,
       backgroundColor: '#fff',
-    }
+    },
   }
 }));
 

@@ -6,9 +6,18 @@ import {useParams} from "react-router-dom";
 import AddAnnouncement from './addAnnouncement';
 import AddIcon from '@material-ui/icons/Add';
 import MyMenu from '../../teacher/MenuT';
+import Paper from '@material-ui/core/Paper';
 
 
 const useStyles = makeStyles((theme) => ({
+  Paper:{
+    width: '90%',
+    margin: 'auto', 
+    marginTop:'5%',   
+    marginBottom:'5%',
+    padding:'2%',
+    boxShadow:"1px 1px 1px 1px #9E9E9E",    
+},
   fab: {
     position: 'fixed',
     bottom: theme.spacing(5),
@@ -76,9 +85,9 @@ export default function ViewAnnouncementt() {
        <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
           <AddIcon />
         </Fab>
-
-      <Box border={1} mx="auto" marginTop="8%" marginBottom="5%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#fff" borderColor="#0066CC">
-            <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}}>公佈欄</Typography>
+      <br/>
+      <Paper className={classes.Paper}>
+      <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體'}}>公佈欄</Typography>
 
             <Container maxWidth="sm">
             { Announcement.reverse(),
@@ -101,7 +110,7 @@ export default function ViewAnnouncementt() {
             </Container>
             <Box  mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>
       
-      </Box>
+      </Paper>
       
     {/* 教師發佈公告 */}
     <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>
