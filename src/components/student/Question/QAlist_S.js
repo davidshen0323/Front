@@ -8,6 +8,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import TableContainer from '@material-ui/core/TableContainer';
 import {List,Dialog} from '@material-ui/core/';
+import CloseIcon from '@material-ui/icons/Close';
+import { IconButton } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -155,6 +157,7 @@ export default function QAlist_S() {
                     <TableCell component="th" scope="row" align="center">學號</TableCell>
                     <TableCell component="th" scope="row" align="center">問題內容</TableCell>
                     <TableCell component="th" scope="row" align="center">最後更新時間</TableCell>
+                    <TableCell component="th" scope="row" align="left">取消問題</TableCell>
                     {/* <TableCell component="th" scope="row" align="center">回覆</TableCell> */}
                 </TableRow>
             </TableHead>
@@ -165,10 +168,16 @@ export default function QAlist_S() {
                 <TableRow key={index}>
                  {/* <TableCell>{index+1}</TableCell> */}
                   {
-                    questionlist.map( (list, i) =>
+                    questionlist.map( (list, i) => i<3 ?
                     
                     <TableCell key={i} component="th" scope="row" align="center">
                       {Ques[list]}
+                     </TableCell>
+                     :
+                     <TableCell>
+                      <IconButton>
+                        <CloseIcon/>
+                      </IconButton>
                      </TableCell>
                     )
                     }
@@ -183,12 +192,12 @@ export default function QAlist_S() {
             </TableBody>
           </Table>
           <List >
-          <Button 
+          {/* <Button 
           className={classes.button}
           variant="contained" 
           color="primary">
             取消問題
-          </Button>
+          </Button> */}
 
           <Button 
             onClick = {handleClickOpen}

@@ -68,7 +68,7 @@ export default function ViewAnnouncements() {
       <MyMenu/>
       <br/>
       <Paper className={classes.Paper}>
-            <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體'}}>公佈欄</Typography>
+            <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體',color:"#0066cc"}}>公佈欄</Typography>
 
             <Container maxWidth="sm">
             {Announcement.reverse(),
@@ -77,7 +77,8 @@ export default function ViewAnnouncements() {
                       
                     {
                         AnnouncementList.map( (list, i) =>  
-                            <ExpansionPanelSummary key={i} style={{marginLeft:10,fontSize:18}}>
+                            <ExpansionPanelSummary key={i} style={{marginLeft:10,fontSize:18,
+                              fontFamily:'微軟正黑體'}}>
                                <ExpansionPanelDetails>{announce[list]}</ExpansionPanelDetails>
                             </ExpansionPanelSummary>
                             

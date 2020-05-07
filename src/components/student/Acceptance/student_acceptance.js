@@ -34,6 +34,7 @@ export default function AcceptanceList({ open }) {
     },
     table: {
       minWidth: 450,
+      fontFamily:'微軟正黑體'
     },
     // backbut: {
     //   width: 100,
@@ -252,14 +253,6 @@ export default function AcceptanceList({ open }) {
         >
           
           <List>
-          <Button 
-          onClick={handleSubmit}
-          className={classes.button}
-          >
-            我要驗收
-          </Button>
-          
-          
           
           <Button
           onClick={handledelete}
@@ -267,6 +260,14 @@ export default function AcceptanceList({ open }) {
           >  
             取消驗收
           </Button>
+
+          <Button 
+          onClick={handleSubmit}
+          className={classes.button}
+          >
+            我要驗收
+          </Button>
+          
          </List>
 
           {/* <Button
@@ -281,31 +282,31 @@ export default function AcceptanceList({ open }) {
 
         </Grid> 
         {/* 成功小綠框 */}
-        <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="success">
             登記驗收成功！
           </Alert>
         </Snackbar>
         {/* 成功小綠框2 */}
-        <Snackbar open={openS2} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openS2} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="success">
             取消驗收成功！
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}
-        <Snackbar open={openErr1} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openErr1} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="error">
             老師已經打分數了，無法取消！
           </Alert>
         </Snackbar>
         {/* 失敗小橘框 */}
-        <Snackbar open={openWarn} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openWarn} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="warning">
             您已登記過驗收！
           </Alert>
         </Snackbar>
         {/* 失敗小橘框2 */}
-        <Snackbar open={openWarn2} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openWarn2} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="warning">
             你還沒點過驗收！
           </Alert>
