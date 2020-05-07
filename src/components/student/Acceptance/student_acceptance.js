@@ -6,8 +6,9 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyMenu from '../MenuS';
 import { useParams, Link ,useHistory} from 'react-router-dom';
-
-
+import Paper from '@material-ui/core/Paper';
+import TableContainer from '@material-ui/core/TableContainer';
+import {List} from '@material-ui/core/';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -19,7 +20,14 @@ export default function AcceptanceList({ open }) {
   const [acceptances, setAcceptances] = useState([]);
 
   /*------------ STYLE ------------*/
-  const useStyles = makeStyles({
+  const useStyles = makeStyles(theme =>({
+    Paper:{
+      width: '90%',
+      margin: 'auto', 
+      marginTop:'5%',   
+      marginBottom:'5%',
+      boxShadow:"1px 1px 1px 1px #9E9E9E",    
+  },
     root: {
       width: '100%',
       overflowX: 'auto',
@@ -35,17 +43,19 @@ export default function AcceptanceList({ open }) {
     //   backgroundColor: '#E0E0E0',
     // },
     button: {
-      width: 100,
+      width: '100px',
       margin:'auto',
       marginTop: 20,
       // marginLeft: 10,
       marginBottom: 10,
+      margin: theme.spacing(1),
       fontFamily: 'Microsoft JhengHei',
       color: "white",
       backgroundColor: "#003060",
       fontWeight:'bold',
     },
-  });
+  }
+  ));
   const classes = useStyles();
 
   /*=========== Create Table HEAD ===========*/
@@ -169,9 +179,9 @@ export default function AcceptanceList({ open }) {
     <div>
   
       <MyMenu/>
-
-      <Box border={1} mx="auto" width="60%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
-
+      <br/>
+      <Paper className={classes.Paper}>
+      <TableContainer>
         <Table className={classes.table}>
 
             {/*===== TableHead =====*/}
@@ -224,7 +234,8 @@ export default function AcceptanceList({ open }) {
             </TableBody>
 
         </Table>
-        </Box>
+        </TableContainer>
+        </Paper>
 
         <Grid
         open={open}
@@ -235,7 +246,7 @@ export default function AcceptanceList({ open }) {
         spacing={2}
         >
           
-          
+          <List>
           <Button 
           onClick={handleSubmit}
           className={classes.button}
@@ -251,18 +262,19 @@ export default function AcceptanceList({ open }) {
           >  
             取消驗收
           </Button>
+         </List>
 
-          <Button
+          {/* <Button
       className={classes.button}
       component={Link}
       to={`/selectHW_S/${params.cs_id}`}
       >
       返回
-      </Button>
+      </Button> */}
           
 
 
-        </Grid>
+        </Grid> 
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

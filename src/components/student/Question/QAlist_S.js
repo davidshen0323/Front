@@ -4,12 +4,11 @@ import { AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Ty
 import MyMenu from '../MenuS';
 import AddQA from './AddQA';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-// import QaReply from './QAReply';
 import TableContainer from '@material-ui/core/TableContainer';
-import {List} from '@material-ui/core/';
+import {List,Dialog} from '@material-ui/core/';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -108,6 +107,16 @@ export default function QAlist_S() {
     fetchData();
   }, []);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  }
+  
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   {/* 學生新增問題 */}
   const [openAddQa, closeAddQa] = React.useState(false);
   const onCloseAddQa = () => {
@@ -135,10 +144,8 @@ export default function QAlist_S() {
 
       <TabPanel value={value} index={0}>
         
-      <Paper className={classes.Paper}>
         <div className={classes.root}>
           <TableContainer>
-            <List>
       <Table
       className={classes.table}
       size='small'>
@@ -175,7 +182,6 @@ export default function QAlist_S() {
                
             </TableBody>
           </Table>
-</List>
           <List >
           <Button 
           className={classes.button}
@@ -184,20 +190,29 @@ export default function QAlist_S() {
             取消問題
           </Button>
 
+          <Button 
+            onClick = {handleClickOpen}
+            variant = "contained" 
+            color = "primary" 
+            className={classes.button}
+          >
+          我要發問
+        </Button>
+
+        <Dialog open={open} onClose={handleClose}>
+
           <AddQA />
-          
+        </Dialog>
           </List>
 
           </TableContainer>
           </div>
-      </Paper>
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
 
       <TabPanel value={value} index={1}>
-      <Paper className={classes.Paper}>
         <div className={classes.root}>
           <TableContainer>
       <Table
@@ -237,7 +252,6 @@ export default function QAlist_S() {
           </Table>
           </TableContainer>
           </div>
-      </Paper>
       </TabPanel>
     </div>
   );

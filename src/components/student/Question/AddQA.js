@@ -1,5 +1,5 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize} from "@material-ui/core";
+import {Button, DialogActions, DialogContent, Typography, TextareaAutosize} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -101,7 +101,7 @@ export default function AddQA ()  {
 
   return (
     <div>
-
+{/* 
     <Button 
       onClick = {handleClickOpen}
       variant = "contained" 
@@ -109,9 +109,9 @@ export default function AddQA ()  {
       className={classes.button}
     >
     我要發問
-  </Button>
+  </Button> */}
 
-    <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+    {/* <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description"> */}
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
@@ -152,7 +152,7 @@ export default function AddQA ()  {
           </Alert>
         </Snackbar>
       </DialogActions>
-    </Dialog>
+    {/* </Dialog> */}
       </div>
   );
 }
