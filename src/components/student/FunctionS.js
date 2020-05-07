@@ -134,9 +134,6 @@ const useStyles = makeStyles(theme => ({
               title="點名"
               className={classes.image}
               />
-                 {/* <Typography>
-                  點名
-                </Typography> */}
               </CardContent>
             <CardActions>
               

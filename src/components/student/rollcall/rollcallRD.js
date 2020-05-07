@@ -59,6 +59,7 @@ function LinkTab(props) {
 
 
 export default function RollcallRD() {
+  //const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const params = useParams();
@@ -69,7 +70,13 @@ export default function RollcallRD() {
   };
 
   return (
-          <div>     
+          <div> 
+      {/* <Button  component={Link} to={`/rollcallRD/${params.cs_id}`} >
+       <FunctionButton title="點名" url="https://image.flaticon.com/icons/svg/1828/1828867.svg" />
+      </Button> */}
+
+
+
       <MyMenu/>
          <AppBar position="static" color="inherite" >
                 <Tabs

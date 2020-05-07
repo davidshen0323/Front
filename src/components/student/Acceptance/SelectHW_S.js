@@ -41,6 +41,7 @@ export default function SelectHW() {
     },
     buttonbase: {
       width: '100%',
+      fontFamily: 'Microsoft JhengHei',
     },
   });
   
@@ -81,7 +82,7 @@ export default function SelectHW() {
       <Typography className={classes.selehw} variant="h5" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%'}}>請選擇作業：</Typography>
       <Paper className={classes.Paper}>
           
-          <Table>
+          <Table >
             <TableHead>
                 <TableRow>
                     <TableCell align="center">作業名稱</TableCell>

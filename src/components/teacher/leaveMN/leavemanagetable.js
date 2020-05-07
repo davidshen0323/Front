@@ -362,7 +362,9 @@ export default function Leavemanagetable(props) {
                       // key={leave.name}
                       
                     >
-                        <TableCell>{index+1}</TableCell>
+                        <TableCell>
+                          {/* {index+1} */}
+                        </TableCell>
                   {
                     leaveList.map( (list, i) =>   i < 6 ? 
                     <TableCell key={i} component="th" scope="row" align="left" >
@@ -373,7 +375,7 @@ export default function Leavemanagetable(props) {
                    <RadioGroup row value={leave.tl_state+''} >
                      <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="通過" />
                      <FormControlLabel value="2" control={<Radio color="secondary" size="small"/>} label="未通過" />
-                     <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="未審核" />
+                     {/* <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="未審核" /> */}
                    </RadioGroup>
                  </FormControl>
                  </TableCell>

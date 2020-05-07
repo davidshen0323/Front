@@ -157,7 +157,7 @@ export default function GPS() {
   return (
     <div>
       <Button  onClick={handleClickOpen} >
-       <ComButton title="GPS" url="https://image.flaticon.com/icons/svg/2572/2572792.svg" className={classes.button}/>
+       <ComButton title="GPS" url="https://image.flaticon.com/icons/svg/2572/2572792.svg" className={classes.button} c/>
       </Button>
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
