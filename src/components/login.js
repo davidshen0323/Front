@@ -63,13 +63,7 @@ const useStyles = makeStyles(theme =>({
             textAlign:'center',
             backgroundColor:'#BEBEBE',
           },
-          
-          StyleSheet:{
-            display:"flex",
-            alignItems:"center",
-            justifyContent:"center",
-          },
-        
+                 
     }
     ));
 /*--------------------------------*/
@@ -177,9 +171,6 @@ export default function Login(){
                     </Button>
                     <ForgetPw className={classes.button}/>
     </List>
-    {/* <List >
-      <ForgetPw />
-    </List> */}
     </form> 
     </WingBlank>
                 </Paper>

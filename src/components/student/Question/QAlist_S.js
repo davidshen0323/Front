@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
 import MyMenu from '../MenuS';
 import AddQA from './AddQA';
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-// import QaReply from './QAReply';
-
+import TableContainer from '@material-ui/core/TableContainer';
+import {List,Dialog} from '@material-ui/core/';
+import CloseIcon from '@material-ui/icons/Close';
+import { IconButton } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,9 +52,38 @@ function LinkTab(props) {
     />
   );
 }
+/*------------ STYLE ------------*/
+const useStyles = makeStyles(theme =>({
 
+  Paper:{
+      width: '100%',
+      margin: 'auto',        
+  },
+  root: {
+    width: '100%',
+    textAlign:'center',
+  },
+  table: {
+    minWidth: 750,
+  },
+  button: {
+    margin: theme.spacing(1),
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    width:'100px',
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+     backgroundColor: "#003060",
+    fontWeight:'bold',
+},
+}
+));
+
+/*--------------------------------*/
 
 export default function QAlist_S() {
+  const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -77,6 +109,16 @@ export default function QAlist_S() {
     fetchData();
   }, []);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  }
+  
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   {/* 學生新增問題 */}
   const [openAddQa, closeAddQa] = React.useState(false);
   const onCloseAddQa = () => {
@@ -100,15 +142,22 @@ export default function QAlist_S() {
             
                 </Tabs>
             </AppBar>
+
+
       <TabPanel value={value} index={0}>
-      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
-      <Table>
+        
+        <div className={classes.root}>
+          <TableContainer>
+      <Table
+      className={classes.table}
+      size='small'>
             <TableHead>
                 <TableRow>
                     {/* <TableCell>排序</TableCell> */}
                     <TableCell component="th" scope="row" align="center">學號</TableCell>
                     <TableCell component="th" scope="row" align="center">問題內容</TableCell>
                     <TableCell component="th" scope="row" align="center">最後更新時間</TableCell>
+                    <TableCell component="th" scope="row" align="left">取消問題</TableCell>
                     {/* <TableCell component="th" scope="row" align="center">回覆</TableCell> */}
                 </TableRow>
             </TableHead>
@@ -119,10 +168,16 @@ export default function QAlist_S() {
                 <TableRow key={index}>
                  {/* <TableCell>{index+1}</TableCell> */}
                   {
-                    questionlist.map( (list, i) =>
+                    questionlist.map( (list, i) => i<3 ?
                     
                     <TableCell key={i} component="th" scope="row" align="center">
                       {Ques[list]}
+                     </TableCell>
+                     :
+                     <TableCell>
+                      <IconButton>
+                        <CloseIcon/>
+                      </IconButton>
                      </TableCell>
                     )
                     }
@@ -132,35 +187,46 @@ export default function QAlist_S() {
               :
               <div></div>
               )}
-
-                {/* <TableRow>
-                    <TableCell>1</TableCell>
-                    <TableCell>406401628</TableCell>
-                    <TableCell>Table 怎麼做</TableCell>
-                    <TableCell>2020-04-03 11:29</TableCell>
-                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
-                </TableRow> */}
-                
+               
                
             </TableBody>
           </Table>
-          <Button 
-          // onClick={handledelete()}
-          style={{marginTop:'3%', marginBottom:'2%' , marginLeft:'50%', fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} 
+          <List >
+          {/* <Button 
+          className={classes.button}
           variant="contained" 
           color="primary">
             取消問題
-          </Button>
-          <AddQA/>
-      </Box>
+          </Button> */}
+
+          <Button 
+            onClick = {handleClickOpen}
+            variant = "contained" 
+            color = "primary" 
+            className={classes.button}
+          >
+          我要發問
+        </Button>
+
+        <Dialog open={open} onClose={handleClose}>
+
+          <AddQA />
+        </Dialog>
+          </List>
+
+          </TableContainer>
+          </div>
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
 
       <TabPanel value={value} index={1}>
-      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
-      <Table>
+        <div className={classes.root}>
+          <TableContainer>
+      <Table
+      className={classes.table}
+      size='small'>
             <TableHead>
                 <TableRow>
                     {/* <TableCell>排序</TableCell> */}
@@ -193,7 +259,8 @@ export default function QAlist_S() {
                
             </TableBody>
           </Table>
-      </Box>
+          </TableContainer>
+          </div>
       </TabPanel>
     </div>
   );

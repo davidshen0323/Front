@@ -148,7 +148,7 @@ export default function AddAccept({ open, handleClose })  {
             id="content" 
             value={addHw.content}
             onChange={handleChange('content')}
-            style={{borderRadius:10, padding:8, width:300, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    
+            style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    
             rowsMin={5} 
             placeholder="請輸入作業內容"
             />

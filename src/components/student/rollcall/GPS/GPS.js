@@ -26,6 +26,14 @@ const useStyles = makeStyles((theme) => ({
     width: '150px',
     height:'150px',
   },
+  imageSrc: {
+    //position: 'absolute',
+    maxHeight:'250px',
+    maxWidth:'250px',
+    display:'block',
+    opacity: 0.9,
+    margin:theme.spacing(2),
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -135,17 +143,20 @@ useEffect(() => {
       <Grid
         container
         direction="column"
-        justify="flex-start"
+        justify="center"
         alignItems="center"
       >
-
+<Grid item xs={12}>
+        <img
+                className={classes.imageSrc}
+                alt="complex"
+                src="https://www.flaticon.com/premium-icon/icons/svg/501/501987.svg"
+          />
+        </Grid>
     <Grid item  xs={12}>
-      <LocationOnIcon color='disabled' className={classes.gpslogo}/>
-      <Typography>
       <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary" alignItems="center">
     我要點名!
 </Button>
-      </Typography>
         
     </Grid>    
 

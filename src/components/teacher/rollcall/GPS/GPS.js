@@ -10,21 +10,39 @@ import ComButton from "../../../ComButton";
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import {useParams} from "react-router-dom";
 import { usePosition } from 'use-position';
 import axios from 'axios';
 
-const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
-  },
-}));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
+
+/*----------------------------------------------*/
+const useStyles = makeStyles(theme => ({
+  button:{
+    margin: theme.spacing(2),
+    fontFamily:'Microsoft JhengHei', 
+    width:'150px',
+    color:'primary',  
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+  imageSrc: {
+    //position: 'absolute',
+    maxHeight:'250px',
+    maxWidth:'250px',
+    display:'block',
+    opacity: 0.9,
+    margin:theme.spacing(2),
+  },
+}));
+/*---------------------------------------------*/
+
 
 export default function GPS() {
     const classes = useStyles();
@@ -139,7 +157,7 @@ export default function GPS() {
   return (
     <div>
       <Button  onClick={handleClickOpen} >
-       <ComButton title="GPS" url="https://image.flaticon.com/icons/svg/2572/2572792.svg" className={classes.button}/>
+       <ComButton title="GPS" url="https://image.flaticon.com/icons/svg/2572/2572792.svg" className={classes.button} c/>
       </Button>
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
@@ -158,18 +176,21 @@ export default function GPS() {
       <Grid
         container
         direction="column"
-        justify="flex-start"
+        justify="center"
         alignItems="center"
       >
+        <Grid item xs={12}>
+        <img
+                className={classes.imageSrc}
+                alt="complex"
+                src="https://image.flaticon.com/icons/png/512/854/854878.png"
+          />
+        </Grid>
 
     <Grid item  xs={12}>
-      <Typography>
-      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
-
-點名
-</Button>
-      </Typography>
-        
+      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold',width:'200px',alignItems:"center"}} variant="contained" color="primary">
+        點名
+      </Button>
     </Grid>    
 
       

@@ -6,11 +6,6 @@ import Leavetable from './leavetable';
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 
-    body:{
-        margin:'20px',
-        marginTop:'20px',
-        background: '#E1E1E1',
-    },
     Paper:{
         width: '100%',
         margin: 'auto',        
