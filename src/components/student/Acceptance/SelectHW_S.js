@@ -33,6 +33,7 @@ export default function SelectHW() {
     },
     buttonbase: {
       width: '100%',
+      margin: 0,
     },
   });
   
@@ -40,7 +41,7 @@ export default function SelectHW() {
 
   const [Acc, setAcc] = React.useState([]);
 
-  const acceptanceList = [ 'hw_name', 'hw_createtime', 'accept_score' ]
+  const acceptanceList = [ 'hw_name', 'hw_createtime' ]
 
   const params = useParams();
   const csid = params.cs_id;
@@ -77,7 +78,7 @@ export default function SelectHW() {
                 <TableRow>
                     <TableCell align="center">作業名稱</TableCell>
                     <TableCell align="center">日期</TableCell>
-                    <TableCell align="center">分數</TableCell>
+                    {/* <TableCell align="center">分數</TableCell> */}
                     
                 </TableRow>
             </TableHead>

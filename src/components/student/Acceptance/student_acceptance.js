@@ -50,6 +50,7 @@ export default function AcceptanceList({ open }) {
 
   /*=========== Create Table HEAD ===========*/
   const acceptanceList = [ 'std_id', 'accept_time', 'accept_done' ]
+  const acceptanceDoneList = [ 'std_id', 'accept_time', 'accept_done', 'accept_score' ]
   
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
@@ -72,7 +73,7 @@ export default function AcceptanceList({ open }) {
       async function fetchData() {
           const result = await axios.get(`/student/acceptance/hw/${csid}/${hwname}`);
           setAcceptances(result.data);
-        //   console.log(result.data);
+          console.log(result.data);
       }
       fetchData();
   }, []);
@@ -118,6 +119,11 @@ export default function AcceptanceList({ open }) {
   } fetchres() })
   // console.log(hwname)
 }
+
+  // const done = () => {
+  //   setOpenWarn(true);
+  //   // history.push(`/selectHW_S/${params.cs_id}`)
+  // }
 
   const handledelete = () =>
   {
@@ -165,6 +171,11 @@ export default function AcceptanceList({ open }) {
     window.location.reload();
   };
 
+  const handleClose = () => {
+    setOpenS(false);    
+    setOpenErr1(false);
+  }
+
   return (
     <div>
   
@@ -187,7 +198,7 @@ export default function AcceptanceList({ open }) {
 
             {/*===== TableBody =====*/}
             <TableBody>
-                {acceptances.map((acceptance,index) => acceptance["accept_done"] === false ? (
+                {acceptances.map((acceptance,index) => acceptance['accept_done'] === false ?(
                     <TableRow key={index}>
                       <TableCell align="center">{index+1}</TableCell>
                       
@@ -222,9 +233,37 @@ export default function AcceptanceList({ open }) {
                     
                 )
                 :
-                <TableRow>
+                <TableRow key={index}>
+                      <TableCell align="center">{index+1}</TableCell>
+                      
+                    {
+                        
+                        acceptanceDoneList.map( (list, i) =>   i === 0 ? 
+                            <TableCell key={i} component="th" scope="row" align="center" >
+                               {acceptance[list]}
+                               {/* {console.log(i)} */}
+                               {/* {console.log(list)} */}
 
-                </TableRow>
+                            </TableCell>:
+                            <TableCell key={i} align="center">
+                               {acceptance[list]}
+                               {console.log(i)}
+                               {console.log(list)}
+                              
+                            {/* {acceptanceList.map( (list, i) => acceptance[list][4] === true ?
+                            <TableCell>
+                              <p>已驗收過</p>
+                            </TableCell>
+                            :
+                            <TableCell>
+                              <p>尚未驗收</p>
+                            </TableCell>
+                            ) */}
+                              </TableCell> 
+                        )
+                    }
+                    
+                    </TableRow>
                 )}
             </TableBody>
 
@@ -281,19 +320,19 @@ export default function AcceptanceList({ open }) {
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}
-        <Snackbar open={openErr1} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openErr1} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100}}>
           <Alert severity="error">
             老師已經打分數了，無法取消！
           </Alert>
         </Snackbar>
         {/* 失敗小橘框 */}
-        <Snackbar open={openWarn} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openWarn} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100}}>
           <Alert severity="warning">
             您已登記過驗收！
           </Alert>
         </Snackbar>
         {/* 失敗小橘框2 */}
-        <Snackbar open={openWarn2} autoHideDuration={1500} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openWarn2} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100}}>
           <Alert severity="warning">
             你還沒點過驗收！
           </Alert>

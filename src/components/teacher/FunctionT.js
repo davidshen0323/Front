@@ -51,8 +51,8 @@ const useStyles = makeStyles(theme => ({
       card: {
         width: 300,
         height: 300,
-        marginTop: 80,
-        marginBottom: 80,
+        marginTop: 30,
+        marginBottom: 20,
         marginLeft: 'auto',
         marginRight: 'auto',
         // borderColor: 'red',
