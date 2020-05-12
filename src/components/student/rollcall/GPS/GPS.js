@@ -41,14 +41,27 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function GPS() {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const [gps,setGps] = React.useState([]);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [gps,setGps] = React.useState([]);
+  
+  useEffect(() => {
+    async function fetchData() {
+        const result = await axios.get(`/student/rollcall/allGPSRollcall/${params.cs_id}`);
+        
+        console.log(result.data);
+        // if(result.data['rc_end'] === 0)
+        // {
+        setGps(result.data);
+        // }
+    }
+    fetchData();
+   }, []);
 
   const params = useParams();
   //console.log(params.cs_id);
 
-
+  
   const watch = true;
       const {
         latitude,
@@ -60,15 +73,18 @@ export default function GPS() {
       // const [rcid, setRcid] = React.useState(0)
 
       const handleSubmit = () => {
-        console.log("rcid",gps.rc_id)
-    fetch('/student/rollcall/GPSRollcall',{
+        
+        console.log(gps)
+        gps.map( (gpslist, index) => gpslist["rc_end"] === 0 ?
+        
+      fetch('/student/rollcall/GPSRollcall',{
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          rc_id: gps.rc_id,
-          gps_point: longitude + ","  + latitude
+          rc_id: gpslist['rc_id'],
+          gps_point: latitude + ","  + longitude
       })
   })
   .then(res => {
@@ -96,9 +112,11 @@ export default function GPS() {
     
     
 } fetchres() })
-
+      
+      :
+      <div></div>
+      )
   }
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -108,17 +126,6 @@ export default function GPS() {
     setOpen(false);
   };
 
-
-useEffect(() => {
-  async function fetchData() {
-      const result = await axios.get(`/student/rollcall/allGPSRollcall/${params.cs_id}`);
-      
-      console.log(result.data);
- 
-      setGps(result.data);
-  }
-  fetchData();
- }, []);
 
 
   return (

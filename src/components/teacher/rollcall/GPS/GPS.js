@@ -77,7 +77,7 @@ export default function GPS() {
           // @ts-ignore
           cs_id: params.cs_id,
           rc_inputsource: 'GPS點名',
-          gps_point: longitude + ","  + latitude
+          gps_point: latitude + ","  + longitude,
       })
   })
   .then(res => {
@@ -126,7 +126,7 @@ export default function GPS() {
       // console.log(rcid)
       // async function putData() {
       
-      fetch('/teacher/rollcall/closedRollcall',{
+      fetch('/teacher/rollcall/closedRollcall/',{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
