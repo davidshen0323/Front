@@ -57,6 +57,9 @@ const useStyles = makeStyles(theme =>({
 
         div: {
             height: '100vh',
+            width: '100%',
+        background: 'linear-gradient(0deg,#bed8d4  0%,  #fffaea 100%)',
+
         },
 
         TextField:{

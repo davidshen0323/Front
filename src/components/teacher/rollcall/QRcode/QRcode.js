@@ -132,7 +132,7 @@ export default function Qrcode() {
       // console.log(rcid)
       // async function putData() {
       
-      fetch('/teacher/rollcall/closedRollcall',{
+      fetch('/teacher/rollcall/closedRollcall/',{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

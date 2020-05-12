@@ -102,6 +102,7 @@ EnhancedTableHead.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    fontFamily: 'Microsoft JhengHei',
   },
   paper: {
     width: '100%',
