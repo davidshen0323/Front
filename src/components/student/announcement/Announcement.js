@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme) => ({
     "&$expanded": {
       margin: 10,
       backgroundColor: '#fff',
-    }
+    },
+    div: {
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    },
   }
 }));
 
@@ -61,7 +65,7 @@ export default function ViewAnnouncements() {
   return (
    
     
-    <div> 
+    <div className={classes.div}> 
       <MyMenu/>
       <Box border={1} mx="auto" marginTop="8%" marginBottom="5%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#fff" borderColor="#0066CC">
             <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}}>公佈欄</Typography>

@@ -10,7 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import {List,Dialog} from '@material-ui/core/';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
-
+import Paper from '@material-ui/core/Paper';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -74,8 +74,13 @@ const useStyles = makeStyles(theme =>({
     width:'100px',
     fontFamily: 'Microsoft JhengHei',
     color: "white",
-     backgroundColor: "#003060",
+    fontSize:16,
+    backgroundColor: "#f8b62b",
     fontWeight:'bold',
+},
+div:{
+  height:'100vh',
+  background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
 },
 }
 ));
@@ -128,7 +133,8 @@ export default function QAlist_S() {
   
 
   return (
-    <div >
+     <div className={classes.div}>
+
         <MyMenu/>
             <AppBar position="static" color="default">
                 <Tabs
@@ -147,7 +153,8 @@ export default function QAlist_S() {
       <TabPanel value={value} index={0}>
         
         <div className={classes.root}>
-          <TableContainer>
+          
+          <TableContainer><Paper>
       <Table
       className={classes.table}
       size='small'>
@@ -191,6 +198,7 @@ export default function QAlist_S() {
                
             </TableBody>
           </Table>
+          </Paper>
           <List >
           {/* <Button 
           className={classes.button}
@@ -223,6 +231,7 @@ export default function QAlist_S() {
 
       <TabPanel value={value} index={1}>
         <div className={classes.root}>
+          <Paper>
           <TableContainer>
       <Table
       className={classes.table}
@@ -260,6 +269,7 @@ export default function QAlist_S() {
             </TableBody>
           </Table>
           </TableContainer>
+          </Paper>
           </div>
       </TabPanel>
     </div>

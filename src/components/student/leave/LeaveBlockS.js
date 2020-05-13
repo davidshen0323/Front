@@ -7,10 +7,22 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MyMenu from '../MenuS';
-
 import Leave from './leave';
 import ApplyRecord from '../applyrecord/applyrecord';
+/*------------ STYLE ------------*/
+const useStyles = makeStyles({
 
+  div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    },  
+  Paper:{
+      width: '90%',
+      margin: 'auto',        
+  },
+});
+
+/*--------------------------------*/
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,15 +71,14 @@ function LinkTab(props) {
 
 
 export default function LeaveBlockS() {
+  const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
-
-  const handleChange = (event, newValue) => {
+ const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <div >
+    <div className={classes.div}>
         <MyMenu/>
           
             <AppBar position="static" color="inherit">

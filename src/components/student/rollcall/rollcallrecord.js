@@ -12,26 +12,8 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import Paper from '@material-ui/core/Paper';
 
-// function createData(time, attend, score, from) {
-//   return { time, attend, score, from };
-// }
-
-
-// const rows = [
-//   createData('2019.11.05 11:05','出席', '計分', '人臉點名'),
-//   createData('2019.11.12 11:12','缺席', '不計分', 'QR code點名'),
-//   createData('2019.11.19 11:19','缺席','計分', '藍牙點名'),
-//   createData('2019.11.26 11:26', '缺席', '計分', '手動點名'),
-//   createData('2019.12.03 12:03','出席', '不計分', '人臉點名'),
-//   createData('2019.12.10 12:10','出席', '計分', '手動點名'),
-//   createData('2019.12.17 12:17','出席', '不計分', '人臉點名'),
-//   createData('2019.12 24 12:24', '缺席', '不計分', 'QR code點名'),
-//   createData('2020.01.01 01:00', '缺席', '計分', '藍牙點名'),
-//   createData('2020.01.08 01:08', '出席', '計分', '人臉點名'),
-//   createData('2020.01.15 01:15', '缺席', '計分', '藍牙點名'),
-//   createData('2020.01.22 01:22','出席', '不計分', '手動點名'),
-// ];
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -112,28 +94,6 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-
-// const useToolbarStyles = makeStyles(theme => ({
-//   root: {
-//     marginLeft: theme.spacing(3),
-//     marginRight: theme.spacing(1),
-//   },
-//   title: {
-//     flex: '1 1 100%',
-//     marginLeft: theme.spacing(9),
-//     //paddingLeft: theme.spacing(9),
-//   },
-//   listItemText : { 
-//     fontSize:'1.5em',
-//   }, 
-//   listItemText2 : { 
-//     fontSize:'0.8em',
-//   }, 
-//   inline: {
-//     display: 'inline',
-//     fontSize:18,
-//   },
-// }));
 
 
 
@@ -221,7 +181,7 @@ useEffect(() => {
 
   return (
     <div className={classes.root}>  
-          
+      <Paper>
         <TableContainer>
           
           <Table
@@ -274,6 +234,7 @@ useEffect(() => {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+        </Paper>
     </div>
   );
 }

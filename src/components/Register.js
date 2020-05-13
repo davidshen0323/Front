@@ -11,7 +11,7 @@ import {useHistory, Link} from "react-router-dom";
 const useStyles = makeStyles(theme =>({
     
             div: {
-                // backgroundColor:'#E0E0E0',
+                background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
                 height: 800,
             },
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme =>({
                 marginBottom: 10,
                 marginLeft: 10,
                 color: "white",
-                backgroundColor: "#003060",
+                backgroundColor: "#f8b62b",
                 fontWeight:'bold',
             },
             

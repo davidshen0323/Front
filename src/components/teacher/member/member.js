@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 
     div:{
       height:'100vh',
-      background: 'linear-gradient(0deg,#bed8d4  0%,  #fffaea 100%)',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
     },
     Paper:{
       fontFamily: 'Microsoft JhengHei',

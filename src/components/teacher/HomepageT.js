@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   root: {
-    flexWrap: 'wrap',
+     flexWrap: 'wrap',
     height:'100hv',
     width: '100%',
-    background: 'linear-gradient(0deg,#bed8d4  0%,  #fffaea 100%)',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
   },
 
   paperclass: {

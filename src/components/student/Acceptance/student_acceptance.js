@@ -52,8 +52,13 @@ export default function AcceptanceList({ open }) {
       margin: theme.spacing(1),
       fontFamily: 'Microsoft JhengHei',
       color: "white",
-      backgroundColor: "#003060",
+      fontSize:16,
+      backgroundColor: "#f8b62b",
       fontWeight:'bold',
+    },
+    div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
     },
   }
   ));
@@ -188,7 +193,7 @@ export default function AcceptanceList({ open }) {
   }
 
   return (
-    <div>
+    <div className={classes.div}>
   
       <MyMenu/>
       <br/>

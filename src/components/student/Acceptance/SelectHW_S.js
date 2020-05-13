@@ -41,11 +41,12 @@ export default function SelectHW() {
     },
     buttonbase: {
       width: '100%',
-
       margin: 0,
-
       fontFamily: 'Microsoft JhengHei',
-
+    },
+    div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
     },
   });
   
@@ -80,7 +81,7 @@ export default function SelectHW() {
   
   
   return (
-    <div>
+    <div className={classes.div}>
       <MyMenu/>
       <br/>
       <Typography className={classes.selehw} variant="h5" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%'}}>請選擇作業：</Typography>
