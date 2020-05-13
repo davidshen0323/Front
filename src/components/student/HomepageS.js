@@ -67,6 +67,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "25px",
       borderStyle: "solid",
       borderColor: "black",
+      border:1,
     },
    
     classbutton: {
