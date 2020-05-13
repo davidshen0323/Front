@@ -102,6 +102,7 @@ EnhancedTableHead.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    fontFamily: 'Microsoft JhengHei',
   },
   paper: {
     width: '100%',
@@ -167,7 +168,7 @@ export default function MemberTable( props ) {
  useEffect(() => {
   async function fetchData() {
 
-      const result = await axios.get(`/teacher/rollcall/studentList/${csid}`);
+      const result = await axios.get(`/teacher/Course/studentList/${csid}/`);
 
       
       console.log(result.data);

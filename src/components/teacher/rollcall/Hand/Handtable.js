@@ -255,8 +255,7 @@ useEffect(() => {
                     <FormControl component="fieldset" onChange={(e)=>changeState(e,student.std_id)}>
                       <RadioGroup row  value={student.tl_type_id+''}>
                         <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
-                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遲到" />
-                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="請假" />
+                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遠距" />
                         <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="缺席" />
 
                       </RadioGroup>

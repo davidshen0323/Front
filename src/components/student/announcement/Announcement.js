@@ -1,44 +1,37 @@
 import React , { useEffect } from 'react';
-import { Fab, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails ,Container, Typography, Box} from '@material-ui/core';
+import {  ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails ,Container, Typography, Box} from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
-import {useParams} from "react-router-dom";
-import AddAnnouncement from './addAnnouncement';
-import AddIcon from '@material-ui/icons/Add';
-import MyMenu from '../../teacher/MenuT';
-import Paper from '@material-ui/core/Paper';
+import {Link, useParams} from "react-router-dom";
+import MyMenu from '../MenuS';
 
 
 const useStyles = makeStyles((theme) => ({
-  Paper:{
-    width: '85%',
-    margin: 'auto', 
-    marginTop:'5%',   
-    marginBottom:'5%',
-    padding:'2%',
-    //boxShadow:"1px 1px 1px 1px #9E9E9E",    
-},
   fab: {
     position: 'fixed',
     bottom: theme.spacing(5),
     right: theme.spacing(5),
   },
-  div: {
-    height:'100vh',
-    background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
-  },
   root: {
-    background: 'linear-gradient(0deg,#ffffff  0%,#fffaea 30%, #fff2d1 100%)',
-    fontFamily: 'Microsoft JhengHei',
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper
+  },
+  expanded: {},
+  root: {
+    backgroundColor:'#e8eaf6',
     "&$expanded": {
       margin: 10,
-      backgroundColor: '#fffaea',
-      fontFamily: 'Microsoft JhengHei',
-    }
+      backgroundColor: '#fff',
+    },
+    div: {
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    },
   }
 }));
 
-export default function ViewAnnouncementt() {
+export default function ViewAnnouncements() {
 
   const classes = useStyles();
   
@@ -54,7 +47,7 @@ export default function ViewAnnouncementt() {
   useEffect(() => {
     async function fetchData() {
 
-      const result  = await axios.get(`/teacher/announcement/${csid}/get/`)
+      const result  = await axios.get(`/student/announcement/${csid}/get/`)
       
       setAnnouncement(result.data);
       console.log(result.data);
@@ -68,29 +61,17 @@ export default function ViewAnnouncementt() {
 
   console.log(Announcement);
 
-  
-   {/* 教師發佈公告 */}
-   const [openAddAnnouncement, closeAddAnnouncement] = React.useState(false);
-   const onCloseAddAnnouncement = () => {
-     closeAddAnnouncement(openAddAnnouncement ? false : true);
-   };
-
 
   return (
    
     
     <div className={classes.div}> 
       <MyMenu/>
-       {/* 發佈公告 */}
-       <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
-          <AddIcon />
-        </Fab>
-      <br/>
-      <Paper className={classes.Paper}>
-      <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體'}}>公佈欄</Typography>
+      <Box border={1} mx="auto" marginTop="8%" marginBottom="5%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#fff" borderColor="#0066CC">
+            <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}}>公佈欄</Typography>
 
             <Container maxWidth="sm">
-            { Announcement.reverse(),
+            {Announcement.reverse(),
             Announcement.map((announce,index) => (
                     <ExpansionPanel key={index} classes={classes} >
                       
@@ -106,14 +87,14 @@ export default function ViewAnnouncementt() {
                     </ExpansionPanel>
                     
                 ))}
+              
+
+
 
             </Container>
             <Box  mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>
       
-      </Paper>
-      
-    {/* 教師發佈公告 */}
-    <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>
+      </Box>
       
     </div>
     

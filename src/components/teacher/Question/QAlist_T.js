@@ -5,6 +5,9 @@ import MyMenu from '../MenuT';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import QaReply from './QAReply';
+import TableContainer from '@material-ui/core/TableContainer';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 
 function TabPanel(props) {
@@ -49,8 +52,43 @@ function LinkTab(props) {
   );
 }
 
+/*------------ STYLE ------------*/
+const useStyles = makeStyles(theme =>({
+
+  Paper:{
+      width: '100%',
+      margin: 'auto',        
+  },
+  root: {
+    width: '100%',
+    textAlign:'center',
+  },
+  table: {
+    minWidth: 750,
+  },
+  button: {
+    margin: theme.spacing(1),
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    width:'100px',
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+     backgroundColor: "#003060",
+    fontWeight:'bold',
+}, 
+div:{
+  height:'100vh',
+  background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+},
+}
+));
+
+/*--------------------------------*/
+
 
 export default function QAlist_T() {
+  const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -81,11 +119,21 @@ export default function QAlist_T() {
   const onCloseQAReply = () => {
     closeQAReply(openQAReply ? false : true);
   };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  }
+  
+  const handleClose = () => {
+    setOpen(false);
+  }
   
 
 
   return (
-    <div >
+    <div className={classes.div}>
         <MyMenu/>
             <AppBar position="static" color="default">
                 <Tabs
@@ -100,8 +148,12 @@ export default function QAlist_T() {
                 </Tabs>
             </AppBar>
       <TabPanel value={value} index={0}>
-      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
-      <Table>
+      
+      <Paper>
+          <TableContainer>
+      <Table
+      className={classes.table}
+      size='small'>
             <TableHead>
                 <TableRow>
                     {/* <TableCell>排序</TableCell> */}
@@ -152,15 +204,19 @@ export default function QAlist_T() {
                
             </TableBody>
           </Table>
-      </Box>
+      </TableContainer>
+      </Paper>
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
 
       <TabPanel value={value} index={1}>
-      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
-      <Table>
+        <Paper>
+          <TableContainer>
+      <Table
+      className={classes.table}
+      size='small'>
             <TableHead>
                 <TableRow>
                     {/* <TableCell>排序</TableCell> */}
@@ -193,8 +249,9 @@ export default function QAlist_T() {
                
             </TableBody>
           </Table>
-      </Box>
-      </TabPanel>
+          </TableContainer>
+          </Paper>
+          </TabPanel>
     </div>
   );
 }

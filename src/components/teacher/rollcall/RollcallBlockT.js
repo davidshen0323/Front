@@ -11,9 +11,18 @@ import MyMenu from '../MenuT';
 import Rollcall from './rollcall';
 import RollcallRecord from '../rollcallrecord/rollcallrecord';
 import { useParams } from 'react-router-dom';
-//import Leavemanage from '../leaveMN/leavemanage';
-//import Member from '../member/member';
 
+const useStyles = makeStyles(theme => ({
+  container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    div: {
+      height:'100hv',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+      
+    },  
+  }));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,6 +69,7 @@ function LinkTab(props) {
 
 
 export default function RollcallBlockT() {
+  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const params = useParams();
@@ -71,7 +81,7 @@ export default function RollcallBlockT() {
   };
 
   return (
-    <div >
+    <div className={classes.div}>
         <MyMenu/>
             <AppBar position="static" color="inherit">
                 <Tabs
@@ -81,8 +91,6 @@ export default function RollcallBlockT() {
                 >
                 <LinkTab label="點名" href={`/rollcall/${csid}`} {...a11yProps(0)} />
                 <LinkTab label="點名紀錄" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} />
-                {/* <LinkTab label="請假審核" href="/leavemanage" {...a11yProps(2)} />
-                <LinkTab label="班級名單" href="/member" {...a11yProps(3)} /> */}
             
                 </Tabs>
             </AppBar>

@@ -7,8 +7,25 @@ import EditPassword from'./editPassword';
 import UploadImg from './uploadImg';
 import axios from 'axios';
 import { makeStyles } from "@material-ui/styles";
+import Paper from '@material-ui/core/Paper';
+import TableContainer from '@material-ui/core/TableContainer';
 
 const useStyle = makeStyles(theme => ({
+  Paper:{
+    width: '90%',
+    margin: 'auto', 
+    marginTop:'2%',   
+    marginBottom:'5%',
+    padding:'2%',
+    boxShadow:"1px 1px 1px 1px #9E9E9E",    
+},
+box:{
+  width: '80%',
+  margin: 'auto', 
+  marginTop:'5%',   
+  padding:'2%',
+  boxShadow:"1px 1px 1px 1px #9E9E9E",   
+},
   typo: {
     fontFamily: 'Microsoft JhengHei',
     fontWeight:'bold'
@@ -61,11 +78,13 @@ export default function StuInformation() {
     <div > 
         <MyMenu/>
             
-        <Box border={1} mx="auto" marginTop="6%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC">
-            <Typography  variant="h4" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}} className={classes.typo}>學生基本資料</Typography>
-            </Box>
+        <Paper className={classes.box}>
+            <Typography  variant="h4" component="h2"  style={{textAlign:'center'}} className={classes.typo}>學生基本資料</Typography>
+        </Paper>
 
-            <Box border={1} mx="auto" marginTop="2%" marginBottom="3%" width={'96%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC">
+            <br/>
+      <Paper className={classes.Paper}>
+        <TableContainer>
             <Table >
                     <TableRow >
                         <TableCell width="40%" align="center" className={classes.typo}>頭像</TableCell>
@@ -109,7 +128,8 @@ export default function StuInformation() {
                         <TableCell width="20%"><Button onClick={() => closeEditPassword(true)} variant="outlined" color="primary" className={classes.typo}>更改密碼</Button></TableCell>
                     </TableRow>
                 </Table>
-            </Box>
+</TableContainer>
+            </Paper>
             {/* 學生修改Email */}
             <EditEmail open={openEditEmail} handleClose={onCloseEditEmail}/>
             {/* 學生修改Phone */}

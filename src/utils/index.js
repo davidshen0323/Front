@@ -1,17 +1,54 @@
-const TOKEN_KEY = 'jwt';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 
-export const login = () => {
-    localStorage.setItem(TOKEN_KEY, 'TestLogin');
-}
+export default function UserRole() {
 
-export const logout = () => {
-    localStorage.removeItem(TOKEN_KEY);
-}
+//     const Auth = () = {
+//     isAuthenticated: false,
+//     authenticated(cb){
+//         Auth.isAuthenticated = true;
+//         setTimeout(cb, 100);
+//     },
+//     signout(cb) {
+//         Auth.isAuthenticated = false;
+//         setTimeout(cb, 100);
+//     }
+// };
+    
+    const [tcher, setTcher] = React.useState(false);
+    const [std, setStd] = React.useState(false);
 
-export const isLogin = () => {
-    if (localStorage.getItem(TOKEN_KEY)) {
-        return true;
+
+    useEffect(() => {
+        async function fetchData() {
+            const result = await axios.get(`/CheckUserRoleInJSONReturn/`);
+            // setAcceptances(result.data);
+          //   console.log(result.data);
+          Auth(result.data)
+        }
+        fetchData();
+
+    }, [])
+        
+
+    function Auth(data) {
+        console.log(data)
+        if( data["user_role"] === 0){
+            setStd(true);
+            // return(history.push("/homepages"));
+        }
+        else{
+
+            console.log(data["user_role"]);
+            setTcher(true);
+            ;
+            
+            // return(history.push("/homepaget"));
+        }
     }
 
-    return false;
-}
+    return(
+        <div></div>
+    )
+
+} 

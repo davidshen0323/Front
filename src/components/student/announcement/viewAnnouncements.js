@@ -3,26 +3,35 @@ import {  ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails ,Containe
 import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
 import {Link, useParams} from "react-router-dom";
+import Paper from '@material-ui/core/Paper';
 import MyMenu from '../MenuS';
 
 
 const useStyles = makeStyles((theme) => ({
+  Paper:{
+    width: '85%',
+    margin: 'auto', 
+    marginTop:'5%',   
+    marginBottom:'5%',
+    padding:'2%',
+    //boxShadow:"1px 1px 1px 1px #9E9E9E",    
+},
   fab: {
     position: 'fixed',
     bottom: theme.spacing(5),
     right: theme.spacing(5),
   },
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+  div: {
+    height:'100vh',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
   },
-  expanded: {},
   root: {
-    backgroundColor:'#e8eaf6',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fffaea 30%, #fff2d1 100%)',
+    fontFamily: 'Microsoft JhengHei',
     "&$expanded": {
       margin: 10,
-      backgroundColor: '#fff',
+      backgroundColor: '#fffaea',
+      fontFamily: 'Microsoft JhengHei',
     }
   }
 }));
@@ -61,10 +70,11 @@ export default function ViewAnnouncements() {
   return (
    
     
-    <div> 
+    <div className={classes.div}>  
       <MyMenu/>
-      <Box border={1} mx="auto" marginTop="8%" marginBottom="5%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#fff" borderColor="#0066CC">
-            <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}}>公佈欄</Typography>
+      <br/>
+      <Paper className={classes.Paper}>
+            <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體',color:"#000000"}}>公佈欄</Typography>
 
             <Container maxWidth="sm">
             {Announcement.reverse(),
@@ -73,7 +83,8 @@ export default function ViewAnnouncements() {
                       
                     {
                         AnnouncementList.map( (list, i) =>  
-                            <ExpansionPanelSummary key={i} style={{marginLeft:10,fontSize:18}}>
+                            <ExpansionPanelSummary key={i} style={{marginLeft:10,fontSize:18,
+                              fontFamily:'微軟正黑體'}}>
                                <ExpansionPanelDetails>{announce[list]}</ExpansionPanelDetails>
                             </ExpansionPanelSummary>
                             
@@ -88,9 +99,9 @@ export default function ViewAnnouncements() {
 
 
             </Container>
-            <Box  mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>
+            
       
-      </Box>
+      </Paper>
       
     </div>
     

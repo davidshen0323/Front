@@ -44,7 +44,7 @@ import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
-
+// import Loading from './components/Loading';
 // import gps from './components/teacher/rollcall/GPS/Gps';
 // import findgeo from './components/teacher/rollcall/GPS/FindGeo';
 
@@ -60,7 +60,7 @@ ReactDOM.render(
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <Route path="/rollcall/:cs_id" component={Rollcall}/>
-            <Route path="/leavemanage" component={Leavemanage}/>
+            <Route path="/leavemanage/:cs_id" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
             <Route path="/homepages" component={homepages}/>
             <Route path="/functions/:cs_id" component={functions}/>
@@ -95,6 +95,8 @@ ReactDOM.render(
             
             {/* <Route path="/Gps" component={gps}/>
             <Route path="/FindGeo" component={findgeo}/> */}
+
+            {/* <Route path="/loading" component={Loading}/> */}
 
             <Route exact path="/" component={Login}/>
 

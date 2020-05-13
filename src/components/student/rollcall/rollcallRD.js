@@ -11,8 +11,20 @@ import Rollcallrecord from './rollcallrecord';
 import RollcallForm from './rollcallForm';
 import { useParams } from "react-router-dom";
 
-//import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
-//import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
+/*------------ STYLE ------------*/
+const useStyles = makeStyles({
+
+  div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    },  
+  Paper:{
+      width: '90%',
+      margin: 'auto',        
+  },
+});
+
+/*--------------------------------*/
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,6 +71,7 @@ function LinkTab(props) {
 
 
 export default function RollcallRD() {
+  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const params = useParams();
@@ -69,7 +82,13 @@ export default function RollcallRD() {
   };
 
   return (
-          <div>     
+    <div className={classes.div}> 
+      {/* <Button  component={Link} to={`/rollcallRD/${params.cs_id}`} >
+       <FunctionButton title="點名" url="https://image.flaticon.com/icons/svg/1828/1828867.svg" />
+      </Button> */}
+
+
+
       <MyMenu/>
          <AppBar position="static" color="inherite" >
                 <Tabs

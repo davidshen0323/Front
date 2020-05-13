@@ -100,7 +100,7 @@ export default function AcceptScore( props )  {
       variant = "contained" 
       color = "primary" 
     >
-    驗收
+    更改分數
   </Button>
     <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
       <DialogContent>

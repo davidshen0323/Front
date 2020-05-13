@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -132,7 +132,7 @@ export default function Qrcode() {
       // console.log(rcid)
       // async function putData() {
       
-      fetch('/teacher/rollcall/updateQRcode',{
+      fetch('/teacher/rollcall/closedRollcall/',{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -140,9 +140,6 @@ export default function Qrcode() {
         body: JSON.stringify({
             
             rc_id: rcid,
-            qrcode: '',
-            // cs_id: params.cs_id,
-            // rc_inputsource: 'QRcode點名'
             
         })
     })

@@ -9,7 +9,8 @@ const useStyle = makeStyles(theme => ({
   typo: {
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontFamily: 'Microsoft JhengHei',
   },
   description: {
     marginLeft: 10,
@@ -18,7 +19,8 @@ const useStyle = makeStyles(theme => ({
   },
   typoHeading: {
     color: "blue",
-    padding: 10
+    padding: 10,
+    fontFamily: 'Microsoft JhengHei',
   },
 }));
 

@@ -4,6 +4,7 @@ import { Button, Table, TableHead, TableBody, TableCell, TableRow,Box, ButtonBas
 import Typography from '@material-ui/core/Typography';
 import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
 
 
 
@@ -11,6 +12,13 @@ export default function SelectHW() {
   //接值
 
   const useStyles = makeStyles({
+    Paper:{
+      width: '90%',
+      margin: 'auto', 
+      marginTop:'5%',   
+      marginBottom:'5%',
+      boxShadow:"1px 1px 1px 1px #9E9E9E",    
+  },
     backbut: {
       margin:'auto',
       marginTop: 30,
@@ -33,6 +41,12 @@ export default function SelectHW() {
     },
     buttonbase: {
       width: '100%',
+      margin: 0,
+      fontFamily: 'Microsoft JhengHei',
+    },
+    div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
     },
   });
   
@@ -67,16 +81,18 @@ export default function SelectHW() {
   
   
   return (
-    <div>
+    <div className={classes.div}>
       <MyMenu/>
+      <br/>
       <Typography className={classes.selehw} variant="h5" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%'}}>請選擇作業：</Typography>
-      <Box border={1} mx="auto" width="60%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
+      <Paper className={classes.Paper}>
           
-          <Table>
+          <Table >
             <TableHead>
                 <TableRow>
                     <TableCell align="center">作業名稱</TableCell>
                     <TableCell align="center">日期</TableCell>
+                    {/* <TableCell align="center">分數</TableCell> */}
                     
                 </TableRow>
             </TableHead>
@@ -98,22 +114,39 @@ export default function SelectHW() {
                     }
                     {/* </ButtonBase> */}
                 </TableRow>
-              ))}
+              )
+              // :
+              // <TableRow key={index}>
+                 
+              //     {
+              //       acceptanceList.map( (list, i) => 
+                    
+              //       <TableCell key={i} component="th" scope="row" align="center">
+              //         {/* <ButtonBase className={classes.buttonbase} component={Link} to={`/acceptance/${csid}/${Accept['hw_name']}`}> */}
+              //         {Accept[list]}      
+              //       {/* </ButtonBase> */}
+              //         </TableCell>
+                    
+              //         )
+              //       }
+              //       {/* </ButtonBase> */}
+              //   </TableRow>
+              )}
              
             </TableBody>
           </Table>
-      </Box>
+      </Paper>
       <Grid
         container
         justify="center"
       >
-      <Button
+      {/* <Button
       className={classes.button}
       component={Link}
       to={`/functions/${csid}`}
       >
       返回
-      </Button>
+      </Button> */}
       </Grid>
 
     </div>

@@ -13,30 +13,29 @@ import Slide from '@material-ui/core/Slide';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import RollcallRDT from './rollcallRDTtable';
 import Grid from '@material-ui/core/Grid';
-
+import Ttable from './Ttable';
+import {brown} from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
+    backgroundColor:'#ffe1c4',
   },
   title: {
     marginLeft: theme.spacing(2),
     flex: 1,
   },
+  inline:{
+    color: "#582707",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+  }
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-// const RCID = props =>{
-//   const location=useLocation();
-
-// useEffect(()=> {
-//   console.log(location.pathname);
-//   console.log(location.state.detail);
-// },[location]);
-// };
 
 
 export default function RDTB(props) {
@@ -54,7 +53,7 @@ export default function RDTB(props) {
 
   return (
     <div>
-    <IconButton variant="outlined" color="primary" onClick={handleClickOpen} >
+    <IconButton variant="outlined"  style={{color:brown[500]}} onClick={handleClickOpen} >
       <AssignmentOutlinedIcon />
     </IconButton>
 
@@ -81,25 +80,38 @@ export default function RDTB(props) {
         <ListItem alignItems="flex-start">
           
         <ListItemText
-          primary="日期與時間"
+          primary={
+            <Typography
+            className={classes.inline}
+            >
+          日期與時間
+          </Typography>}
           secondary={
           <Typography
                 component="span"
                 variant="body2"
-                className={classes.inline}>
-                {props.time}
+                className={classes.inline}
+                >
+                  {props.time}
           </Typography>
           }
 
         />
            
         <ListItemText
-          primary="來源"
+         
+          primary={
+            <Typography
+            className={classes.inline}
+            >
+          來源
+          </Typography>}
           secondary={
           <Typography
                 component="span"
                 variant="body2"
-                className={classes.inline}>
+                className={classes.inline}
+                >
                   {props.resource}
           </Typography>
           }
@@ -112,46 +124,7 @@ export default function RDTB(props) {
 
 
         <Grid item xs={3} >
-        {/* present={props.present} absent={props.absent} otherwise={props.otherwise} */}
-        
-            <ListItem>
-              <ListItemText
-                  primary="出席"
-                  secondary={
-                  <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}>
-                          {props.present}
-                  </Typography>
-                  }
-                />
-
-              <ListItemText
-                  primary="請假"
-                  secondary={
-                  <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}>
-                          {props.otherwise}
-                  </Typography>
-                  }
-                />
-
-              <ListItemText
-                  primary="缺席"
-                  secondary={
-                  <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}>
-                          {props.absent}
-                  </Typography>
-                  }
-                />
-
-        </ListItem>
+        <Ttable id={props.id}/>
         </Grid>
 </Grid>
     </Toolbar>

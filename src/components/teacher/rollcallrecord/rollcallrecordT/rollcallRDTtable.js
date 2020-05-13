@@ -17,7 +17,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { Button } from '@material-ui/core';
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -122,6 +121,9 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
+  word:{
+    fontFamily: 'Microsoft JhengHei',
+  }
 }));
 /*---------------------------------------------*/
 
@@ -129,7 +131,7 @@ const useStyles = makeStyles(theme => ({
 export default function RollcallRDT( props ) {
 
   /*------------ STATE ------------*/
-  const [students, setMembers] = useState([]);
+  const [students, setStudents] = useState([]);
 
   // const params = useParams();
   //  console.log(params);
@@ -181,12 +183,12 @@ export default function RollcallRDT( props ) {
     var newlist = [...students]
     newlist[stuIndex].tl_type_id = parseInt(event.target.value)
 
-    setMembers(newlist)
+    setStudents(newlist)
     handleSubmit(students[stuIndex])
     console.log(' newlist[stuIndex]', students[stuIndex])
   }
 /*=========== Create Table HEAD ===========*/
-const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_name','tl_type_id']
+const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_id']
 // console.log(props.id)
 useEffect(() => {
  async function fetchData() {
@@ -195,7 +197,7 @@ useEffect(() => {
      console.log(result.data)
      console.log(data.tl_type_id);
 
-     setMembers(result.data);
+     setStudents(result.data);
  }
  fetchData();
 }, []);
@@ -211,7 +213,6 @@ useEffect(() => {
             size='small'
           >
             <EnhancedTableHead
-              classes={classes}
                order={order}
                orderBy={orderBy}              
                onRequestSort={handleRequestSort}
@@ -229,19 +230,21 @@ useEffect(() => {
                   {
                   //const labelId = `enhanced-table-checkbox-${index}`;
 
-                    studentList.map( (list, i) =>   i < 4 ? 
+                    studentList.map( (list, i) =>   i < 3 ? 
                     <TableCell key={i} component="th" scope="row" align="left">
                     {student[list]}
                  </TableCell>:
                 //  <TableCell key={i} align="left">{student[list]}</TableCell> 
-                <TableCell align="left">
+                <TableCell align="left" >
                     <FormControl component="fieldset" onChange={(e)=>changeState(e,student.std_id)}>
-                      <RadioGroup row  value={student.tl_type_id+''} >
+                      <RadioGroup row  value={student.tl_type_id+''}  >
                         <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
-                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="病假" />
-                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="事假" />
-                        <FormControlLabel value="4" control={<Radio color="primary" size="small"/>} label="喪假" />
-                        <FormControlLabel value="5" control={<Radio color="primary" size="small"/>} label="公假" />
+                        <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遠距" />
+                        <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="遲到" />
+                        <FormControlLabel value="4" control={<Radio color="primary" size="small"/>} label="病假" />
+                        <FormControlLabel value="5" control={<Radio color="primary" size="small"/>} label="事假" />
+                        <FormControlLabel value="6" control={<Radio color="primary" size="small"/>} label="喪假" />
+                        <FormControlLabel value="7" control={<Radio color="primary" size="small"/>} label="公假" />
                         <FormControlLabel value="0"  control={<Radio color="primary" size="small"/>} label="缺席" />
                       </RadioGroup>
                     </FormControl>
