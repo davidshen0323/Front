@@ -121,6 +121,9 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
+  word:{
+    fontFamily: 'Microsoft JhengHei',
+  }
 }));
 /*---------------------------------------------*/
 
@@ -210,7 +213,6 @@ useEffect(() => {
             size='small'
           >
             <EnhancedTableHead
-              classes={classes}
                order={order}
                orderBy={orderBy}              
                onRequestSort={handleRequestSort}
@@ -233,9 +235,9 @@ useEffect(() => {
                     {student[list]}
                  </TableCell>:
                 //  <TableCell key={i} align="left">{student[list]}</TableCell> 
-                <TableCell align="left">
+                <TableCell align="left" >
                     <FormControl component="fieldset" onChange={(e)=>changeState(e,student.std_id)}>
-                      <RadioGroup row  value={student.tl_type_id+''} >
+                      <RadioGroup row  value={student.tl_type_id+''}  >
                         <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
                         <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遠距" />
                         <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="遲到" />

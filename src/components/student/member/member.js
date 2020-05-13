@@ -8,6 +8,10 @@ import { useParams } from 'react-router-dom';
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 
+  div:{
+    height:'100vh',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+  },  
     Paper:{
         width: '90%',
         margin: 'auto', 
@@ -23,8 +27,7 @@ export default function Member() {
     const params = useParams();
     // const csid = params.cs_id;
         return (
-
-            <div >
+          <div className={classes.div}>
                 <MyMenu/>
           <br/>
                 <Paper className={classes.Paper}>

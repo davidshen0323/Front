@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import QaReply from './QAReply';
 import TableContainer from '@material-ui/core/TableContainer';
 import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 
 function TabPanel(props) {
@@ -75,6 +76,10 @@ const useStyles = makeStyles(theme =>({
     color: "white",
      backgroundColor: "#003060",
     fontWeight:'bold',
+}, 
+div:{
+  height:'100vh',
+  background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
 },
 }
 ));
@@ -128,7 +133,7 @@ export default function QAlist_T() {
 
 
   return (
-    <div >
+    <div className={classes.div}>
         <MyMenu/>
             <AppBar position="static" color="default">
                 <Tabs
@@ -144,7 +149,7 @@ export default function QAlist_T() {
             </AppBar>
       <TabPanel value={value} index={0}>
       
-      <div className={classes.root}>
+      <Paper>
           <TableContainer>
       <Table
       className={classes.table}
@@ -200,14 +205,14 @@ export default function QAlist_T() {
             </TableBody>
           </Table>
       </TableContainer>
-      </div>
+      </Paper>
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
 
       <TabPanel value={value} index={1}>
-        <div className={classes.root}>
+        <Paper>
           <TableContainer>
       <Table
       className={classes.table}
@@ -245,7 +250,7 @@ export default function QAlist_T() {
             </TableBody>
           </Table>
           </TableContainer>
-          </div>
+          </Paper>
           </TabPanel>
     </div>
   );

@@ -15,6 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {brown} from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   root: {
@@ -27,6 +28,7 @@ const styles = (theme) => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
+  
 });
 
 const DialogTitle = withStyles(styles)((props) => {
@@ -119,7 +121,7 @@ export default function Apply(props) {
 
   return (
     <div className={classes.root}>
-      <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+      <IconButton variant="outlined" style={{color:brown[500]}} onClick={handleClickOpen}>
         <AssignmentOutlinedIcon />
       </IconButton>
 

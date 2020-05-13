@@ -52,7 +52,11 @@ export default function SelectHW_T() {
     typo: {
       fontFamily: 'Microsoft JhengHei',
       fontWeight:'bold'
-    }
+    },
+    div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    },
   }));
   
   const classes = useStyles();
@@ -89,7 +93,7 @@ export default function SelectHW_T() {
   
   
   return (
-    <div>
+    <div className={classes.div}>
       <MyMenu/>
       <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeCreateHw(true)}>
           <AddIcon />

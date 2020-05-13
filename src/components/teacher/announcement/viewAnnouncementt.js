@@ -24,14 +24,9 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(5),
   },
   div: {
-    // width: "100%",
-    // maxWidth: 360,
-    // backgroundColor: theme.palette.background.paper
-    width: '100%',
     height:'100vh',
-    background: 'linear-gradient(0deg,#bed8d4  0%,  #fffaea 100%)',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
   },
-  expanded: {},
   root: {
     background: 'linear-gradient(0deg,#ffffff  0%,#fffaea 30%, #fff2d1 100%)',
     fontFamily: 'Microsoft JhengHei',

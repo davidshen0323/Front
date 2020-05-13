@@ -89,6 +89,10 @@ export default function TAcceptanceList() {
       backgroundColor: "#003060",
       fontWeight:'bold',
     },
+    div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    },
   });
   const classes = useStyles();
 
@@ -120,7 +124,7 @@ export default function TAcceptanceList() {
   // let history = useHistory(); //傳值跳頁的方法
   
   return (
-    <div>
+    <div className={classes.div}>
   
       <MyMenu/>
 

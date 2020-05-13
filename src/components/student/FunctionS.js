@@ -23,10 +23,11 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
       },
       root: {
-        // display: 'flex',
         flexWrap: 'wrap',
-        minWidth: 300,
+        height:'100hv',
+        minWidth: 375,
         width: '100%',
+        background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
       },
 
       content: {

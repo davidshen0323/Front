@@ -12,6 +12,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
+  inline:{
+    color: "#582707",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+  }
 }));
 /*---------------------------------------------*/
 
@@ -52,7 +57,12 @@ export default function Ttable( props ) {
       <div className={classes.root}>  
         <ListItem>
               <ListItemText
-                  primary="出席"
+                  primary={
+                    <Typography
+                    className={classes.inline}
+                    >
+                  出席
+                  </Typography>}
                   secondary={
                   <Typography
                     component="span"
@@ -65,7 +75,12 @@ export default function Ttable( props ) {
                 />
 
                 <ListItemText
-                  primary="遠距"
+                  primary={
+                    <Typography
+                    className={classes.inline}
+                    >
+                  遠距
+                  </Typography>}
                   secondary={
                   <Typography
                         component="span"
@@ -77,7 +92,12 @@ export default function Ttable( props ) {
                 />
 
               <ListItemText
-                  primary="請假"
+                  primary={
+                    <Typography
+                    className={classes.inline}
+                    >
+                  請假
+                  </Typography>}
                   secondary={
                   <Typography
                         component="span"
@@ -89,7 +109,12 @@ export default function Ttable( props ) {
                 />
 
               <ListItemText
-                  primary="缺席"
+                  primary={
+                    <Typography
+                    className={classes.inline}
+                    >
+                  缺席
+                  </Typography>}
                   secondary={
                   <Typography
                         component="span"
