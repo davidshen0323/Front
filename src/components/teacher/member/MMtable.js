@@ -9,9 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import { IconButton } from '@material-ui/core';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -44,11 +43,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'number', numeric: false, disablePadding: true, label: '學號' },
+  { id: 'number', numeric: true, disablePadding: false, label: '學號' },
   { id: 'name', numeric: true, disablePadding: false, label: '姓名' },
   { id: 'grade', numeric: true, disablePadding: false, label: '系級' },
-
-  
+  { id: 'delet', numeric: true, disablePadding: false, label: '刪除' },
 ];
 
 function EnhancedTableHead(props) {
@@ -159,7 +157,7 @@ export default function MemberTable( props ) {
 
 
 /*=========== Create Table HEAD ===========*/
- const studentList = [ 'std_id', 'std_name', 'std_department']
+ const studentList = [ 'std_id', 'std_name', 'std_department','std_id']
 
   const csid = props.csid
   
@@ -177,6 +175,31 @@ export default function MemberTable( props ) {
   }
   fetchData();
 }, []);
+
+
+  const deletstudent=(event,id)=>{
+    const stuIndex = students.findIndex(s=>s.std_id=id)
+    handleDelete(students[stuIndex])
+    console.log('stuIndex',students[stuIndex])
+  }
+
+  const handleDelete = (student) =>
+   {
+
+     console.log('student',student['std_id'])
+     console.log(props.csid)
+        fetch(`/teacher/Deletestudent`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              std_id: student.std_id,
+              cs_id: props.csid,
+        })
+       })
+       window.location.reload();
+      }
 
 
 
@@ -208,11 +231,15 @@ export default function MemberTable( props ) {
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
-                    studentList.map( (list, i) =>   i === 0 ? 
+                    studentList.map( (list, i) =>   i< 3 ? 
                     <TableCell key={i} component="th" scope="row" align="left" padding="none" >
                     {student[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left">{student[list]}</TableCell> 
+                 <TableCell align="left" padding="none" >
+                 <IconButton onClick={(e)=>deletstudent(e,student.std_id)}>
+                 <DeleteOutlineIcon/>
+               </IconButton>
+               </TableCell>
                         )
                   }    
                 </TableRow>

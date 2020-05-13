@@ -35,14 +35,14 @@ const useStyles = makeStyles(theme =>({
               
             textfield: {
                 marginBottom: 10,
-                backgroundColor: 'lightgray',
+                //backgroundColor: 'lightgray',
                 fontFamily: 'Microsoft JhengHei', //沒用
 
             },
             
             root:{
                 width: '70%',
-                marginTop: 100,
+                // marginTop: 100,
                 margin: 'auto',
                 marginBottom: 100,
                 overflowX: 'auto',
@@ -50,14 +50,14 @@ const useStyles = makeStyles(theme =>({
                 justifyContent: 'center',  
                 fontFamily: 'Microsoft JhengHei',
                 fontWeight: 'bold',
-                color: '#003060',
+                color: '#582707',
                 
             },
             
         }
         ));
 
-export default function Register() {
+export default function RegisterT() {
     const classes = useStyles();
 
     const [inputs, setInputs] = React.useState({
@@ -95,19 +95,19 @@ export default function Register() {
             && inputs.mail.length > 0
             && inputs.repeatpwd === inputs.pwd) //每個輸入格都不為空值、驗證密碼等於密碼
             {
-                fetch('/student_re',{
+                fetch('/teacher_re',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        std_id: inputs.user,
-                        std_password: inputs.pwd,
-                        std_name: inputs.name,
-                        std_gender: inputs.gender,
-                        std_department: inputs.dpart,
-                        std_phone: inputs.phone,
-                        std_mail: inputs.mail
+                        teacher_id: inputs.user,
+                        teacher_password: inputs.pwd,
+                        teacher_name: inputs.name,
+                        teacher_gender: inputs.gender,
+                        teacher_department: inputs.dpart,
+                        teacher_phone: inputs.phone,
+                        teacher_mail: inputs.mail
                     })
                 })
                 .then(res => {
@@ -128,9 +128,9 @@ export default function Register() {
                         console.log(2);
                         return post;
                     }
-                    else if(inputs.user.length !== 9) //學號長度不等於9
+                    else if(inputs.user.length !== 5) //學號長度不等於9
                     {
-                        alert("學號長度有誤! 請再次確認!");
+                        alert("帳號長度有誤! 請再次確認!");
                         post = false;
                         console.log(3);
                         return post;
@@ -165,7 +165,7 @@ export default function Register() {
         
         return (
             <div className={classes.div}>
-            <MyMenu/>
+            {/* <MyMenu/> */}
             
             <Paper className={classes.root}>
                  <h2>註冊</h2>
@@ -178,11 +178,11 @@ export default function Register() {
              
             <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
             
-             
+            
             <TextField
                 required
                 id="user"
-                label="學號"
+                label="帳號"
                 value={inputs.user}
                 onChange={handleChange('user')}
                 className={classes.textfield}
@@ -241,7 +241,7 @@ export default function Register() {
             <TextField
                 required
                 id="dpart"
-                label="系所班級"
+                label="授課系所"
                 value={inputs.dpart}
                 onChange={handleChange('dpart')}
                 size="small"
