@@ -78,9 +78,8 @@ ReactDOM.render(
             <Route path="/QAlist_T/:cs_id" component={QAlist_T}/>
             <Route path="/QAlist_S/:cs_id" component={QAlist_S}/>
 
-
             <Route path="/post" component={post}/>
-            
+  
             <Route path="/membert/:cs_id" component={MemberT}/>
             <Route path="/members/:cs_id" component={MemberS}/>
 
@@ -93,6 +92,7 @@ ReactDOM.render(
             <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
             <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
+            
             {/* <Route path="/Gps" component={gps}/>
             <Route path="/FindGeo" component={findgeo}/> */}
 

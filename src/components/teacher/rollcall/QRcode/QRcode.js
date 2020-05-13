@@ -207,10 +207,14 @@ export default function Qrcode() {
 
     <Grid>
           
-
+      {/* disable */}
       <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
 
-        點名
+        開始點名
+      </Button>
+      <Button onClick={handleSubmit} disabled style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
+
+        更新QRcode
       </Button>
     </Grid>
       

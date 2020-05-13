@@ -40,7 +40,6 @@ export default function AddAnnouncement({ open, handleClose })  {
   const [openErr2, setOpenErr2] = React.useState(false);
   // 失敗小橘3
   const [openErr3, setOpenErr3] = React.useState(false);
-  const [changes, setChanges] = React.useState(1);
   const [inputs, setInputs] = React.useState({
     title:'',
     content:'',
@@ -67,7 +66,6 @@ let history = useHistory(); //傳值跳頁的方法
   const submitClose = (event, reason) => {
     handleClose(true);
     setOpenS(false);
-    setChanges(1);
     inputs.title='';
     inputs.content='';
     window.location.reload();
