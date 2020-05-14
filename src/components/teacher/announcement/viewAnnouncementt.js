@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
 import {useParams} from "react-router-dom";
 import AddAnnouncement from './addAnnouncement';
-import EditAnnouncement from './editAnnouncement';
+// import EditAnnouncement from './editAnnouncement';
 import AddIcon from '@material-ui/icons/Add';
 import MyMenu from '../../teacher/MenuT';
 import AppsIcon from '@material-ui/icons/Apps';
@@ -117,7 +117,7 @@ export default function ViewAnnouncementt() {
     {/* 教師發佈公告 */}
     <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>
     
-    <EditAnnouncement open={openEditAnnouncement} handleClose={onCloseEditAnnouncement}/>
+    {/* <EditAnnouncement open={openEditAnnouncement} handleClose={onCloseEditAnnouncement}/> */}
     
     </div>
     
