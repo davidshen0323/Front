@@ -67,7 +67,7 @@ ReactDOM.render(
             <Route path="/loading" component={Loading}/>
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
-            <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
+            <Route path="/acceptance/:cs_id/:hw_name/:std_id" component={AcceptanceList}/>
             <Route path="/acceptancet/:cs_id/:hw_name" component={TAcceptanceList}/>
 
             <Route path="/ViewAnnouncements/:cs_id" component={ViewAnnouncements}/>

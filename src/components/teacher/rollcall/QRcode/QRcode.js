@@ -129,8 +129,8 @@ export default function Qrcode() {
     
     
     // .then(res => {
-      // console.log(rcid)
-      // async function putData() {
+      console.log(rcid)
+      async function putData() {
       
       fetch('/teacher/rollcall/closedRollcall/',{
         method: 'PUT',
@@ -143,11 +143,11 @@ export default function Qrcode() {
             
         })
     })
-    //   .then(res => {
-    //       setQrcode('0');
-    //   })
-    // }
-    // putData();
+      .then(res => {
+          setQrcode('0');
+      })
+    }
+    putData();
      
     
   };

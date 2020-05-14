@@ -53,7 +53,7 @@ export default function SelectHW() {
   const classes = useStyles();
 
   const [Acc, setAcc] = React.useState([]);
-
+  const [stdid, setStdid] = React.useState([]);
   const acceptanceList = [ 'hw_name', 'hw_createtime' ]
 
   const params = useParams();
@@ -71,8 +71,13 @@ export default function SelectHW() {
       
       // const path ={result.data['cs_id']}
     }
-    
+      async function fetchStdid() {
+        const result = await axios.get(`/student/acceptance/std_id`);
+        setStdid(result.data['std_id']);
+        console.log(result.data);
+    }
     fetchData();
+    fetchStdid();
   }, []);
 
   console.log(Acc);
@@ -105,7 +110,11 @@ export default function SelectHW() {
                     acceptanceList.map( (list, i) => 
                     
                     <TableCell key={i} component="th" scope="row" align="center">
-                      <ButtonBase className={classes.buttonbase} component={Link} to={`/acceptance/${csid}/${Accept['hw_name']}`}>
+                      <ButtonBase 
+                      className={classes.buttonbase} 
+                      component={Link} 
+                      to={`/acceptance/${csid}/${Accept['hw_name']}/${stdid}`}
+                      >
                       {Accept[list]}      
                     </ButtonBase>
                       </TableCell>

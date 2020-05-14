@@ -49,7 +49,7 @@ export default function GPS() {
     const [open, setOpen] = React.useState(false);
 
   const params = useParams();
-  console.log(params);
+  // console.log(params);
 
 
   const watch = true;
