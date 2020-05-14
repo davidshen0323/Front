@@ -14,7 +14,6 @@ import {useParams} from "react-router-dom";
 import { usePosition } from 'use-position';
 import axios from 'axios';
 
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -22,11 +21,18 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 /*----------------------------------------------*/
 const useStyles = makeStyles(theme => ({
-  button:{
-    margin: theme.spacing(2),
-    fontFamily:'Microsoft JhengHei', 
-    width:'150px',
-    color:'primary',  
+  button: {
+    width: '150px',
+    margin:'auto',
+    marginTop: 20,
+    // marginLeft: 10,
+    marginBottom: 10,
+    margin: theme.spacing(1),
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+    fontSize:16,
+    backgroundColor: "#f8b62b",
+    fontWeight:'bold',
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -34,11 +40,13 @@ const useStyles = makeStyles(theme => ({
   },
   imageSrc: {
     //position: 'absolute',
-    maxHeight:'250px',
-    maxWidth:'250px',
+    maxHeight:'200px',
+    maxWidth:'200px',
     display:'block',
-    opacity: 0.9,
     margin:theme.spacing(2),
+  },
+  appBar: {
+    backgroundColor:'#fff8e1',
   },
 }));
 /*---------------------------------------------*/
@@ -162,11 +170,11 @@ export default function GPS() {
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <Backdrop className={classes.backdrop} open >
-      <AppBar >
+      <AppBar className={classes.appBar}>
           <Toolbar>
             <Grid item xs={12} sm={12}></Grid>
     
-    <IconButton  color="inherit" onClick={handleClose}>
+    <IconButton  color="#582707" onClick={handleClose}>
       <CloseIcon />
     </IconButton>  
     </Toolbar>
@@ -183,12 +191,12 @@ export default function GPS() {
         <img
                 className={classes.imageSrc}
                 alt="complex"
-                src="https://image.flaticon.com/icons/png/512/854/854878.png"
+                src="https://image.flaticon.com/icons/svg/1321/1321801.svg"
           />
         </Grid>
 
     <Grid item  xs={12}>
-      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold',width:'200px',alignItems:"center"}} variant="contained" color="primary">
+      <Button onClick={handleSubmit}  className={classes.button}>
         點名
       </Button>
     </Grid>    

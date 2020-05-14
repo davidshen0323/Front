@@ -206,7 +206,7 @@ export default function Ing() {
                     <TableCell key={i} component="th" scope="row" align="left" padding="none" >
                     {ing[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left" >
+                 <TableCell key={i} align="left" padding="none" >
                    <Write 
                    id={ing['rc_id']}
                    time={ing['rc_starttime']}

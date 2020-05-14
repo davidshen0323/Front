@@ -28,11 +28,26 @@ const useStyles = makeStyles((theme) => ({
   },
   imageSrc: {
     //position: 'absolute',
-    maxHeight:'250px',
-    maxWidth:'250px',
+    maxHeight:'200px',
+    maxWidth:'200px',
     display:'block',
-    opacity: 0.9,
     margin:theme.spacing(2),
+  },
+  button: {
+    width: '150px',
+    margin:'auto',
+    marginTop: 20,
+    // marginLeft: 10,
+    marginBottom: 10,
+    margin: theme.spacing(1),
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+    fontSize:16,
+    backgroundColor: "#f8b62b",
+    fontWeight:'bold',
+  },
+  appBar: {
+    backgroundColor:'#fff8e1',
   },
 }));
 
@@ -136,11 +151,11 @@ export default function GPS() {
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <Backdrop className={classes.backdrop} open >
-      <AppBar >
+      <AppBar className={classes.appBar}>
           <Toolbar>
             <Grid item xs={12} sm={12}></Grid>
     
-    <IconButton  color="inherit" onClick={handleClose}>
+    <IconButton  color="#582707" onClick={handleClose}>
       <CloseIcon />
     </IconButton>  
     </Toolbar>
@@ -157,11 +172,11 @@ export default function GPS() {
         <img
                 className={classes.imageSrc}
                 alt="complex"
-                src="https://www.flaticon.com/premium-icon/icons/svg/501/501987.svg"
+                src="https://image.flaticon.com/icons/svg/1321/1321793.svg"
           />
         </Grid>
     <Grid item  xs={12}>
-      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary" alignItems="center">
+      <Button onClick={handleSubmit}   className={classes.button}>
     我要點名!
 </Button>
         

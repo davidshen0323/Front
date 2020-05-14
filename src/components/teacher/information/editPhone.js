@@ -7,9 +7,11 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyle = makeStyles(theme => ({
   typo: {
+    fontFamily: 'Microsoft JhengHei',
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontSize:16,
   },
   description: {
     marginLeft: 10,
@@ -17,7 +19,9 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    color: "#582707",
     padding: 10
   },
 }));

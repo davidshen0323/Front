@@ -7,9 +7,11 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyle = makeStyles(theme => ({
   typo: {
+    fontFamily: 'Microsoft JhengHei',
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontSize:16,
   },
   description: {
     marginLeft: 10,
@@ -17,7 +19,9 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    color: "#582707",
     padding: 10
   },
 }));
@@ -109,8 +113,9 @@ export default function EditEmail({ open, handleClose })  {
             目前Email：406401628@mail.fju.edu.tw
           </Typography> */}
 
-          <Typography className={classes.typo} variant="h5">
-            新的Email：<Input 
+          <Typography className={classes.typo} variant="h6">
+            新的Email：
+            <Input 
             id="email"
             value={email.email}
             onChange={handleChange('email')}  

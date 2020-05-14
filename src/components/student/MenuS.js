@@ -98,21 +98,21 @@ export default function LoginMenu() {
                */}
 
 <img src={logo} width="200px"></img>
-              {/* <Button 
+              <Button 
                 variant="text"
                 className={classes.button}
                 href="/homepages"
               >
                 我的課程
-              </Button> */}
+              </Button>
 
-              {/* <Button 
+              <Button 
                 variant="text"
                 className={classes.button}
                 href="/StuInformation"
               >
                 基本資料
-                </Button> */}
+                </Button>
 
               
 
