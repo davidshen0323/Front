@@ -138,10 +138,6 @@ export default function Ing() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [ing,setIng] = React.useState([]);
   const params =useParams();
-
-
-  const [test, setTest] = React.useState('test');
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
