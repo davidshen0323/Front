@@ -106,7 +106,7 @@ export default function Hand() {
   const handleClose = () => {
     setOpen(false);
     console.log(rcid)
-    fetch('/teacher/rollcall/closedRollcall',{
+    fetch('/teacher/rollcall/closedRollcall/',{
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json',

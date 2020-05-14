@@ -18,6 +18,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 import {useState} from  "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import {DialogActions} from "@material-ui/core";
+import { usePosition } from 'use-position';
+import { Label } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -79,10 +81,19 @@ export default function Qrcode() {
     setChange(1);
 }   
 
+const watch = true;
+const {
+  latitude,
+  longitude,
+  // error,
+} = usePosition(watch);
+
+const gpspoint = latitude + longitude;
+
 const submitClick = () => {
 setOpen(false);
 console.log(scan)
-fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
+fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
   method: 'PUT',
   headers: {
       'Content-Type': 'application/json',
