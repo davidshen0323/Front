@@ -54,6 +54,7 @@ export default function OpenJoinClass ()  {
           
       })
   })
+  window.location.reload();
   }
 
   const handleClickOpen=()=>{

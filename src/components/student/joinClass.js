@@ -81,11 +81,12 @@ export default function JoinClass({ open, handleClose })  {
    };
 
    //QRcode
-  const [scan, setScan] = useState();
+  const [scan, setScan] = useState('');
 
   function handleScan (scan) {
     if(scan){
-      setScan(scan);
+      setScan(scan)
+      //setInputs(scan);
       // setInputs(cs_qrcode);
     }
   }
@@ -99,6 +100,8 @@ export default function JoinClass({ open, handleClose })  {
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
+  // 失敗小紅2
+  const [openErr2, setOpenErr2] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     cs_qrcode:'',
   
@@ -113,19 +116,29 @@ export default function JoinClass({ open, handleClose })  {
   const submitClose = () => {
     handleClose(true);
     setOpenS(false);
+    setOpenErr1(false);
     inputs.cs_qrcode='';
   };
-  
-    const previewStyle = {
-      height: 240,
-      width: 320,
-    }
 
-    let post; //宣告一個布林值變數
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    setOpenErr2(false);
+    inputs.cs_qrcode='';
+  };
+
+  
+  
+  const previewStyle = {
+    height: 240,
+    width: 320,
+  }
+
+  let post; //宣告一個布林值變數
 
 const handleSubmit = () =>
 {
-    if(inputs.cs_qrcode.length > 0) //每個輸入格都不為空值
+    if(inputs.cs_qrcode.length > 0 || scan.length > 0) //每個輸入格都不為空值
         {
             fetch('/student/course/joinclass/',{
                 method: 'POST',
@@ -133,7 +146,8 @@ const handleSubmit = () =>
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                  cs_qrcode: inputs.cs_qrcode,
+                  cs_qrcode: inputs.cs_qrcode||scan,
+                 
                 })
             })
             .then(res => {
@@ -143,20 +157,23 @@ const handleSubmit = () =>
                 if (test === "request failed! this class QRcode not exist!") //課堂不存在
                 {
                     //alert("該QRcode不存在！");
-                    post = false;
+                    
                     console.log(1);
                     setOpenErr1(true);
-                    return post;
+                    setOpenErr2(false);
+                    
+                    
                 }
                 else
                 {
                     setOpenS(true);
                     setOpenErr1(false);
-                   
-                    post = true;
+                    setOpenErr2(false);
+                    
                     console.log(0);
+                    window.location.reload();
                  //   history.push('/ViewAnnouncementt/${csid}');
-                    return post;                        
+                                         
                 }
                 
             } fetchres() })
@@ -167,11 +184,16 @@ const handleSubmit = () =>
         
         else
         {
-            //alert("請再次確認!!")
-            setOpenErr1(true);
+            //alert("不能為空")
+            setOpenErr2(true);
+            setOpenErr1(false);
+                    
             
         }
-        
+        console.log(inputs.cs_qrcode);
+        console.log(scan);
+      
+      
     }
 
   return (
@@ -185,7 +207,7 @@ const handleSubmit = () =>
                     <Typography >輸入加課代碼</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <Typography>請輸入加課代碼：<Input  value={inputs.cs_qrcode} onChange={handleChange('cs_qrcode')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/></Typography>
+                    <Typography>請輸入加課代碼：<Input value={inputs.cs_qrcode} onChange={handleChange('cs_qrcode')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/></Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
 
@@ -196,24 +218,24 @@ const handleSubmit = () =>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
-                      {/* <QrReader facingMode="user"  delay={300} onError={handleError} onScan={handleScan} style={{ width:250}}/> */}
+                      {/* <QrReader facingMode="environment"  delay={300} onError={handleError} onScan={handleScan} style={{ width:250}}/> */}
                       <QrReader
-                        facingMode="environment"
+                        facingMode="user"
                         delay={300}
                         style={{width:250}}
                         onError={handleError}
                         onScan={handleScan}
                       />
                     </Typography>
+                   
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            
         </div>
 
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} color="primary">關閉視窗</Button>
-        {/* <Button disabled={change===0 ? true : false} onClick={handleSubmit} color="primary" >加入課程</Button> */}
+        <Button onClick={handleSubmit} color="primary" >加入課程</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
@@ -221,9 +243,15 @@ const handleSubmit = () =>
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}
-        <Snackbar open={openErr1} style={{marginBottom:100}}>
+        <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="error">
-            該QRcode不存在！
+            該加課代碼不存在！
+          </Alert>
+        </Snackbar>
+        {/* 失敗小紅框2 */}
+        <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="error">
+            加課代碼不能為空！
           </Alert>
         </Snackbar>
       </DialogActions>
