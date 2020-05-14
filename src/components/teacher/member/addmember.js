@@ -8,13 +8,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import  {Typography, TextareaAutosize, TextField} from '@material-ui/core';
-import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
-import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import {brown} from '@material-ui/core/colors';
 import {Fab} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -79,7 +73,10 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Microsoft JhengHei',
       },
       TextField:{
-          width:'280px',
+          width:'275px',
+      },
+      text:{
+        height:'60px',
       }
 }));
 /*------------------------------*/
@@ -138,7 +135,7 @@ export default function Apply(props) {
             </Typography>
         </DialogTitle>
 
-        <DialogContent >
+        <DialogContent className={classes.text}>
         
         {/* <Grid container spacing={1}  
         direction="column"  
@@ -152,7 +149,7 @@ export default function Apply(props) {
                 {/* <Typography className={classes.inputName} variant="body1">
                     學生學號：
                  */}
-                <FormControl variant="outlined" size="small">
+                {/* <FormControl variant="outlined" size="small"> */}
                 <TextField 
                 id="std_id"
                 label="學生學號"
@@ -163,7 +160,7 @@ export default function Apply(props) {
                 variant="outlined"
                 className={classes.TextField}
             />
-                </FormControl>
+                {/* </FormControl> */}
                 {/* </Typography> */}
                 {/* </div> */}
             {/* </Grid>   */}

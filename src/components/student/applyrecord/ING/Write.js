@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {brown} from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   root: {
@@ -112,7 +113,7 @@ export default function Write(props) {
 
   return (
     <div className={classes.root}>
-      <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+      <IconButton variant="outlined" style={{color:brown[500]}} onClick={handleClickOpen}>
         <CreateIcon />
       </IconButton>
 

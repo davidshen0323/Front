@@ -24,6 +24,22 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
   },
+  button: {
+    width: '150px',
+    margin:'auto',
+    marginTop: 20,
+    // marginLeft: 10,
+    marginBottom: 10,
+    margin: theme.spacing(1),
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+    fontSize:16,
+    backgroundColor: "#f8b62b",
+    fontWeight:'bold',
+  },
+  appBar: {
+    backgroundColor:'#fff8e1',
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -124,11 +140,11 @@ fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <Backdrop className={classes.backdrop} open >
-      <AppBar >
+      <AppBar className={classes.appBar}>
           <Toolbar>
             <Grid item xs={12} sm={12}></Grid>
     
-    <IconButton  color="inherit" onClick={handleClose}>
+    <IconButton  color="#582707" onClick={handleClose}>
       <CloseIcon />
     </IconButton>  
     </Toolbar>
@@ -160,7 +176,7 @@ fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
       
        
         <DialogActions>
-        <Button disabled={change===0 ? true : false} onClick={submitClick} color="primary" >我要點名!</Button>
+        <Button disabled={change===0 ? true : false} onClick={submitClick} color="#582707" >我要點名!</Button>
         {/* <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           已加入課程！

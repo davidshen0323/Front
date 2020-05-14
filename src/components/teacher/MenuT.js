@@ -93,23 +93,23 @@ export default function LoginMenu() {
               {/* <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography> */}
               
               <img src={logo} width="200px"></img>
-              {/* <Button 
+              <Button 
                 variant="outlined"
                 className={classes.button}
                 href="/homepaget"
                 >
                 我的課程
-              </Button> */}
+              </Button>
 
                 
 
-              {/* <Button 
+              <Button 
                 variant="text"
                 className={classes.button}
                 href="/TInformation"
                 >
                 基本資料
-                </Button> */}
+                </Button>
               
 
               <Grid container
