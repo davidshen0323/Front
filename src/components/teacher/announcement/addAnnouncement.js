@@ -32,6 +32,7 @@ export default function AddAnnouncement({ open, handleClose })  {
   const classes = useStyle();
   const params = useParams();
   const csid = params.cs_id;
+  const [btnClose,setbtnClose]= React.useState(0);
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
@@ -40,6 +41,8 @@ export default function AddAnnouncement({ open, handleClose })  {
   const [openErr2, setOpenErr2] = React.useState(false);
   // 失敗小橘3
   const [openErr3, setOpenErr3] = React.useState(false);
+  // 稍後小橘4
+  const [openErr4, setOpenErr4] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     title:'',
     content:'',
@@ -58,12 +61,7 @@ let post; //宣告一個布林值變數
 let history = useHistory(); //傳值跳頁的方法
 
 
-  const submitClick = () => {
-  
-    setOpenS(true);
-  };
-
-  const submitClose = (event, reason) => {
+  const submitClose = () => {
     handleClose(true);
     setOpenS(false);
     inputs.title='';
@@ -71,9 +69,21 @@ let history = useHistory(); //傳值跳頁的方法
     window.location.reload();
     
   };
+
+  const ErrClose = () => {
+    
+    setOpenS(false);
+    setOpenErr1(false);
+    setOpenErr2(false);
+    setOpenErr3(false);
+    setOpenErr4(false);
+
+  };
     
   const handleSubmit = () =>
     {
+      setbtnClose(1);
+      setOpenErr4(true);
         if(inputs.title.length > 0 
             && inputs.content.length > 0) //每個輸入格都不為空值
             {
@@ -100,6 +110,8 @@ let history = useHistory(); //傳值跳頁的方法
                         setOpenErr1(true);
                         setOpenErr2(false);
                         setOpenErr3(false);
+                        setOpenErr4(false);
+                        setbtnClose(0);
                         return post;
                     }
                     else if(test === "request failed. teacher not in this class!") //教師不屬於該課堂
@@ -110,6 +122,8 @@ let history = useHistory(); //傳值跳頁的方法
                         setOpenErr2(true);
                         setOpenErr1(false);
                         setOpenErr3(false);
+                        setOpenErr4(false);
+                        setbtnClose(0);
                         return post;
                     }
                     else
@@ -118,6 +132,7 @@ let history = useHistory(); //傳值跳頁的方法
                         setOpenErr1(false);
                         setOpenErr2(false);
                         setOpenErr3(false);
+                        setOpenErr4(false);
                         post = true;
                         console.log(0);
                      //   history.push('/ViewAnnouncementt/${csid}');
@@ -134,7 +149,8 @@ let history = useHistory(); //傳值跳頁的方法
             {
                 //alert("請再次確認!!")
                 setOpenErr3(true);
-                
+                setOpenErr4(false);
+                setbtnClose(0);
             }
             
         }
@@ -174,7 +190,7 @@ let history = useHistory(); //傳值跳頁的方法
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} color="primary">關閉視窗</Button>
-        <Button disabled={inputs.title === ''&&inputs.content=== ''} onClick={handleSubmit} color="primary" >確認送出</Button>
+        <Button disabled={btnClose===1} onClick={handleSubmit} color="primary" >確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
@@ -194,9 +210,15 @@ let history = useHistory(); //傳值跳頁的方法
           </Alert>
         </Snackbar>
         {/* 失敗小橘框3 */}
-        <Snackbar open={openErr3} style={{marginBottom:100}}>
+        <Snackbar open={openErr3} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="warning">
             請再次確認！
+          </Alert>
+        </Snackbar>
+        {/* 稍後小橘框4 */}
+        <Snackbar open={openErr4} style={{marginBottom:100}}>
+          <Alert severity="warning">
+            請稍後，正在發送公告信！
           </Alert>
         </Snackbar>
       </DialogActions>
