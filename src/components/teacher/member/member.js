@@ -4,16 +4,17 @@ import MyMenu from '../MenuT';
 import MMTable from './MMtable';
 import Paper from '@material-ui/core/Paper';
 import { useParams } from 'react-router-dom';
+import Addmember from './addmember';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 
-    body:{
-        margin:'20px',
-        marginTop:'20px',
-        background: '#E1E1E1',
+    div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
     },
     Paper:{
+      fontFamily: 'Microsoft JhengHei',
         width: '90%',
         margin: 'auto',        
     },
@@ -26,11 +27,11 @@ export default function Member() {
     // const csid = params.cs_id;
         return (
 
-            <div >
+            <div className={classes.div}>
                 <MyMenu/>
           <br/><br/><br/>
             {/* <center><label><h1>專題</h1></label> </center> */}
-
+          <Addmember csid={params.cs_id}/>
                 <Paper className={classes.Paper}>
                   <MMTable
                     csid={params.cs_id}

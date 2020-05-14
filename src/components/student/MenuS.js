@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button, Link } from '@material-ui/core/';
 import Typography from '@material-ui/core/Typography';
-
+import logo from '../../img/Rollsup.jpeg';
 import Grid from '@material-ui/core/Grid';
 
 
@@ -18,8 +18,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
-    color: "white",
-    backgroundColor: "#003060",
+    fontSize:18,
+    color: "#582707",
+    backgroundColor: "#fffaea",
     
   },
   School: {
@@ -43,12 +44,12 @@ const useStyles = makeStyles(theme => ({
 
 
    toolbar: {
-     backgroundColor: "#003060",
+     backgroundColor: '#fffaea',
   
    },
 
    navbutton: {
-    backgroundColor: "#003060",
+    backgroundColor: "#fffaea",
    },
 
    navbuttext: {
@@ -67,10 +68,12 @@ const useStyles = makeStyles(theme => ({
     marginTop: 10,
     marginBottom: 10,
     width:'200px',
+    fontSize:18,
     fontFamily: 'Microsoft JhengHei',
-    color: "white",
-    backgroundColor: "#003060",
+    color: "#582707",
+    backgroundColor: "#fffaea",
     fontWeight:'bold',
+    borderStyle: 'none'
 }
 }));
 
@@ -91,22 +94,25 @@ export default function LoginMenu() {
             <Toolbar className={classes.toolbar}>
             
 
-              <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography>
-              <Button 
-                variant="contained"
+              {/* <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography>
+               */}
+
+<img src={logo} width="200px"></img>
+              {/* <Button 
+                variant="text"
                 className={classes.button}
                 href="/homepages"
               >
                 我的課程
-              </Button>
+              </Button> */}
 
-              <Button 
-                variant="contained"
+              {/* <Button 
+                variant="text"
                 className={classes.button}
                 href="/StuInformation"
               >
                 基本資料
-                </Button>
+                </Button> */}
 
               
 
@@ -121,7 +127,7 @@ export default function LoginMenu() {
               <form action="/logout" method="POST">
 
                   
-                <Button className={classes.menuButton} type="submit" variant="contained" >登出</Button>
+                <Button className={classes.menuButton} type="submit" variant="outline" >登出</Button>
               </form>
               </Grid>
                 

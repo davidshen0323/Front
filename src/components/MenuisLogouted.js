@@ -1,206 +1,136 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button } from '@material-ui/core/';
-// import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-// import MenuIcon from '@material-ui/icons/Menu';
-// import {useState,useEffect} from 'react';
-// import axios from 'axios';
-// import Grid from '@material-ui/core/Grid';
-
-/*---drawer---*/
-// import clsx from 'clsx';
-// import { useTheme } from '@material-ui/core/styles';
-// import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-
-// import List from '@material-ui/core/List';
-// import Divider from '@material-ui/core/Divider';
-// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import MailIcon from '@material-ui/icons/Mail';
-// import homepage1 from './student/Homepage1';
-
-// const drawerWidth = 200;
-
+import { AppBar, Toolbar, Button, Grid, Typography} from '@material-ui/core/';
+import logo from '../img/Rollsup.jpeg';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    marginBottom: 57, //會讓menu跟下面東西的距離改變
+    
   },
-  // appBar: {
-  //   height: 'auto',
-  //   transition: theme.transitions.create(['margin', 'width'], {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: theme.transitions.duration.leavingScreen,
-  //   }),
-  // },
-  // appBarShift: {
-  //   width: `calc(100% - ${drawerWidth}px)`,
-  //   marginLeft: drawerWidth,
-  //   transition: theme.transitions.create(['margin', 'width'], {
-  //     easing: theme.transitions.easing.easeOut,
-  //     duration: theme.transitions.duration.enteringScreen,
-  //   }),
-  // },
-  // menuButton: {
-  //   marginRight: theme.spacing(2),
-  //   color: "white",
-  // },
+
+  menuButton: {
+    marginRight: theme.spacing(2),
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+    fontSize:18,
+    color: "#582707",
+    backgroundColor: "#fffaea",
+    
+  },
   School: {
     minWidth: 100,
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
     color: 'white',
     marginLeft: 30
-  },
-  // hide: {
-  //   display: 'none',
-  // },
-  // drawer: {
-  //   width: drawerWidth,
-  //   flexShrink: 0,
-    
-  // },
-  // drawerPaper: {
-  //   width: drawerWidth,
-  //   backgroundColor:'#E0E0E0',
-  // },
-  // drawerHeader: {
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   padding: theme.spacing(0, 1),
-  //   ...theme.mixins.toolbar,
-  //   justifyContent: 'flex-end',
-  //   backgroundColor: "#003060",
-  //   // color: "white",
-
-  // },
-  // content: {
-  //   flexGrow: 1,
-  //   padding: theme.spacing(3),
-  //   transition: theme.transitions.create('margin', {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: theme.transitions.duration.leavingScreen,
-  //   }),
-  //   marginLeft: -drawerWidth,
-  // },
-  // contentShift: {
-  //   transition: theme.transitions.create('margin', {
-  //     easing: theme.transitions.easing.easeOut,
-  //     duration: theme.transitions.duration.enteringScreen,
-  //   }),
-  //   marginLeft: 0,
-  // },
-  title: {
-    flexGrow: 1,
-
-  },
-  list: {
-   marginLeft: 20,
-   marginRight: 20,
-   fontFamily: 'Microsoft JhengHei',
-   fontWeight: 'bold',
-  },
-
-  toolbar: {
-    backgroundColor: "#003060",
     
   },
-
-  arrow: {
-    color:'white',
-  }
   
+  Nav: {
+    margin: `${theme.spacing(1)}px auto`,
+    // flexGrow: 1,
+  },
+  
+  list: {
+    marginLeft: 20,
+    marginRight: 20,
+   },
+
+
+   toolbar: {
+     backgroundColor: '#fffaea',
+  
+   },
+
+   navbutton: {
+    backgroundColor: "#fffaea",
+   },
+
+   navbuttext: {
+    color: "white",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+   },
+ 
+   arrow: {
+     color:'white',
+   },
+
+   button: {
+    margin: theme.spacing(1),
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    width:'200px',
+    fontSize:18,
+    fontFamily: 'Microsoft JhengHei',
+    color: "#582707",
+    backgroundColor: "#fffaea",
+    fontWeight:'bold',
+    borderStyle: 'none'
+}
 }));
 
 
-export default function MyLogoutMenu() {
-
-  // const [Sclass, setClass] = useState([]);
-
-  // const classList = ['cs_id','cs_name'];
-
-  // const theme = useTheme();
-  // const [open, setOpen] = React.useState(false);
-
-  // const handleDrawerOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleDrawerClose = () => {
-  //   setOpen(false);
-  // };
-
-//   useEffect(() => {
-//     async function fetchData() {
-//         const result = await axios.get(`/class/all/10811000DMG741D7411023900`);
-//         setClass(result.data);
-//       //   console.log(result.data);
-//     }
-//     fetchData();
-// }, []);
+export default function MylogoutMenu() {
 
   const classes = useStyles();
+
+  // const [value, setValue] = React.useState("value");
+
   return (
     <div className={classes.root}>
-        <CssBaseline />
+        
         <AppBar
           position="fixed"
+          
           >
             <Toolbar className={classes.toolbar}>
-            {/* <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            > */}
-                {/* <MenuIcon /> */}
-              {/* </IconButton> */}
-              <Typography className={classes.School} color="inherit">輔仁大學</Typography>
-          {/* <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton className={classes.arrow} onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-          
-          <Typography className={classes.list}>請先登入以使用功能</Typography>
-        
-       
-      </Drawer> */}
-      
-              {/* <Grid container direction="row" justify="space-between">
-                <Grid item> */}
-                  {/* <Button component={Link} to='/Homepage1' color="inherit">輔仁大學</Button> */}
-                  {/* <Button  component={Link} to='/acceptance' color="inherit">排隊驗收</Button> */}
-                  {/* <Button  component={Link} to='/question' color="inherit">排隊問題</Button> */}
-                  {/* <label>{Sclass[0]}</label> */}
-                {/* </Grid>
-                <Grid item> */}
-                  {/* <Button component={Link} to='/homepage1' color="inherit">登入</Button> */}
-                  {/* <Button component={Link} to='/register' color="inherit">註冊</Button> */}
-                  {/* <Button  component={Link} to='/rollcall' color="inherit">點名</Button> */}
-                  {/* <Typography className={classes.title} align="right" variant="body1">登出</Typography> */}
-                {/* </Grid>
+            
+
+              {/* <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography> */}
+              
+              <img src={logo} width="200px"></img>
+              {/* <Button 
+                variant="outlined"
+                className={classes.button}
+                href="/homepaget"
+                >
+                我的課程
+              </Button> */}
+
+                
+
+              {/* <Button 
+                variant="text"
+                className={classes.button}
+                href="/TInformation"
+                >
+                基本資料
+                </Button> */}
+              
+
+              {/* <Grid container
+               direction="row" 
+               justify="flex-end"
+               className={classes.Nav}
+              // wrap="nowrap"
+              spacing={2}
+              >
+              <Grid item>   
+              <form action="/logout" method="POST">
+
+                  
+                <Button className={classes.menuButton} type="submit" variant="outline" >登出</Button>
+              </form>
+              </Grid>
+                
               </Grid> */}
               </Toolbar>
           </AppBar>
+
     </div>    
   )
 

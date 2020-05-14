@@ -1,5 +1,5 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize} from "@material-ui/core";
+import {Button, DialogActions, DialogContent, Typography, TextareaAutosize} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -10,7 +10,9 @@ const useStyle = makeStyles(theme => ({
   typo: {
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontFamily:'微軟正黑體',
+
   },
   description: {
     marginLeft: 10,
@@ -19,9 +21,25 @@ const useStyle = makeStyles(theme => ({
   },
   typoHeading: {
     color: "blue",
-    padding: 10
+    padding: 10,
+    fontFamily:'微軟正黑體'
   },
-}));
+  button: {
+   // margin: theme.spacing(1),
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    width:'100px',
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+     backgroundColor: "#003060",
+    fontWeight:'bold',
+},
+text:{
+  fontFamily: 'Microsoft JhengHei',
+}
+}
+));
 
 
 function Alert(props) {
@@ -89,20 +107,20 @@ export default function AddQA ()  {
 
   return (
     <div>
-
+{/* 
     <Button 
       onClick = {handleClickOpen}
       variant = "contained" 
       color = "primary" 
-      style={{marginLeft:'50%', fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} 
+      className={classes.button}
     >
     我要發問
-  </Button>
+  </Button> */}
 
-    <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+    {/* <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description"> */}
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-          <Typography className={classes.typoHeading} variant="h5">
+          <Typography className={classes.typoHeading} variant="h5" >
             提問
           </Typography>
         </div>
@@ -126,21 +144,22 @@ export default function AddQA ()  {
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary">關閉視窗</Button>
+        <Button onClick={submitClose} color="primary" className={classes.text} >關閉視窗</Button>
         <Button 
         disabled={inputs.ques === '' ? true : false} 
         onClick={handleSubmit} 
         color="primary"
+        className={classes.text}
         >
           確認送出
           </Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
-          <Alert onClose={submitClose} severity="success">
+          <Alert onClose={submitClose} severity="success" className={classes.text}>
             老師收到你的問題囉！
           </Alert>
         </Snackbar>
       </DialogActions>
-    </Dialog>
+    {/* </Dialog> */}
       </div>
   );
 }

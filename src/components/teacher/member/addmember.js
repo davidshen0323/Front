@@ -7,7 +7,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import  {Typography, TextareaAutosize} from '@material-ui/core';
+import  {Typography, TextareaAutosize, TextField} from '@material-ui/core';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,6 +16,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {brown} from '@material-ui/core/colors';
+import {Fab} from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 
 const styles = (theme) => ({
   root: {
@@ -65,6 +67,20 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       flexWrap: 'wrap',
     },
+    fab: {
+        position: "fixed",
+        bottom: theme.spacing(5),
+        right: theme.spacing(5),
+        backgroundColor:brown[500]
+      },
+      typoHeading: {
+        color: "#582707",
+        padding: 10,
+        fontFamily: 'Microsoft JhengHei',
+      },
+      TextField:{
+          width:'280px',
+      }
 }));
 /*------------------------------*/
 
@@ -76,23 +92,9 @@ export default function Apply(props) {
     const [open, setOpen] = React.useState(false);
 
     const [inputs, setInputs] = React.useState({
-        typeid:'',
-        tl_content:'',    
+        std_id: '',  
     });
   
-    const handleChange = fieldname => event => {
-      event.persist();
-      setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-      
-  }
-
-  // const handleChange = (event) => {
-  // const name = event.target.name;
-  // setState({
-  //     ...state,
-  //     [name]: event.target.value,
-  // });
-  // };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -101,118 +103,87 @@ export default function Apply(props) {
     setOpen(false);
   };
 
+  const handleChange = fieldname => event => {
+    event.persist();
+    setInputs(inputs => ({...inputs, [fieldname]: event.target.value }));
+  }
+
   const handleSubmit = () =>{
     setOpen(false);
-    console.log(props.id);
-    console.log(inputs.tl_content);
-    console.log(inputs.typeid);
-    fetch('/student/takeleave',{
+    console.log("stdid",inputs.std_id);
+    console.log("csid",props.csid);
+    fetch('/teacher/Addstudent',{
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          rc_id:props.id,
-          tl_content:inputs.tl_content,
-          tl_type_id:inputs.typeid,
+          std_id:inputs.std_id,
+          cs_id:props.csid,
       })
   })
+  window.location.reload();
   };
 
   return (
     <div className={classes.root}>
-      <IconButton variant="outlined" style={{color:brown[500]}} onClick={handleClickOpen}>
-        <AssignmentOutlinedIcon />
-      </IconButton>
-
-      <Dialog onClose={handleClose}  open={open} variant="inline" fullWidth maxWidth="sm">
+     <Fab aria-label="add" style={{color:'#ffffff'}} className={classes.fab} onClick={handleClickOpen} >
+      <AddIcon />
+    </Fab>
+      <Dialog onClose={handleClose}  open={open} variant="inline" fullWidth maxWidth="xs">
         <DialogTitle  edge="start"onClose={handleClose}>
-        
-        <ListItem alignItems="flex-start">
-          
-        <ListItem>
-          <Typography className={classes.inputName} >
-            日期時間:
-        </Typography>
-            <Typography
-                  className={classes.inline}>
-                    {props.time}
+    
+            <Typography className={classes.typoHeading} variant="h5">
+                新增學生
             </Typography>
-          </ListItem>  
-
-
-             <ListItem>
-          <Typography className={classes.inputName} >
-            來源:
-        </Typography>
-            <Typography
-                  
-                  className={classes.inline}>
-                    {props.resource}
-            </Typography>
-          </ListItem>  
-          
-          </ListItem>
         </DialogTitle>
 
-        <DialogContent dividers>
-        <Grid container spacing={1}  
+        <DialogContent >
+        
+        {/* <Grid container spacing={1}  
         direction="column"  
         justify="center"  
         alignItems="flex-start"
         >
 
-            <Grid item xs={12} row> 
+            <Grid item xs={12} row>  */}
               
-                <div>
-                <Typography className={classes.inputName} variant="body1">
-                    請假類別：
-                
-                <FormControl variant="outlined" className={classes.formControl} size="small">
-                    <InputLabel>假別</InputLabel>
-                    <Select
-                    native
-                    value={inputs.typeid}
-                    onChange={handleChange('typeid')}
-                    inputProps={{
-                        name: 'typeid',
-                        id:'typeid'
-                    }}
-                    >
-                    <option value="" />
-                    <option value={4}>病假</option>
-                    <option value={5}>事假</option>
-                    <option value={6}>喪假</option>
-                    <option value={7}>公假</option>
-                    </Select>
+                {/* <div> */}
+                {/* <Typography className={classes.inputName} variant="body1">
+                    學生學號：
+                 */}
+                <FormControl variant="outlined" size="small">
+                <TextField 
+                id="std_id"
+                label="學生學號"
+                name="stdid"
+                value={inputs.stdid}
+                onChange={handleChange('std_id')}
+                size="small"
+                variant="outlined"
+                className={classes.TextField}
+            />
                 </FormControl>
-                </Typography>
-                </div>
-            </Grid>  
+                {/* </Typography> */}
+                {/* </div> */}
+            {/* </Grid>   */}
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 
                 <div >
                 <Typography className={classes.inputName} variant="body2">
                     請假事由：
                 </Typography>
 
-                <Typography className={classes.inputName} variant="body2">
-                    <TextareaAutosize 
-                    //onChange={()=> setInputs(2)} id="question" 
-                    style={{borderRadius:10, padding:8, width:550, height:50, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請詳述請假事由"
-                    value={inputs.tl_content}
-                    onChange={handleChange('tl_content')}/>
-                </Typography>     
+                
                 </div>
-            </Grid>
-        </Grid>
+            </Grid> */}
+        {/* </Grid> */}
         </DialogContent>
 
         <DialogActions>
         <Button onClick={handleClose} color="secondary" autoFous>關閉視窗</Button>
         <Button  
-        // disabled={inputs===2 ? false : true} 
         onClick={handleSubmit}
         color="primary" autoFous>確認送出</Button>
         </DialogActions>

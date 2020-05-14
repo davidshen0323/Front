@@ -12,19 +12,23 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import RollcallRDS from './rollcallRDStable';
-import RollcallRDSTT from './RollcallRDSTT';
 import Grid from '@material-ui/core/Grid';
-import {useState,useEffect} from 'react';
-import axios from 'axios';
+import {brown} from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
+    backgroundColor:'#ffe1c4',
   },
   title: {
     marginLeft: theme.spacing(2),
     flex: 1,
   },
+  inline:{
+    color: "#582707",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+  }
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -51,7 +55,7 @@ export default function RDSB(props) {
 
   return (
     <div>
-     <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+     <IconButton variant="outlined"  style={{color:brown[500]}} onClick={handleClickOpen}>
       <AssignmentOutlinedIcon />
       </IconButton>
 
@@ -77,7 +81,12 @@ export default function RDSB(props) {
          <ListItem alignItems="flex-start">
 
          <ListItemText
-          primary="學號"
+         primary={
+          <Typography
+          className={classes.inline}
+          >
+        學號
+        </Typography>}
           secondary={
           <Typography
                 component="span"
@@ -90,7 +99,12 @@ export default function RDSB(props) {
         />
 
 <ListItemText
-          primary="姓名"
+          primary={
+            <Typography
+            className={classes.inline}
+            >
+          姓名
+          </Typography>}
           secondary={
           <Typography
                 component="span"
@@ -103,7 +117,12 @@ export default function RDSB(props) {
         />
 
 <ListItemText
-          primary="系級"
+         primary={
+          <Typography
+          className={classes.inline}
+          >
+        系級
+        </Typography>}
           secondary={
           <Typography
                 component="span"
@@ -124,7 +143,12 @@ export default function RDSB(props) {
         
             <ListItem>
               <ListItemText
-                  primary="出席"
+                  primary={
+                    <Typography
+                    className={classes.inline}
+                    >
+                  出席
+                  </Typography>}
                   secondary={
                   <Typography
                         component="span"
@@ -136,7 +160,12 @@ export default function RDSB(props) {
                 />
 
               <ListItemText
-                  primary="請假"
+                  primary={
+                    <Typography
+                    className={classes.inline}
+                    >
+                  請假
+                  </Typography>}
                   secondary={
                   <Typography
                         component="span"
@@ -148,7 +177,12 @@ export default function RDSB(props) {
                 />
 
               <ListItemText
-                  primary="缺席"
+                  primary={
+                    <Typography
+                    className={classes.inline}
+                    >
+                  缺席
+                  </Typography>}
                   secondary={
                   <Typography
                         component="span"

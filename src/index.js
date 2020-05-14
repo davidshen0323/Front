@@ -21,7 +21,7 @@ import QAlist_T from './components/teacher/Question/QAlist_T';
 import QAlist_S from './components/student/Question/QAlist_S';
 import Loading from './components/Loading';
 import RollcallRD from './components/student/rollcall/rollcallRD';
-import Register from './components/Register.js';
+import RegisterBlock from './components/RegisterBlock';
 
 import ViewAnnouncements from './components/student/announcement/viewAnnouncements';
 import ViewAnnouncementt from './components/teacher/announcement/viewAnnouncementt';
@@ -58,7 +58,7 @@ ReactDOM.render(
             {/* <Route path="/acceptance" component={AcceptanceList}/> */}
             
             <Route path="/login" component={Login}/>
-            <Route path="/register" component={Register}/>
+            <Route path="/register" component={RegisterBlock}/>
             <Route path="/rollcall/:cs_id" component={Rollcall}/>
             <Route path="/leavemanage/:cs_id" component={Leavemanage}/>
             <Route path="/rollcallrecord" component={RollcallRecord}/> 
@@ -78,9 +78,8 @@ ReactDOM.render(
             <Route path="/QAlist_T/:cs_id" component={QAlist_T}/>
             <Route path="/QAlist_S/:cs_id" component={QAlist_S}/>
 
-
             <Route path="/post" component={post}/>
-            
+  
             <Route path="/membert/:cs_id" component={MemberT}/>
             <Route path="/members/:cs_id" component={MemberS}/>
 
@@ -93,6 +92,7 @@ ReactDOM.render(
             <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
             <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
+            
             {/* <Route path="/Gps" component={gps}/>
             <Route path="/FindGeo" component={findgeo}/> */}
 

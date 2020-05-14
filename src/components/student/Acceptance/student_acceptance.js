@@ -6,6 +6,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyMenu from '../MenuS';
 import { useParams, Link ,useHistory} from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
 function TabPanel(props) {
@@ -51,6 +52,7 @@ function LinkTab(props) {
 }
 
 
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -62,13 +64,21 @@ export default function AcceptanceList({ open, props }) {
   // const [stdid, setStdid] = useState();
 
   /*------------ STYLE ------------*/
-  const useStyles = makeStyles({
+  const useStyles = makeStyles(theme =>({
+    Paper:{
+      width: '90%',
+      margin: 'auto', 
+      marginTop:'5%',   
+      marginBottom:'5%',
+      boxShadow:"1px 1px 1px 1px #9E9E9E",    
+  },
     root: {
       width: '100%',
       overflowX: 'auto',
     },
     table: {
       minWidth: 450,
+      fontFamily:'微軟正黑體'
     },
     // backbut: {
     //   width: 100,
@@ -78,17 +88,24 @@ export default function AcceptanceList({ open, props }) {
     //   backgroundColor: '#E0E0E0',
     // },
     button: {
-      width: 100,
+      width: '100px',
       margin:'auto',
       marginTop: 20,
       // marginLeft: 10,
       marginBottom: 10,
+      margin: theme.spacing(1),
       fontFamily: 'Microsoft JhengHei',
       color: "white",
-      backgroundColor: "#003060",
+      fontSize:16,
+      backgroundColor: "#f8b62b",
       fontWeight:'bold',
     },
-  });
+    div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    },
+  }
+  ));
   const classes = useStyles();
 
   /*=========== Create Table HEAD ===========*/
@@ -241,9 +258,10 @@ export default function AcceptanceList({ open, props }) {
   }
 
   return (
-    <div>
+    <div className={classes.div}>
   
       <MyMenu/>
+
       <AppBar position="static" color="default">
                 <Tabs
                 variant="fullWidth"
@@ -259,6 +277,7 @@ export default function AcceptanceList({ open, props }) {
       <TabPanel value={value} index={0}>
       <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
       <Table>
+
             <TableHead>
                 <TableRow>
                     {/* <TableCell>排序</TableCell> */}
@@ -346,8 +365,7 @@ export default function AcceptanceList({ open, props }) {
       </Box>
       </TabPanel>
 
-      
-     
+
 
         <Grid
         open={open}
@@ -358,15 +376,7 @@ export default function AcceptanceList({ open, props }) {
         spacing={2}
         >
           
-          
-          <Button 
-          onClick={handleSubmit}
-          className={classes.button}
-          >
-            我要驗收
-          </Button>
-          
-          
+          <List>
           
           <Button
           onClick={handledelete}
@@ -375,43 +385,58 @@ export default function AcceptanceList({ open, props }) {
             取消驗收
           </Button>
 
-          <Button
+          <Button 
+          onClick={handleSubmit}
+          className={classes.button}
+          >
+            我要驗收
+          </Button>
+          
+         </List>
+
+          {/* <Button
       className={classes.button}
       component={Link}
       to={`/selectHW_S/${params.cs_id}`}
       >
       返回
-      </Button>
+      </Button> */}
           
 
 
-        </Grid>
+        </Grid> 
         {/* 成功小綠框 */}
-        <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="success">
             登記驗收成功！
           </Alert>
         </Snackbar>
         {/* 成功小綠框2 */}
-        <Snackbar open={openS2} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
+        <Snackbar open={openS2} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="success">
             取消驗收成功！
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}
-        <Snackbar open={openErr1} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100}}>
+
+        <Snackbar open={openErr1} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
+
           <Alert severity="error">
             老師已經打分數了，無法取消！
           </Alert>
         </Snackbar>
         {/* 失敗小橘框 */}
-        <Snackbar open={openWarn} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100}}>
+
+        <Snackbar open={openWarn} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
+
           <Alert severity="warning">
             您已登記過驗收！
           </Alert>
         </Snackbar>
         {/* 失敗小橘框2 */}
-        <Snackbar open={openWarn2} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100}}>
+
+        <Snackbar open={openWarn2} autoHideDuration={1500} onClose={handleClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
+
           <Alert severity="warning">
             你還沒點過驗收！
           </Alert>

@@ -4,22 +4,12 @@ import {Link, useParams} from "react-router-dom";
 import MyMenu from './MenuT';
 import { makeStyles } from '@material-ui/core/styles';
 // @ts-ignore
-import Paper from '@material-ui/core/Paper';
-// @ts-ignore
 import axios from 'axios';
 // @ts-ignore
-import Button from "@material-ui/core/Button";
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Typography from '@material-ui/core/Typography';
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import { v4 as uuidv4 } from 'uuid';
 import OpenJoinClass from './OpenJoinClass';
 import AddIcon from "@material-ui/icons/Add";
-import {Fab, Grid} from "@material-ui/core";
+import {Fab, Grid, ButtonBase, Typography, Card, CardActionArea, CardActions, CardContent, CardMedia} from "@material-ui/core";
 
 
 
@@ -31,17 +21,13 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
       },
       root: {
-        // display: 'flex',
         flexWrap: 'wrap',
-        minWidth: 300,
+        height:'100hv',
+        minWidth: 375,
         width: '100%',
-      },
-
-      content: {
-        margin:10,
-        justifyContent: 'center',
-      },
-      
+        background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+        
+      },      
       image: {
         height: '150px',
         width: '150px',
@@ -105,13 +91,23 @@ const useStyles = makeStyles(theme => ({
         const params = useParams();
         //console.log(params);
         
-        const [qrcode , setQrcode] = React.useState('0');
-        console.log(qrcode);
+        // const [qrcode , setQrcode] = React.useState('0');
         //教師開放加入課程
-        const [openJoinClass, closeJoinClass] = React.useState(false);
-        const onCloseJoinClass = () => {
-          closeJoinClass(openJoinClass ? false : true);
-        };
+        // const [openJoinClass, setOpenJoinClass] = React.useState(false);
+        
+        // const OpenJoinClass = () => {
+          
+        //   setOpenJoinClass(true);
+         
+        //   console.log(qrcode);
+        // };
+        
+        // const onCloseJoinClass = () => {
+          
+        //   setOpenJoinClass(false);
+         
+        //   console.log(qrcode);
+        // };
         return (
 
           
@@ -120,15 +116,15 @@ const useStyles = makeStyles(theme => ({
             {/* <br></br><br></br><br></br><br></br> */}
             {/* <p>This is class {params.cs_id}</p> */}
             {/* 新建課程 */}
-            <Fab
+            {/* <Fab
               color="primary"
               aria-label="add"
               className={classes.fab}
-              onClick={() => closeJoinClass(true)}
+              // onClick={OpenJoinClass}
             >
               <AddIcon />
-            </Fab>
-
+            </Fab> */}
+            <OpenJoinClass/>
             <Grid
               container
               direction="row"
@@ -327,7 +323,7 @@ const useStyles = makeStyles(theme => ({
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
       
       {/* 教師開放加入課程 */}
-      <OpenJoinClass open={openJoinClass} handleClose={onCloseJoinClass} />
+      {/* <OpenJoinClass/> */}
     </div>
         );
       }

@@ -104,6 +104,7 @@ const useStyles = makeStyles(theme => ({
   },
   table: {
     width: '100%',
+    fontFamily: 'Microsoft JhengHei',
   },
   visuallyHidden: {
     border: 0,
@@ -176,19 +177,17 @@ export default function RollcallrecordTable() {
         <TableContainer>
           
           <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
             size='small'
           >
             <EnhancedTableHead
-              classes={classes}
+              classes={classes.title}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
             />
 
               {/*===== TableBody =====*/}
-            <TableBody>
+            <TableBody >
               {stableSort(rollcallrecord, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((rollcallrecord, index) => {

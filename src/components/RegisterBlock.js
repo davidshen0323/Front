@@ -6,25 +6,27 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import MyMenu from '../MenuS';
-import Rollcallrecord from './rollcallrecord';
-import RollcallForm from './rollcallForm';
-import { useParams } from "react-router-dom";
 
-/*------------ STYLE ------------*/
-const useStyles = makeStyles({
-
-  div:{
-      height:'100vh',
+import RegisterS from './RegisterS';
+import RegisterT from './RegisterT';
+import { useParams } from 'react-router-dom';
+import Menu from './MenuisLogouted';
+import { WingBlank } from 'antd-mobile';
+const useStyles = makeStyles(theme => ({
+  container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    div: {
+      height:'100hv',
       background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+      
     },  
-  Paper:{
-      width: '90%',
-      margin: 'auto',        
-  },
-});
 
-/*--------------------------------*/
+    // appbar:{
+    //     marginTop: 100,
+    // }
+  }));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,9 +39,8 @@ function TabPanel(props) {
       id={`nav-tabpanel-${index}`}
       aria-labelledby={`nav-tab-${index}`}
       {...other}
-      
     >
-      {value === index && <Box p={2}>{children}</Box>}
+      {value === index && <Box p={4}>{children}</Box>}
     </Typography>
   );
 }
@@ -70,46 +71,44 @@ function LinkTab(props) {
 }
 
 
-export default function RollcallRD() {
+
+export default function RegisterBlock() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const params = useParams();
   const csid = params.cs_id;
 
+  // console.log(csid);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <div className={classes.div}> 
-      {/* <Button  component={Link} to={`/rollcallRD/${params.cs_id}`} >
-       <FunctionButton title="點名" url="https://image.flaticon.com/icons/svg/1828/1828867.svg" />
-      </Button> */}
-
-
-
-      <MyMenu/>
-         <AppBar position="static" color="inherite" >
+    <div className={classes.div}>
+        <Menu/>
+        
+    
+            <AppBar position="static" color="inherit">
                 <Tabs
+                variant="fullWidth"
                 value={value}
                 onChange={handleChange}
-                variant="fullWidth"
                 >
-                <LinkTab label="點名中" href="/rollcallrecordT" {...a11yProps(0)} />
-                <LinkTab label="點名記錄" href="/rollcallrecordS" {...a11yProps(1)} />
+                <LinkTab label="教師" href={`/rollcall/${csid}`} {...a11yProps(0)} />
+                <LinkTab label="學生" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} />
             
                 </Tabs>
             </AppBar>
 
             
       <TabPanel value={value} index={0}>
-       <RollcallForm/>
+        <RegisterT/>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <Rollcallrecord/>
+        <RegisterS/>
       </TabPanel>
-      </div>
+    </div>
   );
 }

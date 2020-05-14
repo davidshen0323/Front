@@ -9,11 +9,10 @@ import { useParams } from 'react-router-dom';
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 
-    body:{
-        margin:'20px',
-        marginTop:'20px',
-        background: '#E1E1E1',
-    },
+    div:{
+        height:'100vh',
+        background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+      },  
     Paper:{
         width: '90%',
         margin: 'auto',        
@@ -25,33 +24,14 @@ export default function Leavemanage() {
     const classes = useStyles();
     const params = useParams();
         return (
-            // <div>
-            // <MyMenu/>
-            // <br/><br/>
-            // <center><label><h1>專題</h1></label> </center>
-            // <HashRouter>
-            //     <TopBlock />
-            //     <br/>
-            //    <LeavemanageForm />
-           // </HashRouter>
-            
-            //<br></br>
-            //</div>
-
-            // <div class="InputTasksForm">
-            //     <div class="InputTask">
-        <div>
+            <div className={classes.div}>
 
         <MyMenu/>
-        <br/><br/><br/>
-        <center><label><h1>專題</h1></label> </center>
-
+        <br/>
             <Paper className={classes.Paper}>
-                {/* <LMNTable /> */}
                 <Leavemanagetable csid={params.cs_id}/>
             </Paper>
         </div>
-            // </div>
 
 
         )

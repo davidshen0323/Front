@@ -2,7 +2,9 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 import {Table, TableBody, TableCell, TableHead, TableRow, Box, Grid, Typography, Tab, AppBar, Tabs} from "@material-ui/core";
+
 import MyMenu from '../MenuT';
 import { useParams} from 'react-router-dom';
 
@@ -87,6 +89,10 @@ export default function TAcceptanceList() {
       backgroundColor: "#003060",
       fontWeight:'bold',
     },
+    div:{
+      height:'100vh',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    },
   });
   const classes = useStyles();
 
@@ -118,7 +124,7 @@ export default function TAcceptanceList() {
   // let history = useHistory(); //傳值跳頁的方法
   
   return (
-    <div>
+    <div className={classes.div}>
   
       <MyMenu/>
 

@@ -16,9 +16,10 @@ const useStyles = makeStyles(theme => ({
     },
 
     root: {
-      // flexGrow: 1,
-      margin: 'auto',
-      // backgroundColor:'#E0E0E0',
+      flexWrap: 'wrap',
+      height:'100hv',
+      width: '100%',
+      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
     },
     photo: {
       padding: theme.spacing(10),
@@ -67,6 +68,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "25px",
       borderStyle: "solid",
       borderColor: "black",
+      border:1,
     },
    
     classbutton: {

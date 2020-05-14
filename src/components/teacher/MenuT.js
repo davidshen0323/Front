@@ -1,7 +1,7 @@
 import React from 'react';
-// import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button, Grid, Typography} from '@material-ui/core/';
+import logo from '../../img/Rollsup.jpeg';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,8 +14,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
-    color: "white",
-    backgroundColor: "#003060",
+    fontSize:18,
+    color: "#582707",
+    backgroundColor: "#fffaea",
     
   },
   School: {
@@ -39,12 +40,12 @@ const useStyles = makeStyles(theme => ({
 
 
    toolbar: {
-     backgroundColor: '#003060',
+     backgroundColor: '#fffaea',
   
    },
 
    navbutton: {
-    backgroundColor: "#003060",
+    backgroundColor: "#fffaea",
    },
 
    navbuttext: {
@@ -62,10 +63,11 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 10,
     marginTop: 10,
     marginBottom: 10,
-    width:'150px',
+    width:'200px',
+    fontSize:18,
     fontFamily: 'Microsoft JhengHei',
-    color: "white",
-    backgroundColor: "#003060",
+    color: "#582707",
+    backgroundColor: "#fffaea",
     fontWeight:'bold',
     borderStyle: 'none'
 }
@@ -88,26 +90,26 @@ export default function LoginMenu() {
             <Toolbar className={classes.toolbar}>
             
 
-              <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography>
+              {/* <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography> */}
               
-
-              <Button 
-                variant="contained"
+              <img src={logo} width="200px"></img>
+              {/* <Button 
+                variant="outlined"
                 className={classes.button}
                 href="/homepaget"
                 >
                 我的課程
-              </Button>
+              </Button> */}
 
                 
 
-              <Button 
-                variant="contained"
+              {/* <Button 
+                variant="text"
                 className={classes.button}
                 href="/TInformation"
                 >
                 基本資料
-                </Button>
+                </Button> */}
               
 
               <Grid container
@@ -121,7 +123,7 @@ export default function LoginMenu() {
               <form action="/logout" method="POST">
 
                   
-                <Button className={classes.menuButton} type="submit" variant="contained" >登出</Button>
+                <Button className={classes.menuButton} type="submit" variant="outline" >登出</Button>
               </form>
               </Grid>
                 

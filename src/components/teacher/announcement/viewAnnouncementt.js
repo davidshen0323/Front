@@ -7,26 +7,36 @@ import AddAnnouncement from './addAnnouncement';
 // import EditAnnouncement from './editAnnouncement';
 import AddIcon from '@material-ui/icons/Add';
 import MyMenu from '../../teacher/MenuT';
+
 import AppsIcon from '@material-ui/icons/Apps';
 import { WingBlank } from 'antd-mobile';
 
+
 const useStyles = makeStyles((theme) => ({
+  Paper:{
+    width: '85%',
+    margin: 'auto', 
+    marginTop:'5%',   
+    marginBottom:'5%',
+    padding:'2%',
+    //boxShadow:"1px 1px 1px 1px #9E9E9E",    
+},
   fab: {
     position: 'fixed',
     bottom: theme.spacing(5),
     right: theme.spacing(5),
   },
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+  div: {
+    height:'100vh',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
   },
-  expanded: {},
   root: {
-    backgroundColor:'#e8eaf6',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fffaea 30%, #fff2d1 100%)',
+    fontFamily: 'Microsoft JhengHei',
     "&$expanded": {
       margin: 10,
-      backgroundColor: '#fff',
+      backgroundColor: '#fffaea',
+      fontFamily: 'Microsoft JhengHei',
     }
   }
 }));
@@ -77,12 +87,13 @@ export default function ViewAnnouncementt() {
   return (
    
     
-    <div> 
+    <div className={classes.div}> 
       <MyMenu/>
        {/* 發佈公告 */}
        <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
           <AddIcon />
         </Fab>
+
         <WingBlank/>
         <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeEditAnnouncement(true)}>
           <AppsIcon />
@@ -90,6 +101,7 @@ export default function ViewAnnouncementt() {
 
       <Box border={1} mx="auto" marginTop="8%" marginBottom="5%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#fff" borderColor="#0066CC">
             <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}}>公佈欄</Typography>
+
 
             <Container maxWidth="sm">
             { Announcement.reverse(),
@@ -112,7 +124,7 @@ export default function ViewAnnouncementt() {
             </Container>
             <Box mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>
       
-      </Box>
+      </Paper>
       
     {/* 教師發佈公告 */}
     <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>

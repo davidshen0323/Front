@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import {Button, Grid, List, Paper, FormControl, TextField} from '@material-ui/core/';
 import clsx from 'clsx';
 import ForgetPw from './forgetpw';
-
+import logo from '../../src/img/Rollsuplogo.jpeg';
 //import Image from '@material-ui-image' ;
 // class Login extends Component{
 //     constructor(props){
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme =>({
             width:'100px',
             fontFamily: 'Microsoft JhengHei',
             color: "white",
-            backgroundColor: "#003060",
+            backgroundColor: "#f8b62b",
             fontWeight:'bold',
         },
 
@@ -56,20 +56,18 @@ const useStyles = makeStyles(theme =>({
         },
 
         div: {
+            flexWrap: 'wrap',
             height: '100vh',
+            width: '100%',
+            background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+
         },
 
         TextField:{
             textAlign:'center',
             backgroundColor:'#BEBEBE',
           },
-          
-          StyleSheet:{
-            display:"flex",
-            alignItems:"center",
-            justifyContent:"center",
-          },
-        
+                 
     }
     ));
 /*--------------------------------*/
@@ -118,8 +116,8 @@ export default function Login(){
                 
                 >
                 <Paper className={classes.root}>
-                    <h2>上課應用系統</h2>
-
+                    {/* <h2>上課應用系統</h2> */}
+                    <img src={logo} width="100px"></img>
 
         <WingBlank>
 
@@ -177,9 +175,6 @@ export default function Login(){
                     </Button>
                     <ForgetPw className={classes.button}/>
     </List>
-    {/* <List >
-      <ForgetPw />
-    </List> */}
     </form> 
     </WingBlank>
                 </Paper>
