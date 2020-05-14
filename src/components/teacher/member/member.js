@@ -4,6 +4,7 @@ import MyMenu from '../MenuT';
 import MMTable from './MMtable';
 import Paper from '@material-ui/core/Paper';
 import { useParams } from 'react-router-dom';
+import Addmember from './addmember';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
@@ -30,7 +31,7 @@ export default function Member() {
                 <MyMenu/>
           <br/><br/><br/>
             {/* <center><label><h1>專題</h1></label> </center> */}
-
+          <Addmember csid={params.cs_id}/>
                 <Paper className={classes.Paper}>
                   <MMTable
                     csid={params.cs_id}
