@@ -3,8 +3,8 @@ import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosi
 import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { useParams } from "react-router-dom";
-
+import CreateIcon from '@material-ui/icons/Create';
+import { IconButton } from '@material-ui/core';
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -37,10 +37,9 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function AddAccept({ open, handleClose })  {
+export default function Edithw(props)  {
   const classes = useStyle();
-  const params = useParams();
-  const csid = params.cs_id
+  const [open,setOpen] = React.useState(false); 
 
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
@@ -48,93 +47,132 @@ export default function AddAccept({ open, handleClose })  {
   const [openErr1, setOpenErr1] = React.useState(false);
   // 失敗小紅2
   const [openErr2, setOpenErr2] = React.useState(false);
+  // 失敗小紅3
+  const [openErr3, setOpenErr3] = React.useState(false);
 
-  const [inputs, setInputs] = React.useState(1);
-  const [addHw, setAddHw] = React.useState({
-      name: '',
-      content: '',
-  });
-
-  const submitClick = () => {
-  
+  const [inputs, setInputs] = React.useState(
+    {name:props.name,content:props.content},
     
-    fetch('/teacher/acceptance/homework',{
-      method: 'POST',
+    
+  );
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+    console.log(props.name)
+    console.log(props.content)
+    console.log(props.id)
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = () => {
+  console.log(inputs.name);
+  console.log(inputs.content);
+  console.log(props.id);
+    
+    fetch('/teacher/updateContent/',{
+      method: 'PUT',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          hw_name: addHw.name,
-          hw_content: addHw.content,
-          hw_cs_id: csid 
+          hw_name: inputs.name,
+          hw_content: inputs.content,
+          hw_id: props.id
       })
   })
   .then(res => {
       
       async function fetchres(){
       const test = await res.text();  //接收後端傳來的訊息
-      if (test === "作業名稱與內容不得為空") 
+      if (test === "作業內容與名稱不得為空") 
       {
           // alert("作業名稱與內容不得為空");
           console.log(1);
+          setOpenS(false);        
           setOpenErr1(true);
-          setOpenErr2(false);
+          setOpenErr2(false); 
+          setOpenErr3(false); 
+          window.location.reload();   
           
       }
-      else if(test === "這堂課已有此作業，請更改作業名稱") 
+      else if(test === "無此作業，請先新增作業") 
       {
          // alert("這堂課已有此作業，請更改作業名稱");
           console.log(2);
-           setOpenErr2(true);
-           setOpenErr1(false);
-
+          setOpenS(false);        
+          setOpenErr1(false);
+          setOpenErr2(true); 
+          setOpenErr3(false);
+          window.location.reload();    
+      }
+      else if(test === "request failed. teacher not in this class!") 
+      {
+         // alert("老師不再這堂課");
+          console.log(3);
+          setOpenS(false);        
+          setOpenErr1(false);
+          setOpenErr2(false); 
+          setOpenErr3(true); 
+          window.location.reload();   
       }
       else
       {
-          // alert("新增作業成功");        
+          // alert("修改成功");        
           console.log(0);          
           setOpenS(true);        
           setOpenErr1(false);
-          setOpenErr2(false);         
+          setOpenErr2(false); 
+          setOpenErr3(false);   
+          window.location.reload();     
       }
   } fetchres()}
-  )};
+  
+  )
+  
+};
 
   const submitClose = (event, reason) => {
  
     handleClose(true);
     setOpenS(false);
-    setInputs(1);
-    addHw.content='';
-    addHw.name='';
-    window.location.reload();
   };
     
   const handleChange = fieldname => event => {
     event.persist();
-    setAddHw(addHw => ({...addHw, [fieldname]: event.target.value}));
-    setInputs(2)
+    setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
+    
 }
 
+
+
   return (
-    <Dialog open={open} onClose={submitClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+<div>
+    <IconButton onClick={handleClickOpen}>
+        <CreateIcon/>
+    </IconButton>
+    
+    <Dialog open={open} onClose={submitClose} >
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
-            開啟作業驗收
+            修改作業驗收
           </Typography>
 
           <Typography className={classes.typo} variant="body1">
             請輸入作業名稱：
 
-            <Typography>
-              <Input
-              id="name"
-              onChange={handleChange('name')}
-              value={addHw.name}
-              style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} 
-              rowsMin={5}
-              />
+            <Typography variant="body2">
+            <Input 
+            id="name" 
+            value={inputs.name}
+            onChange={handleChange('name')}
+            style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    
+            rowsMin={5} 
+            />
             </Typography>
             </Typography>
         </div>
@@ -144,10 +182,10 @@ export default function AddAccept({ open, handleClose })  {
             請輸入作業內容：
           </Typography>
 
-          <Typography className={classes.typo} variant="body1">
+          <Typography className={classes.typo} variant="body2">
             <TextareaAutosize 
             id="content" 
-            value={addHw.content}
+            value={inputs.content}
             onChange={handleChange('content')}
             style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}    
             rowsMin={5} 
@@ -156,13 +194,14 @@ export default function AddAccept({ open, handleClose })  {
           </Typography>
         </div>
       </DialogContent>
+
       <DialogActions>
         <Button onClick={submitClose} color="primary" autoFocus className={classes.button}>關閉視窗</Button>
-        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus className={classes.button}>確認送出</Button>
+        <Button disabled={inputs.name===""|| inputs.content===""} onClick={handleSubmit} color="primary" autoFocus className={classes.button}>確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
-            新增作業成功！
+            修改成功！
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}
@@ -174,11 +213,17 @@ export default function AddAccept({ open, handleClose })  {
         {/* 失敗小紅框2 */}
         <Snackbar open={openErr2} style={{marginBottom:100}}>
           <Alert severity="error">
-            這堂課已有此作業，請更改作業名稱！
+            無此作業，請先新增作業！
+          </Alert>
+        </Snackbar>
+        {/* 失敗小紅框3 */}
+        <Snackbar open={openErr3} style={{marginBottom:100}}>
+          <Alert severity="error">
+            修改失敗！
           </Alert>
         </Snackbar>
       </DialogActions>
     </Dialog>
-    
+    </div>
   );
 };

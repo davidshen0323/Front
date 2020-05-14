@@ -12,7 +12,6 @@ import CreateIcon from '@material-ui/icons/Create';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -83,13 +82,6 @@ export default function Write(props) {
       
   }
 
-  // const handleChange = (event) => {
-  // const name = event.target.name;
-  // setState({
-  //     ...state,
-  //     [name]: event.target.value,
-  // });
-  // };
 
   const handleClickOpen = () => {
     setOpen(true);

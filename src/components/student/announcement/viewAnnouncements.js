@@ -32,6 +32,16 @@ const useStyles = makeStyles((theme) => ({
       margin: 10,
       backgroundColor: '#fffaea',
       fontFamily: 'Microsoft JhengHei',
+    },
+    summary:{
+      fontFamily: 'Microsoft JhengHei',
+      fontSize:18,
+      margin:10,
+    },
+    detail:{
+      fontFamily: 'Microsoft JhengHei',
+      fontSize:12,
+      margin:10,
     }
   }
 }));
@@ -82,12 +92,14 @@ export default function ViewAnnouncements() {
                     <ExpansionPanel key={index} classes={classes} >
                       
                     {
-                        AnnouncementList.map( (list, i) =>  
-                            <ExpansionPanelSummary key={i} style={{marginLeft:10,fontSize:18,
-                              fontFamily:'微軟正黑體'}}>
+                        AnnouncementList.map( (list, i) =>  i < 1 ?
+                            <ExpansionPanelSummary key={i} style={{fontSize:18,fontFamily:'微軟正黑體',fontWeight:'bold'}}>
                                <ExpansionPanelDetails>{announce[list]}</ExpansionPanelDetails>
                             </ExpansionPanelSummary>
-                            
+                            :
+                            <ExpansionPanelSummary key={i} style={{fontSize:14,fontFamily:'微軟正黑體'}}>
+                               <ExpansionPanelDetails>{announce[list]}</ExpansionPanelDetails>
+                            </ExpansionPanelSummary>
                         )
                     }
                     
