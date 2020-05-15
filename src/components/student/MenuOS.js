@@ -257,13 +257,6 @@ export default function LoginMenu() {
           <ListItemText primary="基本資料" />
         </ListItemLink>
 
-        <ListItemLink component={Link} to={`/functions/${params["cs_id"]}`}>
-        <ListItemIcon>
-            <AppsIcon />
-        </ListItemIcon>
-          <ListItemText primary="功能" />
-        </ListItemLink>
-
         </List>
       
 

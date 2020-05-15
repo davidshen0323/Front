@@ -243,26 +243,20 @@ export default function LoginMenu() {
         <Divider />
 
         <List>
-        <ListItemLink href="/homepages">
+        <ListItemLink href="/homepaget">
         <ListItemIcon>
             <HomeIcon />
         </ListItemIcon>
           <ListItemText primary="首頁" />
         </ListItemLink>
         
-        <ListItemLink href="/SInformation">
+        <ListItemLink href="/TInformation">
         <ListItemIcon>
             <PermContactCalendarIcon />
         </ListItemIcon>
           <ListItemText primary="基本資料" />
         </ListItemLink>
 
-        <ListItemLink component={Link} to={`/functions/${params["cs_id"]}`}>
-        <ListItemIcon>
-            <AppsIcon />
-        </ListItemIcon>
-          <ListItemText primary="功能" />
-        </ListItemLink>
 
         </List>
       

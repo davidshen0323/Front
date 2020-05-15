@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { Table, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
-import MyMenu from '../MenuS';
+import MyMenu from '../MenuOS';
 import EditEmail from './editEmail';
 import EditPhone from './editPhone';
 import EditPassword from'./editPassword';
