@@ -21,6 +21,17 @@ const useStyle = makeStyles(theme => ({
     color: "blue",
     padding: 10
   },
+  button: {
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    width:'80px',
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+    fontSize:14,
+    backgroundColor: "#f8b62b",
+    fontWeight:'bold',
+},
 }));
 
 
@@ -119,7 +130,7 @@ export default function QaReply( props )  {
       onClick = {handleClickOpen}
       // onClick = {openQAReply}
       variant = "contained" 
-      color = "primary" 
+      className={classes.button}
     >
     回覆
   </Button>

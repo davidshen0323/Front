@@ -74,7 +74,8 @@ const useStyles = makeStyles(theme =>({
     width:'100px',
     fontFamily: 'Microsoft JhengHei',
     color: "white",
-     backgroundColor: "#003060",
+    fontSize:16,
+    backgroundColor: "#f8b62b",
     fontWeight:'bold',
 }, 
 div:{
