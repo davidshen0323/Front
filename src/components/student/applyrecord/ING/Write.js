@@ -12,9 +12,9 @@ import CreateIcon from '@material-ui/icons/Create';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {brown} from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   root: {
@@ -83,13 +83,6 @@ export default function Write(props) {
       
   }
 
-  // const handleChange = (event) => {
-  // const name = event.target.name;
-  // setState({
-  //     ...state,
-  //     [name]: event.target.value,
-  // });
-  // };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -120,7 +113,7 @@ export default function Write(props) {
 
   return (
     <div className={classes.root}>
-      <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+      <IconButton variant="outlined" style={{color:brown[500]}} onClick={handleClickOpen}>
         <CreateIcon />
       </IconButton>
 

@@ -18,7 +18,7 @@ import {brown} from '@material-ui/core/colors';
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
-    backgroundColor:'#ffe1c4',
+    backgroundColor:'#fff8e1',
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -72,7 +72,7 @@ export default function RDSB(props) {
           alignItems="center"
         >
         <Grid item={1}>
-        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+        <IconButton edge="start" color="#582707" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton> 
         </Grid>

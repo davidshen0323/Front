@@ -7,9 +7,11 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyle = makeStyles(theme => ({
   typo: {
+    fontFamily: 'Microsoft JhengHei',
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontSize:16,
   },
   description: {
     marginLeft: 10,
@@ -17,7 +19,9 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    color: "#582707",
     padding: 10
   },
 }));
@@ -119,11 +123,11 @@ export default function EditPassword({ open, handleClose })  {
           </Typography>
 
           <Typography className={classes.typo} variant="h8">
-            請輸入新密碼：<TextField type="password" value={inputs.newpwd} onChange={handleChange('newpwd')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
+            請輸入新的密碼：<TextField type="password" value={inputs.newpwd} onChange={handleChange('newpwd')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
           </Typography>
           
           <Typography className={classes.typo} variant="h8">
-            確認新密碼：<TextField type="password" value={inputs.repeatpwd} onChange={handleChange('repeatpwd')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
+            請確認新的密碼：<TextField type="password" value={inputs.repeatpwd} onChange={handleChange('repeatpwd')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
           </Typography>
           <Typography className={classes.typo} variant="body1">
             

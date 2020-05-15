@@ -97,7 +97,7 @@ export default function TAcceptanceList() {
   const classes = useStyles();
 
   /*=========== Create Table HEAD ===========*/
-  const acceptanceList = [ 'std_id', 'accept_time', 'accept_score', 'accept_done' ]
+  const acceptanceList = [ 'std_id', 'accept_time', 'accept_done' ]
   
 
   const params = useParams();
@@ -149,10 +149,10 @@ export default function TAcceptanceList() {
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
-                  <TableCell align="center">排序</TableCell>
-                  <TableCell align="center">學號</TableCell>
-                  <TableCell align="center">時間</TableCell>
-                  <TableCell align="center">分數</TableCell>
+                <TableCell align="left" disablePadding='none'></TableCell>
+                  <TableCell align="left" disablePadding='none'>學號</TableCell>
+                  <TableCell align="left" disablePadding='none'>時間</TableCell>
+                  <TableCell align="left" disablePadding='none'>分數</TableCell>
                   
                 </TableRow>
             </TableHead>
@@ -161,16 +161,16 @@ export default function TAcceptanceList() {
             <TableBody>
                 {acceptances.map((acceptance,index) => acceptance["accept_done"] === false ? (
                     <TableRow key={index}>
-                      <TableCell align="center">{index+1} </TableCell>
+                      <TableCell ></TableCell>
                       
                     {
                         
-                        acceptanceList.map( (list, i) => i < 3 ?
-                            <TableCell key={i} component="th" scope="row" align="center" >
+                        acceptanceList.map( (list, i) => i < 2 ?
+                            <TableCell key={i} component="th" scope="row" align="left" padding="none">
                                {acceptance[list]}
                             </TableCell>
                             :
-                            <TableCell key={i} align="center">
+                            <TableCell key={i} align="left">
                              <AcceptScore
                              stdid={acceptance['std_id']}
                              hwid={acceptance['accept_hw_id']}
@@ -179,17 +179,6 @@ export default function TAcceptanceList() {
                              />
                              
                             </TableCell>
-                              
-                        //     {/* {acceptanceList.map( (list, i) => acceptance[list][4] === true ?
-                        //     <TableCell>
-                        //       <p>已驗收過</p>
-                        //     </TableCell>
-                        //     :
-                        //     <TableCell>
-                        //       <p>尚未驗收</p>
-                        //     </TableCell>
-                        //     ) */}
-                        //       </TableCell> 
                          )
                     }
                     
@@ -213,10 +202,10 @@ export default function TAcceptanceList() {
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
-                  <TableCell align="center">排序</TableCell>
-                  <TableCell align="center">學號</TableCell>
-                  <TableCell align="center">時間</TableCell>
-                  <TableCell align="center">分數</TableCell>
+                  <TableCell align="left"></TableCell>
+                  <TableCell align="left">學號</TableCell>
+                  <TableCell align="left">時間</TableCell>
+                  <TableCell align="left">分數</TableCell>
                   
                 </TableRow>
             </TableHead>
@@ -225,16 +214,16 @@ export default function TAcceptanceList() {
             <TableBody>
                 {acceptances.map((acceptance,index) => acceptance["accept_done"] === true ? (
                     <TableRow key={index}>
-                      <TableCell align="center">{index+1} </TableCell>
+                      <TableCell align="left"></TableCell>
                       
                     {
                         
                         acceptanceList.map( (list, i) => i < 3 ?
-                            <TableCell key={i} component="th" scope="row" align="center" >
+                            <TableCell key={i} component="th" scope="row" align="left" >
                                {acceptance[list]}
                             </TableCell>
                             :
-                            <TableCell key={i} align="center">
+                            <TableCell key={i} align="left">
                              <EditScore
                              stdid={acceptance['std_id']}
                              hwid={acceptance['accept_hw_id']}

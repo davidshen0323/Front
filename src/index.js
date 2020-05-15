@@ -16,7 +16,7 @@ import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
 import TInformation from './components/teacher/information/TInformation';
-import StuInformation from './components/student/information/stuInformation';
+import SInformation from './components/student/information/stuInformation';
 import QAlist_T from './components/teacher/Question/QAlist_T';
 import QAlist_S from './components/student/Question/QAlist_S';
 import Loading from './components/Loading';
@@ -67,13 +67,13 @@ ReactDOM.render(
             <Route path="/loading" component={Loading}/>
             <Route path="/homepaget" component={homepaget}/>
             <Route path="/functiont/:cs_id" component={functiont}/>
-            <Route path="/acceptance/:cs_id/:hw_name" component={AcceptanceList}/>
+            <Route path="/acceptance/:cs_id/:hw_name/:std_id" component={AcceptanceList}/>
             <Route path="/acceptancet/:cs_id/:hw_name" component={TAcceptanceList}/>
 
             <Route path="/ViewAnnouncements/:cs_id" component={ViewAnnouncements}/>
             <Route path="/ViewAnnouncementt/:cs_id" component={ViewAnnouncementt}/>
             <Route path="/tacceptance" component={TAcceptanceList}/>
-            <Route path="/StuInformation" component={StuInformation}/>
+            <Route path="/SInformation" component={SInformation}/>
             <Route path="/TInformation" component={TInformation}/>
             <Route path="/QAlist_T/:cs_id" component={QAlist_T}/>
             <Route path="/QAlist_S/:cs_id" component={QAlist_S}/>

@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import MyMenu from "../teacher/MenuT";
+import MyMenu from "../teacher/MenuOT";
 import { makeStyles } from "@material-ui/core/styles";
 import {TableCell, Fab, Grid} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -9,75 +9,65 @@ import { Link } from "react-router-dom";
 import CreateClass from "./createClass";
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-
-  root: {
-     flexWrap: 'wrap',
+  div: {
     height:'100hv',
-    width: '100%',
     background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
   },
-
+  
   paperclass: {
     padding: theme.spacing(5),
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: 50,
     marginBottom: 50,
-    textAlign: "center",
-    backgroundColor: "white",
-    border: "2px",
-    borderStyle: "solid",
-    borderColor: "white",
-    width: "80%",
-    borderRadius: "30pt",
+    textAlign: 'center',
+    backgroundColor: 'white',
+    border: '2px',
+    borderStyle: 'solid',
+    borderColor: 'white',
+    width: '80%',
+    borderRadius: '30pt',
   },
 
-  textField: {
-    marginLeft: theme.spacing(10),
-    marginTop: theme.spacing(2),
-    marginRight: theme.spacing(10),
-    width: "auto",
-  },
-
-  button1: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(15),
-  },
-
+  
   card: {
-    // marginLeft: theme.spacing(10),
-    marginTop: theme.spacing(6),
+    //marginLeft: theme.spacing(10),
+    // marginTop: theme.spacing(3),
+    maxWidth: '80%',
+    margin: theme.spacing(3),
     width: 'auto',
     padding: theme.spacing(3),
     borderRadius: "25px",
     borderStyle: "solid",
     borderColor: "black",
+    border:1,
   },
-
+ 
   classbutton: {
     width: 500,
   },
 
   fab: {
-    position: "fixed",
+    position: 'fixed',
     bottom: theme.spacing(5),
     right: theme.spacing(5),
+    backgroundColor:'#582707'
   },
 
+
+  cardaction: {
+    maxWidth: 600,
+  },
   tablecell: {
     width: '200pt',
-    margin: 'auto',
-    // marginTop: '500pt',
-    // paddingTop: "30pt",
-    // paddingBottom: "30pt",
-    // paddingInline: "30pt",
-    borderColor: "white",
-    fontFamily: 'Microsoft JhengHei',
-    fontWeight: 'bold',
+  margin: 'auto',
+  // marginTop: '500pt',
+  // paddingTop: "30pt",
+  // paddingBottom: "30pt",
+  // paddingInline: "30pt",
+  borderColor: "white",
+  fontFamily: 'Microsoft JhengHei',
+  fontWeight: 'bold',
   },
 }));
 
@@ -124,13 +114,11 @@ export default function HomepageT() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.div}>
       <MyMenu />
       {/* 新建課程 */}
       <Fab
-        color="primary"
-        aria-label="add"
-        className={classes.fab}
+        style={{color:'#ffffff'}} aria-label="add" className={classes.fab}
         onClick={() => closeCreateClass(true)}
       >
         <AddIcon />
@@ -141,79 +129,7 @@ export default function HomepageT() {
         container
         direction="row"
         justify="center"
-        // alignItems="center"
-      >
-        {/* <Grid item md={4}> */}
-        {/* <Paper className={classes.photo}>photo</Paper> */}
-        {/* <Typography className={classes.words}>沈大為</Typography> */}
-        {/* </Grid> */}
-
-        {/* <Grid item md={8}> */}
-        {/* <TextField className={classes.textField} defaultValue='請輸入課程名稱'></TextField> */}
-        {/* <Card className={classes.card}> */}
-        {/* <ButtonBase
-          component={Link}
-
-          to ='/function1'
-          >
-            <CardActionArea>
-
-              <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="140"
-             
-              title="Contemplative Reptile"
-              />
-              <CardContent>
-                <Typography>
-                  Test
-                </Typography>
-              </CardContent>
-            </CardActionArea> */}
-        {/* <CardActions>
-              <Button
-              component={Link}
-              to ='/function1'
-              className={classes.classbutton}
-              >
-                <Typography>Test</Typography>
-              </Button>
-            </CardActions> */}
-        {/* </ButtonBase> */}
-        {/* </Card> */}
-
-        {/* </Grid>   */}
-        {/*         
-        <Grid item xs={4}>
-        <ButtonGroup 
-          orientation="vertical"
-          className={classes.button1}
-        >
-        <Button>我的課程</Button>
-        <Button>個人資料管理</Button>
-        </ButtonGroup>
-        </Grid>   */}
-
-        {/* <Paper>
-            {Sclass.map((classs,index) => (
-              <Grid key ={index}>
-              {
-                classList.map( (list, i) => i === 0 ?
-                <Grid key={i}>
-                {classs[list]}
-                <Grid>
-                {classs[list]}
-                </Grid>
-                </Grid>:
-                <Grid key={i}>{classs[list]}</Grid>
-                )
-              }
-              </Grid>
-              ))
-            }
-          </Paper> */}
-        <Grid item>
+       >
           {Sclass.map((classs, index) => (
             // <Card className={classes.card}>
             <CardActionArea
@@ -221,14 +137,7 @@ export default function HomepageT() {
               component={Link}
               to={`/functiont/${classs["cs_id"]}`}
             >
-              {/* <CardActions> */}
-              {/* {console.log(index)} */}
-              {/* <Paper key = {index}> */}
-
-              {/* <ButtonBase> */}
               {console.log(classs)}
-
-              {/* <TableCell>{index+1}</TableCell> */}
               {classList.map((list, i) => (
                 <TableCell
                   key={i}
@@ -242,14 +151,8 @@ export default function HomepageT() {
                 </TableCell>
               ))}
 
-              {/* </ButtonBase> */}
-
-              {/* </Paper> */}
-              {/* </CardActions> */}
             </CardActionArea>
-            // </Card>
           ))}
-        </Grid>
       </Grid>
       {/* 教師新建課程 */}
       <CreateClass open={openCreateClass} handleClose={onCloseCreateClass} />

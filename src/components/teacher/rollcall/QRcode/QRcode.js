@@ -13,7 +13,6 @@ import QRCode from 'qrcode.react';
 import {useParams} from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { usePosition } from 'use-position';
-import { GetApp } from '@material-ui/icons';
 import axios from 'axios';
 import MuiAlert from "@material-ui/lab/Alert";
 import {Snackbar, Button, Dialog,Typography} from "@material-ui/core";
@@ -25,6 +24,22 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
+  },
+  button: {
+    width: '150px',
+    margin:'auto',
+    marginTop: 20,
+    // marginLeft: 10,
+    marginBottom: 10,
+    margin: theme.spacing(1),
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+    fontSize:16,
+    backgroundColor: "#f8b62b",
+    fontWeight:'bold',
+  },
+  appBar: {
+    backgroundColor:'#fff8e1',
   },
 }));
 
@@ -139,8 +154,8 @@ export default function Qrcode() {
     
     
     // .then(res => {
-      // console.log(rcid)
-      // async function putData() {
+      console.log(rcid)
+      async function putData() {
       
       fetch('/teacher/rollcall/closedRollcall/',{
         method: 'PUT',
@@ -153,31 +168,14 @@ export default function Qrcode() {
             
         })
     })
-    //   .then(res => {
-    //       setQrcode('0');
-    //   })
-    // }
-    // putData();
+      .then(res => {
+          setQrcode('0');
+      })
+    }
+    putData();
      
     
   };
-
-  
-  // const [inputs, setInputs] = React.useState({
-    // rc_inputsource:'',
-    //qrcode:'',
-    //宣告要接值的變數
-  // });
-
-//   const handleChange = user => event => {
-//     event.persist();
-//     setInputs(inputs => ({...inputs, [user]: event.target.value}));
-//     //不知道怎麼解釋哈哈哈哈
-// }
-
-
-    
-
 
   return (
 
@@ -189,11 +187,11 @@ export default function Qrcode() {
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <Backdrop className={classes.backdrop} open >
-      <AppBar >
+      <AppBar className={classes.appBar}>
           <Toolbar>
             <Grid item xs={12} sm={12}></Grid>
     
-    <IconButton color="inherit" onClick={handleClose}>
+    <IconButton color="#582707" onClick={handleClose}>
       <CloseIcon />
     </IconButton>  
     </Toolbar>
@@ -218,11 +216,11 @@ export default function Qrcode() {
     <Grid>
           
       {/* disable */}
-      <Button onClick={handleSubmit}  style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
+      <Button onClick={handleSubmit}  className={classes.button}>
 
         開始點名
       </Button>
-      <Button onClick={handleSubmit} disabled style={{fontFamily:'Microsoft JhengHei', fontWeight:'bold'}} variant="contained" color="primary">
+      <Button onClick={handleSubmit} disabled className={classes.button}>
 
         更新QRcode
       </Button>

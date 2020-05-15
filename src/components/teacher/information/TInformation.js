@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Table, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
-import MyMenu from '../MenuT';
+import MyMenu from '../MenuOT';
 import EditEmail from './editEmail';
 import EditPhone from './editPhone';
 import EditPassword from'./editPassword';
@@ -10,7 +10,12 @@ import { makeStyles } from "@material-ui/styles";
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
 
+
 const useStyle = makeStyles(theme => ({
+  div:{
+    height:'100vh',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+  },  
   Paper:{
     width: '90%',
     margin: 'auto', 
@@ -29,6 +34,12 @@ box:{
   typo: {
     fontFamily: 'Microsoft JhengHei',
     fontWeight:'bold'
+  },
+  button: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    fontSize:16,
+    color:"#f8b62b",
   },
 }));
 
@@ -75,20 +86,21 @@ export default function TInformation() {
 
   return (
     
-    <div > 
+    <div className={classes.div}> 
         <MyMenu/>
             
-        <Paper className={classes.box}>
+        {/* <Paper className={classes.box}>
             <Typography  variant="h4" component="h2" gutterBottom style={{textAlign:'center', fontFamily:'Microsoft JhengHei',fontWeight:'bold'}}>教師基本資料</Typography>
-            </Paper>
+            </Paper> */}
 
+<br/>
             <Paper className={classes.Paper}>
             <TableContainer>
-            <Table>
+            <Table size="small">
                     <TableRow >
                         <TableCell width="40%" align="center" className={classes.typo}>頭像</TableCell>
                         <TableCell width="40%" className={classes.typo}>{information.teacher_image}</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeUploadImg(true)} variant="outlined" color="primary" className={classes.typo}>上傳大頭照</Button></TableCell>
+                        <TableCell width="20%"><Button onClick={() => closeUploadImg(true)} variant="outlined" className={classes.button}>上傳大頭照</Button></TableCell>
                         
                     </TableRow>
                     <TableRow >
@@ -114,17 +126,17 @@ export default function TInformation() {
                     <TableRow>
                         <TableCell align="center" className={classes.typo}>Email</TableCell>
                         <TableCell width="40%" className={classes.typo}>{information["teacher_mail"]}</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeEditEmail(true)} variant="outlined" color="primary" className={classes.typo}>修改Email</Button></TableCell>
+                        <TableCell width="20%"><Button onClick={() => closeEditEmail(true)} variant="outlined" className={classes.button}>修改Email</Button></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell align="center" className={classes.typo}>手機號碼</TableCell>
                         <TableCell width="40%" className={classes.typo}>{information["teacher_phone"]}</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeEditPhone(true)} variant="outlined" color="primary" className={classes.typo}>修改手機號碼</Button></TableCell>
+                        <TableCell width="20%"><Button onClick={() => closeEditPhone(true)} variant="outlined" className={classes.button}>修改手機號碼</Button></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell align="center" className={classes.typo}>密碼</TableCell>
                         <TableCell width="40%">********</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeEditPassword(true)} variant="outlined" color="primary" className={classes.typo}>更改密碼</Button></TableCell>
+                        <TableCell width="20%"><Button onClick={() => closeEditPassword(true)} variant="outlined" className={classes.button}>更改密碼</Button></TableCell>
                     </TableRow>
                 </Table>
                 </TableContainer>

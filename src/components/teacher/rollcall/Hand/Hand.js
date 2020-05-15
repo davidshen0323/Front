@@ -20,6 +20,7 @@ import axios from 'axios';
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
+    backgroundColor:'#fff8e1',
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -134,7 +135,7 @@ export default function Hand() {
 
     <Grid item xs={12} sm={12}></Grid>
     
-    <IconButton  color="inherit"  onClick={handleClose}>
+    <IconButton  color="#582707"  onClick={handleClose}>
       <CloseIcon />
     </IconButton>  
     </Toolbar>

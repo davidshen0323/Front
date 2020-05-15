@@ -4,9 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
 import {useParams} from "react-router-dom";
 import AddAnnouncement from './addAnnouncement';
+// import EditAnnouncement from './editAnnouncement';
 import AddIcon from '@material-ui/icons/Add';
 import MyMenu from '../../teacher/MenuT';
-import Paper from '@material-ui/core/Paper';
+
+import AppsIcon from '@material-ui/icons/Apps';
+import { WingBlank } from 'antd-mobile';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     bottom: theme.spacing(5),
     right: theme.spacing(5),
+    backgroundColor:'#582707'
   },
   div: {
     height:'100vh',
@@ -75,6 +79,11 @@ export default function ViewAnnouncementt() {
      closeAddAnnouncement(openAddAnnouncement ? false : true);
    };
 
+   //教師修改、刪除公告
+   const [openEditAnnouncement, closeEditAnnouncement] = React.useState(false);
+   const onCloseEditAnnouncement = () => {
+     closeEditAnnouncement(openEditAnnouncement ? false : true);
+   };
 
   return (
    
@@ -82,12 +91,18 @@ export default function ViewAnnouncementt() {
     <div className={classes.div}> 
       <MyMenu/>
        {/* 發佈公告 */}
-       <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
+       <Fab style={{color:'#ffffff'}} aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
           <AddIcon />
         </Fab>
-      <br/>
-      <Paper className={classes.Paper}>
-      <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體'}}>公佈欄</Typography>
+
+        <WingBlank/>
+        <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeEditAnnouncement(true)}>
+          <AppsIcon />
+        </Fab>
+
+      <Box border={1} mx="auto" marginTop="8%" marginBottom="5%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#fff" borderColor="#0066CC">
+            <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}}>公佈欄</Typography>
+
 
             <Container maxWidth="sm">
             { Announcement.reverse(),
@@ -108,13 +123,15 @@ export default function ViewAnnouncementt() {
                 ))}
 
             </Container>
-            <Box  mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>
+            <Box mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>
       
       </Paper>
       
     {/* 教師發佈公告 */}
     <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>
-      
+    
+    {/* <EditAnnouncement open={openEditAnnouncement} handleClose={onCloseEditAnnouncement}/> */}
+    
     </div>
     
   );

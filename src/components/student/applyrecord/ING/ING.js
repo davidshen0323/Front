@@ -138,10 +138,6 @@ export default function Ing() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [ing,setIng] = React.useState([]);
   const params =useParams();
-
-
-  const [test, setTest] = React.useState('test');
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -210,7 +206,7 @@ export default function Ing() {
                     <TableCell key={i} component="th" scope="row" align="left" padding="none" >
                     {ing[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left" >
+                 <TableCell key={i} align="left" padding="none" >
                    <Write 
                    id={ing['rc_id']}
                    time={ing['rc_starttime']}

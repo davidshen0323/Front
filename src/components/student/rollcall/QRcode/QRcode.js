@@ -18,11 +18,29 @@ import MuiAlert from "@material-ui/lab/Alert";
 import {useState} from  "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import {DialogActions} from "@material-ui/core";
+import { usePosition } from 'use-position';
+import { Label } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
+  },
+  button: {
+    width: '150px',
+    margin:'auto',
+    marginTop: 20,
+    // marginLeft: 10,
+    marginBottom: 10,
+    margin: theme.spacing(1),
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+    fontSize:16,
+    backgroundColor: "#f8b62b",
+    fontWeight:'bold',
+  },
+  appBar: {
+    backgroundColor:'#fff8e1',
   },
 }));
 
@@ -89,9 +107,18 @@ export default function Qrcode() {
     setChange(1);
 }   
 
+const watch = true;
+const {
+  latitude,
+  longitude,
+  // error,
+} = usePosition(watch);
+
+const gpspoint = latitude + longitude;
+
 const submitClick = () => {
 console.log(scan)
-fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
+fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
   method: 'PUT',
   headers: {
       'Content-Type': 'application/json',
@@ -139,11 +166,11 @@ fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
       
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <Backdrop className={classes.backdrop} open >
-      <AppBar >
+      <AppBar className={classes.appBar}>
           <Toolbar>
             <Grid item xs={12} sm={12}></Grid>
     
-    <IconButton  color="inherit" onClick={handleClose}>
+    <IconButton  color="#582707" onClick={handleClose}>
       <CloseIcon />
     </IconButton>  
     </Toolbar>
@@ -175,6 +202,7 @@ fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
       
        
         <DialogActions>
+
         <Button disabled={change===0 ? true : false} onClick={submitClick} color="primary" >我要點名!</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
@@ -194,6 +222,7 @@ fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
               QRcode不存在！
             </Alert>
         </Snackbar>
+
       </DialogActions>
  </Grid>
       </Backdrop>
