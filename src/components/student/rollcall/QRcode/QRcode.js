@@ -43,6 +43,8 @@ export default function Qrcode() {
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
+  // 失敗小紅1
+  const [openErr2, setOpenErr2] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     cs_id:'',
   
@@ -114,6 +116,13 @@ fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
       console.log(2);
       // setQrcode(null);   
     }
+    else
+    {
+        //alert("QRcode不存在!");
+        setOpenErr2(true);
+        console.log(2);
+        // setQrcode(null);   
+      }
     
     
   } })
@@ -177,6 +186,12 @@ fetch('/student/rollcall/QRcodeRollcall/'+scan+'/',{
         <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
             <Alert severity="error">
               點名失敗！老師已關閉點名！
+            </Alert>
+        </Snackbar>
+        {/* 失敗小紅框2 */}
+        <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+            <Alert severity="error">
+              QRcode不存在！
             </Alert>
         </Snackbar>
       </DialogActions>
