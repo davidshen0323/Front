@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import MyMenu from './MenuS';
+import MyMenu from './MenuOS';
 import { makeStyles } from '@material-ui/core/styles';
 import {TableCell, Fab, Grid} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
