@@ -85,7 +85,7 @@ export default function GPS() {
           // @ts-ignore
           cs_id: params.cs_id,
           rc_inputsource: 'GPS點名',
-          gps_point: latitude + ","  + longitude,
+          gps_point: latitude + "," + longitude,
       })
   })
   .then(res => {

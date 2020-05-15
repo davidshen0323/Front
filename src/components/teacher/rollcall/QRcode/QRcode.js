@@ -110,7 +110,7 @@ export default function Qrcode() {
           // @ts-ignore
           cs_id: params.cs_id,
           rc_inputsource: 'QRcode點名',
-          gps_point: longitude + ","  + latitude
+          gps_point:latitude + ","  + longitude,
       })
   })
   .then(res => {
@@ -170,10 +170,10 @@ export default function Qrcode() {
     })
       .then(res => {
           setQrcode('0');
+          setOpen(false);
       })
     }
     putData();
-     
     
   };
 

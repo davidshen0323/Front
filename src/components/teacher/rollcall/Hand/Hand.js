@@ -66,7 +66,7 @@ export default function Hand() {
           },
           body: JSON.stringify({
               qrcode:"12345",
-              gps_point:longitude + ","  + latitude,
+              gps_point:latitude + ","  + longitude,
               // rc_inputsource:inputs.way,
               cs_id: params.cs_id,
               rc_inputsource: '手動點名'

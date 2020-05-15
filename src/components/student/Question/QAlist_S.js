@@ -154,7 +154,8 @@ export default function QAlist_S() {
         
         <div className={classes.root}>
           
-          <TableContainer><Paper>
+            <Paper>
+          <TableContainer>
       <Table
       className={classes.table}
       size='small'>
@@ -198,21 +199,16 @@ export default function QAlist_S() {
                
             </TableBody>
           </Table>
-          </Paper>
-          <List >
-          {/* <Button 
-          className={classes.button}
-          variant="contained" 
-          color="primary">
-            取消問題
-          </Button> */}
+            </TableContainer>
+              </Paper>
+          
 
           <Button 
             onClick = {handleClickOpen}
             variant = "contained" 
             color = "primary" 
             className={classes.button}
-          >
+            >
           我要發問
         </Button>
 
@@ -220,9 +216,8 @@ export default function QAlist_S() {
 
           <AddQA />
         </Dialog>
-          </List>
+         
 
-          </TableContainer>
           </div>
       </TabPanel>
 

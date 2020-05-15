@@ -168,13 +168,13 @@ export default function RollcallRDS(props) {
      
 
  const changeState =(event,id) =>{
-   const stuIndex = rollcalls.findIndex(s=>s.std_id==id)
+   const rcIndex = rollcalls.findIndex(s=>s.rc_id==id)
    var newlist = [...rollcalls]
-   newlist[stuIndex].tl_type_id = parseInt(event.target.value)
+   newlist[rcIndex].tl_type_id = parseInt(event.target.value)
 
    setRollcalls(newlist)
-   handleSubmit(rollcalls[stuIndex])
-   console.log(' newlist[stuIndex]', rollcalls[stuIndex])
+   handleSubmit(rollcalls[rcIndex])
+   console.log(' newlist[rcIndex]', rollcalls[rcIndex])
  }
 /*=========== Create Table HEAD ===========*/
 const rollcallsList = [ 'rc_starttime', 'rc_inputsource','tl_type_id']
@@ -225,7 +225,7 @@ useEffect(() => {
                     {rollcall[list]}
                  </TableCell>:
                  <TableCell align="left">
-                 <FormControl component="fieldset" onChange={(e)=>changeState(e,rollcall.std_id)}>
+                 <FormControl component="fieldset" onChange={(e)=>changeState(e,rollcall.rc_id)}>
                    <RadioGroup row  value={rollcall.tl_type_id+''} >
                      <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
                      <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遠距" />

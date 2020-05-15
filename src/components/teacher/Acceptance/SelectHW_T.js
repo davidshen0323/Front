@@ -150,7 +150,7 @@ export default function SelectHW_T() {
                       </TableCell>
                     :
                     <TableCell key={i} align="left">
-                
+                <Grid>
                 <EditHW 
                 name={Acc['hw_name']} 
                 content={Acc['hw_content']} 
@@ -160,6 +160,7 @@ export default function SelectHW_T() {
                 <IconButton onClick={(e)=>deletHW(e,Acc.hw_name)}>
                  <DeleteIcon/>
                </IconButton>
+               </Grid>
                     </TableCell>
                       )
                     }

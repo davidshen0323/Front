@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import {Table, TableBody, TableCell, TableHead, TableRow, Button, Box, Grid, Typography, Tab, AppBar, Tabs} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableHead, TableRow, Button, Box, Grid, Typography, Tab, AppBar, Tabs, List} from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyMenu from '../MenuS';
@@ -281,7 +281,7 @@ export default function AcceptanceList({ open, props }) {
             <TableHead>
                 <TableRow>
                     {/* <TableCell>排序</TableCell> */}
-                    <TableCell component="th" scope="row" align="center">排序</TableCell>
+                    {/* <TableCell component="th" scope="row" align="center">排序</TableCell> */}
                     <TableCell component="th" scope="row" align="center">學號</TableCell>
                     <TableCell component="th" scope="row" align="center">時間</TableCell>
                     {/* <TableCell component="th" scope="row" align="center">分數</TableCell> */}
@@ -292,7 +292,7 @@ export default function AcceptanceList({ open, props }) {
             {acceptances.map((acceptance,index) => acceptance["accept_done"] === false ?
             (
                 <TableRow key={index}>
-                 <TableCell align="center">{index+1}</TableCell>
+                 {/* <TableCell align="center">{index+1}</TableCell> */}
                   {
                     acceptanceList.map( (list, i) => 
                     

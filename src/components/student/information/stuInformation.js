@@ -97,12 +97,12 @@ export default function StuInformation() {
       <Paper className={classes.Paper}>
         <TableContainer>
             <Table size="small">
-                    <TableRow >
+                    {/* <TableRow >
                         <TableCell width="40%" align="center" className={classes.typo}>頭像</TableCell>
                         <TableCell width="40%"  className={classes.typo}>{information.std_image}</TableCell>
                         <TableCell width="20%"><Button onClick={() => closeUploadImg(true)} variant="outlined" className={classes.button}>上傳大頭照</Button></TableCell>
                         
-                    </TableRow>
+                    </TableRow> */}
                     <TableRow >
                         <TableCell width="40%" align="center" className={classes.typo}>姓名</TableCell>
                         <TableCell width="40%" className={classes.typo}>{information.std_name}</TableCell>

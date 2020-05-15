@@ -247,7 +247,7 @@ export default function LoginMenu() {
         <ListItemIcon>
             <HomeIcon />
         </ListItemIcon>
-          <ListItemText primary="首頁" />
+          <ListItemText primary="課程" />
         </ListItemLink>
         
         <ListItemLink href="/SInformation">

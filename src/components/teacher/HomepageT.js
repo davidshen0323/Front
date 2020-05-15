@@ -31,16 +31,15 @@ const useStyles = makeStyles((theme) => ({
 
   
   card: {
-    //marginLeft: theme.spacing(10),
-    // marginTop: theme.spacing(3),
-    maxWidth: '80%',
-    margin: theme.spacing(3),
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: theme.spacing(6),
     width: 'auto',
     padding: theme.spacing(3),
     borderRadius: "25px",
     borderStyle: "solid",
     borderColor: "black",
-    border:1,
+    border: 1,
   },
  
   classbutton: {
@@ -129,7 +128,11 @@ export default function HomepageT() {
         container
         direction="row"
         justify="center"
+        alignItems="center"
        >
+      
+
+        
           {Sclass.map((classs, index) => (
             // <Card className={classes.card}>
             <CardActionArea

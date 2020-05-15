@@ -220,7 +220,7 @@ const handleSubmit = () =>
                     <Typography>
                       {/* <QrReader facingMode="environment"  delay={300} onError={handleError} onScan={handleScan} style={{ width:250}}/> */}
                       <QrReader
-                        facingMode="user"
+                        facingMode="environment"
                         delay={300}
                         style={{width:250}}
                         onError={handleError}

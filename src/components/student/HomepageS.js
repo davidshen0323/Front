@@ -137,12 +137,21 @@ export default function HomepageS() {
 
               {Sclass.map((classs,index) => (
 
-            <CardActionArea className={classes.card} component={Link} to={`/functions/${classs["cs_id"]}`}>
+            <CardActionArea 
+            className={classes.card} 
+            component={Link} 
+            to={`/functions/${classs["cs_id"]}`}>
                         {console.log(classs)}
 
                         {
                           classList.map( (list, i) =>
-                          <TableCell key={i} component="th" scope="row" align="center" className={classes.tablecell}>
+                          <TableCell 
+                          key={i} 
+                          component="th" 
+                          scope="row" 
+                          align="center"
+                          variant="body" 
+                          className={classes.tablecell}>
                             {classs[list]}
                           </TableCell>
                           )

@@ -114,7 +114,7 @@ const {
   // error,
 } = usePosition(watch);
 
-const gpspoint = latitude + longitude;
+const gpspoint = latitude + ',' + longitude;
 
 const submitClick = () => {
 console.log(scan)
@@ -141,6 +141,7 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
       //alert("點名成功!");
       setOpenS(true);
       console.log(2);
+      window.location.reload();
       // setQrcode(null);   
     }
     else
@@ -152,7 +153,7 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
       }
     
     
-  } })
+  } fetchres() })
     
   
     }

@@ -98,6 +98,7 @@ export default function TAcceptanceList() {
 
   /*=========== Create Table HEAD ===========*/
   const acceptanceList = [ 'std_id', 'accept_time', 'accept_done' ]
+  const acceptanceDoneList = [ 'std_id', 'accept_time', 'accept_score' ]
   
 
   const params = useParams();
@@ -218,7 +219,7 @@ export default function TAcceptanceList() {
                       
                     {
                         
-                        acceptanceList.map( (list, i) => i < 3 ?
+                        acceptanceDoneList.map( (list, i) => i < 3 ?
                             <TableCell key={i} component="th" scope="row" align="left" >
                                {acceptance[list]}
                             </TableCell>
