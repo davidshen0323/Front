@@ -57,6 +57,12 @@ export default function Qrcode() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [change, setChange] = React.useState(0);  
+  // 成功小綠綠
+  const [openS, setOpenS] = React.useState(false);
+  // 失敗小紅1
+  const [openErr1, setOpenErr1] = React.useState(false);
+  // 失敗小紅1
+  const [openErr2, setOpenErr2] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     cs_id:'',
   
@@ -77,7 +83,11 @@ export default function Qrcode() {
        setChange(1);
      }
    }
- 
+   const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    
+  };  
    function handleError (err) {
      console.error(err);
    }
@@ -107,7 +117,6 @@ const {
 const gpspoint = latitude + longitude;
 
 const submitClick = () => {
-setOpen(false);
 console.log(scan)
 fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
   method: 'PUT',
@@ -122,25 +131,31 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
   const rq = await res.text();  //接收後端傳來的訊息
   if (rq === "request failed. This rollcall was closed by teacher!")
   {
-      alert("點名失敗! 老師已關閉點名!");
+      //alert("點名失敗! 老師已關閉點名!");
+      setOpenErr1(true);
       console.log(1);
       
   }
   else if(rq === "request successful! the QRcode rollcall record has already added!") 
   {
-      alert("點名成功!");
+      //alert("點名成功!");
+      setOpenS(true);
       console.log(2);
       // setQrcode(null);   
     }
+    else
+    {
+        //alert("QRcode不存在!");
+        setOpenErr2(true);
+        console.log(2);
+        // setQrcode(null);   
+      }
     
     
   } })
     
-      
   
     }
-  
-     
 
 
   return (
@@ -187,12 +202,27 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
       
        
         <DialogActions>
-        <Button disabled={change===0 ? true : false} onClick={submitClick} color="#582707" >我要點名!</Button>
-        {/* <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          已加入課程！
-        </Alert>
-      </Snackbar> */}
+
+        <Button disabled={change===0 ? true : false} onClick={submitClick} color="primary" >我要點名!</Button>
+        {/* 成功小綠框 */}
+        <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+            <Alert severity="success">
+              點名成功！
+            </Alert>
+        </Snackbar>
+        {/* 失敗小紅框1 */}
+        <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+            <Alert severity="error">
+              點名失敗！老師已關閉點名！
+            </Alert>
+        </Snackbar>
+        {/* 失敗小紅框2 */}
+        <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+            <Alert severity="error">
+              QRcode不存在！
+            </Alert>
+        </Snackbar>
+
       </DialogActions>
  </Grid>
       </Backdrop>
