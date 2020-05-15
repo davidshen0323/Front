@@ -25,7 +25,8 @@ const useStyle = makeStyles(theme => ({
     position: "fixed",
     bottom: '5%',
     right: "5%",
-    opacity: '100%'
+    opacity: '100%',
+    backgroundColor:'#582707'
   },
 }));
 
@@ -81,7 +82,7 @@ export default function OpenJoinClass ()  {
 
   return (
     <div>
-    <Fab aria-label="add" color="primary" className={classes.fab} onClick={handleClickOpen} >
+    <Fab style={{color:'#ffffff'}} aria-label="add" className={classes.fab} onClick={handleClickOpen} >
       <AddIcon />
     </Fab>
 

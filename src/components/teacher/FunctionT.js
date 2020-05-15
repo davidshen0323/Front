@@ -64,11 +64,6 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Microsoft JhengHei',
         fontWeight: 'bold',
       },
-      fab: {
-        position: "fixed",
-        bottom: theme.spacing(5),
-        right: theme.spacing(5),
-      },
     }));
 
     // class Homepage2 extends Component {
@@ -113,17 +108,6 @@ const useStyles = makeStyles(theme => ({
           
           <div className={classes.root}>
             <MyMenu />
-            {/* <br></br><br></br><br></br><br></br> */}
-            {/* <p>This is class {params.cs_id}</p> */}
-            {/* 新建課程 */}
-            {/* <Fab
-              color="primary"
-              aria-label="add"
-              className={classes.fab}
-              // onClick={OpenJoinClass}
-            >
-              <AddIcon />
-            </Fab> */}
             <OpenJoinClass/>
             <Grid
               container

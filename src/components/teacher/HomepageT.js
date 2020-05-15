@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     bottom: theme.spacing(5),
     right: theme.spacing(5),
+    backgroundColor:'#582707'
   },
 
 
@@ -117,9 +118,7 @@ export default function HomepageT() {
       <MyMenu />
       {/* 新建課程 */}
       <Fab
-        color="primary"
-        aria-label="add"
-        className={classes.fab}
+        style={{color:'#ffffff'}} aria-label="add" className={classes.fab}
         onClick={() => closeCreateClass(true)}
       >
         <AddIcon />

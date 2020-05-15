@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     bottom: theme.spacing(5),
     right: theme.spacing(5),
+    backgroundColor:'#582707'
   },
   div: {
     height:'100vh',
@@ -90,7 +91,7 @@ export default function ViewAnnouncementt() {
     <div className={classes.div}> 
       <MyMenu/>
        {/* 發佈公告 */}
-       <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
+       <Fab style={{color:'#ffffff'}} aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
           <AddIcon />
         </Fab>
 
