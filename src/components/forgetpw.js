@@ -1,8 +1,9 @@
 import React from "react";
 //import Link from "@material-ui/core/Link";
-import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography, List} from "@material-ui/core";
+import {Snackbar, Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography, List} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import {useHistory, Link} from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
@@ -25,10 +26,16 @@ const useStyles = makeStyles(theme =>({
 }
 ));
 /*--------------------------------*/
-
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 export default function ForgetPw() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  // 成功小綠綠
+  const [openS, setOpenS] = React.useState(false);
+  // 失敗小紅1
+  const [openErr1, setOpenErr1] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     id:'',
     phone:'',
@@ -54,7 +61,11 @@ const handleChange = fieldname => event => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    
+  };  
   const handleSubmit = () =>
   
    {
@@ -82,14 +93,16 @@ const handleChange = fieldname => event => {
             const test = await res.text();
             if(test ==="request failed. Email or Phone Number has round!")
             {
-                alert("請重新確認及填寫資料!");
+                //alert("請重新確認及填寫資料!");
+                setOpenErr1(true);
                         put = false;
                         console.log(1);
                         return put;
             }
             else
             {
-                alert("填寫成功!");
+                //alert("填寫成功!");
+                setOpenS(true);
                 put = true;
                 console.log(0);
                 history.push("/login");
@@ -107,11 +120,6 @@ const handleChange = fieldname => event => {
       //  }
   setOpen(false);}
       
-
-
-
-
-
   return (
     <div >
       <Typography className={classes.Link}>
@@ -175,6 +183,18 @@ const handleChange = fieldname => event => {
           {/* {console.log(inputs.user)} */}
         </DialogActions>
       </Dialog>
+      {/* 成功小綠框 */}
+      <Snackbar open={openS} autoHideDuration={2000} onClose={handleSubmit} style={{marginBottom:100}}>
+          <Alert severity="success">
+            填寫成功！
+          </Alert>
+      </Snackbar>
+      {/* 失敗小紅框1 */}
+      <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="error">
+            請重新確認及填寫資料！
+          </Alert>
+      </Snackbar>
     </div>
   );
 }

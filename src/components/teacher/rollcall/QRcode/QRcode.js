@@ -1,7 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import Backdrop from '@material-ui/core/Backdrop';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
@@ -12,12 +10,14 @@ import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
-import Typography from '@material-ui/core/Typography';
 import {useParams} from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { usePosition } from 'use-position';
 import { GetApp } from '@material-ui/icons';
 import axios from 'axios';
+import MuiAlert from "@material-ui/lab/Alert";
+import {Snackbar, Button, Dialog,Typography} from "@material-ui/core";
+
 
 
 
@@ -31,12 +31,17 @@ const useStyles = makeStyles((theme) => ({
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 export default function Qrcode() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [qrcode , setQrcode] = React.useState('0');
-  
+  // 成功小綠綠
+  const [openS, setOpenS] = React.useState(false);
+  // 失敗小紅1
+  const [openErr1, setOpenErr1] = React.useState(false);
   
   const params = useParams();
   
@@ -65,7 +70,11 @@ export default function Qrcode() {
         setQrcode(uuidv4());
         
       };
-      
+      const ErrClose = () => {
+        setOpenS(false);
+        setOpenErr1(false);
+        
+      };  
       const handleChangeQR = () => {
         
       }
@@ -95,13 +104,15 @@ export default function Qrcode() {
     const rq = await res.text();  //接收後端傳來的訊息
     if (rq === 'request failed. teacher not in this class!')
     {
-        alert("點名失敗! 您不是此課程的老師!");
+        //alert("點名失敗! 您不是此課程的老師!");
+        setOpenErr1(true);
         console.log(1);
         
     }
     else if(rq === "request successful! the rollcall has already added!") 
     {
-        alert("點名成功!");
+        //alert("點名成功!");
+        setOpenS(true);
         console.log(2);
         // setQrcode(null);   
     }
@@ -125,7 +136,6 @@ export default function Qrcode() {
   
   const handleClose = () => {
     
-    setOpen(false);
     
     
     // .then(res => {
@@ -223,6 +233,18 @@ export default function Qrcode() {
 
         
       </Dialog>
+      {/* 成功小綠框 */}
+      <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="success">
+            點名成功！
+          </Alert>
+      </Snackbar>
+      {/* 失敗小紅框1 */}
+      <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="error">
+            點名失敗！您不是此課程的老師！
+          </Alert>
+      </Snackbar>
     </div>
   );
 }

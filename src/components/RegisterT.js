@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, TextField, Paper} from '@material-ui/core/';
+import {Button, TextField, Paper, Snackbar} from '@material-ui/core/';
+import MuiAlert from "@material-ui/lab/Alert";
 import MyMenu from './MenuisLogouted';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
@@ -56,10 +57,21 @@ const useStyles = makeStyles(theme =>({
             
         }
         ));
-
+        function Alert(props) {
+            return <MuiAlert elevation={6} variant="filled" {...props} />;
+          }
 export default function RegisterT() {
     const classes = useStyles();
-
+    // 成功小綠綠
+    const [openS, setOpenS] = React.useState(false);
+    // 失敗小紅1
+    const [openErr1, setOpenErr1] = React.useState(false);
+    // 失敗小紅2
+    const [openErr2, setOpenErr2] = React.useState(false);
+    // 失敗小紅3
+    const [openErr3, setOpenErr3] = React.useState(false);
+    // 失敗小紅4
+    const [openErr4, setOpenErr4] = React.useState(false);
     const [inputs, setInputs] = React.useState({
         user:'',
         pwd:'',
@@ -72,12 +84,17 @@ export default function RegisterT() {
         //宣告要接值的變數
     });
 
-      
+    const ErrClose = () => {
+        setOpenS(false);
+        setOpenErr1(false);
+        setOpenErr2(false);
+        setOpenErr3(false);
+        setOpenErr4(false);
+    };  
 
     const handleChange = fieldname => event => {
         event.persist();
         setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-        
     }
 
     let post; //宣告一個布林值變數
@@ -116,28 +133,32 @@ export default function RegisterT() {
                     const test = await res.text();  //接收後端傳來的訊息
                     if (test === "This account has already exist!") //帳號已註冊過
                     {
-                        alert("已註冊過!");
+                        //alert("已註冊過!");
+                        setOpenErr1(true);
                         post = false;
                         console.log(1);
                         return post;
                     }
                     else if(test === "request failed. Email format error!") //信箱不包含@
                     {
-                        alert("信箱格式有誤! 請輸入有效信箱!");
+                        //alert("信箱格式有誤! 請輸入有效信箱!");
+                        setOpenErr2(true);
                         post = false;
                         console.log(2);
                         return post;
                     }
                     else if(inputs.user.length !== 5) //學號長度不等於9
                     {
-                        alert("帳號長度有誤! 請再次確認!");
+                        //alert("帳號長度有誤! 請再次確認!");
+                        setOpenErr3(true);
                         post = false;
                         console.log(3);
                         return post;
                     }
                     else
                     {
-                        alert("註冊成功!");
+                        //alert("註冊成功!");
+                        setOpenS(true);
                         post = true;
                         console.log(0);
                         history.push("/login");
@@ -152,12 +173,10 @@ export default function RegisterT() {
             
             else
             {
-                alert("請再次確認!!")
+                //alert("請再次確認!!")
+                setOpenErr4(true);
             }
 
-            
-
-            
             
         }
         // console.log(post);
@@ -169,14 +188,8 @@ export default function RegisterT() {
             
             <Paper className={classes.root}>
                  <h2>註冊</h2>
-                 
-
-                
-                
                 <List>
-                
-             
-            <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
+          <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
             
             
             <TextField
@@ -292,7 +305,36 @@ export default function RegisterT() {
               </Button>
             
               </Paper>
-  
+            {/* 成功小綠框 */}
+            <Snackbar open={openS} autoHideDuration={2000} onClose={handleSubmit} style={{marginBottom:100}}>
+                <Alert severity="success">
+                    註冊成功！
+                </Alert>
+            </Snackbar>
+            {/* 失敗小紅框1 */}
+            <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+                <Alert severity="error">
+                    已註冊過！
+                </Alert>
+            </Snackbar>
+            {/* 失敗小紅框2 */}
+            <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+                <Alert severity="error">
+                    信箱格式有誤！ 請輸入有效信箱！
+                </Alert>
+            </Snackbar>
+            {/* 失敗小紅框3 */}
+            <Snackbar open={openErr3} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+                <Alert severity="error">
+                    學號長度有誤！ 請再次確認！
+                </Alert>
+            </Snackbar>
+            {/* 失敗小紅框4 */}
+            <Snackbar open={openErr4} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+                <Alert severity="error">
+                    請再次確認！
+                </Alert>
+            </Snackbar>
         </div>
         
     );
