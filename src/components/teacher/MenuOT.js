@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
-    fontSize:18,
+    fontSize:17,
     color: "#582707",
     backgroundColor: "#fffaea",
     

@@ -10,27 +10,11 @@ import JoinClass from '../student/joinClass';
 
 const useStyles = makeStyles(theme => ({
     
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-
-    root: {
-      flexWrap: 'wrap',
+    div: {
       height:'100hv',
-      width: '100%',
       background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
     },
-    photo: {
-      padding: theme.spacing(10),
-      textAlign: 'center',
-      height: 100,
-      width: 100,
-      marginTop: 50,
-      marginLeft: 50,
-      marginRight: 10,
-      color: theme.palette.text.secondary,
-    },
+    
     paperclass: {
       padding: theme.spacing(5),
       marginLeft: "auto",
@@ -46,23 +30,12 @@ const useStyles = makeStyles(theme => ({
       borderRadius: '30pt',
     },
 
-    textField: {
-      marginLeft: theme.spacing(10),
-      marginTop: theme.spacing(2),
-      marginRight: theme.spacing(10),
-      width: 'auto',
-    },
-
-    button1: {
-      marginTop: theme.spacing(3),
-      marginLeft: theme.spacing(15),
-    },
     
     card: {
-      marginLeft: theme.spacing(10),
+      //marginLeft: theme.spacing(10),
       // marginTop: theme.spacing(3),
       maxWidth: '80%',
-      marginTop: theme.spacing(6),
+      margin: theme.spacing(3),
       width: 'auto',
       padding: theme.spacing(3),
       borderRadius: "25px",
@@ -145,7 +118,7 @@ export default function HomepageS() {
      };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.div}>
     <MyMenu />
 
      {/* 加入課程 */}
@@ -153,44 +126,30 @@ export default function HomepageS() {
           <AddIcon />
         </Fab>
       {/* {console.log(Sclass)} */}
-    <Grid
-    container
-    direction="row"
-    justify="center"
-    // alignItems="center"
-    >
-          <Grid item>
-                    {Sclass.map((classs,index) => (
-                    // <Card className={classes.card}>
-            <CardActionArea className={classes.card} component={Link} to={`/functions/${classs["cs_id"]}`}>
-              {/* <CardActions> */}
-                        {/* {console.log(index)} */}
-                      {/* <Paper key = {index}> */}
+         
+          <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          >
 
-                      {/* <ButtonBase> */}
+              {Sclass.map((classs,index) => (
+
+            <CardActionArea className={classes.card} component={Link} to={`/functions/${classs["cs_id"]}`}>
                         {console.log(classs)}
 
-                        {/* <TableCell>{index+1}</TableCell> */}
                         {
-
                           classList.map( (list, i) =>
                           <TableCell key={i} component="th" scope="row" align="center" className={classes.tablecell}>
                             {classs[list]}
                           </TableCell>
-
                           )
                         }
-                        
-                        {/* </ButtonBase> */}
-
-                      {/* </Paper> */}
-                        {/* </CardActions> */}
-                        </CardActionArea>
-                        // </Card>
+            </CardActionArea>
                        
                       ))}     
             
-          </Grid>
         
       </Grid>
       {/* 學生加入課程 */}
