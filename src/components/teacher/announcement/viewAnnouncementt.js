@@ -157,22 +157,7 @@ export default function ViewAnnouncementt() {
                                   <DeleteAnnouncement
                                   atid={announce['at_id']}
                                   />
-                                  {/* <Button 
-                                  size="small"
-                                  onClick={() => closeDeleteAnnouncement(true)}
-                                  
-                                  >
-                                  Delete
-                                  </Button>
-                                  
-                                  <Button 
-                                  size="small" 
-                                  color="primary"
-                                  onClick={() => closeEditAnnouncement(true)}
-                                  
-                                  >
-                                  Edit
-                                </Button> */}
+
                                 </ExpansionPanelActions>
                                         
                             

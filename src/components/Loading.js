@@ -1,6 +1,7 @@
 import React , { useEffect } from 'react';
 import axios from 'axios';
-
+import gifloading from '../img/Spinner-1s-200px.gif';
+import Grid from '@material-ui/core/Grid';
 
 export default function Loading() {
   
@@ -31,9 +32,16 @@ export default function Loading() {
 
   return (
     <div>   
-      
+        <Grid
+         container
+         direction="row"
+         justify="center"
+         alignItems="center"
+        >
+
+        <img src={gifloading}/>
         LOADING....
-        
+        </Grid>
     </div>
   );
 }
