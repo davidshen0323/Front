@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
 import EditHW from './EditHW';
+import {brown} from '@material-ui/core/colors';
 
 /*-------------------------------------------------------*/
 const useStyles = makeStyles(theme => ({
@@ -157,7 +158,7 @@ export default function SelectHW_T() {
                 id={Acc['hw_id']}
                 />
 
-                <IconButton onClick={(e)=>deletHW(e,Acc.hw_name)}>
+                <IconButton  variant="outlined"  style={{color:brown[500]}} onClick={(e)=>deletHW(e,Acc.hw_name)}>
                  <DeleteIcon/>
                </IconButton>
                </Grid>

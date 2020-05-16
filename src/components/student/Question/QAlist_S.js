@@ -206,11 +206,11 @@ export default function QAlist_S() {
           <Button 
             onClick = {handleClickOpen}
             variant = "contained" 
-            color = "primary" 
             className={classes.button}
             >
           我要發問
         </Button>
+        
 
         <Dialog open={open} onClose={handleClose}>
 
