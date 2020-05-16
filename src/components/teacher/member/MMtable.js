@@ -14,7 +14,7 @@ import { IconButton } from '@material-ui/core';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import {brown} from '@material-ui/core/colors';
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -236,7 +236,7 @@ export default function MemberTable( props ) {
                     {student[list]}
                  </TableCell>:
                  <TableCell align="left" padding="none" >
-                 <IconButton onClick={(e)=>deletstudent(e,student.std_id)}>
+                 <IconButton  variant="outlined"  style={{color:brown[500]}} onClick={(e)=>deletstudent(e,student.std_id)}>
                  <DeleteOutlineIcon/>
                </IconButton>
                </TableCell>

@@ -1,12 +1,13 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import {Table, TableBody, TableCell, TableHead, TableRow, Button, Box, Grid, Typography, Tab, AppBar, Tabs, List} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableHead, TableRow,TableContainer, Button, Box, Grid, Typography, Tab, AppBar, Tabs, List} from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyMenu from '../MenuS';
 import { useParams, Link ,useHistory} from 'react-router-dom';
 
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 
 function TabPanel(props) {
@@ -57,7 +58,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function AcceptanceList({ open, props }) {
+export default function AcceptanceList(props) {
 
   /*------------ STATE ------------*/
   const [acceptances, setAcceptances] = useState([]);
@@ -65,13 +66,6 @@ export default function AcceptanceList({ open, props }) {
 
   /*------------ STYLE ------------*/
   const useStyles = makeStyles(theme =>({
-    Paper:{
-      width: '90%',
-      margin: 'auto', 
-      marginTop:'5%',   
-      marginBottom:'5%',
-      boxShadow:"1px 1px 1px 1px #9E9E9E",    
-  },
     root: {
       width: '100%',
       overflowX: 'auto',
@@ -88,7 +82,7 @@ export default function AcceptanceList({ open, props }) {
     //   backgroundColor: '#E0E0E0',
     // },
     button: {
-      width: '100px',
+      width: 100,
       margin:'auto',
       marginTop: 20,
       // marginLeft: 10,
@@ -104,6 +98,10 @@ export default function AcceptanceList({ open, props }) {
       height:'100vh',
       background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
     },
+  root: {
+    width: '100%',
+    textAlign:'center',
+  },
   }
   ));
   const classes = useStyles();
@@ -127,12 +125,16 @@ export default function AcceptanceList({ open, props }) {
   // 警告小橘2
   const [openWarn2, setOpenWarn2] = React.useState(false);
 
+  
+
 
   const params = useParams();
   const csid = params.cs_id;
   const hwname = params.hw_name;
   const studentid = params.std_id;
   const stdid = parseInt(studentid);
+
+  const [clicked,setClicked] = React.useState(false);
 // console.log(stdid);
   useEffect(() => {
       async function fetchData() {
@@ -192,6 +194,7 @@ export default function AcceptanceList({ open, props }) {
 
     }
     
+    setClicked(true);
 
   } fetchres() })
   // console.log(hwname)
@@ -269,22 +272,22 @@ export default function AcceptanceList({ open, props }) {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="未驗收" href="/drafts" {...a11yProps(0)} />
-                <LinkTab label="已驗收" href="/trash" {...a11yProps(1)} />
+                <LinkTab label="未完成" href="/drafts" {...a11yProps(0)} />
+                <LinkTab label="已完成" href="/trash" {...a11yProps(1)} />
             
                 </Tabs>
             </AppBar>
       <TabPanel value={value} index={0}>
-      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
-      <Table>
+        <div className={classes.root}>
+      <Paper>
+      <TableContainer>
+        <Table className={classes.table} size="small">
 
             <TableHead>
                 <TableRow>
-                    {/* <TableCell>排序</TableCell> */}
-                    {/* <TableCell component="th" scope="row" align="center">排序</TableCell> */}
                     <TableCell component="th" scope="row" align="center">學號</TableCell>
                     <TableCell component="th" scope="row" align="center">時間</TableCell>
-                    {/* <TableCell component="th" scope="row" align="center">分數</TableCell> */}
+                    {/* <TableCell component="th" scope="row" align="center">狀態</TableCell> */}
                 </TableRow>
             </TableHead>
             
@@ -320,15 +323,43 @@ export default function AcceptanceList({ open, props }) {
                
             </TableBody>
           </Table>
-      </Box>
+      </TableContainer>
+      </Paper>
+         
+      <Button 
+          onClick={handleSubmit}
+          variant = "contained" 
+          className={classes.button}
+          //disabled={clicked === true }
+          >
+            我要驗收
+
+          </Button>
+         
+          
+  
+         <Button
+          onClick={handledelete}
+          variant = "contained" 
+          className={classes.button}
+          //disabled={clicked === true ? false : true }
+          >  
+            取消驗收
+          </Button>
+
+      </div>
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
 
+
+
       <TabPanel value={value} index={1}>
-      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
-      <Table>
+        <div className={classes.root}>
+     <Paper>
+     <TableContainer>
+        <Table className={classes.table} size='small'>
             <TableHead>
                 <TableRow>
                     {/* <TableCell>排序</TableCell> */}
@@ -342,8 +373,10 @@ export default function AcceptanceList({ open, props }) {
             <TableBody>
             {
             
-            acceptances.map((acceptance,k) =>  acceptance["accept_done"] === true && acceptance['std_id'] === stdid ? (
-                <TableRow key={k}>
+            acceptances.map((acceptance,index) =>  acceptance["accept_done"] === true 
+             && acceptance['std_id'] === stdid 
+            ?(
+                <TableRow key={index}>
                       {/* <TableCell align="center">{k+1}</TableCell> */}
                  
                   {
@@ -362,49 +395,12 @@ export default function AcceptanceList({ open, props }) {
                
             </TableBody>
           </Table>
-      </Box>
+          </TableContainer>
+          </Paper>
+    
+       
+            </div>
       </TabPanel>
-
-
-
-        <Grid
-        open={open}
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing={2}
-        >
-          
-          <List>
-          
-          <Button
-          onClick={handledelete}
-          className={classes.button}
-          >  
-            取消驗收
-          </Button>
-
-          <Button 
-          onClick={handleSubmit}
-          className={classes.button}
-          >
-            我要驗收
-          </Button>
-          
-         </List>
-
-          {/* <Button
-      className={classes.button}
-      component={Link}
-      to={`/selectHW_S/${params.cs_id}`}
-      >
-      返回
-      </Button> */}
-          
-
-
-        </Grid> 
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="success">

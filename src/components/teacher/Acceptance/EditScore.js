@@ -20,6 +20,17 @@ const useStyle = makeStyles(theme => ({
     color: "blue",
     padding: 10
   },
+  button: {
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    width:'100px',
+    fontFamily: 'Microsoft JhengHei',
+    color: "white",
+    fontSize:14,
+    backgroundColor: "#f8b62b",
+    fontWeight:'bold',
+},
 }));
 
 
@@ -98,7 +109,7 @@ export default function AcceptScore( props )  {
       <Button 
       onClick = {handleClickOpen}
       variant = "contained" 
-      color = "primary" 
+      className={classes.button}
     >
     更改分數
   </Button>
