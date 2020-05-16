@@ -32,7 +32,7 @@ export default function AddAnnouncement({ open, handleClose })  {
   const classes = useStyle();
   const params = useParams();
   const csid = params.cs_id;
-  const [btnClose,setbtnClose]= React.useState(0);
+  const [btnClose,setbtnClose]= React.useState(true);
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
@@ -82,7 +82,7 @@ let history = useHistory(); //傳值跳頁的方法
     
   const handleSubmit = () =>
     {
-      setbtnClose(1);
+      setbtnClose(false);
       setOpenErr4(true);
         if(inputs.title.length > 0 
             && inputs.content.length > 0) //每個輸入格都不為空值
@@ -111,7 +111,7 @@ let history = useHistory(); //傳值跳頁的方法
                         setOpenErr2(false);
                         setOpenErr3(false);
                         setOpenErr4(false);
-                        setbtnClose(0);
+                        setbtnClose(true);
                         return post;
                     }
                     else if(test === "request failed. teacher not in this class!") //教師不屬於該課堂
@@ -123,7 +123,7 @@ let history = useHistory(); //傳值跳頁的方法
                         setOpenErr1(false);
                         setOpenErr3(false);
                         setOpenErr4(false);
-                        setbtnClose(0);
+                        setbtnClose(true);
                         return post;
                     }
                     else
@@ -150,7 +150,7 @@ let history = useHistory(); //傳值跳頁的方法
                 //alert("請再次確認!!")
                 setOpenErr3(true);
                 setOpenErr4(false);
-                setbtnClose(0);
+                setbtnClose(true);
             }
             
         }
@@ -190,7 +190,7 @@ let history = useHistory(); //傳值跳頁的方法
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} color="primary">關閉視窗</Button>
-        <Button disabled={btnClose===1} onClick={handleSubmit} color="primary" >確認送出</Button>
+        <Button disabled={btnClose===false} onClick={handleSubmit} color="primary" >確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
@@ -218,7 +218,7 @@ let history = useHistory(); //傳值跳頁的方法
         {/* 稍後小橘框4 */}
         <Snackbar open={openErr4} style={{marginBottom:100}}>
           <Alert severity="warning">
-            請稍後，正在發送公告信！
+            請稍候，正在發送公告信！
           </Alert>
         </Snackbar>
       </DialogActions>

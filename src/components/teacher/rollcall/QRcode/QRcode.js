@@ -205,7 +205,7 @@ export default function Qrcode() {
     </Grid>    
 
     <Grid>   
-      <Button disabled={clicked===false} onClick={handleSubmit}  className={classes.button}>
+      <Button disabled={clicked === false} onClick={handleSubmit}  className={classes.button}>
         開始點名
       </Button>
       <Button disabled={clicked === false ? false : true } onClick={handleSubmit}  className={classes.button}>

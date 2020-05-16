@@ -36,6 +36,9 @@ export default function ForgetPw() {
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
+  // 稍後小橘2
+  const [openErr2, setOpenErr2] = React.useState(false);
+  const [btnClose, setbtnClose] = React.useState(true);
   const [inputs, setInputs] = React.useState({
     id:'',
     phone:'',
@@ -60,22 +63,33 @@ const handleChange = fieldname => event => {
 
   const handleClose = () => {
     setOpen(false);
+    setbtnClose(true);
+    inputs.id='';
+    inputs.mail='';
+    inputs.phone='';
   };
   const ErrClose = () => {
     setOpenS(false);
     setOpenErr1(false);
-    
+    setOpenErr2(false);
+    setbtnClose(true);
+    setOpen(false);
+    inputs.id='';
+    inputs.mail='';
+    inputs.phone='';
   };  
   const handleSubmit = () =>
   
-   {
-    // if(inputs.user.length > 0
-    //    && inputs.phone.length > 0
-    //    && inputs.mail.length > 0 )
-    //    {
+  {
+    
+    setbtnClose(false);
+    setOpenErr2(true);
+
+    
       console.log(inputs.id)
       console.log(inputs.mail);
       console.log(inputs.phone);
+      
         fetch('/sendStudentEmailWithNewPassword/',{
             method: 'PUT',
             headers: {
@@ -94,15 +108,18 @@ const handleChange = fieldname => event => {
             if(test ==="request failed. Email or Phone Number has round!")
             {
                 //alert("請重新確認及填寫資料!");
+                setOpenErr2(false);
                 setOpenErr1(true);
-                        put = false;
-                        console.log(1);
-                        return put;
+                put = false;
+                console.log(1);
+                return put;
             }
             else
             {
                 //alert("填寫成功!");
                 setOpenS(true);
+                setOpenErr1(false);
+                setOpenErr2(false);
                 put = true;
                 console.log(0);
                 history.push("/login");
@@ -111,14 +128,14 @@ const handleChange = fieldname => event => {
         } fetchres() })
         .then(res => console.log(res))
         .catch(err => console.log(`Error with message: ${err}`))
-       
-      //  else
+   //  else
       //       {
       //            alert("請再次確認2!!")
       //       }    
         
-      //  }
-  setOpen(false);}
+      //  }     
+
+  }
       
   return (
     <div >
@@ -177,16 +194,16 @@ const handleChange = fieldname => event => {
           <Button onClick={handleClose} color="secondary">
             取消
           </Button>
-          <Button onClick={handleSubmit} color="primary">
+          <Button disabled={btnClose===false} onClick={handleSubmit} color="primary">
             確認送出
           </Button>
           {/* {console.log(inputs.user)} */}
         </DialogActions>
       </Dialog>
       {/* 成功小綠框 */}
-      <Snackbar open={openS} autoHideDuration={2000} onClose={handleSubmit} style={{marginBottom:100}}>
+      <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="success">
-            填寫成功！
+            已寄送新密碼，請至Email確認！
           </Alert>
       </Snackbar>
       {/* 失敗小紅框1 */}
@@ -195,6 +212,12 @@ const handleChange = fieldname => event => {
             請重新確認及填寫資料！
           </Alert>
       </Snackbar>
+      {/* 稍後小橘框2 */}
+      <Snackbar open={openErr2} style={{marginBottom:100}}>
+          <Alert severity="warning">
+            請稍候，正在發送新密碼！
+          </Alert>
+        </Snackbar>
     </div>
   );
 }
