@@ -96,6 +96,7 @@ export default function Hand() {
       .then(res => {
       async function fetchData() {
         const result = await axios.get(`/teacher/rollcall/findRCID/${uujoinID}/`)
+        
         setRcid(result.data[0]["rc_id"]);
         
         // console.log(result.data[0]["rc_id"]);
