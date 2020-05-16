@@ -15,7 +15,7 @@ import ComButton from "../../../ComButton";
 import {useParams} from "react-router-dom";
 import { usePosition } from 'use-position';
 import axios from 'axios';
-
+import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -41,6 +41,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Hand() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [uujoinID,setuujoinID] = React.useState(uuidv4);
 
   const params = useParams();
   // console.log(params);
@@ -94,7 +95,7 @@ export default function Hand() {
     } fetchres() })
       .then(res => {
       async function fetchData() {
-        const result = await axios.get(`/teacher/rollcall/findRCID/12345/`)
+        const result = await axios.get(`/teacher/rollcall/findRCID/${uujoinID}/`)
         setRcid(result.data[0]["rc_id"]);
         
         // console.log(result.data[0]["rc_id"]);

@@ -13,6 +13,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import {useParams} from "react-router-dom";
 import { usePosition } from 'use-position';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -55,7 +56,7 @@ const useStyles = makeStyles(theme => ({
 export default function GPS() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
+    const [uujoinID,setuujoinID] = React.useState(uuidv4);
   const params = useParams();
   // console.log(params);
 
@@ -81,7 +82,7 @@ export default function GPS() {
       body: JSON.stringify({
           
           // rc_inputsource:inputs.way,
-          qrcode: "1",
+          qrcode: uujoinID,
           // @ts-ignore
           cs_id: params.cs_id,
           rc_inputsource: 'GPS點名',
@@ -109,7 +110,7 @@ export default function GPS() {
 } fetchres() })
   .then(res => {
   async function fetchData() {
-    const result = await axios.get(`/teacher/rollcall/findRCID/1/`)
+    const result = await axios.get(`/teacher/rollcall/findRCID/${uujoinID}/`)
     setRcid(result.data[0]["rc_id"]);
   
     console.log(result.data[0]["rc_id"]);
