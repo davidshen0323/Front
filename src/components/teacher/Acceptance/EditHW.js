@@ -5,6 +5,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import CreateIcon from '@material-ui/icons/Create';
 import { IconButton } from '@material-ui/core';
+import {brown} from '@material-ui/core/colors';
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -151,7 +152,7 @@ export default function Edithw(props)  {
 
   return (
 <div>
-    <IconButton onClick={handleClickOpen}>
+    <IconButton  variant="outlined"  style={{color:brown[500]}} onClick={handleClickOpen}>
         <CreateIcon/>
     </IconButton>
     

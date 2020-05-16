@@ -20,7 +20,7 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
+    color: "#582707",
     padding: 10,
     fontFamily:'微軟正黑體'
   },

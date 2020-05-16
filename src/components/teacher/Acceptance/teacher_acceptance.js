@@ -1,17 +1,17 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-
-
-import {Table, TableBody, TableCell, TableHead, TableRow, Box, Grid, Typography, Tab, AppBar, Tabs} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableHead, TableRow, TableContainer,Box, Typography, Tab, AppBar, Tabs} from "@material-ui/core";
 
 import MyMenu from '../MenuT';
 import { useParams} from 'react-router-dom';
-
-import {useHistory} from "react-router-dom";
+import Paper from '@material-ui/core/Paper';
 import AcceptScore from "./acceptScore";
 import PropTypes from 'prop-types';
 import EditScore from './EditScore';
+import {brown} from '@material-ui/core/colors';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import { IconButton } from '@material-ui/core';
 
 
 function TabPanel(props) {
@@ -86,7 +86,7 @@ export default function TAcceptanceList() {
       marginBottom: 10,
       fontFamily: 'Microsoft JhengHei',
       color: "white",
-      backgroundColor: "#003060",
+      backgroundColor: "#f8b62b",
       fontWeight:'bold',
     },
     div:{
@@ -98,7 +98,7 @@ export default function TAcceptanceList() {
 
   /*=========== Create Table HEAD ===========*/
   const acceptanceList = [ 'std_id', 'accept_time', 'accept_done' ]
-  const acceptanceDoneList = [ 'std_id', 'accept_time', 'accept_score' ]
+  const acceptanceDoneList = [ 'std_id', 'accept_time', 'accept_score','accept_score' ]
   
 
   const params = useParams();
@@ -137,24 +137,23 @@ export default function TAcceptanceList() {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="未驗收" href="/drafts" {...a11yProps(0)} />
-                <LinkTab label="已驗收" href="/trash" {...a11yProps(1)} />
+                <LinkTab label="未完成" href="/drafts" {...a11yProps(0)} />
+                <LinkTab label="已完成" href="/trash" {...a11yProps(1)} />
             
                 </Tabs>
             </AppBar>
       <TabPanel value={value} index={0}>
-      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
-
-        <Table className={classes.table}>
+      <Paper>
+      <TableContainer>
+        <Table className={classes.table} size="small">
 
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
-                <TableCell align="left" disablePadding='none'></TableCell>
-                  <TableCell align="left" disablePadding='none'>學號</TableCell>
-                  <TableCell align="left" disablePadding='none'>時間</TableCell>
-                  <TableCell align="left" disablePadding='none'>分數</TableCell>
-                  
+                  <TableCell component="th" scope="row" align="center">學號</TableCell>
+                  <TableCell component="th" scope="row" align="center">時間</TableCell>
+                  {/* <TableCell component="th" scope="row" align="center">狀態</TableCell> */}
+                  <TableCell component="th" scope="row" align="center">處理</TableCell>
                 </TableRow>
             </TableHead>
 
@@ -162,22 +161,26 @@ export default function TAcceptanceList() {
             <TableBody>
                 {acceptances.map((acceptance,index) => acceptance["accept_done"] === false ? (
                     <TableRow key={index}>
-                      <TableCell ></TableCell>
-                      
+                      {/* <TableCell ></TableCell> */}
                     {
-                        
                         acceptanceList.map( (list, i) => i < 2 ?
-                            <TableCell key={i} component="th" scope="row" align="left" padding="none">
+                            <TableCell key={i} component="th" scope="row" align="center">
                                {acceptance[list]}
                             </TableCell>
                             :
-                            <TableCell key={i} align="left">
+                            <TableCell key={i} align="center">
                              <AcceptScore
                              stdid={acceptance['std_id']}
                              hwid={acceptance['accept_hw_id']}
                             //  time={acceptance["accept_time"]}
                             //  done={acceptance["accept_done"]}
                              />
+
+                            {/* <IconButton  variant="outlined"  style={{color:brown[500]}} 
+                             //onClick={(e)=>deletstudent(e,student.std_id)}
+                             >
+                              <DeleteOutlineIcon/>
+                            </IconButton> */}
                              
                             </TableCell>
                          )
@@ -193,20 +196,23 @@ export default function TAcceptanceList() {
             </TableBody>
 
         </Table>
-        </Box>
+        </TableContainer>
+        </Paper>
         </TabPanel>
-        <TabPanel value={value} index={1}>
-      <Box border={1} mx="auto" width="80%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper">
 
-        <Table className={classes.table}>
+
+        <TabPanel value={value} index={1}>
+     <Paper>
+     <TableContainer>
+        <Table className={classes.table} size='small'>
 
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
-                  <TableCell align="left"></TableCell>
-                  <TableCell align="left">學號</TableCell>
-                  <TableCell align="left">時間</TableCell>
-                  <TableCell align="left">分數</TableCell>
+                  <TableCell component="th" scope="row" align="center">學號</TableCell>
+                  <TableCell component="th" scope="row" align="center">時間</TableCell>
+                  <TableCell component="th" scope="row" align="center">分數</TableCell>
+                  <TableCell component="th" scope="row" align="center">處理</TableCell>
                   
                 </TableRow>
             </TableHead>
@@ -215,35 +221,26 @@ export default function TAcceptanceList() {
             <TableBody>
                 {acceptances.map((acceptance,index) => acceptance["accept_done"] === true ? (
                     <TableRow key={index}>
-                      <TableCell align="left"></TableCell>
+                      {/* <TableCell align="center"></TableCell> */}
                       
                     {
                         
                         acceptanceDoneList.map( (list, i) => i < 3 ?
-                            <TableCell key={i} component="th" scope="row" align="left" >
+                            <TableCell key={i} component="th" scope="row" align="center" >
                                {acceptance[list]}
                             </TableCell>
                             :
-                            <TableCell key={i} align="left">
+                            <TableCell key={i} align="center">
                              <EditScore
                              stdid={acceptance['std_id']}
                              hwid={acceptance['accept_hw_id']}
                             //  time={acceptance["accept_time"]}
                             //  done={acceptance["accept_done"]}
                              />
+                            
                              
                             </TableCell>
                               
-                        //     {/* {acceptanceList.map( (list, i) => acceptance[list][4] === true ?
-                        //     <TableCell>
-                        //       <p>已驗收過</p>
-                        //     </TableCell>
-                        //     :
-                        //     <TableCell>
-                        //       <p>尚未驗收</p>
-                        //     </TableCell>
-                        //     ) */}
-                        //       </TableCell> 
                          )
                     }
                     
@@ -257,74 +254,9 @@ export default function TAcceptanceList() {
             </TableBody>
 
         </Table>
-        </Box>
+        </TableContainer>
+        </Paper>
         </TabPanel>
-        {/* <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing={2}
-        > */}
-{/*           
-          
-          <Button 
-          onClick={handleSubmit}
-          className={classes.button}
-          >
-            我要驗收
-          </Button>
-          
-          
-           */}
-          {/* <Button
-          onClick={handledelete}
-          className={classes.button}
-          >  
-            取消驗收
-          </Button> */}
-{/* 
-          <Button
-      className={classes.button}
-      component={Link}
-      to={`/selectHW_T/${params.cs_id}`}
-      >
-      返回
-      </Button>
-           */}
-
-
-        {/* </Grid> */}
-        </div>
-       
-)
+    </div>
+  );
 }
-
-
-
-
-// import React, {Component} from 'react';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableRow from '@material-ui/core/TableRow';
-// import { Button } from '@material-ui/core/';
-
-
-// export default class Acceptance extends Component{
-
-//   render(){
-//     return (
-//       <TableRow>
-//         <TableCell>{this.props.acceptance.sort}</TableCell>          
-//         <TableCell>{this.props.acceptance.stuid}</TableCell>
-//         <TableCell>{this.props.acceptance.time}</TableCell>
-//         <TableCell> {this.props.acceptance.status}</TableCell>
-//         <TableCell>
-//           {(this.props.acceptance.stuid == "406401628") &&
-//              <Button>取消驗收</Button>
-//           }</TableCell>
-//       </TableRow>
-//     )
-    
-//   }
-    
-// }

@@ -82,7 +82,6 @@ export default function ViewAnnouncements() {
     
     <div className={classes.div}>  
       <MyMenu/>
-      <br/>
       <Paper className={classes.Paper}>
             <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體',color:"#000000"}}>公佈欄</Typography>
 

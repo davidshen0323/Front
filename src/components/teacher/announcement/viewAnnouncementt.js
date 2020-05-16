@@ -7,7 +7,9 @@ import AddAnnouncement from './addAnnouncement';
 import EditAnnouncement from './editAnnouncement';
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteAnnouncement from './DeleteAnnouncement';
-import { Fab, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Container, Typography, Box, ExpansionPanelActions, Divider, Button} from '@material-ui/core';
+import {Paper, Fab, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Container, Typography, Box, ExpansionPanelActions, Divider, Button} from '@material-ui/core';
+
+
 
 const useStyles = makeStyles((theme) => ({
   Paper:{
@@ -113,16 +115,9 @@ export default function ViewAnnouncementt() {
           <AddIcon />
         </Fab>
 
-        {/* <WingBlank/>
-        <Fab color="primary" aria-label="add" className={classes.fab2} onClick={() => closeEditAnnouncement(true)}>
-          <AppsIcon />
-        </Fab>
-
-        <Fab color="primary" aria-label="add" className={classes.fab3} onClick={() => closeDeleteAnnouncement(true)}>
-          <DeleteOutlineIcon />
-        </Fab> */}
-      <Box border={1} mx="auto" marginTop="8%" marginBottom="5%" width={'80%'} borderRadius={16} boxShadow={3} bgcolor="#fff" borderColor="#0066CC">
-            <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',marginTop:'2%',color:'#0066CC'}}>公佈欄</Typography>
+       
+      <Paper className={classes.Paper}>
+      <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體',color:"#000000"}}>公佈欄</Typography>
 
 
             <Container maxWidth="sm">
@@ -166,10 +161,7 @@ export default function ViewAnnouncementt() {
             ))}
             
             </Container>
-            <Box mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>
-            
-            {/* </Paper> */}
-            </Box>
+           </Paper>
     {/* 教師發佈公告 */}
     <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>
     
