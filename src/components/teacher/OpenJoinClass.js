@@ -10,7 +10,8 @@ const useStyle = makeStyles(theme => ({
   typo: {
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontFamily: 'Microsoft JhengHei',
   },
   description: {
     marginLeft: 10,
@@ -18,8 +19,10 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
-    padding: 10
+    color: "#582707",
+    padding: 10,
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
   },
   fab: {
     position: "fixed",

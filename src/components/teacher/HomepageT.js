@@ -1,51 +1,32 @@
 import React, {useEffect} from "react";
 import MyMenu from "../teacher/MenuOT";
 import { makeStyles } from "@material-ui/core/styles";
-import {TableCell, Fab, Grid} from "@material-ui/core";
+import {Typography, Fab, Grid} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import { Link } from "react-router-dom";
 import CreateClass from "./createClass";
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+
+// core components
+import Card from "../Card/Card.js";
+import CardHeader from "../Card/CardHeader.js";
+import CardBody from "../Card/CardBody.js";
+import CardFooter from "../Card/CardFooter.js";
+
+
+//import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
+//const useStyles = makeStyles(styles);
+
+
 
 const useStyles = makeStyles((theme) => ({
   div: {
     height:'100hv',
     background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
   },
-  
-  paperclass: {
-    padding: theme.spacing(5),
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 50,
-    marginBottom: 50,
-    textAlign: 'center',
-    backgroundColor: 'white',
-    border: '2px',
-    borderStyle: 'solid',
-    borderColor: 'white',
-    width: '80%',
-    borderRadius: '30pt',
-  },
-
-  
-  card: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: theme.spacing(6),
-    width: 'auto',
-    padding: theme.spacing(3),
-    borderRadius: "25px",
-    borderStyle: "solid",
-    borderColor: "black",
-    border: 1,
-  },
- 
-  classbutton: {
-    width: 500,
-  },
-
   fab: {
     position: 'fixed',
     bottom: theme.spacing(5),
@@ -53,64 +34,69 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:'#582707'
   },
 
-
-  cardaction: {
-    maxWidth: 600,
+  gridbox:{
+    margin:theme.spacing(0),
   },
-  tablecell: {
-    width: '200pt',
-  margin: 'auto',
-  // marginTop: '500pt',
-  // paddingTop: "30pt",
-  // paddingBottom: "30pt",
-  // paddingInline: "30pt",
-  borderColor: "white",
-  fontFamily: 'Microsoft JhengHei',
-  fontWeight: 'bold',
+
+  grid: {
+    padding: "0 15px !important"
+  },
+  cardTitle: {
+    color: "#777",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+    marginBottom: "3px",
+    textDecoration: "none",
+    "& small": {
+     color: "#999",
+      fontWeight: "400",
+      lineHeight: "1"
+    }
+  },
+  cardTitleWhite: {
+    color: "#FFF",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+    fontSize:20,
+    marginBottom: "3px",
+    textDecoration: "none",
+    "& small": {
+      color: "#999",
+      fontWeight: "400",
+      lineHeight: "1"
+    }
+  },
+  Cardtext: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
   },
 }));
 
 export default function HomepageT() {
   const classes = useStyles();
-
   const [Sclass, setClass] = React.useState([]);
-
-  const classList = ["cs_id", "cs_name", "teacher_name"];
+  const [openCreateClass, closeCreateClass] = React.useState(false);
+  
+  const onCloseCreateClass = () => {
+    closeCreateClass(openCreateClass ? false : true);
+  };
 
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(`/teacher/HomePage1_s/one/`);
-
       setClass(result.data);
-      // console.log(result.data);
-      // console.log(result.data[0]['cs_id']);
-
-      // const path ={result.data['cs_id']}
     }
 
     fetchData();
   }, []);
 
-  // const handleSubmit = () => {
-  //   async function getCsid(){
-  //   const csid = await axios.get(`/student/HomePage1_s/one/`);
-  //   setCsid(csid.data);
-  //   let classid = JSON.stringify(csid.data).toString();
-  //   let i;
-  //   for(i=0; i < classid.length; i++)
-  //   {
-  //   console.log(csid.data[i]['cs_id']);
-  //   }
-  // }
-  //   getCsid();
-  // }
-  {
-    /* 新建課程 */
-  }
-  const [openCreateClass, closeCreateClass] = React.useState(false);
-  const onCloseCreateClass = () => {
-    closeCreateClass(openCreateClass ? false : true);
-  };
+  
 
   return (
     <div className={classes.div}>
@@ -124,39 +110,52 @@ export default function HomepageT() {
       </Fab>
       {/* {console.log(Sclass)} */}
       {/* <WingBlank></WingBlank> */}
+
+
       <Grid
         container
         direction="row"
-        justify="center"
-        alignItems="center"
+        justify="flex-start"
+        alignItems="flex-start"
+        className={classes.gridbox}
        >
-      
+         
+         {Sclass.map((classs, index) => (
+        <Grid item xs={12} sm={12} md={4} className={classes.grid}>
+          <Card>
+            <CardActionArea component={Link}
+              to={`/functiont/${classs["cs_id"]}`}>
+            <CardHeader color="warning" >
+            <h1 className={classes.cardTitleWhite}>
+              {index % 2 === 0 ? <MenuBookIcon style={{ fontSize: 30 }} /> : <ImportContactsIcon style={{ fontSize: 30 }} />}
+              {classs["cs_name"]}
+            </h1>
+            </CardHeader>
 
-        
-          {Sclass.map((classs, index) => (
-            // <Card className={classes.card}>
-            <CardActionArea
-              className={classes.card}
-              component={Link}
-              to={`/functiont/${classs["cs_id"]}`}
-            >
-              {console.log(classs)}
-              {classList.map((list, i) => (
-                <TableCell
-                  key={i}
-                  component="th"
-                  scope="row"
-                  align="center"
-                  variant="body"
-                  className={classes.tablecell}
-                >
-                  {classs[list]}
-                </TableCell>
-              ))}
+            <CardBody>
+              <h2 className={classes.cardTitle}>{classs["cs_id"]}</h2>
+              {/* <p className={classes.cardCategory}>
+                <span className={classes.successText}>
+                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                </span>{" "}
+                increase in today sales.
+              </p> */}
+              <h3 className={classes.cardTitle}>{classs["teacher_name"]}</h3>
+            </CardBody>
 
+            {/* <CardFooter chart>
+              <div className={classes.stats}>
+                <AccessTime /> updated 4 minutes ago
+              </div>
+            </CardFooter> */}
             </CardActionArea>
-          ))}
-      </Grid>
+          </Card>
+        </Grid>
+        ))}
+        </Grid>
+
+
+
       {/* 教師新建課程 */}
       <CreateClass open={openCreateClass} handleClose={onCloseCreateClass} />
     </div>

@@ -3,10 +3,14 @@ import axios from 'axios';
 import ComButton from "../../../ComButton";
 import {useParams} from "react-router-dom";
 import { usePosition } from 'use-position';
+
+import { v4 as uuidv4 } from 'uuid';
+
 import MuiAlert from "@material-ui/lab/Alert";
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
 import {IconButton, Snackbar, Toolbar, AppBar, Grid, Slide, Backdrop, Dialog, Button} from "@material-ui/core";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -50,13 +54,17 @@ function Alert(props) {
 }
 
 export default function GPS() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const [uujoinID,setuujoinID] = React.useState(uuidv4);
+
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
   const [clicked, setClicked] = React.useState(true);
+
   const params = useParams();
   // console.log(params);
 
@@ -108,18 +116,45 @@ export default function GPS() {
               console.log(2);
               // setQrcode(null);   
           }
-          
-          
-      } fetchres() })
-        .then(res => {
-        async function fetchData() {
-          const result = await axios.get(`/teacher/rollcall/findRCID/1/`)
-          setRcid(result.data[0]["rc_id"]);
-        
-          console.log(result.data[0]["rc_id"]);
-          }
-          fetchData()
+
+          // rc_inputsource:inputs.way,
+          qrcode: uujoinID,
+          // @ts-ignore
+          cs_id: params.cs_id,
+          rc_inputsource: 'GPS點名',
+          gps_point: latitude + "," + longitude,
       })
+  })
+  .then(res => {
+                    
+    async function fetchres(){
+    const rq = await res.text();  //接收後端傳來的訊息
+    if (rq === 'request failed. teacher not in this class!')
+    {
+        alert("點名失敗! 您不是此課程的老師!");
+        console.log(1);
+        
+    }
+    else if(rq === "request successful! the rollcall has already added!") 
+    {
+        alert("點名成功!");
+        console.log(2);
+        // setQrcode(null);   
+    }
+    
+    
+} fetchres() })
+  .then(res => {
+  async function fetchData() {
+    const result = await axios.get(`/teacher/rollcall/findRCID/${uujoinID}/`)
+    
+    setRcid(result.data[0]["rc_id"]);
+  
+    console.log(result.data[0]["rc_id"]);
+    }
+    fetchData()
+})
+
     
 
   }
