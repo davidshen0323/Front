@@ -66,7 +66,7 @@ export default function Hand() {
               'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-              qrcode:"12345",
+              qrcode:uujoinID ,
               gps_point:latitude + ","  + longitude,
               // rc_inputsource:inputs.way,
               cs_id: params.cs_id,
