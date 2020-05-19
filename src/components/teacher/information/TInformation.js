@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
-import { Table, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
+import axios from 'axios';
 import MyMenu from '../MenuOT';
 import EditEmail from './editEmail';
 import EditPhone from './editPhone';
-import EditPassword from'./editPassword';
 import UploadImg from './uploadImg';
-import axios from 'axios';
+import EditPassword from'./editPassword';
 import { makeStyles } from "@material-ui/styles";
-import Paper from '@material-ui/core/Paper';
-import TableContainer from '@material-ui/core/TableContainer';
+import {TableContainer, Paper, Table, TableRow, TableCell, Button } from '@material-ui/core';
 
 
 const useStyle = makeStyles(theme => ({

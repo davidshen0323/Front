@@ -185,13 +185,8 @@ const handleChange = fieldname => event => {
         }
 
   return (
-    <div>
-      <Button
-      onClick={handleOpenButton}
-      >
-      修改
-      </Button>
-    
+    <div> 
+      <Button onClick={handleOpenButton}>修改</Button>
     <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
@@ -227,7 +222,7 @@ const handleChange = fieldname => event => {
       renderInput={(params) => <TextField {...params} label="搜尋公告" variant="outlined" />}
     /> */}
         <Typography className={classes.typo} variant="body1">
-            該公告id為：{props.atid}
+            該公告ID為：{props.atid}
           </Typography>
           <Typography className={classes.typo} variant="body1">
             更改公告名稱為：
