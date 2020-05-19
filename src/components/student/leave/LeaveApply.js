@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import ButtonBases from './ButtonBases';
 import Buttons from './Buttons';
-import Score from '../Score';
+import Score from './Score';
 import TextField from '@material-ui/core/TextField';
 
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -30,7 +30,7 @@ import {
 } from '@material-ui/pickers';
 
 
-import ComButton from "./ComButton";
+import ComButton from "../../ComButton";
 import { withStyles } from '@material-ui/core/styles';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -85,7 +85,7 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
 
 
 
-export default function InputTasksForm() {
+export default function LeaveApply() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = React.useState(new Date('2020-3-20T21:11:54'));
   const handleDateChange = date => {
