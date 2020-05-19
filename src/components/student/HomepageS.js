@@ -8,88 +8,78 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import {Link} from "react-router-dom";
 import JoinClass from '../student/joinClass';
 
-const useStyles = makeStyles(theme => ({
-    
-    div: {
-      height:'100hv',
-      background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
-    },
-    
-    paperclass: {
-      padding: theme.spacing(5),
-      marginLeft: "auto",
-      marginRight: "auto",
-      marginTop: 50,
-      marginBottom: 50,
-      textAlign: 'center',
-      backgroundColor: 'white',
-      border: '2px',
-      borderStyle: 'solid',
-      borderColor: 'white',
-      width: '80%',
-      borderRadius: '30pt',
-    },
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+// core components
+import Card from "../Card/Card.js";
+import CardHeader from "../Card/CardHeader.js";
+import CardBody from "../Card/CardBody.js";
 
-    
-    card: {
-      //marginLeft: theme.spacing(10),
-      // marginTop: theme.spacing(3),
-      maxWidth: '80%',
-      margin: theme.spacing(3),
-      width: 'auto',
-      padding: theme.spacing(3),
-      borderRadius: "25px",
-      borderStyle: "solid",
-      borderColor: "black",
-      border:1,
-    },
-   
-    classbutton: {
-      width: 500,
-    },
+const useStyles = makeStyles((theme) => ({
+  div: {
+    height:'100hv',
+    background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+  },
+  fab: {
+    position: 'fixed',
+    bottom: theme.spacing(5),
+    right: theme.spacing(5),
+    backgroundColor:'#582707'
+  },
 
-    fab: {
-      position: 'fixed',
-      bottom: theme.spacing(5),
-      right: theme.spacing(5),
-      backgroundColor:'#582707'
-    },
+  gridbox:{
+    margin:theme.spacing(0),
+  },
 
-
-    cardaction: {
-      maxWidth: 600,
-    },
-    tablecell: {
-      width: '200pt',
-    margin: 'auto',
-    // marginTop: '500pt',
-    // paddingTop: "30pt",
-    // paddingBottom: "30pt",
-    // paddingInline: "30pt",
-    borderColor: "white",
+  grid: {
+    padding: "0 15px !important"
+  },
+  cardTitle: {
+    color: "#777",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
-    },
-  }));
+    marginBottom: "3px",
+    textDecoration: "none",
+    "& small": {
+     color: "#999",
+      fontWeight: "400",
+      lineHeight: "1"
+    }
+  },
+  cardTitleWhite: {
+    color: "#FFF",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+    fontSize:20,
+    marginBottom: "3px",
+    textDecoration: "none",
+    "& small": {
+      color: "#999",
+      fontWeight: "400",
+      lineHeight: "1"
+    }
+  },
+  Cardtext: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
+  },
+}));
 
 export default function HomepageS() {
-
   const classes = useStyles();
-
   const [Sclass, setClass] = React.useState([]);
-  
-
   const classList = ['cs_id','cs_name','teacher_name'];
   
   useEffect(() => {
     async function fetchData() {
       const result  = await axios.get(`/student/HomePage1_s/one/`)
-      
       setClass(result.data);
-      // console.log(result.data);
-      // console.log(result.data[0]['cs_id']);
-      
-      // const path ={result.data['cs_id']}
     }
     
     fetchData();
@@ -123,45 +113,53 @@ export default function HomepageS() {
     <MyMenu />
 
      {/* 加入課程 */}
-     <Fab style={{color:'#ffffff'}} aria-label="add" className={classes.fab} onClick={() => closeJoinClass(true)}>
+     <Fab style={{color:'#ffffff'}} aria-label="add" className={classes.fab} 
+          onClick={() => closeJoinClass(true)}>
           <AddIcon />
         </Fab>
       {/* {console.log(Sclass)} */}
          
-          <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          >
+      <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+        className={classes.gridbox}
+       >
+         
+         {Sclass.map((classs, index) => (
+        <Grid item xs={12} sm={12} md={4} className={classes.grid}>
+          <Card>
+            <CardActionArea component={Link}
+              to={`/functions/${classs["cs_id"]}`}>
+            <CardHeader color="warning" >
+            <h1 className={classes.cardTitleWhite}>
+              {index % 2 === 0 ? <MenuBookIcon style={{ fontSize: 30 }} /> : <ImportContactsIcon style={{ fontSize: 30 }} />}
+              {classs["cs_name"]}
+            </h1>
+            </CardHeader>
 
-              {Sclass.map((classs,index) => (
+            <CardBody>
+              <h2 className={classes.cardTitle}>{classs["cs_id"]}</h2>
+              {/* <p className={classes.cardCategory}>
+                <span className={classes.successText}>
+                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                </span>{" "}
+                increase in today sales.
+              </p> */}
+              <h3 className={classes.cardTitle}>{classs["teacher_name"]}</h3>
+            </CardBody>
 
-            <CardActionArea 
-            className={classes.card} 
-            component={Link} 
-            to={`/functions/${classs["cs_id"]}`}>
-                        {console.log(classs)}
-
-                        {
-                          classList.map( (list, i) =>
-                          <TableCell 
-                          key={i} 
-                          component="th" 
-                          scope="row" 
-                          align="center"
-                          variant="body" 
-                          className={classes.tablecell}>
-                            {classs[list]}
-                          </TableCell>
-                          )
-                        }
+            {/* <CardFooter chart>
+              <div className={classes.stats}>
+                <AccessTime /> updated 4 minutes ago
+              </div>
+            </CardFooter> */}
             </CardActionArea>
-                       
-                      ))}     
-            
-        
-      </Grid>
+          </Card>
+        </Grid>
+        ))}
+        </Grid>
       {/* 學生加入課程 */}
       <JoinClass open={openJoinClass} handleClose={onCloseJoinClass}/>
 

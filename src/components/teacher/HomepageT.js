@@ -7,6 +7,7 @@ import axios from "axios";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import { Link } from "react-router-dom";
 import CreateClass from "./createClass";
+
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 
@@ -14,13 +15,6 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import Card from "../Card/Card.js";
 import CardHeader from "../Card/CardHeader.js";
 import CardBody from "../Card/CardBody.js";
-import CardFooter from "../Card/CardFooter.js";
-
-
-//import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
-//const useStyles = makeStyles(styles);
-
-
 
 const useStyles = makeStyles((theme) => ({
   div: {
@@ -107,7 +101,7 @@ export default function HomepageT() {
         onClick={() => closeCreateClass(true)}
       >
         <AddIcon />
-      </Fab>
+      </Fab>    
       {/* {console.log(Sclass)} */}
       {/* <WingBlank></WingBlank> */}
 
