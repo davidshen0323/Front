@@ -25,22 +25,9 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(5),
     right: theme.spacing(5),
     backgroundColor: '#582707',
+    zIndex:10,
   },
-  // fab2: {
-  //   position: 'fixed',
-  //   bottom: theme.spacing(15),
-  //   right: theme.spacing(5),
-  //   backgroundColor: '#582707',
-
-  // },
-  // fab3: {
-  //   position: 'fixed',
-  //   bottom: theme.spacing(25),
-  //   right: theme.spacing(5),
-  //   backgroundColor: '#582707',
-
-  // },
-
+ 
   div: {
     height:'100vh',
     background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
@@ -165,9 +152,7 @@ export default function ViewAnnouncementt() {
     {/* 教師發佈公告 */}
     <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>
     
-    {/* <EditAnnouncement open={openEditAnnouncement} handleClose={onCloseEditAnnouncement}/>
-    
-    <DeleteAnnouncement open={openDeleteAnnouncement} handleClose={onCloseDeleteAnnouncement}/> */}
+   
     </div>
     
   );

@@ -7,11 +7,13 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import  {Typography, TextareaAutosize, TextField} from '@material-ui/core';
+import {Snackbar, Typography, TextareaAutosize, TextField} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {brown} from '@material-ui/core/colors';
 import {Fab} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import MuiAlert from "@material-ui/lab/Alert";
+
 
 const styles = (theme) => ({
   root: {
@@ -65,7 +67,8 @@ const useStyles = makeStyles(theme => ({
         position: "fixed",
         bottom: theme.spacing(5),
         right: theme.spacing(5),
-        backgroundColor:brown[500]
+        backgroundColor:"#582707",
+        zIndex:10,
       },
       typoHeading: {
         color: "#582707",
@@ -73,7 +76,7 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Microsoft JhengHei',
       },
       TextField:{
-          width:'275px',
+          width:'100%',
       },
       text:{
         height:'60px',
@@ -83,14 +86,19 @@ const useStyles = makeStyles(theme => ({
 
 
 
-
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 export default function Apply(props) {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-
-    const [inputs, setInputs] = React.useState({
-        std_id: '',  
-    });
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  // 成功小綠綠
+  const [openS, setOpenS] = React.useState(false);
+  // 失敗小紅1
+  const [openErr1, setOpenErr1] = React.useState(false);
+  const [inputs, setInputs] = React.useState({
+      std_id: '',  
+  });
   
 
   const handleClickOpen = () => {
@@ -104,12 +112,16 @@ export default function Apply(props) {
     event.persist();
     setInputs(inputs => ({...inputs, [fieldname]: event.target.value }));
   }
-
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    inputs.std_id='';
+  };  
   const handleSubmit = () =>{
-    setOpen(false);
+    // setOpen(false);
     console.log("stdid",inputs.std_id);
     console.log("csid",props.csid);
-    fetch('/teacher/Addstudent',{
+    fetch('/teacher/Addstudent/',{
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
@@ -118,8 +130,26 @@ export default function Apply(props) {
           std_id:inputs.std_id,
           cs_id:props.csid,
       })
-  })
-  window.location.reload();
+  }).then(res => {
+
+    async function fetchres(){
+    const test = await res.text();
+    if(test ==="新增此學生成功")
+    {
+        //alert("成功!");
+        setOpenS(true);
+        setOpenErr1(false);
+        console.log(1);
+        window.location.reload();
+    }
+    else
+    {
+        //alert("失敗!");
+        setOpenErr1(true);
+        setOpenS(false);
+        console.log(0);
+    }
+} fetchres() })
   };
 
   return (
@@ -186,6 +216,18 @@ export default function Apply(props) {
         </DialogActions>
 
       </Dialog>
+      {/* 成功小綠框 */}
+      <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="success">
+            成功新增學生！
+          </Alert>
+      </Snackbar>
+      {/* 失敗小紅框1 */}
+      <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="error">
+            請重新確認學號是否正確！
+          </Alert>
+      </Snackbar>
     </div>
   );
 }

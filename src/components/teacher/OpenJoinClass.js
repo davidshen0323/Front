@@ -29,7 +29,8 @@ const useStyle = makeStyles(theme => ({
     bottom: '5%',
     right: "5%",
     opacity: '100%',
-    backgroundColor:'#582707'
+    backgroundColor:'#582707',
+    zIndex:10,
   },
 }));
 
