@@ -1,21 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import Backdrop from '@material-ui/core/Backdrop';
-import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-import ComButton from "../../../ComButton";
-import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import {useParams} from "react-router-dom";
-import { usePosition } from 'use-position';
 import axios from 'axios';
 import {useState,useEffect} from 'react';
+import ComButton from "../../../ComButton";
+import {useParams} from "react-router-dom";
+import { usePosition } from 'use-position';
+import MuiAlert from "@material-ui/lab/Alert";
+import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from '@material-ui/core/styles';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import {Typography, Toolbar, AppBar, Grid, IconButton, Slide, Backdrop, Snackbar, Dialog, Button} from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -55,10 +49,21 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function GPS() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [gps,setGps] = React.useState([]);
+  // 成功小綠綠
+  const [openS, setOpenS] = React.useState(false);
+  // 失敗小紅1
+  const [openErr1, setOpenErr1] = React.useState(false);
+  // 失敗小紅2
+  const [openErr2, setOpenErr2] = React.useState(false);  
+  const [clicked, setClicked] = React.useState(true);
   
   useEffect(() => {
     async function fetchData() {
@@ -108,19 +113,27 @@ export default function GPS() {
     const rq = await res.text();  //接收後端傳來的訊息
     if (rq === 'request failed. This rollcall was closed by teacher!')
     {
-        alert("點名失敗! 老師已關閉點名!");
+        //alert("點名失敗! 老師已關閉點名!");
+        setOpenErr1(true);
+        setOpenErr2(false);
+        setClicked(false);
         console.log(1);
         
     }
     else if(rq === 'request failed. GPS point distance too far!') 
     {
-        alert("點名失敗! 您不再範圍內!");
+        //alert("點名失敗! 您不再範圍內!");
+        setOpenErr2(true);
+        setOpenErr1(false);
+        setClicked(false);
         console.log(2);
         // setQrcode(null);   
     }
     else if(rq === 'request successful! the GPS rollcall record has already added!') 
     {
-        alert("點名成功!");
+        //alert("點名成功!");
+        setOpenS(true);
+        setClicked(false);
         console.log(3);
         // setQrcode(null);   
     }
@@ -136,9 +149,13 @@ export default function GPS() {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+  }; 
   const handleClose = () => {
     setOpen(false);
+    setClicked(true);
   };
 
 
@@ -176,7 +193,7 @@ export default function GPS() {
           />
         </Grid>
     <Grid item  xs={12}>
-      <Button onClick={handleSubmit}   className={classes.button}>
+      <Button disabled={clicked===false} onClick={handleSubmit} className={classes.button}>
     我要點名!
 </Button>
         
@@ -188,6 +205,24 @@ export default function GPS() {
 
         
       </Dialog>
+      {/* 成功小綠框 */}
+      <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="success">
+            點名成功！
+          </Alert>
+      </Snackbar>
+      {/* 失敗小紅框1 */}
+      <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="error">
+            點名失敗！老師已關閉點名！
+          </Alert>
+      </Snackbar>
+      {/* 失敗小紅框2 */}
+      <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="error">
+            點名失敗！您不在範圍內！
+          </Alert>
+      </Snackbar>      
     </div>
   );
 }

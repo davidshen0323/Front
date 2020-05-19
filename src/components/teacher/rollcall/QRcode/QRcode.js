@@ -48,7 +48,6 @@ export default function Qrcode() {
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
   const [clicked, setClicked] = React.useState(true);
-
   const params = useParams();
   
   // console.log(params.cs_id);
