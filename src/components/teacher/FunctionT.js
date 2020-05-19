@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
         height: 300,
         marginTop: 30,
         marginBottom: 20,
+        zIndex:-1,
         marginLeft: 'auto',
         marginRight: 'auto',
         // borderColor: 'red',

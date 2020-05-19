@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     bottom: theme.spacing(5),
     right: theme.spacing(5),
-    backgroundColor:'#582707'
+    backgroundColor:'#582707',
+    zIndex:10,
   },
 
   gridbox:{
