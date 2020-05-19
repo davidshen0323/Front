@@ -82,7 +82,7 @@ export default function GPS() {
       body: JSON.stringify({
           
           // rc_inputsource:inputs.way,
-          qrcode: uujoinID, 
+          qrcode: uujoinID,
           // @ts-ignore
           cs_id: params.cs_id,
           rc_inputsource: 'GPS點名',

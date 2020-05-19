@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    minWidth:375,
+    //minWidth:375,
     width: '100%',
   },
   image: {
@@ -69,7 +69,7 @@ export default function ComButton(props) {
   
   return (
     // <Grid item xs sm>
-      <div className={classes.root}>
+      <div >
 
       {/* {images.map(image => ( */}
       

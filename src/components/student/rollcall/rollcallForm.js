@@ -34,9 +34,10 @@ const useStyles = makeStyles(theme => ({
             paddingTop:10,
     },
     card: {
-      width:'100%',
-      height: '100%',
-      margin: 5,
+      width:220,
+      height: 220,
+      margin: 'auto',
+      borderRadius:20,
       //marginTop: 30,
       //marginLeft: 'auto',
       //marginRight: 'auto',

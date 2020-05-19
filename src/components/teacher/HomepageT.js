@@ -121,7 +121,7 @@ export default function HomepageT() {
               to={`/functiont/${classs["cs_id"]}`}>
             <CardHeader color="warning" >
             <h1 className={classes.cardTitleWhite}>
-              {index % 2 === 0 ? <MenuBookIcon style={{ fontSize: 30 }} /> : <ImportContactsIcon style={{ fontSize: 30 }} />}
+              {index % 2 === 0 ? <MenuBookIcon style={{ fontSize: 30,paddingRight:10 }} /> : <ImportContactsIcon style={{ fontSize: 30,paddingRight:10 }} />}
               {classs["cs_name"]}
             </h1>
             </CardHeader>
