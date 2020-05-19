@@ -65,7 +65,9 @@ function InputName(props) {
               {props.inputName}
             </div>
         )
-    }
+    };
+
+
 
 
 
@@ -91,6 +93,23 @@ export default function LeaveApply() {
     event.persist();
     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));   
 }
+
+const handleSubmit = () =>{
+  //      console.log(props.id);
+  //      console.log(inputs.tl_content);
+  //      console.log(inputs.typeid);
+        fetch('/student/takeleave',{
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+          //    rc_id:props.id,
+              tl_content:inputs.tl_content,
+              tl_type_id:inputs.typeid,
+          })
+      })
+      };
 
   return (
     <div>
@@ -156,8 +175,16 @@ export default function LeaveApply() {
                     style={{borderRadius:5,fontFamily:'微軟正黑體',width:230,height:35}} placeholder="請詳述請假事由"
                     value={inputs.tl_content}
                     onChange={handleChange('tl_content')}/>
-                </Typography>   
+                   
 
+              
+              <Button  
+                // disabled={inputs===2 ? false : true} 
+                onClick={handleSubmit}
+                color="primary" autoFous>確認送出
+              </Button>
+              
+              </Typography>
               </div>
             </Grid>
           </Grid>
