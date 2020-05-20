@@ -117,6 +117,7 @@ export default function Apply(props) {
           tl_type_id:inputs.typeid,
       })
   })
+  window.location.reload();
   };
 
   return (

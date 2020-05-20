@@ -63,6 +63,9 @@ export default function Qrcode() {
   const [openErr1, setOpenErr1] = React.useState(false);
   // 失敗小紅1
   const [openErr2, setOpenErr2] = React.useState(false);
+  // 失敗小紅3
+  const [openErr3, setOpenErr3] = React.useState(false);
+
   const [inputs, setInputs] = React.useState({
     cs_id:'',
   
@@ -86,7 +89,7 @@ export default function Qrcode() {
    const ErrClose = () => {
     setOpenS(false);
     setOpenErr1(false);
-    
+    setChange(0);
   };  
    function handleError (err) {
      console.error(err);
@@ -133,6 +136,8 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
   {
       //alert("點名失敗! 老師已關閉點名!");
       setOpenErr1(true);
+      setOpenErr2(false);
+      setOpenErr3(false);
       console.log(1);
       
   }
@@ -140,17 +145,27 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
   {
       //alert("點名成功!");
       setOpenS(true);
+      setOpenErr1(false);
+      setOpenErr2(false);
+      setOpenErr3(false);
       console.log(2);
       window.location.reload();
       // setQrcode(null);   
-    }
-    else
+  }
+  else if(rq === "request failed. GPS point distance too far!")
     {
+      setOpenErr1(false);
+      setOpenErr2(false);
+      setOpenErr3(true);
+      console.log(3);
+    }
+  else
+  {
         //alert("QRcode不存在!");
         setOpenErr2(true);
-        console.log(2);
+        console.log(4);
         // setQrcode(null);   
-      }
+  }
     
     
   } fetchres() })
@@ -204,7 +219,7 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
        
         <DialogActions>
 
-        <Button disabled={change===0 ? true : false} onClick={submitClick} color="primary" >我要點名!</Button>
+        <Button disabled={change===0 ? true : false} onClick={submitClick} color="primary" className={classes.button}>我要簽到!</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
             <Alert severity="success">
@@ -221,6 +236,12 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
         <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
             <Alert severity="error">
               QRcode不存在！
+            </Alert>
+        </Snackbar>
+          {/* 失敗小紅框3 */}
+        <Snackbar open={openErr3} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+            <Alert severity="error">
+              距離太遠囉！
             </Alert>
         </Snackbar>
 

@@ -67,7 +67,7 @@ export default function GPS() {
   
   useEffect(() => {
     async function fetchData() {
-        const result = await axios.get(`/student/rollcall/allGPSRollcall/${params.cs_id}`);
+        const result = await axios.get(`/student/rollcall/newlyGPSRollcall/${params.cs_id}/`);
         
         console.log(result.data);
         // if(result.data['rc_end'] === 0)
@@ -95,15 +95,15 @@ export default function GPS() {
       const handleSubmit = () => {
         
         console.log(gps)
-        gps.map( (gpslist, index) => gpslist["rc_end"] === 0 ?
         
-      fetch('/student/rollcall/GPSRollcall',{
+        
+      fetch('/student/rollcall/GPSRollcall/',{
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          rc_id: gpslist['rc_id'],
+          rc_id: gps['rc_id'],
           gps_point: latitude + ","  + longitude
       })
   })
@@ -111,12 +111,13 @@ export default function GPS() {
                     
     async function fetchres(){
     const rq = await res.text();  //接收後端傳來的訊息
+    console.log(rq);
     if (rq === 'request failed. This rollcall was closed by teacher!')
     {
         //alert("點名失敗! 老師已關閉點名!");
         setOpenErr1(true);
         setOpenErr2(false);
-        setClicked(false);
+        // setClicked(false);
         console.log(1);
         
     }
@@ -125,25 +126,32 @@ export default function GPS() {
         //alert("點名失敗! 您不再範圍內!");
         setOpenErr2(true);
         setOpenErr1(false);
-        setClicked(false);
+        // setClicked(false);
         console.log(2);
         // setQrcode(null);   
     }
     else if(rq === 'request successful! the GPS rollcall record has already added!') 
     {
         //alert("點名成功!");
+        console.log(3.0);
         setOpenS(true);
+        console.log(3.1);
+        setOpenErr1(false);
+        console.log(3.2);
+        setOpenErr2(false);
+        console.log(3.3);
         setClicked(false);
-        console.log(3);
+        console.log(3.4);
         // setQrcode(null);   
+    }
+    else{
+      console.log(4)
     }
     
     
 } fetchres() })
       
-      :
-      <div></div>
-      )
+      
   }
 
   const handleClickOpen = () => {
@@ -152,6 +160,7 @@ export default function GPS() {
   const ErrClose = () => {
     setOpenS(false);
     setOpenErr1(false);
+    setOpenErr2(false);
   }; 
   const handleClose = () => {
     setOpen(false);
@@ -194,7 +203,7 @@ export default function GPS() {
         </Grid>
     <Grid item  xs={12}>
       <Button disabled={clicked===false} onClick={handleSubmit} className={classes.button}>
-    我要點名!
+    我要簽到!
 </Button>
         
     </Grid>    
@@ -226,5 +235,3 @@ export default function GPS() {
     </div>
   );
 }
-
-

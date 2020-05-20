@@ -100,7 +100,7 @@ export default function RegisterS() {
         
     }
 
-    let post; //宣告一個布林值變數
+    
     let history = useHistory(); //傳值跳頁的方法
     const handleSubmit = () =>
     {
@@ -137,35 +137,53 @@ export default function RegisterS() {
                     if (test === "This account has already exist!") //帳號已註冊過
                     {
                         //alert("已註冊過!");
+                        setOpenS(false);
                         setOpenErr1(true);
-                        post = false;
+                        setOpenErr2(false);
+                        setOpenErr3(false);
+                        setOpenErr4(false);
+                        
                         console.log(1);
-                        return post;
+                        
                     }
                     else if(test === "request failed. Email format error!") //信箱不包含@
                     {
                         //alert("信箱格式有誤! 請輸入有效信箱!");
+                        setOpenS(false);
+                        setOpenErr1(false);
                         setOpenErr2(true);
-                        post = false;
+                        setOpenErr3(false);
+                        setOpenErr4(false);
+                        
                         console.log(2);
-                        return post;
+                        
                     }
                     else if(inputs.user.length !== 9) //學號長度不等於9
                     {
                         //alert("學號長度有誤! 請再次確認!");
+                        setOpenS(false);
+                        setOpenErr1(false);
+                        setOpenErr2(false);
                         setOpenErr3(true);
-                        post = false;
+                        setOpenErr4(false);
+                        
                         console.log(3);
-                        return post;
+                        
                     }
                     else
                     {
                         //alert("註冊成功!");
                         setOpenS(true);
-                        post = true;
+                        setOpenErr1(false);
+                        setOpenErr2(false);
+                        setOpenErr3(false);
+                        setOpenErr4(false);
+                        
                         console.log(0);
-                        history.push("/login");
-                        return post;                        
+                        // history.push("/login");
+                        window.location.href = "/login";
+
+                                                
                     }
                     
                 } fetchres() })
@@ -177,6 +195,10 @@ export default function RegisterS() {
             else
             {
                 //alert("請再次確認!!")
+                setOpenS(false);
+                setOpenErr1(false);
+                setOpenErr2(false);
+                setOpenErr3(false);
                 setOpenErr4(true);
             }
 

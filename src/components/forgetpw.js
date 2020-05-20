@@ -78,19 +78,64 @@ const handleChange = fieldname => event => {
     inputs.mail='';
     inputs.phone='';
   };  
-  const handleSubmit = () =>
-  
-  {
-    
+  const handleSubmit = () => {
     setbtnClose(false);
     setOpenErr2(true);
-
     
-      console.log(inputs.id)
-      console.log(inputs.mail);
-      console.log(inputs.phone);
-      
-        fetch('/sendStudentEmailWithNewPassword/',{
+    
+    console.log(inputs.id)
+    console.log(inputs.mail);
+    console.log(inputs.phone);
+
+    if(inputs.id.length === 5 
+      && inputs.mail.length > 0
+      && inputs.phone.length > 0)
+      {
+    
+        fetch('/sendTeacherEmailWithNewPassword/',{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                teacher_id: inputs.id,
+                teacher_mail: inputs.mail,
+                teacher_phone: inputs.phone,
+            })
+        })
+        .then(res => {
+
+            async function fetchres(){
+            const test = await res.text();
+            if(test ==="request failed. Email or Phone Number has round!")
+            {
+                //alert("請重新確認及填寫資料!");
+                setOpenErr2(false);
+                setOpenErr1(true);
+                put = false;
+                console.log(1);
+                return put;
+            }
+            else
+            {
+                //alert("填寫成功!");
+                setOpenS(true);
+                setOpenErr1(false);
+                setOpenErr2(false);
+                put = true;
+                console.log(0);
+                history.push("/login");
+                return put;                        
+            }
+        } fetchres() })
+        .then(res => console.log(res))
+        .catch(err => console.log(`Error with message: ${err}`))
+      }
+      else if(inputs.id.length === 9
+        && inputs.mail.length > 0
+        && inputs.phone.length > 0)
+        {
+          fetch('/sendStudentEmailWithNewPassword/',{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -128,14 +173,13 @@ const handleChange = fieldname => event => {
         } fetchres() })
         .then(res => console.log(res))
         .catch(err => console.log(`Error with message: ${err}`))
-   //  else
-      //       {
-      //            alert("請再次確認2!!")
-      //       }    
-        
-      //  }     
-
-  }
+        }
+        else
+        {
+          setOpenErr1(true);
+        }
+    }     
+  
       
   return (
     <div >
@@ -161,7 +205,7 @@ const handleChange = fieldname => event => {
           <TextField
           autoFocus
           id="id"
-          label="學號"
+          label="帳號"
           variant="outlined"
           size="small"
           className={classes.block}

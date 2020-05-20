@@ -99,19 +99,29 @@ export default function QAlist_S() {
 
   const [question, setQuestion] = React.useState([]);
   
-  const questionlist = ['q_std_id','q_content','q_asktime', 'q_sovled'];
+
+  const questionlist = ['q_std_id','q_content','q_asktime', 'q_asktime'];
   const solved_qlist = ['q_std_id','q_content','q_replytime','q_reply'];
 
+  const [stdid, setStdid] = React.useState(0);
 
   useEffect(() => {
     async function fetchData() {
-      const result  = await axios.get(`/student/question/all/${csid}`)
+      const result  = await axios.get(`/student/question/all/${csid}/`)
       setQuestion(result.data);
       console.log(result.data);
     
     }
+    async function fetchStdid() {
+      const result = await axios.get(`/student/std_id`);
+      // setStdid(result.data);
+      setStdid(result.data['std_id']);
+      console.log(result.data);
+      console.log(stdid);
+  }
     
     fetchData();
+    fetchStdid();
   }, []);
 
   const [open, setOpen] = React.useState(false);
@@ -130,6 +140,50 @@ export default function QAlist_S() {
     closeAddQa(openAddQa ? false : true);
   };
   
+//   const handleDelete = () => {
+//     fetch(`/student/deletequestioncontent/`,{
+//       method: 'DELETE',
+//       headers: {
+//           'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         std_id: stdid,
+//         q_asktime:  ,
+//   })
+//  })
+//  window.location.reload();
+
+//   }
+
+const deletequestion = (event,id) => {
+  const QuesIndex = question.findIndex( s => s.q_asktime == id)
+  var newlist = [...question]
+
+  setQuestion(newlist)
+  handleDelete(question[QuesIndex])
+  console.log('newlist', question[QuesIndex])
+}
+
+const handleDelete = (qstudent) =>
+ {
+
+   console.log('qstudent',qstudent['q_asktime'])
+   console.log('stdid',stdid)
+   console.log('qstdid',qstudent["q_std_id"])
+
+      fetch(`/student/deletequestioncontent/`,{
+          method: 'DELETE',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            q_std_id: qstudent.q_std_id,
+            q_asktime: qstudent.q_asktime,
+      })
+     })
+     window.location.reload();
+    }
+
   
 
   return (
@@ -174,7 +228,7 @@ export default function QAlist_S() {
             {question.map((Ques,index) => Ques["q_solved"] === "0" ?
             (
                 <TableRow key={index}>
-                 {/* <TableCell>{index+1}</TableCell> */}
+                 
                   {
                     questionlist.map( (list, i) => i<3 ?
                     
@@ -182,10 +236,16 @@ export default function QAlist_S() {
                       {Ques[list]}
                      </TableCell>
                      :
-                     <TableCell>
-                      <IconButton>
-                        <CloseIcon/>
-                      </IconButton>
+                       <TableCell>
+                     {
+                       Ques['q_std_id'] === stdid ?
+                       <IconButton>
+                          <CloseIcon onClick={(e)=>deletequestion(e,Ques.q_asktime)}/>
+                        </IconButton>
+                            :
+                            <div style={{padding:20}}></div>
+                     }
+                     
                      </TableCell>
                     )
                     }

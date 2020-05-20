@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         opacity: 0,
       },
       '& $imageTitle': {
-        border: '4px solid currentColor',
+        border: '0px solid currentColor',
       },
     },
   },
@@ -59,7 +59,13 @@ const useStyles = makeStyles(theme => ({
   },
   imageTitle: {
     position: 'relative',
+    marginTop: 150,
     padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
+    color: '#582707',
+    fontweight: 'bold',
+    fontFamily: 'Microsoft JhengHei',
+    fontSize:20,
+
   },
   
 }));

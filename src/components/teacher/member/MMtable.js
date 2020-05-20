@@ -178,7 +178,7 @@ export default function MemberTable( props ) {
 
 
   const deletstudent=(event,id)=>{
-    const stuIndex = students.findIndex(s=>s.std_id=id)
+    const stuIndex = students.findIndex(s=>s.std_id==id)
     handleDelete(students[stuIndex])
     console.log('stuIndex',students[stuIndex])
   }
