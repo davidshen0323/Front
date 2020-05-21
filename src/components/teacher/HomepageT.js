@@ -33,13 +33,14 @@ const useStyles = makeStyles((theme) => ({
   },
 
   grid: {
-    padding: "0 15px !important"
+    padding: "0 15px !important",
   },
   cardTitle: {
     color: "#777",
     marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
+    fontSize:16,
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
     marginBottom: "3px",
@@ -121,20 +122,20 @@ export default function HomepageT() {
               to={`/functiont/${classs["cs_id"]}`}>
             <CardHeader color="warning" >
             <h1 className={classes.cardTitleWhite}>
-              {index % 2 === 0 ? <MenuBookIcon style={{ fontSize: 30,paddingRight:10 }} /> : <ImportContactsIcon style={{ fontSize: 30,paddingRight:10 }} />}
+              {index % 2 === 0 ? <MenuBookIcon style={{ fontSize: 30,paddingRight:20 }} /> : <ImportContactsIcon style={{ fontSize: 30,paddingRight:20 }} />}
               {classs["cs_name"]}
             </h1>
             </CardHeader>
 
             <CardBody>
-              <h2 className={classes.cardTitle}>{classs["cs_id"]}</h2>
+              <h3 className={classes.cardTitle}>{classs["cs_id"]}</h3>
               {/* <p className={classes.cardCategory}>
                 <span className={classes.successText}>
                   <ArrowUpward className={classes.upArrowCardCategory} /> 55%
                 </span>{" "}
                 increase in today sales.
               </p> */}
-              <h3 className={classes.cardTitle}>{classs["teacher_name"]}</h3>
+              <h5 className={classes.cardTitle}>{classs["teacher_name"]}</h5>
             </CardBody>
 
             {/* <CardFooter chart>
