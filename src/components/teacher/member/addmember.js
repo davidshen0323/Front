@@ -209,10 +209,10 @@ export default function Apply(props) {
         </DialogContent>
 
         <DialogActions>
-        <Button onClick={handleClose} color="secondary" autoFous>關閉視窗</Button>
+        <Button onClick={handleClose} color="primary"  style={{fontFamily: 'Microsoft JhengHei'}} autoFous>關閉視窗</Button>
         <Button  
         onClick={handleSubmit}
-        color="primary" autoFous>確認送出</Button>
+        color="primary"  style={{fontFamily: 'Microsoft JhengHei'}} autoFous>確認送出</Button>
         </DialogActions>
 
       </Dialog>

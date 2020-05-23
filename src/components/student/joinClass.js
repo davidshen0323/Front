@@ -51,9 +51,11 @@ const ExpansionPanel = withStyles({
 
 const useStyle = makeStyles(theme => ({
   typo: {
+    fontFamily: 'Microsoft JhengHei',
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontSize:16,
   },
   description: {
     marginLeft: 10,
@@ -61,7 +63,9 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    color: "#582707",
     padding: 10
   },
 }));
@@ -234,8 +238,8 @@ const handleSubmit = () =>
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary">關閉視窗</Button>
-        <Button onClick={handleSubmit} color="primary" >加入課程</Button>
+        <Button onClick={submitClose} color="primary" style={{fontFamily:'微軟正黑體'}}>關閉視窗</Button>
+        <Button onClick={handleSubmit} color="primary" style={{fontFamily:'微軟正黑體'}}>加入課程</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

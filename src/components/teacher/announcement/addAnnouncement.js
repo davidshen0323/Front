@@ -192,8 +192,8 @@ let history = useHistory(); //傳值跳頁的方法
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary">關閉視窗</Button>
-        <Button disabled={btnClose===false} onClick={handleSubmit} color="primary" >確認送出</Button>
+        <Button onClick={submitClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} >關閉視窗</Button>
+        <Button disabled={btnClose===false} onClick={handleSubmit} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}  >確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

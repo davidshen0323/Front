@@ -9,12 +9,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import { IconButton } from '@material-ui/core';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import {brown} from '@material-ui/core/colors';
+import DeleteMember from './DeleteMember';
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -236,9 +234,8 @@ export default function MemberTable( props ) {
                     {student[list]}
                  </TableCell>:
                  <TableCell align="left" padding="none" >
-                 <IconButton  variant="outlined"  style={{color:brown[500]}} onClick={(e)=>deletstudent(e,student.std_id)}>
-                 <DeleteOutlineIcon/>
-               </IconButton>
+                   <DeleteMember
+                   std_id={student['std_id']} />
                </TableCell>
                         )
                   }    

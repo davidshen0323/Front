@@ -9,7 +9,8 @@ const useStyle = makeStyles(theme => ({
   typo: {
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontFamily: 'Microsoft JhengHei',
   },
   description: {
     marginLeft: 10,
@@ -17,8 +18,10 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
-    padding: 10
+    color: "#582707",
+    padding: 10,
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
   },
   button: {
     marginLeft: 10,
@@ -141,8 +144,8 @@ export default function AcceptScore( props )  {
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={nosubmitClose} color="primary" autoFocus>關閉視窗</Button>
-        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus>儲存</Button>
+        <Button onClick={nosubmitClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
+        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose} >
         <Alert onClose={submitClose} severity="success">
           已儲存！

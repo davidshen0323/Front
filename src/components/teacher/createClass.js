@@ -2,7 +2,7 @@ import React from "react";
 import {Dialog, Button, DialogActions, DialogContent, Typography, Input, Snackbar} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import MuiAlert from "@material-ui/lab/Alert";
-
+import TextField from '@material-ui/core/TextField';
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -133,24 +133,32 @@ const handleSubmit = () =>
           <Typography className={classes.typoHeading} variant="h5">
             建立課程
           </Typography>
-          <Typography className={classes.typo} variant="body1">
+          {/* <Typography className={classes.typo} variant="body1">
             請輸入課程代碼：<Input value={inputs.csid} onChange={handleChange('csid')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-          </Typography>
-
+          </Typography> */}
+          <TextField
+          label="課程代碼"
+          variant="outlined"
+          size="small" value={inputs.csid} onChange={handleChange('csid')} style={{fontFamily:'微軟正黑體',marginBottom:10}}/>
           
 
         </div>
 
         <div style={{ display: "flex", justifyContent: "center", flexDirection: "column"}}>
-        <Typography className={classes.typo} variant="body1">
+        {/* <Typography className={classes.typo} variant="body1">
             請輸入課程名稱：<Input  value={inputs.name} onChange={handleChange('name')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-          </Typography>
+          </Typography> */}
+           <TextField
+          label="課程名稱"
+          variant="outlined"
+          size="small"  value={inputs.name} onChange={handleChange('name')} style={{fontFamily:'微軟正黑體'}} />
+
         </div>
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFocus>關閉視窗</Button>
-        <Button disabled={inputs.cs_id===''|| inputs.cs_name==='' ? true : false} onClick={handleSubmit} color="primary" autoFocus>儲存</Button>
+        <Button onClick={submitClose} color="primary" style={{fontFamily:'微軟正黑體'}}autoFocus>關閉視窗</Button>
+        <Button disabled={inputs.cs_id===''|| inputs.cs_name==='' ? true : false} onClick={handleSubmit} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>儲存</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

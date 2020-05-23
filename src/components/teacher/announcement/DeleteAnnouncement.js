@@ -10,7 +10,8 @@ const useStyle = makeStyles(theme => ({
   typo: {
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontFamily: 'Microsoft JhengHei',
   },
   description: {
     marginLeft: 10,
@@ -18,8 +19,10 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
-    padding: 10
+    color: "#582707",
+    padding: 10,
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
   },
 }));
 
@@ -28,7 +31,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function EditAnnouncement( props )  {
+export default function DeleteAnnouncement( props )  {
   const classes = useStyle();
   const params = useParams();
   const csid = params.cs_id;
@@ -172,10 +175,11 @@ export default function EditAnnouncement( props )  {
     <div>
     <Button
       onClick={handleOpenButton}
+      style={{fontFamily: 'Microsoft JhengHei'}} 
       >
       刪除
       </Button>
-    <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+    <Dialog open={open} onClose={handleClose} >
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
@@ -207,8 +211,8 @@ export default function EditAnnouncement( props )  {
         </div> */}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">關閉視窗</Button>
-        <Button  onClick={handleDelete} color="primary">確認刪除</Button>
+        <Button onClick={handleClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
+        <Button  onClick={handleDelete} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}>確認刪除</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

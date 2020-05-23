@@ -109,7 +109,7 @@ export default function EditPassword({ open, handleClose })  {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+    <Dialog open={open} onClose={handleClose}>
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
@@ -117,27 +117,51 @@ export default function EditPassword({ open, handleClose })  {
           </Typography>
 
            {/* 之後要接密碼(? */}  
-          <Typography className={classes.typo} variant="h8">
-            請輸入目前密碼：<TextField type="password" value={inputs.pwd} onChange={handleChange('pwd')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-          </Typography>
-
-          <Typography className={classes.typo} variant="h8">
-            請輸入新密碼：<TextField type="password" value={inputs.newpwd} onChange={handleChange('newpwd')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-          </Typography>
+          {/* <Typography className={classes.typo} variant="h8">
+            請輸入目前密碼：
+          </Typography> */}
+          <TextField 
+          label="目前密碼"
+          variant="outlined"
+          size="small"
+          type="password" 
+          value={inputs.pwd} 
+          onChange={handleChange('pwd')} 
+          style={{fontFamily:'微軟正黑體',marginTop:10}}/>
           
-          <Typography className={classes.typo} variant="h8">
+          {/* <Typography className={classes.typo} variant="h8">
+            請輸入新密碼：
+          </Typography> */}
+          <TextField 
+          label="新密碼"
+          variant="outlined"
+          size="small"
+          type="password" 
+          value={inputs.pwd} 
+          onChange={handleChange('newpwd')} 
+          style={{fontFamily:'微軟正黑體',marginTop:10}}/>
+         
+          {/* <Typography className={classes.typo} variant="h8">
             確認新密碼：<TextField type="password" value={inputs.repeatpwd} onChange={handleChange('repeatpwd')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-          </Typography>
-          <Typography className={classes.typo} variant="body1">
+          </Typography> */}
+          <TextField 
+          label="新密碼"
+          variant="outlined"
+          size="small"
+          type="password" 
+          value={inputs.pwd} 
+          onChange={handleChange('repeatpwd')} 
+          style={{fontFamily:'微軟正黑體',marginTop:10}}/>
+          {/* <Typography className={classes.typo} variant="body1">
             
-          </Typography>
+          </Typography> */}
         </div>
 
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFocus>關閉視窗</Button>
-        <Button disabled={inputs.pwd!==''&&inputs.pwd!==inputs.newpwd&&inputs.newpwd===inputs.repeatpwd ? false : true} onClick={submitClick} color="primary" autoFocus>儲存</Button>
+        <Button onClick={submitClose} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>關閉視窗</Button>
+        <Button disabled={inputs.pwd!==''&&inputs.pwd!==inputs.newpwd&&inputs.newpwd===inputs.repeatpwd ? false : true} onClick={submitClick} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
         <Alert onClose={submitClose} severity="success">
           已變更密碼！

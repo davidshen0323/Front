@@ -234,6 +234,7 @@ export default function TAcceptanceList() {
                              <EditScore
                              stdid={acceptance['std_id']}
                              hwid={acceptance['accept_hw_id']}
+                             score={acceptance['accept_score']}
                             //  time={acceptance["accept_time"]}
                             //  done={acceptance["accept_done"]}
                              />
