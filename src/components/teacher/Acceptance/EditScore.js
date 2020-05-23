@@ -3,13 +3,14 @@ import {Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@
 import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-
+import TextField from '@material-ui/core/TextField';
 
 const useStyle = makeStyles(theme => ({
   typo: {
     marginLeft: 10,
     padding: 5,
-    flex: 1
+    flex: 1,
+    fontFamily: 'Microsoft JhengHei',
   },
   description: {
     marginLeft: 10,
@@ -17,8 +18,10 @@ const useStyle = makeStyles(theme => ({
     flex: 1
   },
   typoHeading: {
-    color: "blue",
-    padding: 10
+    color: "#582707",
+    padding: 10,
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
   },
   button: {
     marginLeft: 10,
@@ -44,25 +47,27 @@ export default function AcceptScore( props )  {
 
 
   const [openS, setOpenS] = React.useState(false);
-  const [inputs, setInputs] = React.useState(1);
+  const [inputs, setInputs] = React.useState(
+    {score:props.score},    
+  );
   const [open, setOpen] = React.useState(false);
 
-  const [score, setScore] = React.useState({
-    score:'',
-  })
+  // const [score, setScore] = React.useState({
+  //   score:'',
+  // })
 
   const handleChange = fieldname => event => {
     setInputs(2);
     event.persist();
-    setScore(score => ({...score, [fieldname]: event.target.value}));
-    //
-  }
+    setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
+    
+}
   
   const submitClick = () => {
     setOpenS(true);
     console.log(props.stdid);
     console.log(props.hwid);
-    console.log(parseInt(score.score));
+    console.log(parseInt(inputs.score));
     
     fetch('/teacher/updateScore',{
       method: 'PUT',
@@ -72,7 +77,7 @@ export default function AcceptScore( props )  {
       body: JSON.stringify({
           std_id: props.stdid,
           accept_hw_id: props.hwid,
-          accept_score: parseInt(score.score),
+          accept_score: parseInt(inputs.score),
           // accept_done: 1
       })
   })
@@ -129,20 +134,21 @@ export default function AcceptScore( props )  {
             分數：
           </Typography>
           <Typography className={classes.typo} variant="body1">
-          <Input
+          <TextField
+          variant="outlined"
+          size="small"
           id="score"
-          value={score.score}
+          value={inputs.score}
           onChange={handleChange('score')} 
-          style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}
-          rowsMin={5}
+          style={{fontFamily:'微軟正黑體'}}
           />
           </Typography>
         </div>
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={nosubmitClose} color="primary" autoFocus>關閉視窗</Button>
-        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus>儲存</Button>
+        <Button onClick={nosubmitClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
+        <Button disabled={inputs.score===""} onClick={submitClick} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose} >
         <Alert onClose={submitClose} severity="success">
           已儲存！
