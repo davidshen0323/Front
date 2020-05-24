@@ -1,24 +1,24 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button, Grid, Typography} from '@material-ui/core/';
-import logo from '../../img/Rollsup.jpeg';
 import clsx from 'clsx';
-import {useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import logo from '../../img/Rollsup.jpeg';
+import AppsIcon from '@material-ui/icons/Apps';
+import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
+import GroupIcon from '@material-ui/icons/Group';
+import {Link, useParams} from "react-router-dom";
+import { useTheme } from '@material-ui/core/styles';
+import PanToolIcon from '@material-ui/icons/PanTool';
+import { makeStyles } from '@material-ui/core/styles';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
-import AppsIcon from '@material-ui/icons/Apps';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
-import {Link, useParams} from "react-router-dom";
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import {ListItemText, ListItemIcon, ListItem, IconButton, Divider, List, Drawer, AppBar, Toolbar, Button, Grid, Collapse} from '@material-ui/core/';
 
 const drawerWidth = 240;
 
@@ -153,6 +153,11 @@ export default function LoginMenu() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(true);
+
+  const handleClick = () => {
+    setOpen2(!open2);
+  };
   const theme = useTheme();
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -188,24 +193,6 @@ export default function LoginMenu() {
               {/* <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography> */}
               
               <img src={logo} width="200px"></img>
-              {/* <Button 
-                variant="outlined"
-                className={classes.button}
-                href="/homepaget"
-                >
-                我的課程
-              </Button> */}
-
-                
-
-              {/* <Button 
-                variant="text"
-                className={classes.button}
-                href="/TInformation"
-                >
-                基本資料
-                </Button> */}
-              
 
               <Grid container
                direction="row" 
@@ -241,31 +228,90 @@ export default function LoginMenu() {
           </IconButton>
         </div>
         <Divider />
-
-        <List>
+        <List
+    component="nav"
+    aria-labelledby="nested-list-subheader"
+    subheader
+    >
+      <ListItem button>
         <ListItemLink href="/homepaget">
-        <ListItemIcon>
+          <ListItemIcon>
             <HomeIcon />
-        </ListItemIcon>
-          <ListItemText primary="課程" />
+          </ListItemIcon>
+          <ListItemText primary="我的課程" />
         </ListItemLink>
-        
+      </ListItem>
+      <ListItem button>
         <ListItemLink href="/TInformation">
-        <ListItemIcon>
+          <ListItemIcon>
             <PermContactCalendarIcon />
-        </ListItemIcon>
+          </ListItemIcon>
           <ListItemText primary="基本資料" />
         </ListItemLink>
-
-        <ListItemLink component={Link} to={`/functiont/${params["cs_id"]}`}>
+      </ListItem>
+      <ListItem button onClick={handleClick}>
+      <ListItemLink component={Link} to={`/functiont/${params["cs_id"]}`}>
         <ListItemIcon>
-            <AppsIcon />
+          <AppsIcon />
         </ListItemIcon>
-          <ListItemText primary="功能" />
+        <ListItemText primary="功能" />
+        {open2 ? <ExpandLess /> : <ExpandMore />}
         </ListItemLink>
-
+      </ListItem>
+      <Divider />
+      <Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemLink component={Link} to={`/RollcallBlockT/${params["cs_id"]}`}>
+              <ListItemIcon>
+                <AccessTimeIcon />
+              </ListItemIcon>
+              <ListItemText primary="點名" />
+            </ListItemLink>
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemLink component={Link} to={`/leavemanage/${params["cs_id"]}`}>
+              <ListItemIcon>
+                <AssignmentIcon />
+              </ListItemIcon>
+              <ListItemText primary="請假審核" />
+            </ListItemLink>
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemLink component={Link} to={`/membert/${params["cs_id"]}`}>
+              <ListItemIcon>
+                <GroupIcon />
+              </ListItemIcon>
+              <ListItemText primary="班級名單" />
+            </ListItemLink>
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemLink component={Link} to={`/ViewAnnouncementt/${params["cs_id"]}`}>
+              <ListItemIcon>
+                <NotificationsActiveIcon />
+              </ListItemIcon>
+              <ListItemText primary="公告" />
+            </ListItemLink>
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemLink component={Link} to={`/QAlist_T/${params["cs_id"]}`}>
+              <ListItemIcon>
+                <HelpOutlineIcon />
+              </ListItemIcon>
+              <ListItemText primary="發問Q&A" />
+            </ListItemLink>
+          </ListItem>
+          <ListItem button className={classes.nested}>
+          <ListItemLink component={Link} to={`/selectHW_T/${params["cs_id"]}`}>
+            <ListItemIcon>
+              <PanToolIcon />
+            </ListItemIcon>
+            <ListItemText primary="課堂舉手" />
+            </ListItemLink>
+          </ListItem>
         </List>
-      
+      </Collapse>
+    </List>      
 
       </Drawer>
       <main

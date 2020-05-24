@@ -93,11 +93,11 @@ export default function ViewAnnouncements() {
                     {
                         AnnouncementList.map( (list, i) =>  i < 1 ?
                             <ExpansionPanelSummary key={i} style={{fontSize:18,fontFamily:'微軟正黑體',fontWeight:'bold'}}>
-                               <ExpansionPanelDetails>{announce[list]}</ExpansionPanelDetails>
+                               <ExpansionPanelDetails><Typography variant="inherit">{announce[list]}</Typography></ExpansionPanelDetails>
                             </ExpansionPanelSummary>
                             :
                             <ExpansionPanelSummary key={i} style={{fontSize:14,fontFamily:'微軟正黑體'}}>
-                               <ExpansionPanelDetails>{announce[list]}</ExpansionPanelDetails>
+                               <ExpansionPanelDetails><Typography variant="inherit">{announce[list]}</Typography></ExpansionPanelDetails>
                             </ExpansionPanelSummary>
                         )
                     }

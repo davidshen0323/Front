@@ -1,24 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button, Grid, Typography} from '@material-ui/core/';
-import logo from '../../img/Rollsup.jpeg';
 import clsx from 'clsx';
-import {useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import logo from '../../img/Rollsup.jpeg';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import { useParams} from "react-router-dom";
+import { useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
-import AppsIcon from '@material-ui/icons/Apps';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
-import {Link, useParams} from "react-router-dom";
+import {ListItemText, ListItemIcon, ListItem, IconButton, Divider,List, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
 
 const drawerWidth = 240;
 
@@ -26,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     //marginBottom: 68, //會讓menu跟下面東西的距離改變
-    
   },
 
   logoutButton: {
@@ -243,20 +233,22 @@ export default function LoginMenu() {
         <Divider />
 
         <List>
-        <ListItemLink href="/homepages">
-        <ListItemIcon>
-            <HomeIcon />
-        </ListItemIcon>
-          <ListItemText primary="課程" />
-        </ListItemLink>
-        
-        <ListItemLink href="/SInformation">
-        <ListItemIcon>
-            <PermContactCalendarIcon />
-        </ListItemIcon>
-          <ListItemText primary="基本資料" />
-        </ListItemLink>
-
+          <ListItem>
+            <ListItemLink href="/homepages">
+              <ListItemIcon>
+                  <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="我的課程" />
+            </ListItemLink>
+          </ListItem>
+          <ListItem>
+            <ListItemLink href="/SInformation">
+              <ListItemIcon>
+                  <PermContactCalendarIcon />
+              </ListItemIcon>
+              <ListItemText primary="基本資料" />
+            </ListItemLink>
+          </ListItem>
         </List>
       
 
