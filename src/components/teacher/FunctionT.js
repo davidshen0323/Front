@@ -284,10 +284,10 @@ const useStyles = makeStyles(theme => ({
                 <CardContent>
               <CardMedia
               component="img"
-              alt="課堂驗收"
+              alt="課堂舉手"
               // height="140"
               image="https://image.flaticon.com/icons/svg/2312/2312099.svg"
-              title="課堂驗收"
+              title="課堂舉手"
               className={classes.image}
               >
                    
@@ -296,7 +296,7 @@ const useStyles = makeStyles(theme => ({
               </CardContent>
             <CardActions>
               
-                <Typography className={classes.Cardtext}>課堂驗收</Typography>
+                <Typography className={classes.Cardtext}>課堂舉手</Typography>
            
             </CardActions>
               </ButtonBase>

@@ -117,7 +117,7 @@ export default function ViewAnnouncementt() {
                       AnnouncementList.map( (list, i) =>  i < 4 ? 
                         <ExpansionPanelSummary key={i} style={{marginLeft:10,fontSize:18}}>
                                <ExpansionPanelDetails>
-                                  {announce[list]}
+                                  <Typography variant="inherit">{announce[list]}</Typography>
                                </ExpansionPanelDetails>
                         </ExpansionPanelSummary>
                                
