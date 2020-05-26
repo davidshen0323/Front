@@ -3,7 +3,7 @@ import {Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@
 import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-
+import TextField from '@material-ui/core/TextField';
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -101,7 +101,7 @@ export default function EditEmail({ open, handleClose })  {
 }
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+    <Dialog open={open} onClose={handleClose} fullWidth>
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
@@ -113,15 +113,12 @@ export default function EditEmail({ open, handleClose })  {
             目前Email：406401628@mail.fju.edu.tw
           </Typography> */}
 
-          <Typography className={classes.typo} variant="h6">
-            新的Email：
-            <Input 
-            id="email"
-            value={email.email}
-            onChange={handleChange('email')}  
-            style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} 
-            rowsMin={5}/>
-          </Typography>
+<TextField
+          label="新的Email"
+          variant="outlined"
+          size="small"
+          value={email.email}
+          onChange={handleChange('email')}  style={{fontFamily:'微軟正黑體'}}/>
           <Typography className={classes.typo} variant="body1">
             
           </Typography>
@@ -130,8 +127,8 @@ export default function EditEmail({ open, handleClose })  {
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFocus>關閉視窗</Button>
-        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus>儲存</Button>
+        <Button onClick={submitClose} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>關閉視窗</Button>
+        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>儲存</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

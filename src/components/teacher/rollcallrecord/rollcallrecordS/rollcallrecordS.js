@@ -66,6 +66,7 @@ function EnhancedTableHead(props) {
           
         {headCells.map(headCell => (
           <TableCell
+            style={{ fontFamily:'微軟正黑體'}}
             key={headCell.id}
             align={headCell.numeric ='left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
@@ -125,10 +126,6 @@ export default function RollcallrecordSTable() {
    /*------------ STATE ------------*/
    const [rollcallrecord, setRollcallrecord] = useState([]);
    const params = useParams();
-   // console.log(params);
-   // const csid = params.cs_id;
-   console.log(params.cs_id);
-
 
    const classes = useStyles();
    const [order, setOrder] = React.useState('asc');
@@ -179,7 +176,6 @@ export default function RollcallrecordSTable() {
          <TableContainer>
            <Table
              className={classes.table}
-             aria-labelledby="tableTitle"
              size='small'
            >
              <EnhancedTableHead

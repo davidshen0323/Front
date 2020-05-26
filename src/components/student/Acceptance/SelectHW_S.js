@@ -54,7 +54,7 @@ export default function SelectHW() {
 
   const [Acc, setAcc] = React.useState([]);
   const [stdid, setStdid] = React.useState([]);
-  const acceptanceList = [ 'hw_name', 'hw_createtime' ]
+  const acceptanceList = [ 'hw_name','hw_content', 'hw_createtime' ]
 
   const params = useParams();
   const csid = params.cs_id;
@@ -95,8 +95,9 @@ export default function SelectHW() {
           <Table >
             <TableHead>
                 <TableRow>
-                    <TableCell align="center">作業名稱</TableCell>
-                    <TableCell align="center">日期</TableCell>
+                    <TableCell align="center" className={classes.typo}>作業名稱</TableCell>
+                    <TableCell align="center" className={classes.typo}>內容</TableCell>
+                    <TableCell align="center" className={classes.typo}>日期</TableCell>
                     {/* <TableCell align="center">分數</TableCell> */}
                     
                 </TableRow>

@@ -3,22 +3,22 @@ import {Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@
 import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-
+import TextField from '@material-ui/core/TextField';
 
 const useStyle = makeStyles(theme => ({
   typo: {
-    marginLeft: 10,
-    padding: 5,
-    flex: 1
-  },
-  description: {
-    marginLeft: 10,
-    padding: 5,
-    flex: 1
+    color: "#582707",
+    padding: 10,
+    fontSize:16,
+    flex: 1,
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
   },
   typoHeading: {
-    color: "blue",
-    padding: 10
+    color: "#582707",
+    padding: 10,
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight: 'bold',
   },
   button: {
     marginLeft: 10,
@@ -31,6 +31,9 @@ const useStyle = makeStyles(theme => ({
     backgroundColor: "#f8b62b",
     fontWeight:'bold',
 },
+  textfield: {
+    paddingLeft: 10,
+  },
 }));
 
 
@@ -44,25 +47,27 @@ export default function AcceptScore( props )  {
 
 
   const [openS, setOpenS] = React.useState(false);
-  const [inputs, setInputs] = React.useState(1);
+  const [inputs, setInputs] = React.useState(
+    {score:props.score},    
+  );
   const [open, setOpen] = React.useState(false);
 
-  const [score, setScore] = React.useState({
-    score:'',
-  })
+  // const [score, setScore] = React.useState({
+  //   score:'',
+  // })
 
   const handleChange = fieldname => event => {
     setInputs(2);
     event.persist();
-    setScore(score => ({...score, [fieldname]: event.target.value}));
-    //
-  }
+    setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
+    
+}
   
   const submitClick = () => {
     setOpenS(true);
     console.log(props.stdid);
     console.log(props.hwid);
-    console.log(parseInt(score.score));
+    console.log(parseInt(inputs.score));
     
     fetch('/teacher/updateScore',{
       method: 'PUT',
@@ -72,7 +77,7 @@ export default function AcceptScore( props )  {
       body: JSON.stringify({
           std_id: props.stdid,
           accept_hw_id: props.hwid,
-          accept_score: parseInt(score.score),
+          accept_score: parseInt(inputs.score),
           // accept_done: 1
       })
   })
@@ -113,7 +118,7 @@ export default function AcceptScore( props )  {
     >
     更改分數
   </Button>
-    <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+    <Dialog open={open} onClose={handleClose}>
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
@@ -125,24 +130,26 @@ export default function AcceptScore( props )  {
             學號：{props.stdid}
           </Typography>
 
-          <Typography className={classes.typo} variant="body1">
-            分數：
-          </Typography>
-          <Typography className={classes.typo} variant="body1">
-          <Input
-          id="score"
-          value={score.score}
-          onChange={handleChange('score')} 
-          style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}}
-          rowsMin={5}
-          />
-          </Typography>
-        </div>
+          <Typography className={classes.typo} >
+            分數 :
+          
+          <TextField
+                id="score"
+                value={inputs.score}
+                onChange={handleChange('score')} 
+                size="small"
+                variant="outlined"
+                className={classes.textfield}
+                style={{width:200}}
+            />
+ 
+            </Typography>
+          </div>
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={nosubmitClose} color="primary" autoFocus>關閉視窗</Button>
-        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus>儲存</Button>
+        <Button onClick={nosubmitClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
+        <Button disabled={inputs.score===""} onClick={submitClick} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose} >
         <Alert onClose={submitClose} severity="success">
           已儲存！
