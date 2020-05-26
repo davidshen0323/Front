@@ -12,17 +12,25 @@ import { makeStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
-import {ListItemText, ListItemIcon, ListItem, IconButton, Divider,List, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
+import {Typography, ListItemText, ListItemIcon, ListItem, IconButton, Divider,List, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    //marginBottom: 68, //會讓menu跟下面東西的距離改變
+    color: theme.palette.text.secondary,
+    '&:hover > $content': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    '&:focus > $content, &$selected > $content': {
+      backgroundColor: `var(--tree-view-bg-color, ${theme.palette.grey[400]})`,
+      color: 'var(--tree-view-color)',
+    },
+    '&:focus > $content $label, &:hover > $content $label, &$selected > $content $label': {
+      backgroundColor: 'transparent',
+    },
   },
 
   logoutButton: {
@@ -32,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize:17,
     color: "#582707",
     backgroundColor: "#fffaea",
-    
   },
   School: {
     minWidth: 100,
@@ -122,15 +129,15 @@ drawerHeader: {
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 },
-content: {
-  flexGrow: 1,
-  padding: theme.spacing(3),
-  transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  marginLeft: -drawerWidth,
-},
+// content: {
+//   flexGrow: 1,
+//   padding: theme.spacing(3),
+//   transition: theme.transitions.create('margin', {
+//     easing: theme.transitions.easing.sharp,
+//     duration: theme.transitions.duration.leavingScreen,
+//   }),
+//   marginLeft: -drawerWidth,
+// },
 contentShift: {
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.easeOut,
@@ -138,11 +145,88 @@ contentShift: {
   }),
   marginLeft: 0,
 },
+content: {
+  color: theme.palette.text.secondary,
+  borderTopRightRadius: theme.spacing(2),
+  borderBottomRightRadius: theme.spacing(2),
+  paddingRight: theme.spacing(1),
+  padding:10,
+  fontWeight: theme.typography.fontWeightMedium,
+  '$expanded > &': {
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+},
+group: {
+  marginLeft: 0,
+  '& $content': {
+    paddingLeft: theme.spacing(2),
+  },
+},
+expanded: {},
+selected: {},
+label: {
+  fontWeight: 'inherit',
+  color: 'inherit',
+},
+labelRoot: {
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0.5, 0),
+},
+labelIcon: {
+  marginRight: theme.spacing(1),
+},
+labelText: {
+  fontWeight: 'inherit',
+  flexGrow: 1,
+},
 }));
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
+
+function StyledTreeItem(props) {
+  const classes = useStyles();
+  const { labelText, labelIcon: LabelIcon, labelInfo, color, bgColor, ...other } = props;
+
+  return (
+    <TreeItem
+      label={
+        <div className={classes.labelRoot}>
+          <LabelIcon color="inherit" className={classes.labelIcon} />
+          <Typography variant="body2" className={classes.labelText}>
+            {labelText}
+          </Typography>
+          <Typography variant="caption" color="inherit">
+            {labelInfo}
+          </Typography>
+        </div>
+      }
+      style={{
+        '--tree-view-color': color,
+        '--tree-view-bg-color': bgColor,
+      }}
+      classes={{
+        root: classes.root,
+        content: classes.content,
+        expanded: classes.expanded,
+        selected: classes.selected,
+        group: classes.group,
+        label: classes.label,
+      }}
+      {...other}
+    />
+  );
+}
+
+StyledTreeItem.propTypes = {
+  bgColor: PropTypes.string,
+  color: PropTypes.string,
+  labelIcon: PropTypes.elementType.isRequired,
+  labelInfo: PropTypes.string,
+  labelText: PropTypes.string.isRequired,
+};
 
 export default function LoginMenu() {
 
@@ -161,6 +245,12 @@ export default function LoginMenu() {
   const params = useParams();
         console.log(params);
 
+  const f1 = () => {
+    window.location.href=`/homepaget`
+  }
+  const f2 = () => {
+    window.location.href=`/TInformation`
+  }
   return (
     <div className={classes.root}>
         
@@ -244,8 +334,8 @@ export default function LoginMenu() {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 24 }} />}
     >
-        <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}/>
-        <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}/>
+        <StyledTreeItem onClick={f1} nodeId="1" labelText="我的課程" labelIcon={HomeIcon}/>
+        <StyledTreeItem onClick={f2} nodeId="2" labelText="基本資料" labelIcon={PermContactCalendarIcon}/>
         </TreeView>
       </Drawer>
       <main
