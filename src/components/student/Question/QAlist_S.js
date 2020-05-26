@@ -5,12 +5,13 @@ import MyMenu from '../MenuS';
 import AddQA from './AddQA';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import TableContainer from '@material-ui/core/TableContainer';
 import {List,Dialog} from '@material-ui/core/';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -270,13 +271,14 @@ const handleDelete = (qstudent) =>
             >
           我要發問
         </Button>
-        
+
+       
 
         <Dialog open={open} onClose={handleClose}>
 
           <AddQA />
         </Dialog>
-         
+
 
           </div>
       </TabPanel>

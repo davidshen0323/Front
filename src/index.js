@@ -44,6 +44,7 @@ import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
+
 // import Loading from './components/Loading';
 // import gps from './components/teacher/rollcall/GPS/Gps';
 // import findgeo from './components/teacher/rollcall/GPS/FindGeo';
