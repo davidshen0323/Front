@@ -286,7 +286,7 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="課堂舉手"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/2312/2312099.svg"
+              image="https://image.flaticon.com/icons/svg/2107/2107558.svg"
               title="課堂舉手"
               className={classes.image}
               >
