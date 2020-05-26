@@ -1,24 +1,21 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button, Grid, Typography} from '@material-ui/core/';
-import logo from '../../img/Rollsup.jpeg';
 import clsx from 'clsx';
-import {useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import PropTypes from 'prop-types';
+import logo from '../../img/Rollsup.jpeg';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
-import AppsIcon from '@material-ui/icons/Apps';
+import { useParams} from "react-router-dom";
+import TreeView from '@material-ui/lab/TreeView';
+import TreeItem from '@material-ui/lab/TreeItem';
+import { useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
-import {Link, useParams} from "react-router-dom";
+import {ListItemText, ListItemIcon, ListItem, IconButton, Divider,List, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
 
 const drawerWidth = 240;
 
@@ -26,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     //marginBottom: 68, //會讓menu跟下面東西的距離改變
-    
   },
 
   logoutButton: {
@@ -241,26 +237,16 @@ export default function LoginMenu() {
           </IconButton>
         </div>
         <Divider />
-
-        <List>
-        <ListItemLink href="/homepaget">
-        <ListItemIcon>
-            <HomeIcon />
-        </ListItemIcon>
-          <ListItemText primary="課程" />
-        </ListItemLink>
-        
-        <ListItemLink href="/TInformation">
-        <ListItemIcon>
-            <PermContactCalendarIcon />
-        </ListItemIcon>
-          <ListItemText primary="基本資料" />
-        </ListItemLink>
-
-
-        </List>
-      
-
+        <TreeView
+      className={classes.root}
+      defaultExpanded={['11']}
+      defaultCollapseIcon={<ArrowDropDownIcon />}
+      defaultExpandIcon={<ArrowRightIcon />}
+      defaultEndIcon={<div style={{ width: 24 }} />}
+    >
+        <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}/>
+        <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}/>
+        </TreeView>
       </Drawer>
       <main
         className={clsx(classes.content, {
