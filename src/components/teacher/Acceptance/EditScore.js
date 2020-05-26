@@ -7,15 +7,12 @@ import TextField from '@material-ui/core/TextField';
 
 const useStyle = makeStyles(theme => ({
   typo: {
-    marginLeft: 10,
-    padding: 5,
+    color: "#582707",
+    padding: 10,
+    fontSize:16,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
-  },
-  description: {
-    marginLeft: 10,
-    padding: 5,
-    flex: 1
+    fontWeight:'bold',
   },
   typoHeading: {
     color: "#582707",
@@ -34,6 +31,9 @@ const useStyle = makeStyles(theme => ({
     backgroundColor: "#f8b62b",
     fontWeight:'bold',
 },
+  textfield: {
+    paddingLeft: 10,
+  },
 }));
 
 
@@ -118,7 +118,7 @@ export default function AcceptScore( props )  {
     >
     更改分數
   </Button>
-    <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+    <Dialog open={open} onClose={handleClose}>
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
@@ -130,20 +130,21 @@ export default function AcceptScore( props )  {
             學號：{props.stdid}
           </Typography>
 
-          <Typography className={classes.typo} variant="body1">
-            分數：
-          </Typography>
-          <Typography className={classes.typo} variant="body1">
+          <Typography className={classes.typo} >
+            分數 :
+          
           <TextField
-          variant="outlined"
-          size="small"
-          id="score"
-          value={inputs.score}
-          onChange={handleChange('score')} 
-          style={{fontFamily:'微軟正黑體'}}
-          />
-          </Typography>
-        </div>
+                id="score"
+                value={inputs.score}
+                onChange={handleChange('score')} 
+                size="small"
+                variant="outlined"
+                className={classes.textfield}
+                style={{width:200}}
+            />
+ 
+            </Typography>
+          </div>
 
       </DialogContent>
       <DialogActions>

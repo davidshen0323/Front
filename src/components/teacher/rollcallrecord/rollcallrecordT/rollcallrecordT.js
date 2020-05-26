@@ -42,14 +42,13 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'time', label: '日期與時間', numeric: false, disablePadding: true },
-  { id: 'attend', label: '出席人數', numeric: false, disablePadding: true },
-  { id: 'pass', label: '請假人數', numeric: false, disablePadding: true },
-  { id: 'absence', label: '缺席人數', numeric: false, disablePadding: true},
-  { id: 'from', label: '來源', numeric: false, disablePadding: true},
-  { id: 'detail',label: '詳細資料', numeric: false, disablePadding: true},
+  { id: 'time', numeric: true, disablePadding: false, label: '日期與時間' },
+  { id: 'attend', numeric: true, disablePadding: false, label: '出席人數' },
+  { id: 'pass', numeric: true, disablePadding: false, label: '請假人數' },
+  { id: 'absence', numeric: true, disablePadding: false, label: '缺席人數' },
+  { id: 'from', numeric: true, disablePadding: false, label: '來源' },
+  { id: 'detail', numeric: true, disablePadding: false, label: '詳細資料' },
 ];
-
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = property => event => {
@@ -62,11 +61,12 @@ function EnhancedTableHead(props) {
 
 
         <TableCell padding="none" />
-
+          
         {headCells.map(headCell => (
           <TableCell
+            style={{ fontFamily:'微軟正黑體'}}
             key={headCell.id}
-            align={headCell.numeric = 'left'}
+            align={headCell.numeric ='left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -103,8 +103,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   table: {
-    width: '100%',
-    fontFamily: 'Microsoft JhengHei',
+    minWidth: '100%',
   },
   visuallyHidden: {
     border: 0,
@@ -175,12 +174,12 @@ export default function RollcallrecordTable() {
     <div className={classes.root}>  
         
         <TableContainer>
-          
           <Table
+            className={classes.table}
             size='small'
           >
             <EnhancedTableHead
-              classes={classes.title}
+              classes={classes}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -197,7 +196,7 @@ export default function RollcallrecordTable() {
                       <TableCell>{index+1}</TableCell>
                   {
                     rollcallrecordList.map( (list, i) =>   i < 5 ? 
-                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    <TableCell key={i} component="th" scope="row" align="left">
                     {rollcallrecord[list]}
                  </TableCell>:
                  <TableCell key={i} align="left" >
