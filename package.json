@@ -36,7 +36,9 @@
         "smart-webcomponents-community": "^7.4.0",
         "styletron-engine-atomic": "^1.4.6",
         "styletron-react": "^5.2.7",
+        "use-immer": "^0.4.0",
         "use-position": "0.0.7",
+        "use-socket.io-client": "^1.1.0",
         "uuid": "^7.0.3"
     },
     "scripts": {

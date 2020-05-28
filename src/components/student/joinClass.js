@@ -1,12 +1,12 @@
 import React,{useState} from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Input, Snackbar } from "@material-ui/core";
+import QrReader from 'react-qr-reader'
+import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
-import MuiAlert from "@material-ui/lab/Alert";
 import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import QrReader from 'react-qr-reader'
+import {Dialog, Button, DialogActions, DialogContent, Typography, Input, Snackbar } from "@material-ui/core";
 
 const ExpansionPanel = withStyles({
     root: {
@@ -77,7 +77,6 @@ function Alert(props) {
 
 export default function JoinClass({ open, handleClose })  {
   
-   {/* Block */}
    const [expanded, setExpanded] = React.useState();
 
    const blockClick = panel => (event, newExpanded) => {
@@ -173,7 +172,6 @@ const handleSubmit = () =>
                     setOpenS(true);
                     setOpenErr1(false);
                     setOpenErr2(false);
-                    
                     console.log(0);
                     window.location.reload();
                  //   history.push('/ViewAnnouncementt/${csid}');

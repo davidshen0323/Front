@@ -311,7 +311,9 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="課堂舉手"
               // height="140"
+
               image={hands}
+
               title="課堂舉手"
               className={classes.image}
               >

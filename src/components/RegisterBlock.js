@@ -95,19 +95,19 @@ export default function RegisterBlock() {
                 value={value}
                 onChange={handleChange}
                 >
-                <LinkTab label="教師" href={`/rollcall/${csid}`} {...a11yProps(0)} />
-                <LinkTab label="學生" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} />
+                <LinkTab label="學生" href={`/rollcall/${csid}`} {...a11yProps(0)} />
+                <LinkTab label="教師" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} />
             
                 </Tabs>
             </AppBar>
 
             
       <TabPanel value={value} index={0}>
-        <RegisterT/>
+        <RegisterS/>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <RegisterS/>
+        <RegisterT/>
       </TabPanel>
     </div>
   );

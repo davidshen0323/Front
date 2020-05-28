@@ -64,7 +64,8 @@ export default function GPS() {
   // 失敗小紅2
   const [openErr2, setOpenErr2] = React.useState(false);  
   const [clicked, setClicked] = React.useState(true);
-  
+  // const [count, setCount] = React.useState(0);
+
   useEffect(() => {
     async function fetchData() {
         const result = await axios.get(`/student/rollcall/newlyGPSRollcall/${params.cs_id}/`);
@@ -118,6 +119,8 @@ export default function GPS() {
         setOpenErr1(true);
         setOpenErr2(false);
         // setClicked(false);
+        // setCount(count+1);
+        
         console.log(1);
         
     }
@@ -127,6 +130,8 @@ export default function GPS() {
         setOpenErr2(true);
         setOpenErr1(false);
         // setClicked(false);
+        // setCount(count+1);
+
         console.log(2);
         // setQrcode(null);   
     }
@@ -154,6 +159,8 @@ export default function GPS() {
       
   }
 
+  // console.log(count);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -167,7 +174,7 @@ export default function GPS() {
     setClicked(true);
   };
 
-
+  
 
   return (
     <div>
