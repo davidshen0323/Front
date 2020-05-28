@@ -1,12 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
+
 import PropTypes from 'prop-types';
+
 import logo from '../../img/Rollsup.jpeg';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import { useParams} from "react-router-dom";
+
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
+
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -14,12 +18,15 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
+
 import {Typography, ListItemText, ListItemIcon, ListItem, IconButton, Divider,List, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
+
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
+
     color: theme.palette.text.secondary,
     '&:hover > $content': {
       backgroundColor: theme.palette.action.hover,
@@ -31,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     '&:focus > $content $label, &:hover > $content $label, &$selected > $content $label': {
       backgroundColor: 'transparent',
     },
+
   },
 
   logoutButton: {
@@ -327,6 +335,7 @@ export default function LoginMenu() {
           </IconButton>
         </div>
         <Divider />
+
         <TreeView
       className={classes.root}
       defaultExpanded={['11']}
@@ -337,6 +346,7 @@ export default function LoginMenu() {
         <StyledTreeItem onClick={f1} nodeId="1" labelText="我的課程" labelIcon={HomeIcon}/>
         <StyledTreeItem onClick={f2} nodeId="2" labelText="基本資料" labelIcon={PermContactCalendarIcon}/>
         </TreeView>
+
       </Drawer>
       <main
         className={clsx(classes.content, {
