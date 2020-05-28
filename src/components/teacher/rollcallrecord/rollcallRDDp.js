@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import { useParams } from 'react-router-dom';
 import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
 import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
-
+import axios from 'axios';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,6 +77,24 @@ export default function RollcallRDDp() {
     setValue(newValue);
   };
 
+
+//   useEffect(() => {
+//     async function fetchData() {
+//         const result = await axios.get(`/teacher/downloadExcel/Rollcall/${csid}`);
+//         setAcceptances(result.data);
+//     }
+//     fetchData();
+// }, []);
+console.log('csid',csid);
+
+  const exportexcel = () => {
+    async function fetchData() {
+        const result = await axios.get(`/teacher/downloadExcel/Rollcall/${csid}/`);
+        //setAcceptances(result.data);
+    }
+    fetchData();
+}
+
   return (
           <div>
             <AppBar position="static" color="inherite" >
@@ -87,7 +105,7 @@ export default function RollcallRDDp() {
                 <LinkTab label="時間查看" href="/rollcallrecordT" {...a11yProps(0)}   style={{ fontFamily:'微軟正黑體'}}/>
                 <LinkTab label="學生查看" href="/rollcallrecordS" {...a11yProps(1)}   style={{ fontFamily:'微軟正黑體'}}/>
                
-                <Link component="button" variant="body" color="primary" className={classes.Link}>
+                <Link component="button" variant="body" color="primary" className={classes.Link} onClick={exportexcel}>
                   匯出成Excel檔
                 </Link>
               

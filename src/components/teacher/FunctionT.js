@@ -11,8 +11,12 @@ import OpenJoinClass from './OpenJoinClass';
 import AddIcon from "@material-ui/icons/Add";
 import {Fab, Grid, ButtonBase, Typography, Card, CardActionArea, CardActions, CardContent, CardMedia} from "@material-ui/core";
 
-
-
+import rollcall from '../../img/rollcall.jpg'
+import leave from '../../img/leave.jpg'
+import classs from '../../img/class.jpg'
+import bell from '../../img/bell.jpg'
+import question from '../../img/question.jpg'
+import hands from '../../img/hands.jpg'
 
 // @ts-ignore
 const useStyles = makeStyles(theme => ({
@@ -35,16 +39,16 @@ const useStyles = makeStyles(theme => ({
 
 
       card: {
-        width: 300,
-        height: 300,
-        marginTop: 30,
-        marginBottom: 20,
+        width: "100%",
+        maxWidth:250,
+        height: "100%",
+        maxHeight:300,
+        // marginTop: 10,
+        // marginBottom: 10,
         zIndex:-1,
         marginLeft: 'auto',
         marginRight: 'auto',
-        // borderColor: 'red',
-        // borderWidth: '3pt',
-        // borderStyle: 'dotted',
+        borderRadius: 10,
       },
 
       cardaction: {
@@ -115,22 +119,27 @@ const useStyles = makeStyles(theme => ({
               direction="row"
               justify="center"
               alignItems="center"
+              spacing={2}
             >
 
-            <Grid item xs={12} sm={6} md={4} lg={4}>  
+            <Grid item xs={6} sm={6} md={4} lg={4}>  
             <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
                component={Link}
                // @ts-ignore
                to={`/RollcallBlockT/${params.cs_id}`}
+               style={{
+                 display:"flex",
+                 flexDirection:"column",
+                 justifyContent:"center"}}
               >
               <CardContent>
               <CardMedia
               component="img"
               alt="點名"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/1828/1828867.svg"
+              image={rollcall}
               title="點名"
               className={classes.image}
               />
@@ -148,21 +157,24 @@ const useStyles = makeStyles(theme => ({
         </Card>
         </Grid>
         
-        <Grid item xs={12} sm={6} md={4} lg={4}>  
+        <Grid item xs={6} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
               // @ts-ignore
               to ={`/leavemanage/${params.cs_id}`}
-              
+               style={{
+                 display:"flex",
+                 flexDirection:"column",
+                 justifyContent:"center"}}
               >
               <CardContent>
               <CardMedia
               component="img"
               alt="請假審核"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/1828/1828610.svg"
+              image={leave}
               title="請假審核"
               className={classes.image}
               />
@@ -175,21 +187,24 @@ const useStyles = makeStyles(theme => ({
         </Card>
         </Grid>
 
-        <Grid item xs={12} sm={6} md={4} lg={4}>  
+        <Grid item xs={6} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
               // @ts-ignore
               to ={`/membert/${params.cs_id}`}
-              // className={classes.ButtonBase}
+              style={{
+                display:"flex",
+                flexDirection:"column",
+                justifyContent:"center"}}
               >
                 <CardContent>
               <CardMedia
               component="img"
               alt="班級名單"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/2312/2312129.svg"
+              image={classs}
               title="班級名單"
               className={classes.image}
               />
@@ -207,7 +222,7 @@ const useStyles = makeStyles(theme => ({
         </Grid>
 
         
-        <Grid item xs={12} sm={6} md={4} lg={4}>
+        <Grid item xs={6} sm={6} md={4} lg={4}>
 
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
@@ -215,14 +230,17 @@ const useStyles = makeStyles(theme => ({
               component={Link}
               // @ts-ignore
               to ={`/ViewAnnouncementt/${params.cs_id}`}
-              
+              style={{
+                display:"flex",
+                flexDirection:"column",
+                justifyContent:"center"}}
               >
                 <CardContent>
               <CardMedia
               component="img"
               alt="公告"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/1827/1827388.svg"
+              image={bell}
               title="公告"
               className={classes.image}
               />
@@ -239,7 +257,7 @@ const useStyles = makeStyles(theme => ({
 
         </Grid>
 
-        <Grid item xs={12} sm={6} md={4} lg={4}>  
+        <Grid item xs={6} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
 
@@ -248,14 +266,17 @@ const useStyles = makeStyles(theme => ({
                component={Link}
                // @ts-ignore
                to={`/QAlist_T/${params.cs_id}`}
-
+               style={{
+                display:"flex",
+                flexDirection:"column",
+                justifyContent:"center"}}
               >
                 <CardContent>
               <CardMedia
               component="img"
               alt="發問Q&A"
              
-              image="https://image.flaticon.com/icons/svg/1828/1828789.svg"
+              image={question}
               title="發問Q&A"
               className={classes.image}
               />
@@ -271,13 +292,17 @@ const useStyles = makeStyles(theme => ({
         
         </Grid>
 
-        <Grid item xs={12} sm={6} md={4} lg={4}>  
+        <Grid item xs={6} sm={6} md={4} lg={4}>  
         <Card className={classes.card}>
             <CardActionArea className={classes.cardaction}>
             <ButtonBase 
             component={Link}
             // @ts-ignore
-            to={`/selectHW_T/${params.cs_id}`}>
+            to={`/selectHW_T/${params.cs_id}`}
+            style={{
+                 display:"flex",
+                 flexDirection:"column",
+                 justifyContent:"center"}}>
               {/* <ButtonBase
               component={Link}
           */}
@@ -286,7 +311,7 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="課堂舉手"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/2312/2312099.svg"
+              image={hands}
               title="課堂舉手"
               className={classes.image}
               >

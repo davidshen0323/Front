@@ -1,15 +1,28 @@
 import React from "react";
 import {Dialog, Button, DialogActions, DialogContent, Typography, Input,TextField} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles,withStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputBase from '@material-ui/core/InputBase';
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import MenuItem from '@material-ui/core/MenuItem';
+import GradeIcon from '@material-ui/icons/Grade';
+import CheckIcon from '@material-ui/icons/Check';
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { useState, useEffect } from "react";
+import {Grid,Chip } from "@material-ui/core";
+import { throttle, debounce } from "throttle-debounce";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -45,6 +58,36 @@ const useStyle = makeStyles(theme => ({
   }
 }));
 
+const BootstrapInput = withStyles(theme => ({
+ 
+  input: {
+    borderRadius: 4,
+    position: 'relative',
+    //backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 26px 10px 12px',
+   // transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+}))(InputBase);
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -62,9 +105,7 @@ export default function AcceptScore( props )  {
   });
   const [open, setOpen] = React.useState(false);
 
-  const [label, setLabel] = React.useState({
-    label:false,
-  })
+  const [label, setLabel] = React.useState("");
 
   
   const [expanded, setExpanded] = React.useState(false);
@@ -83,7 +124,7 @@ export default function AcceptScore( props )  {
   }
   
   const handleChangelabel = (event) => {
-    setLabel({ ...label, [event.target.name]: event.target.checked });
+    setLabel(event.target.value);
   };
 
   const submitClick = () => {
@@ -135,6 +176,36 @@ export default function AcceptScore( props )  {
     setExpanded(isExpanded ? panel : false);
   };
 
+
+  const [query, setQuery] = useState("");
+  const [searches, setSearches] = useState([]);
+
+  const autocompleteSearch = query => {
+    console.log("autocompleteSearch", query);
+    _fetch(query);
+  };
+
+  const autocompleteSearchDebounced = debounce(500, autocompleteSearch);
+  const autocompleteSearchThrottled = throttle(500, autocompleteSearch);
+
+
+  useEffect(() => {
+    if (query.length < 5) {
+      autocompleteSearchThrottled(query);
+    } else {
+      autocompleteSearchDebounced(query);
+    }
+  }, [query]);
+
+  const _fetch = query => {
+    const _searches = searches || [];
+    _searches.push(query);
+    setSearches(_searches);
+  };
+
+
+
+
   return (
     <div>
       <Button 
@@ -168,7 +239,18 @@ export default function AcceptScore( props )  {
 
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-        <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+          <div 
+          style={{display: "flex",
+        flexDirection: "column", 
+         justifyContent: "center"}}>
+        <div 
+        style={{display: "flex",
+        //flexDirection: "column", 
+         justifyContent: "center"}}
+         >
+
+
+
           <Typography className={classes.typo} >
             分數 :
           
@@ -180,20 +262,49 @@ export default function AcceptScore( props )  {
                 size="small"
                 variant="outlined"
                 className={classes.textfield}
-                style={{width:200}}
+                style={{width:85}}
             />
             
             </Typography>
 
            <Typography className={classes.typo} >
             標記 :
-            <FormControlLabel
-            control={<Switch checked={label.label} onChange={handleChangelabel} name="label"
-            color="primary"
-            className={classes.label} />}
-            />
-            <TextField
-                disabled={label.label===true ? false:true }
+
+            <FormControl
+            className={classes.label}
+             >
+            <Select
+             className={classes.textfield}
+          value={label}
+          onChange={handleChangelabel}
+          input={<BootstrapInput name="label"/>}
+          style={{width:85}}
+        >
+          <MenuItem value="">
+          <ListItemIcon>
+             <em>  None </em>
+            </ListItemIcon>
+          </MenuItem>
+          <MenuItem value={1} select>
+            <ListItemIcon>
+              <GradeIcon />
+            </ListItemIcon>
+          </MenuItem>
+          <MenuItem value={2}>
+            <ListItemIcon>
+              <CheckIcon />
+            </ListItemIcon>
+          </MenuItem>
+          <MenuItem value={3}>
+          <ListItemIcon>
+              <RadioButtonCheckedIcon />
+            </ListItemIcon>
+          </MenuItem>
+        </Select>
+            </FormControl>
+       </Typography>     
+            {/* <TextField
+                disabled={label === "" ? true : false }
                 label="註記內容"
                 id="content"
                 value={inputs.content}
@@ -201,14 +312,51 @@ export default function AcceptScore( props )  {
                 size="small"
                 variant="outlined"
                 className={classes.textfield}
+            /> */}
+</div>
+<div>
+            <Autocomplete
+            
+            disabled={label === "" ? true : false }
+              multiple
+              options={comments.map(option => option.title)}
+              //defaultValue={[top100Films[1].title]}
+              freeSolo
+              ChipProps={{ onDelete: () => {} }}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    variant="outlined"
+                    label={option}
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={params => (
+                <TextField
+                  {...params}
+                  //disabled={label === "" ? true : false }
+                  variant="outlined"
+                  size="small"
+                  label="註記內容"
+                  value={inputs.content}
+                  onChange={handleChange('content')} 
+                  className={classes.textfield}
+                  fullWidth
+                />
+              )}
             />
-          </Typography>
+
+
+</div>
           </div>
+          
           </ExpansionPanelDetails>
           </ExpansionPanel>
 
 
         </div>
+      
 
       </DialogContent>
       <DialogActions>
@@ -226,3 +374,11 @@ export default function AcceptScore( props )  {
     
   );
 };
+
+
+const comments = [
+  { title: "內容不符合要求"},
+  { title: "這學生很煩"},
+  { title: "做錯作業"},
+  { title: "幫助同學"}, 
+];
