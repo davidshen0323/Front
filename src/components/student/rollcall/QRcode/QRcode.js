@@ -1,25 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import Backdrop from '@material-ui/core/Backdrop';
 import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
 import ComButton from "../../../ComButton";
-import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
-import Typography from '@material-ui/core/Typography';
 import {useParams} from "react-router-dom";
 import QrReader from 'react-qr-reader'
 import MuiAlert from "@material-ui/lab/Alert";
 import {useState} from  "react";
-import Snackbar from "@material-ui/core/Snackbar";
 import {DialogActions} from "@material-ui/core";
 import { usePosition } from 'use-position';
 import { Label } from '@material-ui/icons';
+import {Typography, Toolbar, AppBar, Grid, IconButton, Slide, Backdrop, Snackbar, Dialog, Button} from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
