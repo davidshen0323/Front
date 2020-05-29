@@ -141,9 +141,6 @@ export default function AddQA ()  {
              placeholder="請輸入問題"
              />
           </Typography>
-        </div>
-      </DialogContent>
-      <DialogActions>
         <Button onClick={submitClose} color="primary" className={classes.text} >關閉視窗</Button>
         <Button 
         disabled={inputs.ques === '' ? true : false} 
@@ -153,6 +150,9 @@ export default function AddQA ()  {
         >
           確認送出
           </Button>
+        </div>
+      </DialogContent>
+      <DialogActions>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
           <Alert onClose={submitClose} severity="success" className={classes.text}>
             老師收到你的問題囉！

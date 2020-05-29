@@ -18,8 +18,8 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
+import {Typography, ListItem, IconButton, Divider, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
 
-import {Typography, ListItemText, ListItemIcon, ListItem, IconButton, Divider,List, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
 
 
 const drawerWidth = 240;
