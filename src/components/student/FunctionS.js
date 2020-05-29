@@ -4,7 +4,6 @@ import {Link, useParams} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import {CardMedia, CardContent, CardActions, CardActionArea, Card, Grid, Typography, ButtonBase } from '@material-ui/core/';
 
-
 // @ts-ignore
 const useStyles = makeStyles(theme => ({
     container: {
