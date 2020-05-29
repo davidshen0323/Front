@@ -87,21 +87,21 @@ export default function Login(){
             setInputs(inputs => ({...inputs, [fieldname]: event.target.value }));
           }
           
-          let login;
-          const handleSubmit = () =>
-          {
-            if(inputs.Userid.length > 0 && inputs.Userpassword.length > 0)
-            {
-                login = true;
-                return login;
-            }
-            else
-            {
-                alert("請再次確認!");
-                login = false;
-                return login;
-            }
-          }
+        //   let login;
+        //   const handleSubmit = () =>
+        //   {
+        //     if(inputs.Userid.length > 0 && inputs.Userpassword.length > 0)
+        //     {
+        //         login = true;
+        //         return login;
+        //     }
+        //     else
+        //     {
+        //         alert("請再次確認!");
+        //         login = false;
+        //         return login;
+        //     }
+        //   }
 
 
         return (
@@ -170,7 +170,8 @@ export default function Login(){
                     type="submit"
                     variant="contained" 
                     className={classes.button}
-                    onClick={handleSubmit}>
+                    // onClick={handleSubmit}
+                    >
                     登入
                     </Button>
                     <ForgetPw className={classes.button}/>

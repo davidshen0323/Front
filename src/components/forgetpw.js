@@ -63,6 +63,9 @@ const handleChange = fieldname => event => {
 
   const handleClose = () => {
     setOpen(false);
+    setOpenS(false);
+    setOpenErr1(false);
+    setOpenErr2(false);
     setbtnClose(true);
     inputs.id='';
     inputs.mail='';
@@ -73,14 +76,14 @@ const handleChange = fieldname => event => {
     setOpenErr1(false);
     setOpenErr2(false);
     setbtnClose(true);
-    setOpen(false);
-    inputs.id='';
-    inputs.mail='';
-    inputs.phone='';
+    // setOpen(false);
+    // inputs.id='';
+    // inputs.mail='';
+    // inputs.phone='';
   };  
   const handleSubmit = () => {
     setbtnClose(false);
-    setOpenErr2(true);
+     setOpenErr2(true);
     
     
     console.log(inputs.id)
@@ -107,7 +110,7 @@ const handleChange = fieldname => event => {
 
             async function fetchres(){
             const test = await res.text();
-            if(test ==="request failed. Email or Phone Number has round!")
+            if(test ==="請求失敗，Email或phone沒有找到")
             {
                 //alert("請重新確認及填寫資料!");
                 setOpenErr2(false);
@@ -122,6 +125,7 @@ const handleChange = fieldname => event => {
                 setOpenS(true);
                 setOpenErr1(false);
                 setOpenErr2(false);
+                setOpen(false);
                 put = true;
                 console.log(0);
                 history.push("/login");
@@ -153,8 +157,8 @@ const handleChange = fieldname => event => {
             if(test ==="request failed. Email or Phone Number has round!")
             {
                 //alert("請重新確認及填寫資料!");
-                setOpenErr2(false);
                 setOpenErr1(true);
+                setOpenErr2(false);
                 put = false;
                 console.log(1);
                 return put;
@@ -165,6 +169,7 @@ const handleChange = fieldname => event => {
                 setOpenS(true);
                 setOpenErr1(false);
                 setOpenErr2(false);
+                setOpen(false);
                 put = true;
                 console.log(0);
                 history.push("/login");
@@ -174,10 +179,11 @@ const handleChange = fieldname => event => {
         .then(res => console.log(res))
         .catch(err => console.log(`Error with message: ${err}`))
         }
-        else
-        {
-          setOpenErr1(true);
-        }
+      else 
+      {
+        setOpenErr2(false);
+        setOpenErr1(true);
+      }
     }     
   
       
@@ -245,7 +251,7 @@ const handleChange = fieldname => event => {
         </DialogActions>
       </Dialog>
       {/* 成功小綠框 */}
-      <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+      <Snackbar open={openS} autoHideDuration={2000} onClose={handleClose} style={{marginBottom:100}}>
           <Alert severity="success">
             已寄送新密碼，請至Email確認！
           </Alert>
