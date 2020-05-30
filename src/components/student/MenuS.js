@@ -245,6 +245,7 @@ export default function LoginMenu() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -281,6 +282,7 @@ export default function LoginMenu() {
   //   action="/logout", method="POST"
   // }
   
+
   const params = useParams();
         console.log(params);
 
@@ -318,6 +320,7 @@ export default function LoginMenu() {
               >
               <Grid item>   
               <form action="/logout" method="POST">
+
                 <Button className={classes.logoutButton} type="submit" variant="outline" >登出</Button>
               </form>
               </Grid>
@@ -341,6 +344,7 @@ export default function LoginMenu() {
           </IconButton>
         </div>
         <Divider />
+
         <TreeView
       className={classes.root}
       defaultExpanded={['11']}
@@ -430,6 +434,7 @@ export default function LoginMenu() {
       <Divider />
 
     </TreeView>
+
       </Drawer>
       <main
         className={clsx(classes.content, {

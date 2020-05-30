@@ -107,8 +107,8 @@ export default function AcceptanceList(props) {
   const classes = useStyles();
 
   /*=========== Create Table HEAD ===========*/
-  const acceptanceList = [ 'std_id', 'accept_time', 'accept_done' ]
-  const acceptanceDoneList = [ 'std_id', 'accept_time', 'accept_score' ]
+  const acceptanceList = [ 'std_id','std_name', 'accept_time', 'accept_done' ]
+  const acceptanceDoneList = [ 'std_id','std_name', 'accept_time', 'accept_score' ]
   
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -168,6 +168,7 @@ export default function AcceptanceList(props) {
       },
       body: JSON.stringify({
           hw_name: hwname,
+          accept_state:"1",
       })
   })
   .then(res => {
@@ -200,10 +201,47 @@ export default function AcceptanceList(props) {
   // console.log(hwname)
 }
 
-  // const done = () => {
-  //   setOpenWarn(true);
-  //   // history.push(`/selectHW_S/${params.cs_id}`)
-  // }
+
+  const handleSubmitAsk = () => 
+  {
+    fetch('/student/acceptance',{
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          hw_name: hwname,
+          accept_state:"2",
+      })
+  })
+  .then(res => {
+    async function fetchres(){
+    const test = await res.text();
+    if(test === "登記驗收成功")
+    {
+      //alert("登記驗收成功!")
+      // history.push(`/acceptance/${csid}/${hwname}`)
+      setOpenS(true);
+      window.location.reload();
+
+      // history.push(`/acceptance/${csid}/${hwname}`);
+
+    }
+    else if(test === "您已驗收過")
+    {
+      //alert("您已登記過驗收!")
+      setOpenWarn(true);
+      window.location.reload();
+
+      // history.push(`/acceptance/${csid}/${hwname}`)
+      // history.push(`/acceptance/${csid}/${hwname}`);
+
+    }
+    
+    setClicked(true);
+
+  } fetchres() })
+}
 
   const handledelete = () =>
   {
@@ -272,8 +310,8 @@ export default function AcceptanceList(props) {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="未完成" href="/drafts" {...a11yProps(0)} />
-                <LinkTab label="已完成" href="/trash" {...a11yProps(1)} />
+                <LinkTab label="舉手排序" href="/drafts" {...a11yProps(0)} />
+                <LinkTab label="驗收完成" href="/trash" {...a11yProps(1)} />
             
                 </Tabs>
             </AppBar>
@@ -286,8 +324,9 @@ export default function AcceptanceList(props) {
             <TableHead>
                 <TableRow>
                     <TableCell component="th" scope="row" align="center">學號</TableCell>
+                    <TableCell component="th" scope="row" align="center">姓名</TableCell>
                     <TableCell component="th" scope="row" align="center">時間</TableCell>
-                    {/* <TableCell component="th" scope="row" align="center">狀態</TableCell> */}
+                    <TableCell component="th" scope="row" align="center">狀態</TableCell>
                 </TableRow>
             </TableHead>
             
@@ -330,21 +369,26 @@ export default function AcceptanceList(props) {
           onClick={handleSubmit}
           variant = "contained" 
           className={classes.button}
-          //disabled={clicked === true }
           >
-            我要驗收
+            舉手驗收
 
           </Button>
-         
+          <Button 
+          onClick={handleSubmitAsk}
+          variant = "contained" 
+          className={classes.button}
+          >
+            舉手發問
+          </Button>
           
   
          <Button
           onClick={handledelete}
           variant = "contained" 
           className={classes.button}
-          //disabled={clicked === true ? false : true }
+         // disabled={clicked === true ? false : true }
           >  
-            取消驗收
+            取消舉手
           </Button>
 
       </div>
@@ -365,6 +409,7 @@ export default function AcceptanceList(props) {
                     {/* <TableCell>排序</TableCell> */}
                     {/* <TableCell component="th" scope="row" align="center">排序</TableCell> */}
                     <TableCell component="th" scope="row" align="center">學號</TableCell>
+                    <TableCell component="th" scope="row" align="center">姓名</TableCell>
                     <TableCell component="th" scope="row" align="center">時間</TableCell>
                     <TableCell component="th" scope="row" align="center">分數</TableCell>
                 </TableRow>
@@ -374,16 +419,28 @@ export default function AcceptanceList(props) {
             {
             
             acceptances.map((acceptance,index) =>  acceptance["accept_done"] === true 
-             && acceptance['std_id'] === stdid 
+            //  && acceptance['std_id'] === stdid 
             ?(
                 <TableRow key={index}>
                       {/* <TableCell align="center">{k+1}</TableCell> */}
                  
                   {
-                    acceptanceDoneList.map( (list, i) => 
+                    acceptanceDoneList.map( (list, i) => i < 3 ?
                     
                     <TableCell key={i} component="th" scope="row" align="center">
                       {acceptance[list]}
+                      </TableCell>
+                      :
+                      <TableCell key={i} component="th" scope="row" align="center">
+                        {
+                          
+                          acceptance['std_id'] === stdid ?
+                          <div>
+                          {acceptance['accept_score']}
+                          </div>
+                          :
+                          <div></div>
+                        }
                       </TableCell>
                       )
                     }
@@ -410,7 +467,7 @@ export default function AcceptanceList(props) {
         {/* 成功小綠框2 */}
         <Snackbar open={openS2} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100,fontFamily:'微軟正黑體'}}>
           <Alert severity="success">
-            取消驗收成功！
+            取消舉手成功！
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}

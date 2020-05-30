@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import {Table, TableBody, TableCell, TableHead, TableRow, TableContainer,Box, Typography, Tab, AppBar, Tabs} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableHead, TableRow, TableContainer,Box, Typography, Tab, AppBar, Tabs,Button} from "@material-ui/core";
 
 import MyMenu from '../MenuT';
 import { useParams} from 'react-router-dom';
@@ -9,9 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import AcceptScore from "./acceptScore";
 import PropTypes from 'prop-types';
 import EditScore from './EditScore';
-import {brown} from '@material-ui/core/colors';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import { IconButton } from '@material-ui/core';
 
 
 function TabPanel(props) {
@@ -71,24 +68,17 @@ export default function TAcceptanceList() {
     table: {
       minWidth: 450,
     },
-    // backbut: {
-    //   width: 100,
-    //   margin:'auto',
-    //   marginTop: 20,
-    //   fontFamily: 'Microsoft JhengHei',
-    //   backgroundColor: '#E0E0E0',
-    // },
     button: {
-      width: 100,
-      margin:'auto',
-      marginTop: 20,
-      // marginLeft: 10,
+      marginLeft: 10,
+      marginTop: 10,
       marginBottom: 10,
+      width:'100px',
       fontFamily: 'Microsoft JhengHei',
       color: "white",
+      fontSize:14,
       backgroundColor: "#f8b62b",
       fontWeight:'bold',
-    },
+  },
     div:{
       height:'100vh',
       background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
@@ -97,8 +87,8 @@ export default function TAcceptanceList() {
   const classes = useStyles();
 
   /*=========== Create Table HEAD ===========*/
-  const acceptanceList = [ 'std_id', 'accept_time', 'accept_done' ]
-  const acceptanceDoneList = [ 'std_id', 'accept_time', 'accept_score','accept_score' ]
+  const acceptanceList = [ 'std_id','std_name', 'accept_time','accept_state', 'accept_content ','accept_score','accept_label','accept_score' ]
+  const acceptanceDoneList = [ 'std_id','std_name' ,'accept_time', 'accept_score','accept_score' ]
   
 
   const params = useParams();
@@ -106,10 +96,19 @@ export default function TAcceptanceList() {
   const hwname = params.hw_name;
   
   const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
- 
+
+   // 成功小綠綠
+   const [openS, setOpenS] = React.useState(false);
+   // 成功小綠綠2
+   const [openS2, setOpenS2] = React.useState(false);
+   // 失敗小紅1
+   const [openErr1, setOpenErr1] = React.useState(false);
+   // 警告小橘
+   const [openWarn, setOpenWarn] = React.useState(false);
+   // 警告小橘2
+   const [openWarn2, setOpenWarn2] = React.useState(false);
+
+
 
   useEffect(() => {
       async function fetchData() {
@@ -121,9 +120,49 @@ export default function TAcceptanceList() {
   }, []);
 
    console.log(acceptances);
-
-  // let history = useHistory(); //傳值跳頁的方法
   
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handledelete = () =>
+  {
+    fetch('/teacher/acceptance/deleteAcceptance',{
+      method: 'DELETE',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        hw_name: hwname,
+      })
+  })
+  .then(res => {
+    async function fetchres(){
+      const test = await res.text();  //接收後端傳來的訊息
+      if (test === "此學生尚未點選驗收") //帳號已註冊過
+      {
+          //alert("你還沒點過驗收");
+          setOpenWarn2(true);
+      }
+      else if(test === "老師已驗收完成無法取消驗收") //信箱不包含@
+      {
+          //alert("老師已經打分數了，無法取消!");
+          setOpenErr1(true);
+      }
+      else
+      {
+          //alert("取消驗收成功!");    
+          setOpenS2(true);
+          // history.push(`/acceptance/${csid}/${hwname}`);     
+          window.location.reload();
+
+      }
+      
+  } fetchres() })
+  
+}
+
   return (
     <div className={classes.div}>
   
@@ -137,8 +176,8 @@ export default function TAcceptanceList() {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="未完成" href="/drafts" {...a11yProps(0)} />
-                <LinkTab label="已完成" href="/trash" {...a11yProps(1)} />
+                <LinkTab label="舉手排序" href="/drafts" {...a11yProps(0)} />
+                <LinkTab label="驗收完成" href="/trash" {...a11yProps(1)} />
             
                 </Tabs>
             </AppBar>
@@ -151,8 +190,12 @@ export default function TAcceptanceList() {
             <TableHead>
                 <TableRow>
                   <TableCell component="th" scope="row" align="center">學號</TableCell>
+                  <TableCell component="th" scope="row" align="center">姓名</TableCell>
                   <TableCell component="th" scope="row" align="center">時間</TableCell>
-                  {/* <TableCell component="th" scope="row" align="center">狀態</TableCell> */}
+                  <TableCell component="th" scope="row" align="center">狀態</TableCell>
+                  <TableCell component="th" scope="row" align="center">註記內容</TableCell>
+                  <TableCell component="th" scope="row" align="center">分數</TableCell>
+                  <TableCell component="th" scope="row" align="center">標記</TableCell>
                   <TableCell component="th" scope="row" align="center">處理</TableCell>
                 </TableRow>
             </TableHead>
@@ -163,7 +206,7 @@ export default function TAcceptanceList() {
                     <TableRow key={index}>
                       {/* <TableCell ></TableCell> */}
                     {
-                        acceptanceList.map( (list, i) => i < 2 ?
+                        acceptanceList.map( (list, i) => i < 7 ?
                             <TableCell key={i} component="th" scope="row" align="center">
                                {acceptance[list]}
                             </TableCell>
@@ -172,15 +215,16 @@ export default function TAcceptanceList() {
                              <AcceptScore
                              stdid={acceptance['std_id']}
                              hwid={acceptance['accept_hw_id']}
-                            //  time={acceptance["accept_time"]}
-                            //  done={acceptance["accept_done"]}
+                             stdname={acceptance['std_name']}
                              />
 
-                            {/* <IconButton  variant="outlined"  style={{color:brown[500]}} 
-                             //onClick={(e)=>deletstudent(e,student.std_id)}
+                            <Button  
+                            onClick={handledelete}
+                            variant="contained" 
+                            className={classes.button} 
                              >
-                              <DeleteOutlineIcon/>
-                            </IconButton> */}
+                            完成問題
+                            </Button>
                              
                             </TableCell>
                          )
@@ -210,6 +254,7 @@ export default function TAcceptanceList() {
             <TableHead>
                 <TableRow>
                   <TableCell component="th" scope="row" align="center">學號</TableCell>
+                  <TableCell component="th" scope="row" align="center">姓名</TableCell>
                   <TableCell component="th" scope="row" align="center">時間</TableCell>
                   <TableCell component="th" scope="row" align="center">分數</TableCell>
                   <TableCell component="th" scope="row" align="center">處理</TableCell>
@@ -225,7 +270,7 @@ export default function TAcceptanceList() {
                       
                     {
                         
-                        acceptanceDoneList.map( (list, i) => i < 3 ?
+                        acceptanceDoneList.map( (list, i) => i < 4 ?
                             <TableCell key={i} component="th" scope="row" align="center" >
                                {acceptance[list]}
                             </TableCell>
@@ -235,8 +280,6 @@ export default function TAcceptanceList() {
                              stdid={acceptance['std_id']}
                              hwid={acceptance['accept_hw_id']}
                              score={acceptance['accept_score']}
-                            //  time={acceptance["accept_time"]}
-                            //  done={acceptance["accept_done"]}
                              />
                             
                              

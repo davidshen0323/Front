@@ -57,7 +57,7 @@ export default function GPS() {
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
-  const [uujoinID,setuujoinID] = React.useState(uuidv4);
+  const [uujoinID,setUuJoinID] = React.useState('0');
   const [clicked, setClicked] = React.useState(true);
   const params = useParams();
   // console.log(params);
@@ -129,6 +129,7 @@ export default function GPS() {
 
   const handleClickOpen = () => {
     setOpen(true);
+    setUuJoinID(uuidv4());
   };
   const ErrClose = () => {
     setOpenS(false);
@@ -139,8 +140,8 @@ export default function GPS() {
     setClicked(true);
     
     // .then(res => {
-      // console.log(rcid)
-      // async function putData() {
+      console.log(rcid)
+      async function putData() {
       
       fetch('/teacher/rollcall/closedRollcall/',{
         method: 'PUT',
@@ -153,21 +154,27 @@ export default function GPS() {
                         
         })
     })
-  };
+    .then(res => {
+      setUuJoinID('0');
+      setOpen(false);
+    })
+  }
+  putData();
+};
 
   
-  const [inputs, setInputs] = React.useState({
-    rc_id:'',
-    rc_inputsource:'',
-    //qrcode:'',
-    //宣告要接值的變數
-  });
+  // const [inputs, setInputs] = React.useState({
+  //   rc_id:'',
+  //   rc_inputsource:'',
+  //   //qrcode:'',
+  //   //宣告要接值的變數
+  // });
 
-  const handleChange = user => event => {
-    event.persist();
-    setInputs(inputs => ({...inputs, [user]: event.target.value}));
-    //不知道怎麼解釋哈哈哈哈
-}
+//   const handleChange = user => event => {
+//     event.persist();
+//     setInputs(inputs => ({...inputs, [user]: event.target.value}));
+//     //不知道怎麼解釋哈哈哈哈
+// }
 
 
   return (

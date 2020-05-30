@@ -81,20 +81,6 @@ export default function Qrcode() {
       
       // const test = uuidv4();
       
-      
-      const handleClickOpen = () => {
-        setOpen(true);
-        setQrcode(uuidv4());
-        
-      };
-      const ErrClose = () => {
-        setOpenS(false);
-        setOpenErr1(false);
-        setOpenC(false);
-        setClicked(false);
-      };  
-
-      
       const [rcid, setRcid] = React.useState(0)
       
       const handleSubmit = () => {
@@ -149,6 +135,20 @@ export default function Qrcode() {
   
   
 }
+      const handleClickOpen = () => {
+        setOpen(true);
+        setQrcode(uuidv4());
+        
+      };
+      const ErrClose = () => {
+        setOpenS(false);
+        setOpenErr1(false);
+        setOpenC(false);
+        setClicked(false);
+      };  
+
+      
+      
 // const Rcid = ['rc_id'];
 
 
