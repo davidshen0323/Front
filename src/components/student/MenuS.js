@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import logo from '../../img/Rollsup.jpeg';
 import { useParams} from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
 import AppsIcon from '@material-ui/icons/Apps';
 import ListIcon from '@material-ui/icons/List';
 import TreeView from '@material-ui/lab/TreeView';
@@ -14,7 +13,6 @@ import { useTheme } from '@material-ui/core/styles';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -352,7 +350,7 @@ export default function LoginMenu() {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 24 }} />}
     >
-      <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}>
+      {/* <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}> */}
         {/* <StyledTreeItem nodeId="2" labelText="功能" labelIcon={AppsIcon}> */}
           <StyledTreeItem
             onClick={f1}
@@ -392,7 +390,7 @@ export default function LoginMenu() {
           <StyledTreeItem
             onClick={f5}
             nodeId="6"
-            labelText="班級名單"
+            labelText="課程資訊"
             labelIcon={GroupIcon}
             color="#a250f5"
             bgColor="#f3e8fd"
@@ -421,11 +419,11 @@ export default function LoginMenu() {
             color="#3c8039"
             bgColor="#e6f4ea"
           />
-        </StyledTreeItem>
+        {/* </StyledTreeItem> */}
         <Divider />
 
       {/* </StyledTreeItem> */}
-      <StyledTreeItem onClick={f9} nodeId="10" labelText="基本資料" labelIcon={PermContactCalendarIcon} />
+      <StyledTreeItem onClick={f9} nodeId="10" labelText="基本資料" labelIcon={PermContactCalendarIcon} color="#1a73e8" bgColor="#e8f0fe"/>
       <Divider />
       <form action="/logout" method="POST">
         <Button className={classes.logoutButton} type="submit" variant="outline" >登出</Button>

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import MyMenu from '../MenuS';
 import MMTable from './MMtableS';
-import Paper from '@material-ui/core/Paper';
 import { useParams } from 'react-router-dom';
+import {TableContainer, Paper, Table, TableRow, TableCell} from '@material-ui/core';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
@@ -15,9 +16,18 @@ const useStyles = makeStyles({
     Paper:{
         width: '90%',
         margin: 'auto', 
-        marginTop:'5%',   
-        marginBottom:'5%',
+        marginTop:'3%',   
         boxShadow:"1px 1px 1px 1px #9E9E9E",    
+    },
+    Paper2:{
+      width: '80%',
+      margin: 'auto', 
+      marginTop:'3%',   
+      boxShadow:"1px 1px 1px 1px #9E9E9E",    
+  },
+    typo: {
+      fontFamily: 'Microsoft JhengHei',
+      fontWeight:'bold'
     },
   });
 
@@ -25,11 +35,48 @@ const useStyles = makeStyles({
 export default function Member() {
     const classes = useStyles();
     const params = useParams();
+    const csid = params.cs_id;
+    const [teacherInformation, setTeacherInformation] = React.useState([]);
+ useEffect(() => {
+  async function fetchData() {
+
+      const result = await axios.get(`/student/Course/studentList/TeacherInformation/${csid}`);
+      console.log(result.data);
+      setTeacherInformation(result.data);
+  }
+  fetchData();
+}, []);
     // const csid = params.cs_id;
         return (
           <div className={classes.div}>
                 <MyMenu/>
           <br/>
+          <Paper className={classes.Paper2}>
+            <TableContainer>
+            <Table size="small">
+                    <TableRow >
+                        <TableCell width="40%" align="center" className={classes.typo}>教師姓名</TableCell>
+                        <TableCell width="40%" align="center" className={classes.typo}>{teacherInformation.teacher_name}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="center" className={classes.typo}>系所</TableCell>
+                        <TableCell align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_department}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="center" className={classes.typo}>電話</TableCell>
+                        <TableCell align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_phone}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="center" className={classes.typo}>Email</TableCell>
+                        <TableCell align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_mail}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="center" className={classes.typo}>辦公室位置</TableCell>
+                        <TableCell align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_office}</TableCell>
+                    </TableRow>
+                </Table>
+                </TableContainer>
+            </Paper>
                 <Paper className={classes.Paper}>
                   <MMTable
                     csid={params.cs_id}

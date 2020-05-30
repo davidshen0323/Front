@@ -1,18 +1,12 @@
 import React from 'react';
-import { Button, TextField, Paper, Snackbar, Radio, Typography, InputLabel } from '@material-ui/core/';
+import clsx from 'clsx';
+import { List } from 'antd-mobile';
+import Select from '@material-ui/core/Select';
 import MuiAlert from "@material-ui/lab/Alert";
-import MyMenu from './MenuisLogouted';
+import { useHistory, Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-// import Logo from './logo.js';
-import { List } from 'antd-mobile';
-import clsx from 'clsx';
-import { useHistory, Link } from "react-router-dom";
-// import FormHelperText from '@material-ui/core/FormHelperText';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-
-
+import { Button, TextField, Paper, Snackbar, Radio, Typography, InputLabel } from '@material-ui/core/';
 
 const useStyles = makeStyles(theme => ({
 
@@ -93,11 +87,12 @@ export default function RegisterT() {
         user: '',
         pwd: '',
         repeatpwd: '',
-        names: '',
+        name: '',
         // gender: '',
         // dpart: '',
         phone: '',
-        mail: ''
+        mail: '',
+        office:''
         //宣告要接值的變數
     });
 
@@ -118,17 +113,17 @@ export default function RegisterT() {
     let history = useHistory(); //傳值跳頁的方法
     const handleSubmit = () => {
         if (inputs.user.length > 0
-            && inputs.user.length > 0
             && inputs.pwd.length > 0
             && inputs.repeatpwd.length > 0
-            && inputs.names.length > 0
+            && inputs.name.length > 0
             && selectedvalue !== null
-            // && inputs.dpart.length > 0
+            && dpart.dpart.length > 0
+            && inputs.office.length > 0
             && inputs.phone.length > 0
             && inputs.mail.length > 0
             && inputs.repeatpwd === inputs.pwd) //每個輸入格都不為空值、驗證密碼等於密碼
             {
-                fetch('/teacher_re', {
+                fetch('/teacher_re/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -136,20 +131,21 @@ export default function RegisterT() {
                     body: JSON.stringify({
                         teacher_id: inputs.user,
                         teacher_password: inputs.pwd,
-                        teacher_names: inputs.names,
+                        teacher_name: inputs.name,
                         teacher_gender: selectedvalue,
                         teacher_department: dpart.dpart,
                         teacher_phone: inputs.phone,
-                        teacher_mail: inputs.mail
+                        teacher_mail: inputs.mail,
+                        teacher_office: inputs.office,
                     })
                 })
                 .then(res => {
                     
                     async function fetchres() {
                         const test = await res.text();  //接收後端傳來的訊息
-                        if (test === "This account has already exist!") //帳號已註冊過
+                        if (test === "此帳號已存在") //帳號已註冊過
                         {
-                            //alert("已註冊過!");
+                            //alert("此帳號已存在!");
                             setOpenS(false);
                             setOpenErr1(true);
                             setOpenErr2(false);
@@ -159,9 +155,9 @@ export default function RegisterT() {
                             console.log(1);
                             
                         }
-                        else if (test === "request failed. Email format error!") //信箱不包含@
+                        else if (test === "帳號長度不符") //帳號長度不符
                         {
-                            //alert("信箱格式有誤! 請輸入有效信箱!");
+                            //alert("帳號長度不符!");
                             setOpenS(false);
                             setOpenErr1(false);
                             setOpenErr2(true);
@@ -170,7 +166,7 @@ export default function RegisterT() {
                             
                             console.log(2);
                         }
-                        else if (inputs.user.length !== 5) //學號長度不等於5
+                        else if (test === "email格式錯誤") //email格式錯誤
                         {
                             //alert("帳號長度有誤! 請再次確認!");
                             setOpenS(false);
@@ -188,6 +184,7 @@ export default function RegisterT() {
                             setOpenErr2(false);
                             setOpenErr3(false);
                             setOpenErr4(true);
+                            console.log(1233);
                         }
                         else {
                             //alert("註冊成功!");
@@ -211,7 +208,7 @@ export default function RegisterT() {
 
             else {
                 //alert("請再次確認!!")
-                setOpenS(false);
+            setOpenS(false);
             setOpenErr1(false);
             setOpenErr2(false);
             setOpenErr3(false);
@@ -294,10 +291,10 @@ export default function RegisterT() {
 
                         <TextField
                             required
-                            id="names"
+                            id="name"
                             label="姓名"
-                            value={inputs.names}
-                            onChange={handleChange('names')}
+                            value={inputs.name}
+                            onChange={handleChange('name')}
                             size="small"
                             variant="outlined"
                             className={classes.textfield}
@@ -388,6 +385,16 @@ export default function RegisterT() {
 
                         <TextField
                             required
+                            id="office"
+                            label="辦公室位置"
+                            value={inputs.office}
+                            onChange={handleChange('office')}
+                            size="small"
+                            variant="outlined"
+                            className={classes.textfield}
+                        />
+                        <TextField
+                            required
                             id="phone"
                             label="電話號碼"
                             value={inputs.phone}
@@ -438,19 +445,19 @@ export default function RegisterT() {
             {/* 失敗小紅框1 */}
             <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{ marginBottom: 100 }}>
                 <Alert severity="error">
-                    已註冊過！
+                    該帳號已存在！
                 </Alert>
             </Snackbar>
             {/* 失敗小紅框2 */}
             <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{ marginBottom: 100 }}>
                 <Alert severity="error">
-                    信箱格式有誤！ 請輸入有效信箱！
+                    帳號長度有誤！請再次確認！
                 </Alert>
             </Snackbar>
             {/* 失敗小紅框3 */}
             <Snackbar open={openErr3} autoHideDuration={2000} onClose={ErrClose} style={{ marginBottom: 100 }}>
                 <Alert severity="error">
-                    帳號長度有誤！ 請再次確認！
+                    Email格式錯誤！
                 </Alert>
             </Snackbar>
             {/* 失敗小紅框4 */}

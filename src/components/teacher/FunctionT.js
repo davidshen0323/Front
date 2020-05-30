@@ -202,17 +202,17 @@ const useStyles = makeStyles(theme => ({
                 <CardContent>
               <CardMedia
               component="img"
-              alt="班級名單"
+              alt="課程資訊"
               // height="140"
               image={classs}
-              title="班級名單"
+              title="課程資訊"
               className={classes.image}
               />
                 
               </CardContent>
             <CardActions>
               
-                <Typography className={classes.Cardtext}>班級名單</Typography>
+                <Typography className={classes.Cardtext}>課程資訊</Typography>
               
             </CardActions>
               </ButtonBase>
