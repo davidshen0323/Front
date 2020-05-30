@@ -63,12 +63,14 @@ export default function EditEmail({ open, handleClose })  {
       {
           //alert("email格式錯誤");
           setOpenErr1(true);
+          setOpenErr2(false);
           console.log(1);
       }
       else if(test === "This account has already exist!") //信箱不包含@
       {
           //alert("此信箱已存在");
           setOpenErr2(true);
+          setOpenErr1(false);
           console.log(2);
       }
       else
@@ -92,12 +94,16 @@ export default function EditEmail({ open, handleClose })  {
     setInputs(1);
     email.email='';
   };
-    
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    setOpenErr2(false);
+};
+
   const handleChange = fieldname => event => {
     setInputs(2);
     event.persist();
     setEmail(email => ({...email, [fieldname]: event.target.value}));
-    
 }
 
   return (
@@ -113,7 +119,7 @@ export default function EditEmail({ open, handleClose })  {
             目前Email：406401628@mail.fju.edu.tw
           </Typography> */}
 
-<TextField
+          <TextField
           label="新的Email"
           variant="outlined"
           size="small"
@@ -136,13 +142,13 @@ export default function EditEmail({ open, handleClose })  {
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}
-        <Snackbar open={openErr1} style={{marginBottom:100}}>
+        <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="error">
             Email格式錯誤！
           </Alert>
         </Snackbar>
         {/* 失敗小紅框2 */}
-        <Snackbar open={openErr2} style={{marginBottom:100}}>
+        <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="error">
             此信箱已存在！
           </Alert>

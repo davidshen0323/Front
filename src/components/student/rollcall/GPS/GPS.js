@@ -1,15 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import {useState,useEffect} from 'react';
+import { useEffect } from 'react';
 import ComButton from "../../../ComButton";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { usePosition } from 'use-position';
 import MuiAlert from "@material-ui/lab/Alert";
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import {Typography, Toolbar, AppBar, Grid, IconButton, Slide, Backdrop, Snackbar, Dialog, Button} from "@material-ui/core";
-
+import {Toolbar, AppBar, Grid, IconButton, Slide, Backdrop, Snackbar, Dialog, Button} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {

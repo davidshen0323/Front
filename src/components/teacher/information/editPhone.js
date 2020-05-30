@@ -32,15 +32,10 @@ function Alert(props) {
 
 export default function EditEmail({ open, handleClose })  {
   const classes = useStyle();
-  
-
-  // 成功小綠綠
+    // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
-  // 失敗小紅2
- // const [openErr2, setOpenErr2] = React.useState(false);
-
   const [inputs, setInputs] = React.useState(1);
   const [phone, setPhone] = React.useState({
     phone: '',
@@ -51,8 +46,6 @@ export default function EditEmail({ open, handleClose })  {
 
   const submitClick = () => {
   
-    
-    
     fetch('/teacher/resetPhone',{
       method: 'PUT',
       headers: {
@@ -101,7 +94,11 @@ export default function EditEmail({ open, handleClose })  {
     setInputs(1);
     phone.phone='';
   };
-    
+
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+};
   
 
   return (
@@ -142,13 +139,13 @@ export default function EditEmail({ open, handleClose })  {
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
-            已修改完成！
+            修改完成！
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}
-        <Snackbar open={openErr1} style={{marginBottom:100}}>
-          <Alert severity="error" onClose={submitClose}>
-          電話格式不正確，請輸入10位數字的電話號碼！
+        <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="error" >
+            電話格式不正確，請輸入10位數字的電話號碼！
           </Alert>
         </Snackbar>
         

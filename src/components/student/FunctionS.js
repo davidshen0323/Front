@@ -1,20 +1,8 @@
-// @ts-ignore
-import React, { Component, useEffect} from 'react';
-import {Link, useParams} from "react-router-dom";
+import React from 'react';
 import MyMenu from './MenuS';
+import {Link, useParams} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-// @ts-ignore
-import Grid from '@material-ui/core/Grid';
-// @ts-ignore
-import axios from 'axios';
-// @ts-ignore
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Typography from '@material-ui/core/Typography';
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
+import {CardMedia, CardContent, CardActions, CardActionArea, Card, Grid, Typography, ButtonBase } from '@material-ui/core/';
 
 // @ts-ignore
 const useStyles = makeStyles(theme => ({
@@ -131,7 +119,7 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="點名"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/1828/1828867.svg"
+              image="https://image.flaticon.com/icons/svg/1827/1827524.svg"
               title="點名"
               className={classes.image}
               />
@@ -162,7 +150,7 @@ const useStyles = makeStyles(theme => ({
 
               alt="請假申請"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/1828/1828610.svg"
+              image="https://image.flaticon.com/icons/svg/2311/2311995.svg"
               title="請假申請"
 
               className={classes.image}
@@ -192,17 +180,17 @@ const useStyles = makeStyles(theme => ({
                 <CardContent>
               <CardMedia
               component="img"
-              alt="班級名單"
+              alt="課程資訊"
               // height="140"
               image="https://image.flaticon.com/icons/svg/2312/2312129.svg"
-              title="班級名單"
+              title="課程資訊"
               className={classes.image}
               />
                 
               </CardContent>
             <CardActions>
               
-                <Typography className={classes.Cardtext}>班級名單</Typography>
+                <Typography className={classes.Cardtext}>課程資訊</Typography>
               
             </CardActions>
               </ButtonBase>
@@ -227,7 +215,7 @@ const useStyles = makeStyles(theme => ({
 
               alt="公告"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/1827/1827489.svg"
+              image="https://image.flaticon.com/icons/svg/1827/1827412.svg"
               title="公告"
 
               className={classes.image}
@@ -292,7 +280,7 @@ const useStyles = makeStyles(theme => ({
               component="img"
               alt="課堂舉手"
               // height="140"
-              image="https://image.flaticon.com/icons/svg/2107/2107558.svg"
+              image="https://image.flaticon.com/icons/svg/2107/2107491.svg"
               title="課堂舉手"
               className={classes.image}
               >
