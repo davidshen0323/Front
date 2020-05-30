@@ -41,12 +41,14 @@ const useStyles = makeStyles((theme) => ({
   },
 
   logoutButton: {
-    marginRight: theme.spacing(2),
+    // marginRight: theme.spacing(2),
+    marginRight: 'auto',
+    marginLeft: 'auto',
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
     fontSize:17,
-    color: "#582707",
-    backgroundColor: "#fffaea",
+    // color: "#582707",
+    // backgroundColor: "#fffaea",
   },
   School: {
     minWidth: 100,
