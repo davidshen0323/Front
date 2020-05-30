@@ -355,7 +355,7 @@ export default function LoginMenu() {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 24 }} />}
     >
-      <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}>
+      {/* <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}> */}
         {/* <StyledTreeItem nodeId="2" labelText="功能" labelIcon={AppsIcon}> */}
           <StyledTreeItem
             onClick={f1}
@@ -424,7 +424,7 @@ export default function LoginMenu() {
             color="#3c8039"
             bgColor="#e6f4ea"
           />
-        </StyledTreeItem>
+        {/* </StyledTreeItem> */}
         <Divider />
 
       {/* </StyledTreeItem> */}

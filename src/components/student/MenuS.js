@@ -22,6 +22,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
@@ -47,12 +48,14 @@ const useStyles = makeStyles((theme) => ({
   },
 
   logoutButton: {
-    marginRight: theme.spacing(2),
+    // marginRight: theme.spacing(2),
+    marginRight: 'auto',
+    marginLeft: 'auto',
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
     fontSize:17,
-    color: "#582707",
-    backgroundColor: "#fffaea",
+    // color: "#582707",
+    // backgroundColor: "#fffaea",
   },
   School: {
     minWidth: 100,
@@ -356,7 +359,7 @@ export default function LoginMenu() {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 24 }} />}
     >
-      <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}>
+      {/* <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}> */}
         {/* <StyledTreeItem nodeId="2" labelText="功能" labelIcon={AppsIcon}> */}
           <StyledTreeItem
             onClick={f1}
@@ -425,7 +428,7 @@ export default function LoginMenu() {
             color="#3c8039"
             bgColor="#e6f4ea"
           />
-        </StyledTreeItem>
+        {/* </StyledTreeItem> */}
         <Divider />
 
       {/* </StyledTreeItem> */}
