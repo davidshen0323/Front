@@ -378,48 +378,48 @@ export default function LoginMenu() {
             nodeId="4"
             labelText="點名"
             labelIcon={AccessTimeIcon}
-            color="#1a73e8"
-            bgColor="#e8f0fe"
+            color="#fc573b"
+            bgColor="#ffe6e2"
           />
           <StyledTreeItem
             onClick={f4}
             nodeId="5"
             labelText="請假申請"
             labelIcon={AssignmentIcon}
-            color="#e3742f"
-            bgColor="#fcefe3"
+            color="#ffa81d"
+            bgColor="#fef2dc"
           />
           <StyledTreeItem
             onClick={f5}
             nodeId="6"
             labelText="課程資訊"
             labelIcon={GroupIcon}
-            color="#a250f5"
-            bgColor="#f3e8fd"
+            color="#ffa81d"
+            bgColor="#fffadd"
           />
           <StyledTreeItem
             onClick={f6}
             nodeId="7"
             labelText="公告"
             labelIcon={NotificationsActiveIcon}
-            color="#3c8039"
-            bgColor="#e6f4ea"
+            color="#bd63f9"
+            bgColor="#f5e6fd"
           />
           <StyledTreeItem
             onClick={f7}
             nodeId="8"
             labelText="發問Q&A"
             labelIcon={HelpOutlineIcon}
-            color="#3c8039"
-            bgColor="#e6f4ea"
+            color="#44cedf"
+            bgColor="#e3f8fb"
           />
           <StyledTreeItem
             onClick={f8}
             nodeId="9"
             labelText="課堂舉手"
             labelIcon={PanToolIcon}
-            color="#3c8039"
-            bgColor="#e6f4ea"
+            color="#4eba64"
+            bgColor="#f0ffe8"
           />
         {/* </StyledTreeItem> */}
         <Divider />
