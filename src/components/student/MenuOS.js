@@ -334,8 +334,8 @@ export default function LoginMenu() {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 24 }} />}
     >
-        <StyledTreeItem onClick={f1} nodeId="1" labelText="我的課程" labelIcon={HomeIcon}/>
-        <StyledTreeItem onClick={f2} nodeId="2" labelText="基本資料" labelIcon={PermContactCalendarIcon}/>
+        <StyledTreeItem onClick={f1} nodeId="1" labelText="我的課程" labelIcon={HomeIcon} color="#1a73e8" bgColor="#e8f0fe"/>
+        <StyledTreeItem onClick={f2} nodeId="2" labelText="基本資料" labelIcon={PermContactCalendarIcon} color="#1a73e8" bgColor="#e8f0fe"/>
         </TreeView>
         </Drawer>
       <main
