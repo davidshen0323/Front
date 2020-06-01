@@ -167,6 +167,7 @@ export default function AcceptanceList(props) {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+          cs_id:csid,
           hw_name: hwname,
           accept_state:"1",
       })
@@ -210,6 +211,7 @@ export default function AcceptanceList(props) {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+          cs_id:csid,
           hw_name: hwname,
           accept_state:"2",
       })

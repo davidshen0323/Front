@@ -11,6 +11,8 @@ import { useParams } from 'react-router-dom';
 import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
 import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+//import Exportexcel from './model';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,7 +61,7 @@ const useStyles = makeStyles(theme =>({
     
   Link: {
       fontSize:'14px',
-      paddingLeft:theme.spacing(96),
+      paddingLeft:theme.spacing(2),
       fontFamily: 'Microsoft JhengHei',
     },  
   }))
@@ -90,7 +92,7 @@ console.log('csid',csid);
   const exportexcel = () => {
     async function fetchData() {
         const result = await axios.get(`/teacher/downloadExcel/Rollcall/${csid}/`);
-        //setAcceptances(result.data);
+        console.log(result.data);
     }
     fetchData();
 }
@@ -105,9 +107,10 @@ console.log('csid',csid);
                 <LinkTab label="時間查看" href="/rollcallrecordT" {...a11yProps(0)}   style={{ fontFamily:'微軟正黑體'}}/>
                 <LinkTab label="學生查看" href="/rollcallrecordS" {...a11yProps(1)}   style={{ fontFamily:'微軟正黑體'}}/>
                
-                <Link component="button" variant="body" color="primary" className={classes.Link} onClick={exportexcel}>
+                <Button  color="primary" className={classes.Link} onClick={exportexcel}>
+                  {/* <Exportexcel/> */}
                   匯出成Excel檔
-                </Link>
+                </Button>
               
                 </Tabs>
             </AppBar>
