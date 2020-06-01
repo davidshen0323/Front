@@ -169,15 +169,15 @@ export default function TAcceptanceList() {
       <MyMenu/>
 
       {/* <Box border={1} mx="auto" width="60%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper"> */}
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="default" style={{maxWidth:'96%',margin:'auto'}}>
                 <Tabs
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="舉手排序" href="/drafts" {...a11yProps(0)} />
-                <LinkTab label="驗收完成" href="/trash" {...a11yProps(1)} />
+                <LinkTab label="舉手排序" href="/drafts" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
+                <LinkTab label="驗收完成" href="/trash" {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
             
                 </Tabs>
             </AppBar>
@@ -189,14 +189,14 @@ export default function TAcceptanceList() {
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
-                  <TableCell component="th" scope="row" align="center">學號</TableCell>
-                  <TableCell component="th" scope="row" align="center">姓名</TableCell>
-                  <TableCell component="th" scope="row" align="center">時間</TableCell>
-                  <TableCell component="th" scope="row" align="center">狀態</TableCell>
-                  <TableCell component="th" scope="row" align="center">註記內容</TableCell>
-                  <TableCell component="th" scope="row" align="center">分數</TableCell>
-                  <TableCell component="th" scope="row" align="center">標記</TableCell>
-                  <TableCell component="th" scope="row" align="center">處理</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>姓名</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>時間</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>狀態</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>註記內容</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>分數</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>標記</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>處理</TableCell>
                 </TableRow>
             </TableHead>
 
@@ -253,11 +253,11 @@ export default function TAcceptanceList() {
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
-                  <TableCell component="th" scope="row" align="center">學號</TableCell>
-                  <TableCell component="th" scope="row" align="center">姓名</TableCell>
-                  <TableCell component="th" scope="row" align="center">時間</TableCell>
-                  <TableCell component="th" scope="row" align="center">分數</TableCell>
-                  <TableCell component="th" scope="row" align="center">處理</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>姓名</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>時間</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>分數</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>處理</TableCell>
                   
                 </TableRow>
             </TableHead>

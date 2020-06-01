@@ -192,15 +192,15 @@ const handleDelete = (qstudent) =>
      <div className={classes.div}>
 
         <MyMenu/>
-            <AppBar position="static" color="default">
+            <AppBar position="static" color="default" style={{maxWidth:'96%',margin:'auto'}}>
                 <Tabs
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="未回答" href="/drafts" {...a11yProps(0)} />
-                <LinkTab label="已回答" href="/trash" {...a11yProps(1)} />
+                <LinkTab label="未解決" href="/drafts" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
+                <LinkTab label="已解決" href="/trash" {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
             
                 </Tabs>
             </AppBar>

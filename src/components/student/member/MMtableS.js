@@ -65,6 +65,7 @@ function EnhancedTableHead(props) {
           
         {headCells.map(headCell => (
           <TableCell
+            style={{ fontFamily:'微軟正黑體'}}
             key={headCell.id}
             align={headCell.numeric ='left'}
             padding={headCell.disablePadding ? 'none' : 'default'}

@@ -70,9 +70,9 @@ export default function ApplyRDDp() {
                 onChange={handleChange}
                 variant="fullWidth"
                 >
-                <LinkTab label="審核中" href="/ING" {...a11yProps(0)} />
-                <LinkTab label="未通過" href="/CheckBlock" {...a11yProps(1)} />
-                <LinkTab label="已通過" href="/CheckBlock" {...a11yProps(2)} />
+                <LinkTab label="審核中" href="/ING" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
+                <LinkTab label="未通過" href="/CheckBlock" {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
+                <LinkTab label="已通過" href="/CheckBlock" {...a11yProps(2)} style={{ fontFamily:'微軟正黑體'}}/>
             
                 </Tabs>
             </AppBar>
