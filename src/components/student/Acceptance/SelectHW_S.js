@@ -95,9 +95,9 @@ export default function SelectHW() {
           <Table >
             <TableHead>
                 <TableRow>
-                    <TableCell align="center" className={classes.typo}>作業名稱</TableCell>
-                    <TableCell align="center" className={classes.typo}>內容</TableCell>
-                    <TableCell align="center" className={classes.typo}>日期</TableCell>
+                    <TableCell align="center" className={classes.typo} style={{ fontFamily:'微軟正黑體'}}>作業名稱</TableCell>
+                    <TableCell align="center" className={classes.typo} style={{ fontFamily:'微軟正黑體'}}>內容</TableCell>
+                    <TableCell align="center" className={classes.typo} style={{ fontFamily:'微軟正黑體'}}>日期</TableCell>
                     {/* <TableCell align="center">分數</TableCell> */}
                     
                 </TableRow>

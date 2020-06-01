@@ -305,15 +305,15 @@ export default function AcceptanceList(props) {
   
       <MyMenu/>
 
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="default" style={{maxWidth:'96%',margin:'auto'}}>
                 <Tabs
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
-                <LinkTab label="舉手排序" href="/drafts" {...a11yProps(0)} />
-                <LinkTab label="驗收完成" href="/trash" {...a11yProps(1)} />
+                <LinkTab label="舉手排序" href="/drafts" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}} />
+                <LinkTab label="驗收完成" href="/trash" {...a11yProps(1)}  style={{ fontFamily:'微軟正黑體'}}/>
             
                 </Tabs>
             </AppBar>
@@ -321,14 +321,14 @@ export default function AcceptanceList(props) {
         <div className={classes.root}>
       <Paper>
       <TableContainer>
-        <Table className={classes.table} size="small">
+        <Table className={classes.table} size="small" style={{ fontFamily:'微軟正黑體'}}>
 
             <TableHead>
                 <TableRow>
-                    <TableCell component="th" scope="row" align="center">學號</TableCell>
-                    <TableCell component="th" scope="row" align="center">姓名</TableCell>
-                    <TableCell component="th" scope="row" align="center">時間</TableCell>
-                    <TableCell component="th" scope="row" align="center">狀態</TableCell>
+                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
+                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>姓名</TableCell>
+                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>時間</TableCell>
+                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>狀態</TableCell>
                 </TableRow>
             </TableHead>
             
@@ -410,10 +410,10 @@ export default function AcceptanceList(props) {
                 <TableRow>
                     {/* <TableCell>排序</TableCell> */}
                     {/* <TableCell component="th" scope="row" align="center">排序</TableCell> */}
-                    <TableCell component="th" scope="row" align="center">學號</TableCell>
-                    <TableCell component="th" scope="row" align="center">姓名</TableCell>
-                    <TableCell component="th" scope="row" align="center">時間</TableCell>
-                    <TableCell component="th" scope="row" align="center">分數</TableCell>
+                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
+                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>姓名</TableCell>
+                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>時間</TableCell>
+                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>分數</TableCell>
                 </TableRow>
             </TableHead>
             
@@ -501,32 +501,3 @@ export default function AcceptanceList(props) {
        
 )
 }
-
-
-
-
-// import React, {Component} from 'react';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableRow from '@material-ui/core/TableRow';
-// import { Button } from '@material-ui/core/';
-
-
-// export default class Acceptance extends Component{
-
-//   render(){
-//     return (
-//       <TableRow>
-//         <TableCell>{this.props.acceptance.sort}</TableCell>          
-//         <TableCell>{this.props.acceptance.stuid}</TableCell>
-//         <TableCell>{this.props.acceptance.time}</TableCell>
-//         <TableCell> {this.props.acceptance.status}</TableCell>
-//         <TableCell>
-//           {(this.props.acceptance.stuid == "406401628") &&
-//              <Button>取消驗收</Button>
-//           }</TableCell>
-//       </TableRow>
-//     )
-    
-//   }
-    
-// }

@@ -62,6 +62,7 @@ function EnhancedTableHead(props) {
 
         {headCells.map(headCell => (
           <TableCell
+            style={{ fontFamily:'微軟正黑體'}}
             key={headCell.id}
             align={headCell.numeric = 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
@@ -102,9 +103,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
-  paper: {
-    width: '100%',
-  },
   table: {
     minWidth: 750,
   },
@@ -118,11 +116,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: 20,
     width: 1,
-  },
-  container: {
-    display: 'flex',
-  },
-  
+  },  
 }));
 /*---------------------------------------------*/
 

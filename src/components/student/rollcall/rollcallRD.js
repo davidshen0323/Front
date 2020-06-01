@@ -90,14 +90,14 @@ export default function RollcallRD() {
 
 
       <MyMenu/>
-         <AppBar position="static" color="inherite" >
+         <AppBar position="static" color="inherite" style={{maxWidth:'97%',margin:'auto'}}>
                 <Tabs
                 value={value}
                 onChange={handleChange}
                 variant="fullWidth"
                 >
-                <LinkTab label="點名中" href="/rollcallrecordT" {...a11yProps(0)} />
-                <LinkTab label="點名記錄" href="/rollcallrecordS" {...a11yProps(1)} />
+                <LinkTab label="點名中" href="/rollcallrecordT" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
+                <LinkTab label="點名記錄" href="/rollcallrecordS" {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
             
                 </Tabs>
             </AppBar>
