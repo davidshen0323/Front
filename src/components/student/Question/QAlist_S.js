@@ -11,6 +11,7 @@ import {List,Dialog} from '@material-ui/core/';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import ViewQA from './viewQAlist_S'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -238,14 +239,17 @@ const handleDelete = (qstudent) =>
                      </TableCell>
                      :
                        <TableCell>
-                     {
+                     {/* {
                        Ques['q_std_id'] === stdid ?
                        <IconButton>
                           <CloseIcon onClick={(e)=>deletequestion(e,Ques.q_asktime)}/>
                         </IconButton>
+                        
                             :
                             <div style={{padding:20}}></div>
-                     }
+                            
+                     } */}
+                     <ViewQA/>
                      
                      </TableCell>
                     )
