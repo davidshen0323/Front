@@ -363,6 +363,7 @@ export default function AcceptScore( props )  {
         <Button onClick={nosubmitClose} color="default" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
         <Button onClick={submitClick} color="secondary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>退回重驗</Button>
         <Button onClick={submitClick} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>完成驗收</Button>
+        
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose} >
         <Alert onClose={submitClose} severity="success">
           已儲存！

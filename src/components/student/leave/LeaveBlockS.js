@@ -81,7 +81,7 @@ export default function LeaveBlockS() {
     <div className={classes.div}>
         <MyMenu/>
           
-            <AppBar position="static" color="inherit">
+            <AppBar position="static" color="inherit" style={{maxWidth:'95%',margin:'auto'}}>
                 <Tabs
                 variant="fullWidth"
                 value={value}
@@ -89,8 +89,8 @@ export default function LeaveBlockS() {
                 aria-label="nav tabs example"
                 >
                
-                <LinkTab label="請假申請" href="/leavemanage" {...a11yProps(0)} />
-                <LinkTab label="請假申請記錄" href="/leavemanage" {...a11yProps(1)} />
+                <LinkTab label="請假申請" href="/leavemanage" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
+                <LinkTab label="請假申請記錄" href="/leavemanage" {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
                 
             
                 </Tabs>

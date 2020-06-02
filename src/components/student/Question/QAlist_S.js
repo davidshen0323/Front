@@ -11,6 +11,7 @@ import { List, Dialog } from '@material-ui/core/';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import ViewQA from './viewQAlist_S'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -226,21 +227,23 @@ export default function QAlist_S() {
 
 
   return (
-    <div className={classes.div}>
 
-      <MyMenu />
-      <AppBar position="static" color="default">
-        <Tabs
-          variant="fullWidth"
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs example"
-        >
-          <LinkTab label="未解決" href="/drafts" {...a11yProps(0)} />
-          <LinkTab label="已解決" href="/trash" {...a11yProps(1)} />
+     <div className={classes.div}>
 
-        </Tabs>
-      </AppBar>
+        <MyMenu/>
+            <AppBar position="static" color="default" style={{maxWidth:'96%',margin:'auto'}}>
+                <Tabs
+                variant="fullWidth"
+                value={value}
+                onChange={handleChange}
+                aria-label="nav tabs example"
+                >
+                <LinkTab label="未解決" href="/drafts" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
+                <LinkTab label="已解決" href="/trash" {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
+            
+                </Tabs>
+            </AppBar>
+
 
 
       <TabPanel value={value} index={0}>
@@ -280,6 +283,10 @@ export default function QAlist_S() {
                       {/* <Typography> *6
                       */}
                         {Ques['q_content']}
+                    <ViewQA 
+                     person={Ques["q_std_id"]}
+                     question={Ques["q_content"]}
+                     time={Ques["q_asktime"]}/>
                     {/* </Typography> */}
                     </TableCell>
 
@@ -332,6 +339,7 @@ export default function QAlist_S() {
                     <TableCell component="th" scope="row" align="center">最後更新時間</TableCell>
                     <TableCell component="th" scope="row" align="left">取消問題</TableCell>
                     
+
                   </TableRow>
                 </TableHead>
 
@@ -362,6 +370,7 @@ export default function QAlist_S() {
                         }
 
                       </TableRow>
+
                     )
                     :
                     <div></div>

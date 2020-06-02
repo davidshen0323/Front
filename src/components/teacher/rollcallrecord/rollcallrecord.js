@@ -27,7 +27,8 @@ export default function RollcallRecord() {
 
                 <div>
                 <Paper className={classes.Paper}> 
-                <RollcallRDDp/>
+                <RollcallRDDp
+                csid={csid}/>
                 </Paper>
                 </div>
 

@@ -83,14 +83,15 @@ export default function RollcallBlockT() {
   return (
     <div className={classes.div}>
         <MyMenu/>
-            <AppBar position="static" color="inherit">
+            <AppBar position="static" color="inherit" style={{maxWidth:'95%',margin:'auto'}}>
                 <Tabs
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
+
                 >
-                <LinkTab label="點名" href={`/rollcall/${csid}`} {...a11yProps(0)} />
-                <LinkTab label="點名紀錄" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} />
+                <LinkTab label="點名" href={`/rollcall/${csid}`} {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
+                <LinkTab label="點名紀錄" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
             
                 </Tabs>
             </AppBar>
