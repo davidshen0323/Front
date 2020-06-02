@@ -12,16 +12,13 @@ import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import {brown} from '@material-ui/core/colors';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
 import TextField from '@material-ui/core/TextField';
-
+import Orange from '@material-ui/core/colors/orange';
+import Smile from '@material-ui/icons/SentimentVerySatisfied';
 
 const styles = (theme) => ({
   root: {
@@ -41,7 +38,7 @@ const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h3">{children}</Typography>
+      <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
           <CloseIcon />
@@ -71,15 +68,25 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       flexWrap: 'wrap',
     },
-    inline:{
-        color: "#582707",
+    title:{
+        //color: "#582707",
         fontFamily: 'Microsoft JhengHei',
         fontWeight:'bold',
+        fontSize:20,
+        lineHeight:1,
       },
+    title2:{
+      fontFamily: 'Microsoft JhengHei',
+      fontSize:12,
+      lineHeight:1,
+    },
     button:{
         width:"10%",
         height:40,
         marginLeft:10,
+    },
+    Avatar:{
+      backgroundColor:Orange[500]
     }
 }));
 /*------------------------------*/
@@ -143,33 +150,29 @@ export default function ViewQAS(props) {
       </IconButton>
 
       <Dialog onClose={handleClose}  open={open} variant="inline" fullWidth maxWidth="sm">
-        <DialogTitle  edge="start"onClose={handleClose}>
+        <DialogTitle  edge="start" onClose={handleClose}>
         
         <ListItem alignItems="flex-start">
           
-        <ListItem>
-          <Typography className={classes.inputName} >
-            日期時間:
-        </Typography>
+          <ListItemText  
+           primary={
             <Typography
-                  className={classes.inline}>
-                    {props.time}
+              className={classes.title}
+              >
+                {props.question}
             </Typography>
-          </ListItem>  
-
-
-             <ListItem>
-          <Typography className={classes.inputName} >
-            來源:
-        </Typography>
+            }
+            secondary={
             <Typography
-                  
-                  className={classes.inline}>
-                    {props.resource}
+              component="span"
+              variant="body2"
+              className={classes.title2}
+              >
+                {props.time}
             </Typography>
-          </ListItem>  
-          
-          </ListItem>
+              }
+                  />
+        </ListItem>
         </DialogTitle>
         
 
@@ -186,9 +189,7 @@ export default function ViewQAS(props) {
                 <div>
                 <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar>
-                        <ImageIcon />
-                    </Avatar>
+                    <Avatar src="https://image.flaticon.com/icons/svg/1933/1933446.svg"/>
                 </ListItemAvatar>
 
           <ListItemText style={{marginRight:10,}}
@@ -223,9 +224,9 @@ export default function ViewQAS(props) {
               <div>
               <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                  <Avatar>
-                      <ImageIcon />
-                  </Avatar>
+                    <Avatar className={classes.Avatar}>
+                    <Smile/>
+                    </Avatar>
               </ListItemAvatar>
 
         <ListItemText style={{marginRight:10,}}

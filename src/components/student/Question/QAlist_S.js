@@ -249,8 +249,10 @@ const handleDelete = (qstudent) =>
                             <div style={{padding:20}}></div>
                             
                      } */}
-                     <ViewQA/>
-                     
+                     <ViewQA 
+                     person={Ques["q_std_id"]}
+                     question={Ques["q_content"]}
+                     time={Ques["q_asktime"]}/>
                      </TableCell>
                     )
                     }

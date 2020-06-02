@@ -12,7 +12,6 @@ import RollcallrecordTable from './rollcallrecordT/rollcallrecordT';
 import RollcallrecordSTable from './rollcallrecordS/rollcallrecordS';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
-//import Exportexcel from './model';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,6 +55,25 @@ function LinkTab(props) {
   );
 }
 
+
+
+// function download() {
+//   // fake server request, getting the file url as response
+//   setTimeout(() => {
+//     const params = useParams();
+//     const csid = params.cs_id;
+//     const response = {
+//       file: 'http://localhost:8080/teacher/downloadExcel/Rollcall/'+csid,
+      
+//     };
+//     // server sent the url to the file!
+//     // now, let's download:
+//     window.open(response.file);
+//     // you could also do:
+//     // window.location.href = response.file;
+//   }, 100);
+// }
+
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
     
@@ -66,7 +84,7 @@ const useStyles = makeStyles(theme =>({
     },  
   }))
 
-export default function RollcallRDDp() {
+export default function RollcallRDDp( props ) {
   const classes = useStyles();
 
   const [value, setValue] = React.useState(0);
@@ -87,6 +105,23 @@ export default function RollcallRDDp() {
 //     }
 //     fetchData();
 // }, []);
+
+
+const download = () => {
+  // fake server request, getting the file url as response
+  setTimeout(() => {
+    const response = {
+      file: 'http://localhost:8080/teacher/downloadExcel/Rollcall/'+props.csid+'/',
+      
+    };
+    // server sent the url to the file!
+    // now, let's download:
+    window.open(response.file);
+    // you could also do:
+    // window.location.href = response.file;
+  }, 100);
+}
+
 console.log('csid',csid);
 
   const exportexcel = () => {
@@ -107,7 +142,7 @@ console.log('csid',csid);
                 <LinkTab label="時間查看" href="/rollcallrecordT" {...a11yProps(0)}   style={{ fontFamily:'微軟正黑體'}}/>
                 <LinkTab label="學生查看" href="/rollcallrecordS" {...a11yProps(1)}   style={{ fontFamily:'微軟正黑體'}}/>
                
-                <Button  color="primary" className={classes.Link} onClick={exportexcel}>
+                <Button  color="primary" className={classes.Link} onClick={download}>
                   {/* <Exportexcel/> */}
                   匯出成Excel檔
                 </Button>
