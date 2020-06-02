@@ -84,7 +84,7 @@ export default function RegisterS() {
         user: '',
         pwd: '',
         repeatpwd: '',
-        names: '',
+        name: '',
         // gender:'',
         dpart: '',
         phone: '',
@@ -110,10 +110,9 @@ export default function RegisterS() {
     let history = useHistory(); //傳值跳頁的方法
     const handleSubmit = () => {
         if (inputs.user.length > 0
-            && inputs.user.length > 0
             && inputs.pwd.length > 0
             && inputs.repeatpwd.length > 0
-            && inputs.names.length > 0
+            && inputs.name.length > 0
             && selectedvalue !== null
             && inputs.dpart.length > 0
             && inputs.phone.length > 0
@@ -128,7 +127,7 @@ export default function RegisterS() {
                 body: JSON.stringify({
                     std_id: inputs.user,
                     std_password: inputs.pwd,
-                    std_name: inputs.names,
+                    std_name: inputs.name,
                     std_gender: selectedvalue,
                     std_department: inputs.dpart,
                     std_phone: inputs.phone,
@@ -294,10 +293,10 @@ export default function RegisterS() {
 
                         <TextField
                             required
-                            id="names"
+                            id="name"
                             label="姓名"
-                            value={inputs.nameㄋ}
-                            onChange={handleChange('nameㄋ')}
+                            value={inputs.name}
+                            onChange={handleChange('name')}
                             size="small"
                             variant="outlined"
                             className={classes.textfield}
