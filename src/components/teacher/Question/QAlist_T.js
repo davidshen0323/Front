@@ -270,7 +270,7 @@ export default function QAlist_T() {
                 <TableRow>
 
                     {/* <TableCell>排序</TableCell> */}
-                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
+                    {/* <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>問題內容</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>最後更新時間</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>回覆</TableCell>
@@ -311,7 +311,7 @@ export default function QAlist_T() {
             </TableBody>
           </Table>
       </TableContainer>
-      </Paper> */}
+      </Paper> */} */}
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
@@ -399,7 +399,7 @@ export default function QAlist_T() {
                 <TableRow>
 
                     {/* <TableCell>排序</TableCell> */}
-                    <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
+                    {/* <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>問題內容</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>最後更新時間</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>回覆內容</TableCell>
@@ -430,7 +430,7 @@ export default function QAlist_T() {
             </TableBody>
           </Table>
           </TableContainer>
-          </Paper> */}
+          </Paper> */} */}
           </TabPanel>
     </div>
   );
