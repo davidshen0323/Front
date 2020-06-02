@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Typography, Box} from '@material-ui/core';
+import { Grid, CardActionArea, Container, AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Typography, Box} from '@material-ui/core';
 import MyMenu from '../MenuT';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -79,8 +79,46 @@ const useStyles = makeStyles(theme =>({
     fontWeight:'bold',
 }, 
 div:{
-  height:'100vh',
-  background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+  height:'250vh',
+  background: '#ffe1c4',
+},
+card: {
+  //marginLeft: theme.spacing(10),
+  // marginTop: theme.spacing(3),
+  maxWidth: '80%',
+  margin: 'auto',
+  // width: 'auto',
+  // padding: theme.spacing(3),
+  borderRadius: "25px",
+  borderStyle: "solid",
+  borderColor: "white",
+  border:1,
+  backgroundColor:'white',
+},
+tablecell: {
+width: '800pt',
+margin: 'auto',
+// marginTop: '500pt',
+// paddingTop: "30pt",
+// paddingBottom: "30pt",
+// paddingInline: "30pt",
+borderRadius: "25px",
+borderColor: "white",
+fontFamily: 'Microsoft JhengHei',
+fontWeight: 'bold',
+},
+stdid: {
+  width: '800pt',
+  margin: 'auto',
+  // marginTop: '500pt',
+  // paddingTop: "30pt",
+  // paddingBottom: "30pt",
+  // paddingInline: "30pt",
+  borderRadius: "25px",
+  borderColor: "white",
+  fontFamily: 'Microsoft JhengHei',
+  fontWeight: 'bold',
+  fontSize: 20,
 },
 }
 ));
@@ -100,7 +138,7 @@ export default function QAlist_T() {
 
   const [question, setQuestion] = React.useState([]);
   
-  const questionlist = ['q_std_id','q_content','q_asktime', 'q_sovled'];
+  const questionlist = ['q_asktime','q_content'];
   const solved_qlist = ['q_std_id','q_content','q_replytime','q_reply'];
 
 
@@ -143,25 +181,100 @@ export default function QAlist_T() {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 >
+
                 <LinkTab label="未解決" href="/drafts" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
                 <LinkTab label="已解決" href="/trash" {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
+
             
                 </Tabs>
             </AppBar>
+
       <TabPanel value={value} index={0}>
-      
-      <Paper>
+      <div className={classes.root}>
+      <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            >
+
+            {question.map((Ques, index) => Ques["q_solved"] === "0" ?
+              (
+                <TableCell style={{border:0}}>
+
+                {/* <Card> */}
+
+                <CardActionArea
+                  className={classes.card} 
+                  >
+                  {
+                    questionlist.map((list, i) => i < 1 ?
+                    (
+                      <div>
+                        <Container maxWidth="sm">
+
+                    <TableCell
+                    key={i}
+                    component="th"
+                    scope="row"
+                    align="center"
+                    variant="body"
+                    className={classes.stdid}>
+                      {/* <Typography> *6
+                      */}
+                        {Ques['q_content']}
+                    {/* </Typography> */}
+                    </TableCell>
+
+                    </Container>
+                    </div>
+                   )
+                   :
+                   (
+                     <div>
+
+                    <TableCell
+                    key={i}
+                    component="th"
+                    scope="row"
+                    align="center"
+                    variant="body"
+                    className={classes.tablecell}>
+                      {/* <Typography> */}
+                        {Ques['q_asktime']}
+                    {/* </Typography> */}
+                    </TableCell>
+
+                    </div>
+                    )
+                    )
+                  }
+                </CardActionArea>
+            {/* </Card> */}
+                    </TableCell>
+
+)
+:
+<div></div>)
+            }
+
+
+          </Grid>
+      </div>
+      {/* <Paper>
           <TableContainer>
       <Table
       className={classes.table}
       size='small'>
             <TableHead>
                 <TableRow>
+
                     {/* <TableCell>排序</TableCell> */}
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>問題內容</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>最後更新時間</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>回覆</TableCell>
+
                 </TableRow>
             </TableHead>
             
@@ -169,7 +282,7 @@ export default function QAlist_T() {
             {question.map((Ques,index) => Ques["q_solved"] === "0" ?
             (
                 <TableRow key={index}>
-                 {/* <TableCell>{index+1}</TableCell> */}
+                
                   {
                     questionlist.map( (list, i) => i < 3 ?
                     
@@ -194,37 +307,103 @@ export default function QAlist_T() {
               <div></div>
               )}
 
-                {/* <TableRow>
-                    <TableCell>1</TableCell>
-                    <TableCell>406401628</TableCell>
-                    <TableCell>Table 怎麼做</TableCell>
-                    <TableCell>2020-04-03 11:29</TableCell>
-                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
-                </TableRow> */}
-                
                
             </TableBody>
           </Table>
       </TableContainer>
-      </Paper>
+      </Paper> */}
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
 
       <TabPanel value={value} index={1}>
-        <Paper>
+      <div className={classes.root}>
+          
+          <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              >
+  
+              {question.map((Ques, index) => Ques["q_solved"] === "1" ?
+                (
+                  <TableCell style={{border:0}}>
+  
+                  {/* <Card> */}
+  
+                  <CardActionArea
+                    className={classes.card} 
+                    >
+                    {
+                      questionlist.map((list, i) => i < 1 ?
+                      (
+                        <div>
+                          <Container maxWidth="sm">
+  
+                      <TableCell
+                      key={i}
+                      component="th"
+                      scope="row"
+                      align="center"
+                      variant="body"
+                      className={classes.stdid}>
+                        {/* <Typography> *6
+                        */}
+                          {Ques['q_content']}
+                      {/* </Typography> */}
+                      </TableCell>
+  
+                      </Container>
+                      </div>
+                     )
+                     :
+                     (
+                       <div>
+  
+                      <TableCell
+                      key={i}
+                      component="th"
+                      scope="row"
+                      align="center"
+                      variant="body"
+                      className={classes.tablecell}>
+                        {/* <Typography> */}
+                          {Ques['q_asktime']}
+                      {/* </Typography> */}
+                      </TableCell>
+  
+                      </div>
+                      )
+                      )
+                    }
+                  </CardActionArea>
+              {/* </Card> */}
+                      </TableCell>
+  
+  )
+  :
+  <div></div>)
+              }
+  
+  
+            </Grid>
+   </div>
+        {/* <Paper>
           <TableContainer>
       <Table
       className={classes.table}
       size='small'>
             <TableHead>
                 <TableRow>
+
                     {/* <TableCell>排序</TableCell> */}
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>問題內容</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>最後更新時間</TableCell>
                     <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>回覆內容</TableCell>
+
                 </TableRow>
             </TableHead>
             
@@ -251,7 +430,7 @@ export default function QAlist_T() {
             </TableBody>
           </Table>
           </TableContainer>
-          </Paper>
+          </Paper> */}
           </TabPanel>
     </div>
   );
