@@ -1,22 +1,15 @@
-// @ts-ignore
-import React, { Component, useEffect} from 'react';
-import {Link, useParams} from "react-router-dom";
+import React from 'react';
 import MyMenu from './MenuT';
-import { makeStyles } from '@material-ui/core/styles';
-// @ts-ignore
-import axios from 'axios';
-// @ts-ignore
-import { v4 as uuidv4 } from 'uuid';
-import OpenJoinClass from './OpenJoinClass';
-import AddIcon from "@material-ui/icons/Add";
-import {Fab, Grid, ButtonBase, Typography, Card, CardActionArea, CardActions, CardContent, CardMedia} from "@material-ui/core";
-
-import rollcall from '../../img/rollcall.jpg'
+import bell from '../../img/bell.jpg'
 import leave from '../../img/leave.jpg'
 import classs from '../../img/class.jpg'
-import bell from '../../img/bell.jpg'
-import question from '../../img/question.jpg'
 import hands from '../../img/hands.jpg'
+import OpenJoinClass from './OpenJoinClass';
+import rollcall from '../../img/rollcall.jpg'
+import question from '../../img/question.jpg'
+import {Link, useParams} from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import {Grid, ButtonBase, Typography, Card, CardActionArea, CardActions, CardContent, CardMedia} from "@material-ui/core";
 
 // @ts-ignore
 const useStyles = makeStyles(theme => ({
@@ -89,25 +82,7 @@ const useStyles = makeStyles(theme => ({
         const classes = useStyles();
 
         const params = useParams();
-        //console.log(params);
-        
-        // const [qrcode , setQrcode] = React.useState('0');
-        //教師開放加入課程
-        // const [openJoinClass, setOpenJoinClass] = React.useState(false);
-        
-        // const OpenJoinClass = () => {
-          
-        //   setOpenJoinClass(true);
-         
-        //   console.log(qrcode);
-        // };
-        
-        // const onCloseJoinClass = () => {
-          
-        //   setOpenJoinClass(false);
-         
-        //   console.log(qrcode);
-        // };
+       
         return (
 
           
@@ -202,17 +177,17 @@ const useStyles = makeStyles(theme => ({
                 <CardContent>
               <CardMedia
               component="img"
-              alt="班級名單"
+              alt="課程資訊"
               // height="140"
               image={classs}
-              title="班級名單"
+              title="課程資訊"
               className={classes.image}
               />
                 
               </CardContent>
             <CardActions>
               
-                <Typography className={classes.Cardtext}>班級名單</Typography>
+                <Typography className={classes.Cardtext}>課程資訊</Typography>
               
             </CardActions>
               </ButtonBase>

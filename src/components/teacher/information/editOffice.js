@@ -30,36 +30,28 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function EditEmail({ open, handleClose })  {
+export default function EditOffice({ open, handleClose })  {
   const classes = useStyle();
-  
-
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
-  // 失敗小紅2
-  const [openErr2, setOpenErr2] = React.useState(false);
-
   const [inputs, setInputs] = React.useState(1);
-  const [email, setEmail] = React.useState({
-    email: '',
+  const [office, setOffice] = React.useState({
+    office: '',
   })
-  // const [tid, setTid] = React.useState({
-  //   tcherid: '',
-  // })
 
   const submitClick = () => {
   
     
     
-    fetch('/teacher/resetEmail',{
+    fetch('/teacher/resetOffice/',{
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          teacher_mail: email.email,
+          teacher_office: office.office,
           // teacher_id: tid.tcherid,
       })
   })
@@ -67,29 +59,19 @@ export default function EditEmail({ open, handleClose })  {
       
       async function fetchres(){
       const test = await res.text();  //接收後端傳來的訊息
-      if (test === "email格式錯誤") //帳號已註冊過
+      if (test === "input Office too long!") //帳號已註冊過
       {
-          //alert("email格式錯誤");
+          //alert("input Office too long");
           console.log(1);
           setOpenErr1(true);
-          setOpenErr2(false);
       }
-      else if(test === "此帳號已存在") //信箱不包含@
+      else if(test === "renew Office Seccessful!") //信箱不包含@
       {
-          //alert("此信箱已存在");
-          console.log(2);
-          setOpenErr2(true);
-          setOpenErr1(false);
-      }
-      else
-      {
-          //alert("更改成功!");
-          console.log(0);
-          setOpenS(true);
-          setOpenErr1(false);
-          setOpenErr2(false);
-          window.location.reload();        
-
+           //alert("更改成功!");
+           console.log(0);
+           setOpenS(true);
+           setOpenErr1(false);
+           window.location.reload();  
       }
       
   } fetchres() })
@@ -100,22 +82,19 @@ export default function EditEmail({ open, handleClose })  {
   const handleChange = fieldname => event => {
     setInputs(2);
     event.persist();
-    setEmail(email => ({...email, [fieldname]: event.target.value}));
-    
+    setOffice(office => ({...office, [fieldname]: event.target.value}));
 }
   const submitClose = () => {
     handleClose(true);
     setOpenS(false);
     setOpenErr1(false);
-    setOpenErr2(false);
     setInputs(1);
-    email.email='';
+    office.office='';
   };
-
+    
   const ErrClose = () => {
     setOpenS(false);
     setOpenErr1(false);
-    setOpenErr2(false);
 };
 
   return (
@@ -123,26 +102,14 @@ export default function EditEmail({ open, handleClose })  {
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typoHeading} variant="h5">
-            修改Email
+            修改辦公室位置
           </Typography>
-
-           {/* 之後要接Email */}  
-          {/* <Typography className={classes.typo} variant="h8">
-            目前Email：
-            <TextareaAutosize disabled style={{borderRadius:10, padding:8, width:250, height:40, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5} >
-              {props.email}
-            </TextareaAutosize>
-          </Typography> */}
-
-          {/* <Typography className={classes.typo} variant="h5" id="email">
-            新的Email：
-          </Typography> */}
           <TextField
-          label="新的Email"
+          label="新的辦公室位置"
           variant="outlined"
           size="small"
-          value={email.email}
-          onChange={handleChange('email')}  style={{fontFamily:'微軟正黑體'}}/>
+          value={office.office}
+          onChange={handleChange('office')}  style={{fontFamily:'微軟正黑體'}}/>
           {/* <Typography className={classes.typo} variant="body1">
             
           </Typography> */}
@@ -162,13 +129,7 @@ export default function EditEmail({ open, handleClose })  {
         {/* 失敗小紅框1 */}
         <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="error" >
-            Email格式錯誤！
-          </Alert>
-        </Snackbar>
-        {/* 失敗小紅框2 */}
-        <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
-          <Alert severity="error">
-            此信箱已存在！
+            請再次確認辦公室位置！
           </Alert>
         </Snackbar>
       </DialogActions>

@@ -1,11 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
-
 import PropTypes from 'prop-types';
 import logo from '../../img/Rollsup.jpeg';
 import AppsIcon from '@material-ui/icons/Apps';
 import ListIcon from '@material-ui/icons/List';
-import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
@@ -16,12 +14,10 @@ import PanToolIcon from '@material-ui/icons/PanTool';
 import { makeStyles } from '@material-ui/core/styles';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
@@ -381,54 +377,54 @@ export default function LoginMenu() {
             nodeId="4"
             labelText="點名"
             labelIcon={AccessTimeIcon}
-            color="#1a73e8"
-            bgColor="#e8f0fe"
+            color="#fc573b"
+            bgColor="#ffe6e2"
           />
           <StyledTreeItem
             onClick={f4}
             nodeId="5"
             labelText="請假審核"
             labelIcon={AssignmentIcon}
-            color="#e3742f"
-            bgColor="#fcefe3"
+            color="#ffa81d"
+            bgColor="#fef2dc"
           />
           <StyledTreeItem
             onClick={f5}
             nodeId="6"
-            labelText="班級名單"
+            labelText="課程資訊"
             labelIcon={GroupIcon}
-            color="#a250f5"
-            bgColor="#f3e8fd"
+            color="#ffa81d"
+            bgColor="#fffadd"
           />
           <StyledTreeItem
             onClick={f6}
             nodeId="7"
             labelText="公告"
             labelIcon={NotificationsActiveIcon}
-            color="#3c8039"
-            bgColor="#e6f4ea"
+            color="#bd63f9"
+            bgColor="#f5e6fd"
           />
           <StyledTreeItem
             onClick={f7}
             nodeId="8"
             labelText="發問Q&A"
             labelIcon={HelpOutlineIcon}
-            color="#3c8039"
-            bgColor="#e6f4ea"
+            color="#44cedf"
+            bgColor="#e3f8fb"
           />
           <StyledTreeItem
             onClick={f8}
             nodeId="9"
             labelText="課堂舉手"
             labelIcon={PanToolIcon}
-            color="#3c8039"
-            bgColor="#e6f4ea"
+            color="#4eba64"
+            bgColor="#f0ffe8"
           />
         {/* </StyledTreeItem> */}
         <Divider />
 
       {/* </StyledTreeItem> */}
-      <StyledTreeItem onClick={f9} nodeId="10" labelText="基本資料" labelIcon={PermContactCalendarIcon} />
+      <StyledTreeItem onClick={f9} nodeId="10" labelText="基本資料" labelIcon={PermContactCalendarIcon} color="#1a73e8" bgColor="#e8f0fe"/>
       <Divider />
       <form action="/logout" method="POST">
         <Button className={classes.logoutButton} type="submit" variant="outline" >登出</Button>
