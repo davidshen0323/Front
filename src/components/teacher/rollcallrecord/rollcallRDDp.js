@@ -111,7 +111,7 @@ const download = () => {
   // fake server request, getting the file url as response
   setTimeout(() => {
     const response = {
-      file: 'http://localhost:8080/teacher/downloadExcel/Rollcall/'+props.csid+'/',
+      file: 'http://140.136.155.124:8080/downloadExcel/Rollcall/'+props.csid+'/',
       
     };
     // server sent the url to the file!

@@ -1,5 +1,6 @@
 import React from 'react';
 import { brown } from '@material-ui/core/colors';
+import MuiAlert from "@material-ui/lab/Alert";
 import CloseIcon from '@material-ui/icons/Close';
 import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,7 +8,8 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
-import {Select, FormControl, InputLabel, Grid, ListItem, IconButton, Dialog, Button, Typography, TextareaAutosize} from '@material-ui/core';
+import {InputLabel, Select, FormControl, Grid, ListItem, IconButton, Dialog, Button, Snackbar, Typography, TextareaAutosize} from '@material-ui/core';
+
 
 const styles = (theme) => ({
   root: {
@@ -62,11 +64,17 @@ const useStyles = makeStyles(theme => ({
 
 
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function Apply(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
+    // 成功小綠綠
+    const [openS, setOpenS] = React.useState(false);
+    // 失敗小紅1
+    const [openErr1, setOpenErr1] = React.useState(false);
     const [inputs, setInputs] = React.useState({
         typeid:'',
         tl_content:'',    
@@ -93,6 +101,11 @@ export default function Apply(props) {
     setOpen(false);
   };
 
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+  };
+
   const handleSubmit = () =>{
     setOpen(false);
     console.log(props.id);
@@ -109,7 +122,25 @@ export default function Apply(props) {
           tl_type_id:inputs.typeid,
       })
   })
-  window.location.reload();
+  .then(res => {
+                    
+    async function fetchres(){
+    const test = await res.text();  //接收後端傳來的訊息
+    if (test === "你已申請過請假，請耐心等待老師的回覆") //你已申請過請假，請耐心等待老師的回覆
+    {
+        //alert("你已申請過請假，請耐心等待老師的回覆!");
+        console.log(test);
+        setOpenErr1(true);
+    }
+    else if(test === "申請成功") //內容為空
+    {
+        //alert("內容為空!");
+        console.log(2);
+        setOpenS(true);
+        setOpenErr1(false);
+        window.location.reload();
+    }
+} fetchres() })
   };
 
   return (
@@ -211,6 +242,18 @@ export default function Apply(props) {
         </DialogActions>
 
       </Dialog>
+      {/* 成功小綠框 */}
+      <Snackbar open={openS} autoHideDuration={2000} onClose={handleSubmit} style={{ marginBottom: 100 }}>
+          <Alert severity="success">
+            請假申請成功！
+          </Alert>
+      </Snackbar>
+      {/* 失敗小紅框1 */}
+      <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{ marginBottom: 100 }}>
+          <Alert severity="error">
+            已申請過，請等候教師審核！
+          </Alert>
+      </Snackbar>
     </div>
   );
 }

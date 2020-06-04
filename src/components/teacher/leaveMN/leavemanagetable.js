@@ -303,7 +303,7 @@ export default function Leavemanagetable(props) {
       
 
   const changeState =(event,id) =>{
-    const stuIndex = leaves.findIndex(s=>s.tl_content==id)
+    const stuIndex = leaves.findIndex(s=>s.tl_id==id)
     var newlist = [...leaves]
     newlist[stuIndex].tl_state = parseInt(event.target.value)
 
@@ -372,7 +372,7 @@ export default function Leavemanagetable(props) {
                     {leave[list]}
                  </TableCell>:
                  <TableCell align="left">
-                 <FormControl component="fieldset" onChange={(e)=>changeState(e,leave.tl_content)}>
+                 <FormControl component="fieldset" onChange={(e)=>changeState(e,leave.tl_id)}>
                    <RadioGroup row value={leave.tl_state+''} >
                      <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="通過" />
                      <FormControlLabel value="2" control={<Radio color="secondary" size="small"/>} label="未通過" />
