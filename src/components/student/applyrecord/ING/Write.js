@@ -1,20 +1,14 @@
 import React from 'react';
+import MuiAlert from "@material-ui/lab/Alert";
+import { brown } from '@material-ui/core/colors';
+import CloseIcon from '@material-ui/icons/Close';
+import CreateIcon from '@material-ui/icons/Create';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
+import { makeStyles } from '@material-ui/core/styles';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import  {Typography, TextareaAutosize} from '@material-ui/core';
-import CreateIcon from '@material-ui/icons/Create';
-import ListItem from '@material-ui/core/ListItem';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import {brown} from '@material-ui/core/colors';
+import {Select, FormControl, Grid, ListItem, IconButton, Dialog, Button, Snackbar, Typography, TextareaAutosize} from '@material-ui/core';
 
 const styles = (theme) => ({
   root: {
@@ -69,10 +63,20 @@ const useStyles = makeStyles(theme => ({
 
 
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+
 export default function Write(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
+    // 成功小綠綠
+    const [openS, setOpenS] = React.useState(false);
+    // 失敗小紅1
+    const [openErr1, setOpenErr1] = React.useState(false);
+    // 失敗小紅2
+    const [openErr2, setOpenErr2] = React.useState(false);
     const [inputs, setInputs] = React.useState(
       {content:props.content,}
     );
@@ -94,6 +98,11 @@ export default function Write(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    setOpenErr2(false);
+  };
 
   const handleSubmit = () =>{
     setOpen(false);
@@ -109,6 +118,34 @@ export default function Write(props) {
         tl_content:inputs.content,
       })
   })
+  .then(res => {
+                    
+    async function fetchres(){
+    const test = await res.text();  //接收後端傳來的訊息
+    if (test === "請假內容不得為空") //請假內容不得為空
+    {
+        //alert("請假內容不得為空!");
+        console.log(test);
+        setOpenErr1(true);
+        setOpenErr2(false);
+    }
+    else if(test === "教師已審核過該筆請假，無法更改內容") //教師已審核過該筆請假，無法更改內容
+    {
+        //alert("教師已審核過該筆請假，無法更改內容!");
+        console.log(2);
+        setOpenErr1(false);
+        setOpenErr2(true);
+    }
+    else if(test === "已修改請假內容") //已修改請假內容
+    {
+        //alert("已修改請假內容!");
+        console.log(3);
+        setOpenS(true);
+        setOpenErr1(false);
+        setOpenErr2(false);
+        window.location.reload();
+    }
+} fetchres() })
   };
 
   return (
@@ -207,6 +244,24 @@ export default function Write(props) {
         </DialogActions>
 
       </Dialog>
+       {/* 成功小綠框 */}
+       <Snackbar open={openS} autoHideDuration={2000} onClose={handleSubmit} style={{ marginBottom: 100 }}>
+          <Alert severity="success">
+            修改內容成功！
+          </Alert>
+      </Snackbar>
+      {/* 失敗小紅框1 */}
+      <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{ marginBottom: 100 }}>
+          <Alert severity="error">
+            請假內容不得為空！
+          </Alert>
+      </Snackbar>
+      {/* 失敗小紅框2 */}
+      <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{ marginBottom: 100 }}>
+          <Alert severity="error">
+            教師已審核過該筆請假，無法更改內容！
+          </Alert>
+      </Snackbar>
     </div>
   );
 }
