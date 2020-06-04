@@ -384,7 +384,7 @@ export default function LoginMenu() {
           <StyledTreeItem
             onClick={f4}
             nodeId="5"
-            labelText="請假申請"
+            labelText="請假紀錄"
             labelIcon={AssignmentIcon}
             color="#ffa81d"
             bgColor="#fef2dc"

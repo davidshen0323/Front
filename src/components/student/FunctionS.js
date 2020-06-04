@@ -162,17 +162,17 @@ const useStyles = makeStyles(theme => ({
               <CardMedia
               component="img"
 
-              alt="請假申請"
+              alt="請假紀錄"
               // height="140"
               image={leave}
-              title="請假申請"
+              title="請假紀錄"
 
               className={classes.image}
               />
               </CardContent>
             <CardActions>
 
-                <Typography className={classes.Cardtext}>請假申請</Typography>
+                <Typography className={classes.Cardtext}>請假紀錄</Typography>
 
             </CardActions>
               </ButtonBase>

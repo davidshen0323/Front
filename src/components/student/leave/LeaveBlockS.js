@@ -1,14 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import MyMenu from '../MenuS';
-import Leave from './leave';
+import PropTypes from 'prop-types';
 import ApplyRecord from '../applyrecord/applyrecord';
+import { makeStyles } from '@material-ui/core/styles';
+import {Tab, Box, Typography} from '@material-ui/core';
+
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
 
@@ -81,7 +77,7 @@ export default function LeaveBlockS() {
     <div className={classes.div}>
         <MyMenu/>
           
-            <AppBar position="static" color="inherit" style={{maxWidth:'95%',margin:'auto'}}>
+            {/* <AppBar position="static" color="inherit" style={{maxWidth:'95%',margin:'auto'}}>
                 <Tabs
                 variant="fullWidth"
                 value={value}
@@ -94,15 +90,15 @@ export default function LeaveBlockS() {
                 
             
                 </Tabs>
-            </AppBar>
+            </AppBar> */}
 
-      <TabPanel value={value} index={0}>
+      {/* <TabPanel value={value} index={0}>
         <Leave/>
-      </TabPanel>
+      </TabPanel> */}
 
-      <TabPanel value={value} index={1}>
+      {/* <TabPanel value={value} index={1}> */}
         <ApplyRecord/>
-      </TabPanel>
+      {/* </TabPanel> */}
 
 
     </div>

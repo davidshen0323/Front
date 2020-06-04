@@ -1,18 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import {useState,useEffect} from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import Apply from '../leave/apply';
+import {useState,useEffect} from 'react';
 import { useParams } from "react-router-dom";
-import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Paper} from '@material-ui/core';
+
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -45,6 +39,8 @@ const headCells = [
   { id: 'time', label: '日期與時間', numeric: false, disablePadding: true },
   { id: 'attend', label: '出席狀況', numeric: true, disablePadding: false, },
   { id: 'from', label: '來源',numeric: true, disablePadding: false,},
+  { id: 'from', label: '請假',numeric: true, disablePadding: false,},
+
 ];
 
 function EnhancedTableHead(props) {
@@ -155,7 +151,7 @@ export default function Rollcallrecord() {
   };
 
   /*=========== Create Table HEAD ===========*/
-const rollcallrecordList = [ 'rc_starttime','tl_type_name','rc_inputsource']
+const rollcallrecordList = [ 'rc_starttime','tl_type_name','rc_inputsource','123']
 
 useEffect(() => {
  async function fetchData() {
@@ -198,11 +194,14 @@ useEffect(() => {
                       {/* 碰到的時候後面會反灰 */}
                       <TableCell>{index+1}</TableCell>
                   {
-                    rollcallrecordList.map( (list, i) =>   i === 0 ? 
-                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    rollcallrecordList.map( (list, i) =>   i === 3 && rollcallrecord['tl_type_name']==="缺席" ? 
+                    <TableCell height="30" key={i} align="left"><Apply id={rollcallrecord['rc_id']}
+                    time={rollcallrecord['rc_starttime']}
+                    resource={rollcallrecord['rc_inputsource']}  /></TableCell> 
+                    :
+                 <TableCell height="60" key={i} component="th" scope="row" align="left" padding="none" >
                     {rollcallrecord[list]}
-                 </TableCell>:
-                 <TableCell key={i} align="left">{rollcallrecord[list]}</TableCell> 
+                 </TableCell>
                         )
                   }   
                       {/* <TableCell padding="default" />
