@@ -1,15 +1,21 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import {useHistory, useParams} from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/styles";
+import Snackbar from "@material-ui/core/Snackbar";
+import {useHistory, useParams} from "react-router-dom";
+import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
   typo: {
-    marginLeft: 10,
+    // marginLeft: 10,
     padding: 5,
+    flex: 1,
+    fontFamily: 'Microsoft JhengHei',
+  },
+  typo2: {
+    // marginLeft: 10,
+    // padding: 5,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
   },
@@ -20,9 +26,13 @@ const useStyle = makeStyles(theme => ({
   },
   typoHeading: {
     color: "#582707",
-    padding: 10,
+    padding: 5,
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
+  },
+  btntext:{
+    fontFamily: 'Microsoft JhengHei',
+    width:'100px',
   },
 }));
 
@@ -168,23 +178,25 @@ let history = useHistory(); //傳值跳頁的方法
           </Typography>
 
           <Typography className={classes.typo} variant="body1">
-            請輸入公告名稱：<Input id="title" value={inputs.title} onChange={handleChange('title')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-
+            請輸入公告名稱：
           </Typography>
-
+          <Typography className={classes.typo2} variant="body1">
+           <Input id="title" value={inputs.title} onChange={handleChange('title')} style={{borderRadius:10, padding:8, width:250, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
+          </Typography>
+          
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column"}}>
+        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column",marginTop:10}}>
           <Typography className={classes.typo} variant="body1">
             請輸入公告內容：
           </Typography>
 
-          <Typography className={classes.typo} variant="body1">
+          <Typography className={classes.typo2} variant="body1">
             <TextareaAutosize
             id="content" 
             value={inputs.content} 
             onChange={handleChange('content')} 
-            style={{borderRadius:10, padding:8, width:350, height:150, fontSize:14, fontFamily:'微軟正黑體'}}
+            style={{borderRadius:10, padding:8, width:250, fontSize:14, fontFamily:'微軟正黑體'}}
             rowsMin={5}
             placeholder="請輸入公告內容"
             />
@@ -192,8 +204,8 @@ let history = useHistory(); //傳值跳頁的方法
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} >關閉視窗</Button>
-        <Button disabled={btnClose===false} onClick={handleSubmit} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}  >確認送出</Button>
+        <Button onClick={submitClose} color="primary" className={classes.btntext} style={{fontFamily: 'Microsoft JhengHei'}} >關閉視窗</Button>
+        <Button disabled={btnClose===false} onClick={handleSubmit} className={classes.btntext} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}  >確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

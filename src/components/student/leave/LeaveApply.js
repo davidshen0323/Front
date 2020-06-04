@@ -36,7 +36,6 @@ const useStyles = makeStyles(theme => ({
     margin: 'auto',
     marginBottom: theme.spacing(2),
     //backgroundColor: '#F2F2F2',
-
   },
   inputForm: {
     paddingLeft: 60,
@@ -47,7 +46,6 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: 60,
     paddingRight:10,
     paddingTop: 25,
-    
   },
   inputName:{
     paddingLeft: 50,
