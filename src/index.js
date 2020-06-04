@@ -44,7 +44,7 @@ import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
-
+import ForumS from './components/student/Question/viewQAlist_S';
 // import Loading from './components/Loading';
 // import gps from './components/teacher/rollcall/GPS/Gps';
 // import findgeo from './components/teacher/rollcall/GPS/FindGeo';
@@ -96,6 +96,8 @@ ReactDOM.render(
             <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 
             <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
+
+            <Route path="/Forums" component={ForumS}/>
             
             {/* <Route path="/Gps" component={gps}/>
             <Route path="/FindGeo" component={findgeo}/> */}

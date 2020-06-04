@@ -10,6 +10,12 @@ import AcceptScore from "./acceptScore";
 import PropTypes from 'prop-types';
 import EditScore from './EditScore';
 
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -87,14 +93,15 @@ export default function TAcceptanceList() {
   const classes = useStyles();
 
   /*=========== Create Table HEAD ===========*/
-  const acceptanceList = [ 'std_id','std_name', 'accept_time','accept_state', 'accept_content ','accept_score','accept_label','accept_score' ]
-  const acceptanceDoneList = [ 'std_id','std_name' ,'accept_time', 'accept_score','accept_score' ]
+  const acceptanceList = [ 'accept_label','std_id','std_name', 'accept_time','accept_state','accept_score','accept_content','accept_score' ]
+  const acceptanceDoneList = [ 'accept_label','std_id','std_name' ,'accept_time', 'accept_score','accept_score' ]
   
 
   const params = useParams();
   const csid = params.cs_id;
   const hwname = params.hw_name;
   
+  const[state,setState] = React.useState({});
   const [value, setValue] = React.useState(0);
 
    // 成功小綠綠
@@ -124,6 +131,9 @@ export default function TAcceptanceList() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  const labelChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   const handledelete = () =>
@@ -189,13 +199,13 @@ export default function TAcceptanceList() {
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>標記</TableCell>
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>姓名</TableCell>
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>時間</TableCell>
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>狀態</TableCell>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>分數</TableCell> 
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>註記內容</TableCell>
-                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>分數</TableCell>
-                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>標記</TableCell>
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>處理</TableCell>
                 </TableRow>
             </TableHead>
@@ -205,9 +215,24 @@ export default function TAcceptanceList() {
                 {acceptances.map((acceptance,index) => acceptance["accept_done"] === false ? (
                     <TableRow key={index}>
                       {/* <TableCell ></TableCell> */}
+                      
                     {
                         acceptanceList.map( (list, i) => i < 7 ?
+                            i<1?
                             <TableCell key={i} component="th" scope="row" align="center">
+                           <FormControlLabel
+                              control={
+                              <Checkbox 
+                              icon={<RadioButtonUncheckedIcon />} 
+                              checkedIcon={<FiberManualRecordIcon />} 
+                              checked={state.label}
+                              onChange={labelChange}
+                              />}
+                            />
+                         </TableCell>
+                            
+                          :
+                          <TableCell key={i} component="th" scope="row" align="center">
                                {acceptance[list]}
                             </TableCell>
                             :
@@ -253,6 +278,7 @@ export default function TAcceptanceList() {
             {/*===== TableHead =====*/}
             <TableHead>
                 <TableRow>
+                  <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>標記</TableCell>
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>學號</TableCell>
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>姓名</TableCell>
                   <TableCell component="th" scope="row" align="center" style={{ fontFamily:'微軟正黑體'}}>時間</TableCell>
@@ -270,7 +296,18 @@ export default function TAcceptanceList() {
                       
                     {
                         
-                        acceptanceDoneList.map( (list, i) => i < 4 ?
+                        acceptanceDoneList.map( (list, i) => i < 5 ?
+                        i<1?
+                        <TableCell key={i} component="th" scope="row" align="center">
+                       <FormControlLabel
+                          control={
+                          <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} 
+                          checked={state.label}
+                          onChange={labelChange}
+                          />}
+                        />
+                     </TableCell>
+                            :
                             <TableCell key={i} component="th" scope="row" align="center" >
                                {acceptance[list]}
                             </TableCell>

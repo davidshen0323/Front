@@ -225,13 +225,13 @@ export default function GPS() {
       {/* 成功小綠框 */}
       <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="success">
-            點名成功！
+            開始點名囉！
           </Alert>
       </Snackbar>
       {/* 失敗小紅框1 */}
       <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="error">
-            點名失敗！您不是此課程的老師！
+            建立點名失敗！您不是此課程的老師！
           </Alert>
       </Snackbar>
     </div>
