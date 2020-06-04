@@ -81,9 +81,9 @@ const useStyles = makeStyles(theme => ({
       lineHeight:1,
     },
     button:{
-        width:"10%",
+        width:"5%",
         height:40,
-        marginLeft:10,
+        marginLeft:5,
     },
     Avatar:{
       backgroundColor:Orange[500]
@@ -107,7 +107,7 @@ export default function ViewQAS(props) {
       event.persist();
       setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
       
-  }
+  };
 
   // const handleChange = (event) => {
   // const name = event.target.name;
@@ -125,7 +125,7 @@ export default function ViewQAS(props) {
   };
 
   const handleSubmit = () =>{
-    setOpen(false);
+    // setOpen(false);
     console.log(props.id);
     console.log(inputs.tl_content);
     console.log(inputs.typeid);
@@ -149,7 +149,7 @@ export default function ViewQAS(props) {
         <AssignmentOutlinedIcon />
       </IconButton>
 
-      <Dialog onClose={handleClose}  open={open} variant="inline" fullWidth maxWidth="sm">
+      <Dialog onClose={handleClose}  open={open} variant="inline" fullWidth maxWidth="md">
         <DialogTitle  edge="start" onClose={handleClose}>
         
         <ListItem alignItems="flex-start">
@@ -212,7 +212,7 @@ export default function ViewQAS(props) {
           />
 
          
-          <ListItemText style={{borderRadius:10,width:550,fontFamily:'微軟正黑體',backgroundColor:'#ffffff',padding:10}}>
+          <ListItemText style={{borderRadius:10,width:750,fontFamily:'微軟正黑體',backgroundColor:'#ffffff',padding:10,marginLeft:30,}}>
               hello~
           </ListItemText> 
           </ListItem>
@@ -249,7 +249,7 @@ export default function ViewQAS(props) {
         />
 
        
-        <ListItemText style={{borderRadius:10,width:550,fontFamily:'微軟正黑體',backgroundColor:'#ffffff',padding:10}}>
+        <ListItemText style={{borderRadius:10,width:750,fontFamily:'微軟正黑體',backgroundColor:'#ffffff',padding:10,marginLeft:30}}>
             hello~
         </ListItemText> 
         </ListItem>
@@ -261,13 +261,13 @@ export default function ViewQAS(props) {
 
         <DialogActions dividers >
         <Grid container spacing={1}  
-        justify="flex-start"  
-        alignItems="flex-start"
+        justify="center"  
+        alignItems="center"
         >
            <Grid item xs={12} row> 
               
               <div>
-              <ListItem alignItems="flex-start">
+              <ListItem alignItems="center">
               {/* <ListItemAvatar>
                 
               </ListItemAvatar> */}
@@ -280,7 +280,7 @@ export default function ViewQAS(props) {
           defaultValue="請輸入內文"
           variant="outlined"
           size="small"
-          style={{backgroundColor:'#fafafa',width:470}}
+          style={{backgroundColor:'#fafafa',width:"70%"}}
         />
         
         <Button  

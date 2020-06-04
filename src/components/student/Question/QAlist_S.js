@@ -11,7 +11,33 @@ import { List, Dialog } from '@material-ui/core/';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import ViewQA from './viewQAlist_S'
+import ViewQA from './viewQAlist_S';
+import { withStyles } from '@material-ui/core/styles';
+
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import TextField from '@material-ui/core/TextField';
+import Orange from '@material-ui/core/colors/orange';
+import Smile from '@material-ui/icons/SentimentVerySatisfied';
+
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+  
+});
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,6 +80,36 @@ function LinkTab(props) {
     />
   );
 }
+
+
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
+
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme => ({
 
@@ -166,14 +222,25 @@ export default function QAlist_S() {
   }, []);
 
   const [open, setOpen] = React.useState(false);
+  const [forum, setForum] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
+
+  const forumOpen = () => {
+    setForum(true);
+  };
+
+  const forumClose = () => {
+    setForum(false);
+  };
+
+
 
   {/* 學生新增問題 */ }
   const [openAddQa, closeAddQa] = React.useState(false);
@@ -224,6 +291,7 @@ export default function QAlist_S() {
     window.location.reload();
   }
 
+ 
 
 
   return (
@@ -266,6 +334,8 @@ export default function QAlist_S() {
 
                 <CardActionArea
                   className={classes.card} 
+                  onClick={forumOpen}
+                  rquestion={Ques['q_content']}
                   >
                   {
                     questionlist.map((list, i) => i < 1 ?
@@ -283,12 +353,11 @@ export default function QAlist_S() {
                       {/* <Typography> *6
                       */}
                         {Ques['q_content']}
-                    <ViewQA 
-                     person={Ques["q_std_id"]}
-                     question={Ques["q_content"]}
-                     time={Ques["q_asktime"]}/>
-                    {/* </Typography> */}
                     </TableCell>
+<ViewQA 
+question={Ques['q_content']}
+time={Ques['q_asktime']}/>
+                    
 
                     </Container>
                     </div>
@@ -313,9 +382,15 @@ export default function QAlist_S() {
                     )
                     )
                   }
+
+                  
                 </CardActionArea>
+                
+
+                
             {/* </Card> */}
                     </TableCell>
+                    
 
 )
 :
