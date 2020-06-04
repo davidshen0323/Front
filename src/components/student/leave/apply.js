@@ -1,6 +1,6 @@
 import React from 'react';
+import { brown } from '@material-ui/core/colors';
 import MuiAlert from "@material-ui/lab/Alert";
-import {brown} from '@material-ui/core/colors';
 import CloseIcon from '@material-ui/icons/Close';
 import { withStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
