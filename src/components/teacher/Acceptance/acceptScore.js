@@ -1,34 +1,14 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Input,TextField} from "@material-ui/core";
-import { makeStyles,withStyles } from "@material-ui/styles";
-import Snackbar from "@material-ui/core/Snackbar";
+import { useState, useEffect } from "react";
 import MuiAlert from "@material-ui/lab/Alert";
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputBase from '@material-ui/core/InputBase';
-import Switch from '@material-ui/core/Switch';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import MenuItem from '@material-ui/core/MenuItem';
 import GradeIcon from '@material-ui/icons/Grade';
 import CheckIcon from '@material-ui/icons/Check';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import { useState, useEffect } from "react";
-import {Grid,Chip } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
-
-
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles, withStyles } from "@material-ui/styles";
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import { ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, MenuItem, ListItemIcon, InputBase, Select, FormControl, Snackbar, Grid, Chip, Dialog, Button, DialogActions, DialogContent, Typography, Input, TextField } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -58,7 +38,6 @@ const useStyle = makeStyles(theme => ({
 },
   textfield: {
     paddingLeft: 10,
-    width:200,
   },
   label:{
     marginLeft:10,
@@ -112,7 +91,6 @@ export default function AcceptScore( props )  {
   });
   const [open, setOpen] = React.useState(false);
 
-  const[state,setState] = React.useState({});
   const [label, setLabel] = React.useState("");
 
   
@@ -131,9 +109,6 @@ export default function AcceptScore( props )  {
     //
   }
   
-  const labelChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
   const handleChangelabel = (event) => {
     setLabel(event.target.value);
   };
@@ -249,7 +224,6 @@ export default function AcceptScore( props )  {
           </Typography>
 
         </ExpansionPanelSummary>
-
         <ExpansionPanelDetails>
           <div 
           style={{display: "flex",
@@ -257,7 +231,7 @@ export default function AcceptScore( props )  {
          justifyContent: "center"}}>
         <div 
         style={{display: "flex",
-       // flexDirection: "row", 
+        //flexDirection: "column", 
          justifyContent: "center"}}
          >
 
@@ -274,36 +248,15 @@ export default function AcceptScore( props )  {
                 size="small"
                 variant="outlined"
                 className={classes.textfield}
-                style={{width:120,marginRight:90}}
-            />
-            
-            
-
-{/* 
-            <Typography className={classes.typo} > */}
-            標記 :
-            <FormControlLabel
-            control={<Switch checked={label.label} onChange={handleChangelabel} name="label"
-            color="secondary"
-            className={classes.label} 
-            />}
+                style={{width:85}}
             />
             
             </Typography>
-            {/* </Typography> */}
-           {/* <Typography className={classes.typo} >
+
+           <Typography className={classes.typo} >
             標記 :
 
-            <FormControlLabel
-                              control={
-                              <Checkbox 
-                              icon={<RadioButtonUncheckedIcon />} 
-                              checkedIcon={<FiberManualRecordIcon />} 
-                              checked={state.label}
-                              onChange={labelChange}
-                              />}
-                            /> */}
-            {/* <FormControl
+            <FormControl
             className={classes.label}
              >
             <Select
@@ -323,10 +276,19 @@ export default function AcceptScore( props )  {
               <GradeIcon />
             </ListItemIcon>
           </MenuItem>
-      
+          <MenuItem value={2}>
+            <ListItemIcon>
+              <CheckIcon />
+            </ListItemIcon>
+          </MenuItem>
+          <MenuItem value={3}>
+          <ListItemIcon>
+              <RadioButtonCheckedIcon />
+            </ListItemIcon>
+          </MenuItem>
         </Select>
-            </FormControl> */}
-       {/* </Typography>      */}
+            </FormControl>
+       </Typography>     
             {/* <TextField
                 disabled={label === "" ? true : false }
                 label="註記內容"
@@ -338,10 +300,10 @@ export default function AcceptScore( props )  {
                 className={classes.textfield}
             /> */}
 </div>
-{/* <div> */}
+<div>
             <Autocomplete
             
-            //disabled={label === "" ? true : false }
+            disabled={label === "" ? true : false }
               multiple
               options={comments.map(option => option.title)}
               //defaultValue={[top100Films[1].title]}
@@ -365,15 +327,14 @@ export default function AcceptScore( props )  {
                   label="註記內容"
                   value={inputs.content}
                   onChange={handleChange('content')} 
-                  // className={classes.textfield}
-                  style={{marginLeft:10,width:240}}
+                  className={classes.textfield}
                   fullWidth
                 />
               )}
             />
 
 
-{/* </div> */}
+</div>
           </div>
           
           </ExpansionPanelDetails>

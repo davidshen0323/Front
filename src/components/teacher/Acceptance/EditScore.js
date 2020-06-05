@@ -1,9 +1,7 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import TextField from '@material-ui/core/TextField';
+import { makeStyles } from "@material-ui/styles";
+import { Snackbar, TextField, Dialog, Button, DialogActions, DialogContent, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -30,6 +28,11 @@ const useStyle = makeStyles(theme => ({
     fontSize:14,
     backgroundColor: "#f8b62b",
     fontWeight:'bold',
+},
+  button2: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    width:'100px',
 },
   textfield: {
     paddingLeft: 10,
@@ -148,8 +151,8 @@ export default function AcceptScore( props )  {
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={nosubmitClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
-        <Button disabled={inputs.score===""} onClick={submitClick} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>儲存</Button>
+        <Button onClick={nosubmitClose} color="default" className={classes.button2} autoFocus>關閉視窗</Button>
+        <Button disabled={inputs.score===""} onClick={submitClick} color="primary" className={classes.button2} autoFocus>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose} >
         <Alert onClose={submitClose} severity="success">
           已儲存！

@@ -98,7 +98,7 @@ export default function ViewAnnouncementt() {
     <div className={classes.div}> 
       <MyMenu/>
        {/* 發佈公告 */}
-       <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
+       <Fab style={{color:'#ffffff'}} aria-label="add" className={classes.fab} onClick={() => closeAddAnnouncement(true)}>
           <AddIcon />
         </Fab>
 

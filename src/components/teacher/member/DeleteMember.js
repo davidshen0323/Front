@@ -1,12 +1,10 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import {useHistory, useParams} from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
+import { useParams } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
-import {brown} from '@material-ui/core/colors';
+import { brown } from '@material-ui/core/colors';
+import { makeStyles } from "@material-ui/styles";
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Snackbar, Dialog, Button, DialogActions, DialogContent, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -25,6 +23,11 @@ const useStyle = makeStyles(theme => ({
     padding: 10,
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
+  },
+  button: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    width:'100px',
   },
 }));
 
@@ -163,8 +166,8 @@ export default function DeleteMember( props )  {
         </div> */}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
-        <Button  onClick={handleDelete} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}>確認刪除</Button>
+        <Button onClick={handleClose} color="default" className={classes.button} style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
+        <Button  onClick={handleDelete} color="primary" className={classes.button} style={{fontFamily: 'Microsoft JhengHei'}}>確認刪除</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

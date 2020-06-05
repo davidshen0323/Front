@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/styles";
-import {useHistory, useParams} from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import axios from 'axios';
-import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
+import { useParams } from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/styles";
+import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
@@ -13,6 +12,8 @@ const useStyle = makeStyles(theme => ({
     padding: 5,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    color:'#582707'
   },
   typo2: {
     // marginLeft: 10,
@@ -33,6 +34,7 @@ const useStyle = makeStyles(theme => ({
   },
   btntext:{
     fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
     width:'100px',
   },
 }));
@@ -270,7 +272,7 @@ const handleChange = fieldname => event => {
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary" className={classes.btntext} style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
+        <Button onClick={handleClose} color="default" className={classes.btntext} style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
         <Button disabled={inputs.title === '' && inputs.content=== ''} onClick={handleEdit} className={classes.btntext} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}>確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>

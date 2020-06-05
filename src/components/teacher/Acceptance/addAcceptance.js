@@ -1,14 +1,13 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import { useParams } from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/styles";
+import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
   typo: {
-    marginLeft: 10,
+    // marginLeft: 10,
     padding: 5,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
@@ -22,13 +21,14 @@ const useStyle = makeStyles(theme => ({
   },
   typoHeading: {
     color: "#582707",
-    padding: 10,
+    padding: 3,
     fontFamily: 'Microsoft JhengHei',
     fontWeight:'bold'
   },
   button: {
     fontFamily: 'Microsoft JhengHei',
-    fontWeight:'bold'
+    fontWeight:'bold',
+    width:'100px',
   },
 }));
 
@@ -157,7 +157,7 @@ export default function AddAccept({ open, handleClose })  {
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFocus className={classes.button}>關閉視窗</Button>
+        <Button onClick={submitClose} color="default" autoFocus className={classes.button}>關閉視窗</Button>
         <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFocus className={classes.button}>確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>

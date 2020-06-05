@@ -1,9 +1,8 @@
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import Snackbar from "@material-ui/core/Snackbar";
-import {useHistory, useParams} from "react-router-dom";
-import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
+import { useHistory, useParams } from "react-router-dom";
+import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
@@ -12,6 +11,8 @@ const useStyle = makeStyles(theme => ({
     padding: 5,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    color:'#582707'
   },
   typo2: {
     // marginLeft: 10,
@@ -32,6 +33,7 @@ const useStyle = makeStyles(theme => ({
   },
   btntext:{
     fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
     width:'100px',
   },
 }));
@@ -80,7 +82,12 @@ let history = useHistory(); //傳值跳頁的方法
     inputs.title='';
     inputs.content='';
     window.location.reload();
-    
+  };
+  const submitClose2 = () => {
+    handleClose(true);
+    setOpenS(false);
+    inputs.title='';
+    inputs.content='';
   };
 
   const ErrClose = () => {
@@ -204,7 +211,7 @@ let history = useHistory(); //傳值跳頁的方法
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" className={classes.btntext} style={{fontFamily: 'Microsoft JhengHei'}} >關閉視窗</Button>
+        <Button onClick={submitClose2} color="default" className={classes.btntext} style={{fontFamily: 'Microsoft JhengHei'}} >關閉視窗</Button>
         <Button disabled={btnClose===false} onClick={handleSubmit} className={classes.btntext} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}  >確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>

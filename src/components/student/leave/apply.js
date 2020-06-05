@@ -234,7 +234,7 @@ export default function Apply(props) {
         </DialogContent>
 
         <DialogActions>
-        <Button onClick={handleClose} color="secondary" autoFous>關閉視窗</Button>
+        <Button onClick={handleClose} color="default" autoFous>關閉視窗</Button>
         <Button  
         // disabled={inputs===2 ? false : true} 
         onClick={handleSubmit}

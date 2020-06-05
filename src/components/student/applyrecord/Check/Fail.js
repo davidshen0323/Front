@@ -1,18 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-//import Apply from './apply';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import {useEffect} from 'react';
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel} from "@material-ui/core";
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -203,10 +195,10 @@ export default function Fail() {
                 
                     <TableRow hover >
                       {/* 碰到的時候後面會反灰 */}
-                      <TableCell></TableCell>
+                      <TableCell height="30"></TableCell>
                       {
                     ingList.map( (list, i) =>    
-                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    <TableCell height="30" key={i} component="th" scope="row" align="left" padding="none" >
                     {ing[list]}
                  </TableCell>
                     )   

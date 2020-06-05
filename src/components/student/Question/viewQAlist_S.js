@@ -1,24 +1,15 @@
 import React from 'react';
+import CloseIcon from '@material-ui/icons/Close';
+import { brown } from '@material-ui/core/colors';
+import Orange from '@material-ui/core/colors/orange';
+import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import Smile from '@material-ui/icons/SentimentVerySatisfied';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import  {Typography, TextareaAutosize} from '@material-ui/core';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
-import ListItem from '@material-ui/core/ListItem';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import {brown} from '@material-ui/core/colors';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import TextField from '@material-ui/core/TextField';
-import Orange from '@material-ui/core/colors/orange';
-import Smile from '@material-ui/icons/SentimentVerySatisfied';
+import { TextField, Avatar, ListItemAvatar, ListItemText, Grid, ListItem, Dialog, Button, Typography, IconButton } from '@material-ui/core';
 
 const styles = (theme) => ({
   root: {

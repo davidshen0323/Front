@@ -1,18 +1,13 @@
 import React from 'react';
+import AddIcon from "@material-ui/icons/Add";
+import MuiAlert from "@material-ui/lab/Alert";
+import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import {Snackbar, Typography, TextareaAutosize, TextField} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import {brown} from '@material-ui/core/colors';
-import {Fab} from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import MuiAlert from "@material-ui/lab/Alert";
+import { Button, Dialog, IconButton, Fab, Snackbar, Typography, TextField } from '@material-ui/core';
 
 
 const styles = (theme) => ({
@@ -20,13 +15,23 @@ const styles = (theme) => ({
     margin: 0,
     padding: theme.spacing(2),
   },
+  typo: {
+    marginLeft: 10,
+    padding: 5,
+    flex: 1,
+    fontFamily: 'Microsoft JhengHei',
+  },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-  
+  button: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    width:'100px',
+  },
 });
 
 const DialogTitle = withStyles(styles)((props) => {
@@ -74,13 +79,19 @@ const useStyles = makeStyles(theme => ({
         color: "#582707",
         padding: 10,
         fontFamily: 'Microsoft JhengHei',
+        fontWeight: 'bold',
       },
       TextField:{
           width:'100%',
       },
       text:{
         height:'60px',
-      }
+      },
+      button: {
+        fontFamily: 'Microsoft JhengHei',
+        fontWeight:'bold',
+        width:'100px',
+      },
 }));
 /*------------------------------*/
 
@@ -209,10 +220,10 @@ export default function Apply(props) {
         </DialogContent>
 
         <DialogActions>
-        <Button onClick={handleClose} color="primary"  style={{fontFamily: 'Microsoft JhengHei'}} autoFous>關閉視窗</Button>
+        <Button onClick={handleClose} color="default" className={classes.button} autoFous>關閉視窗</Button>
         <Button  
         onClick={handleSubmit}
-        color="primary"  style={{fontFamily: 'Microsoft JhengHei'}} autoFous>確認送出</Button>
+        color="primary" className={classes.button} autoFous>確認送出</Button>
         </DialogActions>
 
       </Dialog>

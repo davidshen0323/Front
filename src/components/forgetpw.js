@@ -1,9 +1,8 @@
 import React from "react";
-//import Link from "@material-ui/core/Link";
-import {Snackbar, Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography, List} from "@material-ui/core";
-import {makeStyles} from '@material-ui/core/styles';
-import {useHistory, Link} from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
+import {useHistory, Link} from "react-router-dom";
+import {makeStyles} from '@material-ui/core/styles';
+import {Snackbar, Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography, List} from "@material-ui/core";
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
@@ -12,7 +11,6 @@ const useStyles = makeStyles(theme =>({
         fontSize:'14px',
         paddingLeft:theme.spacing(20),
         fontFamily: 'Microsoft JhengHei',
-        
       },   
     block:{
         margin:theme.spacing(1),
@@ -22,7 +20,18 @@ const useStyles = makeStyles(theme =>({
         width:'460px',
         margin:theme.spacing(1),
         fontFamily: 'Microsoft JhengHei',
-    }
+    },
+    typoHeading: {
+      color: "#582707",
+      padding: 25,
+      fontFamily: 'Microsoft JhengHei',
+      fontWeight: 'bold',
+    },
+    button: {
+      fontFamily: 'Microsoft JhengHei',
+      fontWeight:'bold',
+      width:'100px',
+    },
 }
 ));
 /*--------------------------------*/
@@ -190,7 +199,7 @@ const handleChange = fieldname => event => {
   return (
     <div >
       <Typography className={classes.Link}>
-        <Link href="#" onClick={handleClickOpen}>
+        <Link href="#" onClick={handleClickOpen} >
           忘記密碼?
         </Link>
       </Typography>
@@ -200,7 +209,7 @@ const handleChange = fieldname => event => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">忘記密碼嗎 ( ･д･ )?</DialogTitle>
+        <DialogTitle id="form-dialog-title" className={classes.typoHeading}>忘記密碼嗎 ( ･д･ )?</DialogTitle>
         <DialogContent>
           <DialogContentText>
            請填寫以下資料以便我們找回您的密碼
@@ -232,7 +241,7 @@ const handleChange = fieldname => event => {
             id="mail"
             variant="outlined"
             size="small"
-            label="Email Address"
+            label="Email"
             type="email"
             fullWidth
             className={classes.block2}
@@ -241,10 +250,10 @@ const handleChange = fieldname => event => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary">
+          <Button onClick={handleClose} className={classes.button} color="secondary">
             取消
           </Button>
-          <Button disabled={btnClose===false} onClick={handleSubmit} color="primary">
+          <Button disabled={btnClose===false} onClick={handleSubmit} className={classes.button} color="primary">
             確認送出
           </Button>
           {/* {console.log(inputs.user)} */}

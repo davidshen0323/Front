@@ -70,7 +70,7 @@ export default function EditPassword({ open, handleClose })  {
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFous>關閉視窗</Button>
+        <Button onClick={submitClose} color="default" autoFous>關閉視窗</Button>
         <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFous>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
         <Alert onClose={submitClose} severity="success">

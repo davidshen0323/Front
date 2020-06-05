@@ -2,9 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import Snackbar from "@material-ui/core/Snackbar";
-import {Dialog, Button, DialogActions, DialogContent, Typography} from "@material-ui/core";
-
+import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -26,6 +24,7 @@ const useStyle = makeStyles(theme => ({
   },
   btntext:{
     fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
     width:'100px',
   },
 }));
@@ -215,7 +214,7 @@ export default function DeleteAnnouncement( props )  {
         </div> */}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary"  className={classes.btntext} style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
+        <Button onClick={handleClose} color="default" className={classes.btntext} style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
         <Button  onClick={handleDelete} color="primary" className={classes.btntext} style={{fontFamily: 'Microsoft JhengHei'}}>確認刪除</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>

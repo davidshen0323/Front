@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Input, Snackbar } from "@material-ui/core";
+import { Dialog, Button, DialogActions, DialogContent, Typography, Input, Snackbar } from "@material-ui/core";
 
 const ExpansionPanel = withStyles({
     root: {
@@ -236,7 +236,7 @@ const handleSubmit = () =>
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" style={{fontFamily:'微軟正黑體'}}>關閉視窗</Button>
+        <Button onClick={submitClose} color="default" style={{fontFamily:'微軟正黑體'}}>關閉視窗</Button>
         <Button onClick={handleSubmit} color="primary" style={{fontFamily:'微軟正黑體'}}>加入課程</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>

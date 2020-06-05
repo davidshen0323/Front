@@ -40,6 +40,9 @@ const useStyles = makeStyles(theme => ({
 },
   selehw: {
     fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    color:'#582707',
+
   },
   buttonbase: {
     width: '100%',

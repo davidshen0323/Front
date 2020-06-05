@@ -203,7 +203,7 @@ export default function AddQA ()  {
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" className={classes.btntext} >關閉視窗</Button>
+        <Button onClick={submitClose} color="default" className={classes.btntext} >關閉視窗</Button>
         <Button 
         disabled={inputs.ques === '' ? true : false} 
         onClick={handleSubmit} 

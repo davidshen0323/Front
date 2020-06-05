@@ -1,8 +1,7 @@
 import React from "react";
-import {TextField, Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/styles";
+import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, Input } from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
@@ -71,7 +70,7 @@ export default function EditPassword({ open, handleClose })  {
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFous>關閉視窗</Button>
+        <Button onClick={submitClose} color="default" autoFous>關閉視窗</Button>
         <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" autoFous>儲存</Button>
         <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose}>
         <Alert onClose={submitClose} severity="success">
