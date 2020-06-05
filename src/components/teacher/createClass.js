@@ -1,8 +1,7 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Input, Snackbar} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import MuiAlert from "@material-ui/lab/Alert";
-import TextField from '@material-ui/core/TextField';
+import { makeStyles } from "@material-ui/styles";
+import { TextField, Dialog, Button, DialogActions, DialogContent, Typography, Snackbar} from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -22,6 +21,11 @@ const useStyle = makeStyles(theme => ({
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
   },
+  button: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    width:'100px',
+},
 }));
 
 
@@ -157,8 +161,8 @@ const handleSubmit = () =>
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" style={{fontFamily:'微軟正黑體'}}autoFocus>關閉視窗</Button>
-        <Button disabled={inputs.cs_id===''|| inputs.cs_name==='' ? true : false} onClick={handleSubmit} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>儲存</Button>
+        <Button onClick={submitClose} color="default" className={classes.button} autoFocus>關閉視窗</Button>
+        <Button disabled={inputs.cs_id===''|| inputs.cs_name==='' ? true : false} className={classes.button} onClick={handleSubmit} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>儲存</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
@@ -177,7 +181,6 @@ const handleSubmit = () =>
             該課程代碼已存在，請新增其他課程代碼！
           </Alert>
         </Snackbar>
-       
       </DialogActions>
     </Dialog>
     

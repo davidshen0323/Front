@@ -175,8 +175,8 @@ export default function QaReply( props )  {
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
-        <Button onClick={submitClick} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>標記為已於課堂上回答</Button>
+        <Button onClick={submitClose} color="default" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
+        <Button onClick={submitClick} color="secondary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>標記為已於課堂上回答</Button>
         <Button 
         disabled={inputs===2 ? false : true} 
         onClick={submitSaved} 

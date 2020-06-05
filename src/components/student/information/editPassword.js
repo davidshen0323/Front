@@ -147,7 +147,7 @@ export default function EditPassword({ open, handleClose })  {
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>關閉視窗</Button>
+        <Button onClick={submitClose} color="default" style={{fontFamily:'微軟正黑體'}} autoFocus>關閉視窗</Button>
         <Button disabled={inputs.pwd!==''&&inputs.pwd!==inputs.newpwd&&inputs.newpwd===inputs.repeatpwd ? false : true} onClick={submitClick} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>儲存</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>

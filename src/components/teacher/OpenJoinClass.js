@@ -1,10 +1,10 @@
 import React from "react";
-import {Fab,Dialog, Button, DialogActions, DialogContent, Typography} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import {useParams} from "react-router-dom";
-import AddIcon from "@material-ui/icons/Add";
 import QRCode from 'qrcode.react';
 import { v4 as uuidv4 } from 'uuid';
+import { useParams } from "react-router-dom";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/styles";
+import {Fab, Dialog, Button, DialogActions, DialogContent, Typography} from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -31,6 +31,11 @@ const useStyle = makeStyles(theme => ({
     opacity: '100%',
     backgroundColor:'#582707',
     zIndex:10,
+  },
+  button: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    width:'100px',
   },
 }));
 
@@ -97,10 +102,10 @@ export default function OpenJoinClass ()  {
             開放加入課程
           </Typography>
 
-          <Typography className={classes.typo} variant="body1">
+          <Typography className={classes.typoHeading} variant="body1">
             代碼：{joinID}
           </Typography>
-          <Typography className={classes.typo} variant="body1">
+          <Typography className={classes.typoHeading} variant="body1">
             QRcode：
           </Typography>
           <QRCode value={joinID} size={250}/>
@@ -108,7 +113,7 @@ export default function OpenJoinClass ()  {
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">關閉視窗</Button>
+        <Button className={classes.button} onClick={handleClose} color="default">關閉視窗</Button>
       </DialogActions>
     </Dialog>
   </div>

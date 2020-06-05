@@ -1,11 +1,9 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/styles";
+import { brown } from '@material-ui/core/colors';
 import CreateIcon from '@material-ui/icons/Create';
-import { IconButton } from '@material-ui/core';
-import {brown} from '@material-ui/core/colors';
+import { Snackbar, IconButton, Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -29,7 +27,8 @@ const useStyle = makeStyles(theme => ({
   },
   button: {
     fontFamily: 'Microsoft JhengHei',
-    fontWeight:'bold'
+    fontWeight:'bold',
+    width:'100px',
   },
 }));
 
@@ -53,8 +52,7 @@ export default function Edithw(props)  {
 
   const [inputs, setInputs] = React.useState(
     {name:props.name,content:props.content},
-    
-    
+  
   );
 
 
@@ -197,7 +195,7 @@ export default function Edithw(props)  {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={submitClose} color="primary" autoFocus className={classes.button}>關閉視窗</Button>
+        <Button onClick={submitClose} color="default" autoFocus className={classes.button}>關閉視窗</Button>
         <Button disabled={inputs.name===""|| inputs.content===""} onClick={handleSubmit} color="primary" autoFocus className={classes.button}>確認送出</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>

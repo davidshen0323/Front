@@ -1,28 +1,14 @@
 import React from "react";
-import {Dialog, Button, DialogActions, DialogContent, Typography, Input,TextField} from "@material-ui/core";
-import { makeStyles,withStyles } from "@material-ui/styles";
-import Snackbar from "@material-ui/core/Snackbar";
+import { useState, useEffect } from "react";
 import MuiAlert from "@material-ui/lab/Alert";
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputBase from '@material-ui/core/InputBase';
-
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import MenuItem from '@material-ui/core/MenuItem';
 import GradeIcon from '@material-ui/icons/Grade';
 import CheckIcon from '@material-ui/icons/Check';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import { useState, useEffect } from "react";
-import {Grid,Chip } from "@material-ui/core";
 import { throttle, debounce } from "throttle-debounce";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles, withStyles } from "@material-ui/styles";
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import { ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, MenuItem, ListItemIcon, InputBase, Select, FormControl, Snackbar, Grid, Chip, Dialog, Button, DialogActions, DialogContent, Typography, Input, TextField } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {

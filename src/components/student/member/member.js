@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
 import MyMenu from '../MenuS';
 import MMTable from './MMtableS';
 import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import {TableContainer, Paper, Table, TableRow, TableCell} from '@material-ui/core';
 
 /*------------ STYLE ------------*/
@@ -55,24 +55,24 @@ export default function Member() {
             <TableContainer>
             <Table size="small">
                     <TableRow >
-                        <TableCell width="40%" align="center" className={classes.typo}>教師姓名</TableCell>
-                        <TableCell width="40%" align="center" className={classes.typo}>{teacherInformation.teacher_name}</TableCell>
+                        <TableCell height="30" width="40%" align="center" className={classes.typo}>教師姓名</TableCell>
+                        <TableCell height="30" width="40%" align="center" className={classes.typo}>{teacherInformation.teacher_name}</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center" className={classes.typo}>系所</TableCell>
-                        <TableCell align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_department}</TableCell>
+                        <TableCell height="30" align="center" className={classes.typo}>系所</TableCell>
+                        <TableCell height="30" align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_department}</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center" className={classes.typo}>電話</TableCell>
-                        <TableCell align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_phone}</TableCell>
+                        <TableCell height="30" align="center" className={classes.typo}>電話</TableCell>
+                        <TableCell height="30" align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_phone}</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center" className={classes.typo}>Email</TableCell>
-                        <TableCell align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_mail}</TableCell>
+                        <TableCell height="30" align="center" className={classes.typo}>Email</TableCell>
+                        <TableCell height="30" align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_mail}</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center" className={classes.typo}>辦公室位置</TableCell>
-                        <TableCell align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_office}</TableCell>
+                        <TableCell height="30" align="center" className={classes.typo}>辦公室位置</TableCell>
+                        <TableCell height="30" align="center" width="40%" className={classes.typo}>{teacherInformation.teacher_office}</TableCell>
                     </TableRow>
                 </Table>
                 </TableContainer>

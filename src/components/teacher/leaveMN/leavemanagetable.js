@@ -1,34 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import CheckCircle from '@material-ui/icons/CheckCircle';
-import CancelIcon from '@material-ui/icons/Cancel';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import Grid from '@material-ui/core/Grid';
-import {useState,useEffect} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-
-
-
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import CancelIcon from '@material-ui/icons/Cancel';
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import { lighten, makeStyles } from '@material-ui/core/styles';
+import { FormControl, FormControlLabel, RadioGroup, Radio, Grid, Tooltip, IconButton, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Toolbar } from "@material-ui/core";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -79,6 +58,7 @@ function EnhancedTableHead(props) {
         <TableCell padding='default'/>
         {headCells.map(headCell => (
           <TableCell
+          height="30"
             style={{ fontFamily:'微軟正黑體'}}
             key={headCell.id}
             align={headCell.numeric? 'left' : 'right'}
@@ -350,9 +330,10 @@ export default function Leavemanagetable(props) {
               //rowCount={leaves.length}
             />
             <TableBody>
-              {stableSort(leaves, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((leave, index) => leave["tl_state"] === 0 ?
+              {
+              // stableSort(leaves, getComparator(order, orderBy))
+              //   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                leaves.map((leave, index) => leave["tl_state"] === 0 ?
                   (
                     <TableRow 
                       hover
@@ -363,15 +344,15 @@ export default function Leavemanagetable(props) {
                       // key={leave.name}
                       
                     >
-                        <TableCell>
+                        <TableCell height="30">
                           {/* {index+1} */}
                         </TableCell>
                   {
                     leaveList.map( (list, i) =>   i < 6 ? 
-                    <TableCell key={i} component="th" scope="row" align="left" >
+                    <TableCell height="30" key={i} component="th" scope="row" align="left" >
                     {leave[list]}
                  </TableCell>:
-                 <TableCell align="left">
+                 <TableCell height="30" align="left">
                  <FormControl component="fieldset" onChange={(e)=>changeState(e,leave.tl_id)}>
                    <RadioGroup row value={leave.tl_state+''} >
                      <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="通過" />
@@ -393,15 +374,15 @@ export default function Leavemanagetable(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25]}
+        {/* <TablePagination
+          rowsPerPageOptions={[10,25]}
           component="div"
           count={leaves.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        />     
+        />      */}
     </div>
   );
 }
