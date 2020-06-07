@@ -1,20 +1,17 @@
 import React, {useEffect} from "react";
-import MyMenu from "../teacher/MenuOT";
-import { makeStyles } from "@material-ui/core/styles";
-import { IconButton, Typography, Fab, Grid} from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import { Link } from "react-router-dom";
-import CreateClass from "./createClass";
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
 import OffClass from './OffClass';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MyMenu from "../teacher/MenuOT";
+import CreateClass from "./createClass";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/core/styles";
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import { CardActionArea, Fab, Grid} from "@material-ui/core";
 // core components
 import Card from "../Card/Card.js";
-import CardHeader from "../Card/CardHeader.js";
 import CardBody from "../Card/CardBody.js";
+import CardHeader from "../Card/CardHeader.js";
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 
 const useStyles = makeStyles((theme) => ({
   div: {
@@ -152,8 +149,9 @@ export default function HomepageT() {
             </CardHeader>
 
             <CardBody  onClick={() =>Jump(classs)}>
-              <h3 className={classes.cardTitle}>{classs["cs_id"]}</h3>
-              <h5 className={classes.cardTitle}>{classs["teacher_name"]}</h5>
+              <h5 className={classes.cardTitle}>教師：{classs["teacher_name"]}</h5>
+              <h5 className={classes.cardTitle}>課程人數：{classs["std_count"]}</h5>
+              <h3 className={classes.cardTitle}>課程代碼：{classs["cs_id"]}</h3>
             </CardBody>
             </CardActionArea>
           </Card>

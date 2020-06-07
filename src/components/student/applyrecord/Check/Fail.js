@@ -162,7 +162,7 @@ export default function Fail() {
   
    useEffect(() => {
      async function fetchData() {
-       const result = await axios.get(`/student/takeleave/TakeleaveRecord/${params.cs_id}/`);
+       const result = await axios.get(`/student/takeleave/TakeleaveRecord/${params.cs_id}/2/`);
        
        console.log(result.data);
        
