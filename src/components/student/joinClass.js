@@ -68,6 +68,11 @@ const useStyle = makeStyles(theme => ({
     color: "#582707",
     padding: 10
   },
+  button: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    width:'100px',
+  },
 }));
 
 
@@ -236,8 +241,8 @@ const handleSubmit = () =>
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="default" style={{fontFamily:'微軟正黑體'}}>關閉視窗</Button>
-        <Button onClick={handleSubmit} color="primary" style={{fontFamily:'微軟正黑體'}}>加入課程</Button>
+        <Button onClick={submitClose} className={classes.button} color="default" >關閉視窗</Button>
+        <Button onClick={handleSubmit} className={classes.button} color="primary" >加入課程</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
