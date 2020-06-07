@@ -13,6 +13,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {useEffect} from 'react';
+import {Paper} from '@material-ui/core';
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -181,7 +182,7 @@ export default function Pass() {
 
   return (
     <div className={classes.root}>  
-          
+          <Paper>
         <TableContainer>
           
           <Table
@@ -229,6 +230,7 @@ export default function Pass() {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+        </Paper>
     </div>
   );
 }

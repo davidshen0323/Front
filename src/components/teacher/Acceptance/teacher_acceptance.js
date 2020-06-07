@@ -17,6 +17,8 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -59,6 +61,9 @@ function LinkTab(props) {
   );
 }
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function TAcceptanceList() {
 
@@ -101,25 +106,18 @@ export default function TAcceptanceList() {
   const csid = params.cs_id;
   const hwname = params.hw_name;
   
-  const[state,setState] = React.useState({});
+  const[state,setState] = React.useState(acceptances['accept_tag']);
   const [value, setValue] = React.useState(0);
 
    // 成功小綠綠
    const [openS, setOpenS] = React.useState(false);
-   // 成功小綠綠2
-   const [openS2, setOpenS2] = React.useState(false);
-   // 失敗小紅1
-   const [openErr1, setOpenErr1] = React.useState(false);
-   // 警告小橘
-   const [openWarn, setOpenWarn] = React.useState(false);
-   // 警告小橘2
-   const [openWarn2, setOpenWarn2] = React.useState(false);
+ 
 
 
 
   useEffect(() => {
       async function fetchData() {
-          const result = await axios.get(`/teacher/acceptance/hw/${csid}/${hwname}`);
+          const result = await axios.get(`/teacher/acceptance/hw/${csid}/${hwname}/`);
           setAcceptances(result.data);
         //   console.log(result.data);
       }
@@ -132,19 +130,80 @@ export default function TAcceptanceList() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const labelChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+
+  const labelChange = (event,id) => {
+    const tagIndex = acceptances.findIndex(s=>s.std_id==id)
+    var newlist = [...acceptances]
+    newlist[tagIndex].accept_tag =(event.target.checked) 
+    // == true ? 1 : 0
+    //setState({ ...state, [event.target.name]: event.target.checked });
+    
+    setAcceptances(newlist);
+    labelSubmit(acceptances[tagIndex])
+    console.log(' newlist[tagIndex]', acceptances[tagIndex])
   };
 
-  const handledelete = () =>
+
+  const labelSubmit = (label) =>
   {
-    fetch('/teacher/acceptance/deleteAcceptance',{
+    console.log('stdid',label['std_id'])
+    console.log('hw_id',label['accept_hw_id'])
+    console.log('tag',label['accept_tag'])
+
+    if(label['accept_tag'] === true)
+    {
+
+      fetch(`/teacher/updateTag/`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          std_id: label.std_id,
+          accept_hw_id: label.accept_hw_id,
+          accept_tag: 1,
+          
+        })
+      })
+    }
+    else
+    {
+      fetch(`/teacher/updateTag/`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          std_id: label.std_id,
+          accept_hw_id: label.accept_hw_id,
+          accept_tag: 0,
+          
+        })
+      })
+    }
+     }
+
+
+  const deletQ=(event,id)=>{
+    const QIndex = acceptances.findIndex(s=>s.std_id===id)
+    handleDelete(acceptances[QIndex])
+    console.log('QIndex',acceptances[QIndex])
+    
+  }
+
+  const handleDelete = (student) =>
+  {
+    console.log('homework',hwname)
+    console.log('stdid',student['std_id'])
+    fetch('/teacher/acceptance/deleteAcceptance/',{
       method: 'DELETE',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        std_id: student.std_id,
         hw_name: hwname,
+        cs_id: csid,
       })
   })
   .then(res => {
@@ -153,25 +212,29 @@ export default function TAcceptanceList() {
       if (test === "此學生尚未點選驗收") //帳號已註冊過
       {
           //alert("你還沒點過驗收");
-          setOpenWarn2(true);
+          //setOpenWarn2(true);
       }
       else if(test === "老師已驗收完成無法取消驗收") //信箱不包含@
       {
           //alert("老師已經打分數了，無法取消!");
-          setOpenErr1(true);
+          //setOpenErr1(true);
       }
       else
       {
-          //alert("取消驗收成功!");    
-          setOpenS2(true);
+          //alert("取消學生問題成功!");    
+          setOpenS(true);
           // history.push(`/acceptance/${csid}/${hwname}`);     
-          window.location.reload();
+          //window.location.reload();
 
       }
       
   } fetchres() })
   
 }
+
+const submitClose = (event, reason) => {
+  window.location.reload();
+};
 
   return (
     <div className={classes.div}>
@@ -212,28 +275,57 @@ export default function TAcceptanceList() {
 
             {/*===== TableBody =====*/}
             <TableBody>
-                {acceptances.map((acceptance,index) => acceptance["accept_done"] === false ? (
+                {acceptances.map((acceptance,index) => acceptance["accept_done"] === false && 
+                (acceptance["accept_state"] === 0 || acceptance["accept_state"] === 1) ? (
                     <TableRow key={index}>
                       {/* <TableCell ></TableCell> */}
                       
                     {
                         acceptanceList.map( (list, i) => i < 7 ?
-                            i<1?
-                            <TableCell key={i} component="th" scope="row" align="center">
-                           <FormControlLabel
-                              control={
-                              <Checkbox 
-                              icon={<RadioButtonUncheckedIcon />} 
-                              checkedIcon={<FiberManualRecordIcon />} 
-                              checked={state.label}
-                              onChange={labelChange}
-                              />}
-                            />
-                         </TableCell>
+                            i<1
+                            ?//標註
+                              <TableCell key={i} component="th" scope="row" align="center">
+                                <FormControlLabel
+                                    control={
+                                    <Checkbox 
+                                    icon={<RadioButtonUncheckedIcon />} 
+                                    checkedIcon={<FiberManualRecordIcon />} 
+                                    checked={acceptance["accept_tag"]}
+                                    onChange={(e)=>labelChange(e,acceptance.std_id)}
+                                    />}
+                                  />
+                              </TableCell>
                             
-                          :
-                          <TableCell key={i} component="th" scope="row" align="center">
-                               {acceptance[list]}
+                            :
+                            i<5&&i>3? acceptance["accept_state"] === 0 ?
+                            <TableCell key={i} component="th" scope="row" align="center" >
+                              發問
+                            </TableCell>
+                              :
+                            <TableCell key={i} component="th" scope="row" align="center">
+                              驗收
+                            </TableCell>
+                            :
+                            <TableCell key={i} component="th" scope="row" align="center">
+                            {acceptance[list]}
+                          </TableCell>
+                            ://處理
+                            acceptance["accept_state"]===0?
+                            <TableCell key={i} align="center">
+                              <Button  
+                            onClick={(e)=>deletQ(e,acceptance.std_id)}
+                            variant="contained" 
+                            className={classes.button} 
+                             >
+                            完成問題
+                            </Button>
+                            
+                             <AcceptScore
+                             stdid={acceptance['std_id']}
+                             hwid={acceptance['accept_hw_id']}
+                             stdname={acceptance['std_name']}
+                             label={acceptance['accept_tag']}
+                             />                             
                             </TableCell>
                             :
                             <TableCell key={i} align="center">
@@ -241,17 +333,9 @@ export default function TAcceptanceList() {
                              stdid={acceptance['std_id']}
                              hwid={acceptance['accept_hw_id']}
                              stdname={acceptance['std_name']}
+                             label={acceptance['accept_tag']}
                              />
-
-                            <Button  
-                            onClick={handledelete}
-                            variant="contained" 
-                            className={classes.button} 
-                             >
-                            完成問題
-                            </Button>
-                             
-                            </TableCell>
+                             </TableCell>
                          )
                     }
                     
@@ -301,9 +385,12 @@ export default function TAcceptanceList() {
                         <TableCell key={i} component="th" scope="row" align="center">
                        <FormControlLabel
                           control={
-                          <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} 
-                          checked={state.label}
-                          onChange={labelChange}
+                          <Checkbox 
+                          // icon={<FavoriteBorder />} checkedIcon={<Favorite />} 
+                          icon={<RadioButtonUncheckedIcon />} 
+                          checkedIcon={<FiberManualRecordIcon />} 
+                          checked={acceptance["accept_tag"]}
+                          onChange={(e)=>labelChange(e,acceptance.std_id)}
                           />}
                         />
                      </TableCell>
@@ -338,6 +425,13 @@ export default function TAcceptanceList() {
         </TableContainer>
         </Paper>
         </TabPanel>
+
+         {/* 驗收成功小綠框 */}
+      {/* <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+        <Alert severity="success">
+          已解決學生問題！
+          </Alert>
+      </Snackbar> */}
     </div>
   );
 }

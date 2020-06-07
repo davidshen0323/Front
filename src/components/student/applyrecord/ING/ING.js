@@ -13,7 +13,7 @@ import Write from './Write';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {useEffect} from 'react';
-
+import {Paper} from '@material-ui/core';
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -106,9 +106,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
-  paper: {
-    width: '100%',
-  },
   table: {
     minWidth: 750,
   },
@@ -123,10 +120,6 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
-  container: {
-    display: 'flex',
-  },
-  
 }));
 /*---------------------------------------------*/
 
@@ -179,7 +172,7 @@ export default function Ing() {
 
   return (
     <div className={classes.root}>  
-          
+      <Paper>
         <TableContainer>
           
           <Table
@@ -236,6 +229,7 @@ export default function Ing() {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+        </Paper>
     </div>
   );
 }

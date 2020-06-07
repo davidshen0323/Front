@@ -102,19 +102,19 @@ function Alert(props) {
 
 export default function AcceptScore( props )  {
   const classes = useStyle();
-  
-
-
-  const [openS, setOpenS] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     score:'',
     content:'',
   });
-  const [open, setOpen] = React.useState(false);
+  //const [state,setState] = React.useState({});
+  
+  const [label, setLabel] = React.useState(props.label);
 
-  const[state,setState] = React.useState({});
-  const [label, setLabel] = React.useState("");
-
+  // 完成驗收成功小綠綠
+  const [openS, setOpenS] = React.useState(false);
+  // 退回驗收成功小綠綠2
+  const [openR, setOpenR] = React.useState(false);
   
   const [expanded, setExpanded] = React.useState(false);
 
@@ -130,12 +130,77 @@ export default function AcceptScore( props )  {
     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
     //
   }
-  
-  const labelChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+  var labb=props.label;
+
+  console.log('props',props.label);
+  console.log('label',label);
+  console.log('labb',labb);
+
   const handleChangelabel = (event) => {
-    setLabel(event.target.value);
+    //setLabel(event.target.checked);
+    labb=(event.target.checked)
+    labelSubmit();
+  };
+
+  const labelSubmit = () =>
+  {
+    console.log('stdid',props.stdid)
+    console.log('hw_id',props.hwid)
+    console.log('tag',label)
+    console.log('labb',labb)
+    if(label === true)
+    {
+
+      fetch(`/teacher/updateTag/`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          std_id: props.stdid,
+          accept_hw_id:props.hwid,
+          accept_tag: 1,
+          
+        })
+      })
+    }
+    else
+    {
+      fetch(`/teacher/updateTag/`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          std_id: props.stdid,
+          accept_hw_id:props.hwid,
+          accept_tag: 0,
+          
+        })
+      })
+    }
+     }
+
+  const rejectClick = () => {
+    setOpenR(true);
+    console.log(props.stdid);
+    console.log(props.hwid);
+    console.log(parseInt(inputs.score));
+    
+    fetch('/teacher/rejectAcceptance/',{
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          std_id: props.stdid,
+          accept_hw_id: props.hwid,
+          accept_score: parseInt(inputs.score),
+          accept_content:inputs.content,
+          accept_tag:label,
+      })
+  })
+ window.location.reload();
   };
 
   const submitClick = () => {
@@ -156,13 +221,14 @@ export default function AcceptScore( props )  {
           // accept_done: 1
       })
   })
-
+  window.location.reload();
   };
 
   const submitClose = (event, reason) => {
 
     handleClose(true);
     setOpenS(false);
+    setOpenR(false);
     setInputs(1);
     window.location.reload();
   };
@@ -171,6 +237,7 @@ export default function AcceptScore( props )  {
 
     handleClose(true);
     setOpenS(false);
+    setOpenR(false);
     setInputs(1);
     // window.location.reload();
   };
@@ -250,7 +317,7 @@ export default function AcceptScore( props )  {
 
         </ExpansionPanelSummary>
 
-        <ExpansionPanelDetails>
+        <ExpansionPanelSummary>
           <div 
           style={{display: "flex",
         flexDirection: "column", 
@@ -274,7 +341,7 @@ export default function AcceptScore( props )  {
                 size="small"
                 variant="outlined"
                 className={classes.textfield}
-                style={{width:120,marginRight:90}}
+                style={{width:60,marginRight:5}}
             />
             
             
@@ -283,7 +350,7 @@ export default function AcceptScore( props )  {
             <Typography className={classes.typo} > */}
             標記 :
             <FormControlLabel
-            control={<Switch checked={label.label} onChange={handleChangelabel} name="label"
+            control={<Switch checked={props.label} onChange={handleChangelabel} 
             color="secondary"
             className={classes.label} 
             />}
@@ -363,8 +430,8 @@ export default function AcceptScore( props )  {
                   variant="outlined"
                   size="small"
                   label="註記內容"
-                  value={inputs.content}
-                  onChange={handleChange('content')} 
+                  //value={inputs.content}
+                  //onChange={handleChange('content')} 
                   // className={classes.textfield}
                   style={{marginLeft:10,width:240}}
                   fullWidth
@@ -376,7 +443,7 @@ export default function AcceptScore( props )  {
 {/* </div> */}
           </div>
           
-          </ExpansionPanelDetails>
+          </ExpansionPanelSummary>
           </ExpansionPanel>
 
 
@@ -386,14 +453,23 @@ export default function AcceptScore( props )  {
       </DialogContent>
       <DialogActions>
         <Button onClick={nosubmitClose} color="default" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
-        <Button onClick={submitClick} color="secondary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>退回重驗</Button>
+        <Button onClick={rejectClick} color="secondary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>退回重驗</Button>
         <Button onClick={submitClick} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>完成驗收</Button>
         
-        <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose} >
-        <Alert onClose={submitClose} severity="success">
-          已儲存！
+        
+      {/* 完成驗收成功小綠框 */}
+      <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Alert severity="success">
+        已儲存!
         </Alert>
       </Snackbar>
+      {/* 退回驗收成功小綠框 */}
+      <Snackbar open={openR} autoHideDuration={2000} onClose={submitClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Alert severity="success">
+        已退回學生驗收!
+        </Alert>
+      </Snackbar>
+
       </DialogActions>
     </Dialog>
     </div>
