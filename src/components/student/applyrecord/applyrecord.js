@@ -25,7 +25,7 @@ export default function ApplyRecord() {
 
                 <div>
                 <Paper className={classes.Paper}> 
-                <ApplyRDDp/>
+                    <ApplyRDDp/>
                 </Paper>
                 </div>
 

@@ -22,7 +22,11 @@ const styles = (theme) => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-  
+  button: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    width:'100px',
+  },
 });
 
 const DialogTitle = withStyles(styles)((props) => {
@@ -234,10 +238,11 @@ export default function Apply(props) {
         </DialogContent>
 
         <DialogActions>
-        <Button onClick={handleClose} color="default" autoFous>關閉視窗</Button>
+        <Button onClick={handleClose} className={classes.button} color="default" autoFous>關閉視窗22</Button>
         <Button  
         // disabled={inputs===2 ? false : true} 
         onClick={handleSubmit}
+        className={classes.button}
         color="primary" autoFous>確認送出</Button>
         </DialogActions>
 

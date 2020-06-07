@@ -1,19 +1,17 @@
 import React, {useEffect} from 'react';
-import MyMenu from './MenuOS';
-import { makeStyles } from '@material-ui/core/styles';
-import { Fab, Grid} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import axios from 'axios';
-import CardActionArea from "@material-ui/core/CardActionArea";
+import MyMenu from './MenuOS';
 import {Link} from "react-router-dom";
+import AddIcon from '@material-ui/icons/Add';
 import JoinClass from '../student/joinClass';
-
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import { makeStyles } from '@material-ui/core/styles';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
+import { CardActionArea, Fab, Grid} from '@material-ui/core';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 // core components
 import Card from "../Card/Card.js";
-import CardHeader from "../Card/CardHeader.js";
 import CardBody from "../Card/CardBody.js";
+import CardHeader from "../Card/CardHeader.js";
 
 const useStyles = makeStyles((theme) => ({
   div: {
@@ -142,14 +140,8 @@ export default function HomepageS() {
             </CardHeader>
 
             <CardBody>
-              <h3 className={classes.cardTitle}>{classs["cs_id"]}</h3>
-              {/* <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
-                increase in today sales.
-              </p> */}
-              <h5 className={classes.cardTitle}>{classs["teacher_name"]}</h5>
+              <h5 className={classes.cardTitle}>教師：{classs["teacher_name"]}</h5>
+              <h3 className={classes.cardTitle}>課程代碼：{classs["cs_id"]}</h3>
             </CardBody>
 
             {/* <CardFooter chart>
