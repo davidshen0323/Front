@@ -43,7 +43,7 @@ import RollcallBlockT from './components/teacher/rollcall/RollcallBlockT';
 import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
-
+import CommentBoxS from './components/student/Question/CommentBoxS';
 
 // import Loading from './components/Loading';
 // import gps from './components/teacher/rollcall/GPS/Gps';
@@ -97,6 +97,7 @@ ReactDOM.render(
 
             <Route path="/selectHW_T/:cs_id" component={selectHWt}/>
             
+            <Route path="/CommentBoxS/:cs_id/:q_id/:q_content" component={CommentBoxS}/>
             {/* <Route path="/Gps" component={gps}/>
             <Route path="/FindGeo" component={findgeo}/> */}
 

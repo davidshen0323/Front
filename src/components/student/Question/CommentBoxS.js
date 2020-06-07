@@ -1,0 +1,531 @@
+import React, { useEffect } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import {
+  Typography,
+  TextareaAutosize,
+  List,
+  TableCell,
+  Snackbar,
+  TablePagination,
+  Paper,
+  Container,
+  TableContainer,
+} from "@material-ui/core";
+import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
+import ListItem from "@material-ui/core/ListItem";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import { brown } from "@material-ui/core/colors";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import TextField from "@material-ui/core/TextField";
+import Orange from "@material-ui/core/colors/orange";
+import Smile from "@material-ui/icons/SentimentVerySatisfied";
+import MyMenu from "../MenuS";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
+
+
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
+/*------------ STYLE ------------*/
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  Paper:{
+    width: '85%',
+    margin: 'auto', 
+    //marginTop:'5%',   
+    marginBottom:'5%',
+    padding:'2%',
+    //boxShadow:"1px 1px 1px 1px #9E9E9E",    
+},
+  div: {
+    height: "250vh",
+    // background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
+    backgroundColor: "#ffe1c4",
+    overflowX: 'auto',
+
+  },
+
+  title: {
+    // color: "#582707",
+    fontFamily: "Microsoft JhengHei",
+    fontWeight: "bold",
+    fontSize: 20,
+    lineHeight: 1,
+    // width: '80%',
+    // marginLeft: '45%',
+    // marginRight: '45%',
+  },
+  title2: {
+    fontFamily: "Microsoft JhengHei",
+    fontSize: 12,
+    lineHeight: 1,
+  },
+  button: {
+    width: "5%",
+    height: 40,
+    marginLeft: 5,
+    marginTop: 30,
+    fontFamily: "Microsoft JhengHei",
+    fontWeight: "bold",
+    color: 'white',
+    backgroundColor: "#f8b62b",
+    
+  },
+  Avatar: {
+    backgroundColor: Orange[500],
+  },
+}));
+/*------------------------------*/
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+export default function CommentBoxS() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+  const [openS, setOpenS] = React.useState(false);
+  const [openError, setError] = React.useState(false);
+  const [openError2, setError2] = React.useState(false);
+
+   
+
+  const [inputs, setInputs] = React.useState({
+    // typeid:'',
+    cb_content: "",
+  });
+
+  const handleChange = (fieldname) => (event) => {
+    event.persist();
+    setInputs((inputs) => ({ ...inputs, [fieldname]: event.target.value }));
+  };
+
+  const params = useParams();
+  const csid = params.cs_id;
+  const qid = params.q_id;
+  const qcontent = params.q_content;
+  // const qtime = params.q_asktime;
+
+  const [comment, setComment] = React.useState([]);
+
+  // const [stdid, setStdid] = React.useState(0);
+
+  const commentList = ["cb_content"];
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get(
+        `/student/findAllmessageIntheQuestion/${csid}/${qid}`
+      );
+      setComment(result.data);
+      console.log(result.data);
+    }
+    // async function fetchStdid() {
+    //   const result = await axios.get(`/student/std_id`);
+    //   // setStdid(result.data);
+    //   setStdid(result.data["std_id"]);
+    //   console.log(result.data);
+    //   console.log(stdid);
+    // }
+
+    fetchData();
+    // fetchStdid();
+  }, []);
+ 
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+  const ErrClose = () => {
+    setOpenS(false);
+    setError(false);
+    setError2(false);
+};
+
+  const handleSubmit = () => {
+    // setOpen(false);
+    // console.log(props.id);
+    // console.log(inputs.tl_content);
+    // console.log(inputs.typeid);
+    fetch("/student/AddNewMessages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        q_id: qid,
+        cb_content: inputs.cb_content,
+        cs_id: csid,
+      })
+    })
+    .then(res => {
+                    
+      async function fetchres() {
+          const test = await res.text();  
+          if (test === "request failed. input content is null!")
+          {
+              
+              setOpenS(false);
+              setError(true);
+              setError2(false);
+              
+              console.log(1);
+              
+          }
+          else if(test === "request failed. this question has been solved can't add new messages!")
+          {
+            setOpenS(false);
+            setError(false);
+            setError2(true);
+            console.log(2);
+          }
+          else {
+              
+              setOpenS(true);
+              setError(false);
+              setError2(false);
+             
+              console.log(0);
+              window.location.reload();
+          }
+          
+      } fetchres()
+    })
+    
+  };
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 20));
+    setPage(0);
+  };
+
+
+  return (
+    <div
+      className={classes.div}
+      // className={classes.root}
+    >
+      <MyMenu />
+      {/* <Button style={{backgroundColor:"orange" ,color:"white", fontFamily:"Microsoft JhengHei", fontWeight:"bold"}} onClick={handleClickOpen}>
+        留言板
+      </Button> */}
+
+      {/* <Dialog onClose={handleClose} open={open} fullWidth maxWidth="lg">
+        <DialogTitle edge="start" onClose={handleClose}>
+         */}
+      {/* <ListItem alignItems="center">
+        <ListItemText> */}
+
+           {/* primary={ */}
+           <Paper className={classes.Paper}>
+            <Typography  variant="h6" component="h5"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily: "Microsoft JhengHei",fontWeight: "bold",color:"#000000"}}> {qcontent}</Typography>
+
+           {/* } */}
+        {/* </ListItemText> */}
+        
+      {/* </ListItem> */}
+      <Container maxWidth="sm">
+    {/* Grid container direction="row" justify="center" alignItems="center"> */}
+      {/* <Typography className={classes.title}>
+              {qcontent}
+              </Typography>
+               */}
+               <div style={{width:'100%'}}>
+      <TableContainer >       
+        {comment
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        .map((Com, index) => (
+          <List>
+            {commentList.map((list, i) => (
+             
+                      <ListItem >
+                        <ListItemAvatar>
+                          <Avatar src="https://image.flaticon.com/icons/svg/1933/1933446.svg" />
+                        </ListItemAvatar>
+
+                        <ListItemText 
+                        // style={{marginRight:10,}}
+                        // primary={"B"}
+                        >
+                          B{index+1}
+                          </ListItemText>
+
+                        <ListItemText>
+                       
+                          <Typography style={{
+                            borderRadius: 10,
+                            minWidth: "80%",
+                            width:450,
+                            fontFamily: "Microsoft JhengHei",
+                            backgroundColor: "#f12121",
+                            padding: 10,
+                            marginLeft: 30,
+                          }}>
+                          {Com["cb_content"]}
+
+                          </Typography>
+                        </ListItemText>
+                      </ListItem>
+                   
+                  
+            ))}
+          </List>
+        ))}
+        
+        <TablePagination
+        rowsPerPageOptions={[20, 50]}
+        component="div"
+        count={comment.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+      </TableContainer>
+      </div>
+        
+                <TextField
+                  id="cb_content"
+                  label="請輸入內文"
+                  variant="outlined"
+                  size="small"
+                  style={{ backgroundColor: "#fafafa", width: 850, marginTop: 30 }}
+                  onChange={handleChange("cb_content")}
+                />
+
+                <Button
+                  className={classes.button}
+                  onClick={handleSubmit}
+                  color="default"
+                  autoFocus
+                >
+                  留言
+                </Button>
+                
+      {/* </Grid> */}
+      </Container>
+      </Paper>
+
+              {/* <ListItemText> */}
+              {/* </ListItemText> */}
+
+{/* 
+      <Grid
+        container
+        spacing={1}
+        direction="column"
+        justify="center"
+        alignItems="flex-start"
+      >
+        <Grid item xs={12} direction="row">
+          <div>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar src="https://image.flaticon.com/icons/svg/1933/1933446.svg" />
+              </ListItemAvatar>
+
+              <ListItemText
+                style={{ marginRight: 10 }}
+                primary={
+                  //   <Typography
+                  //   className={classes.inline}
+                  //   >
+                  "B1"
+                }
+                secondary={
+                  // <Typography
+                  //       component="span"
+                  //       variant="body2"
+                  //       className={classes.inline}
+                  //       >
+                  "04:48"
+                  // </Typography>
+                }
+              /> */}
+{/* 
+              <ListItemText
+                style={{
+                  borderRadius: 10,
+                  width: 750,
+                  fontFamily: "微軟正黑體",
+                  backgroundColor: "#ffffff",
+                  padding: 10,
+                  marginLeft: 30,
+                }}
+              >
+                {/* hello~ */}
+                {/* {comment['cb_content']} */}
+              {/* </ListItemText> */}
+            {/* // </ListItem> */}
+          {/* // </div> */}
+        {/* // </Grid> */}
+
+        {/* <Grid item xs={12} direction="row">
+          <div>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar className={classes.Avatar}>
+                  <Smile />
+                </Avatar>
+              </ListItemAvatar>
+
+              <ListItemText
+                style={{ marginRight: 10 }}
+                primary={
+                  //   <Typography
+                  //   className={classes.inline}
+                  //   >
+                  "B1"
+                }
+                secondary={
+                  // <Typography
+                  //       component="span"
+                  //       variant="body2"
+                  //       className={classes.inline}
+                  //       >
+                  "04:48"
+                  // </Typography>
+                }
+              /> */}
+{/* 
+              <ListItemText
+                style={{
+                  borderRadius: 10,
+                  width: 750,
+                  fontFamily: "微軟正黑體",
+                  backgroundColor: "#ffffff",
+                  padding: 10,
+                  marginLeft: 30,
+                }}
+              >
+                {/* hello~ */}
+              {/* </ListItemText> */} 
+            {/* </ListItem> */}
+          {/* </div> */}
+        {/* </Grid> */}
+      {/* </Grid> */}
+
+      
+      {/* <Grid container spacing={1} justify="center" alignItems="center"> */}
+        {/* <Grid item xs={12} direction="row"> */}
+          {/* <div> */}
+            {/* <ListItem alignItems="center"> */}
+              {/* <ListItemAvatar>
+                
+              </ListItemAvatar> */}
+{/* 
+              <ListItemText>
+                <TextField
+                  id="cb_content"
+                  label="請輸入內文"
+                  variant="outlined"
+                  size="small"
+                  style={{ backgroundColor: "#fafafa", width: "70%" }}
+                  onChange={handleChange("cb_content")}
+                />
+
+                <Button
+                  className={classes.button}
+                  onClick={handleSubmit}
+                  color="default"
+                  autoFocus
+                >
+                  留言
+                </Button>
+              </ListItemText> */}
+            {/* </ListItem> */}
+          {/* </div> */}
+        {/* </Grid> */}
+        {/* <Button onClick={handleClose} color="secondary" autoFous>關閉視窗</Button>
+        <Button  
+        // disabled={inputs===2 ? false : true} 
+        onClick={handleSubmit}
+        color="primary" autoFous>確認送出</Button> */}
+      {/* </Grid> */}
+      {/* </DialogActions> */}
+
+      {/* </Dialog> */}
+      <Snackbar open={openS} autoHideDuration={2000} onClose={handleSubmit} style={{ marginBottom: 100 }}>
+                <Alert severity="success">
+                    留言成功！
+                </Alert>
+            </Snackbar>
+            {/* 失敗小紅框1 */}
+            <Snackbar open={openError} autoHideDuration={2000} onClose={ErrClose} style={{ marginBottom: 100 }}>
+                <Alert severity="error">
+                    請勿為空值!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError2} autoHideDuration={2000} onClose={ErrClose} style={{ marginBottom: 100 }}>
+                <Alert severity="error">
+                    此問題已被解決!
+                </Alert>
+            </Snackbar>
+    </div>
+  );
+}
