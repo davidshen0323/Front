@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     padding: "0 15px !important",
     zIndex:2,
-
   },
   cardTitle: {
     color: "#777",
