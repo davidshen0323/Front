@@ -1,14 +1,34 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import {Dialog, Button, DialogActions, DialogContent, Typography, Input,TextField} from "@material-ui/core";
+import { makeStyles,withStyles } from "@material-ui/styles";
+import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputBase from '@material-ui/core/InputBase';
+import Switch from '@material-ui/core/Switch';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import MenuItem from '@material-ui/core/MenuItem';
 import GradeIcon from '@material-ui/icons/Grade';
 import CheckIcon from '@material-ui/icons/Check';
-import { throttle, debounce } from "throttle-debounce";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { makeStyles, withStyles } from "@material-ui/styles";
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-import { ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, MenuItem, ListItemIcon, InputBase, Select, FormControl, Snackbar, Grid, Chip, Dialog, Button, DialogActions, DialogContent, Typography, Input, TextField } from "@material-ui/core";
+
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { useState, useEffect } from "react";
+import {Grid,Chip } from "@material-ui/core";
+import { throttle, debounce } from "throttle-debounce";
+
+
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -38,6 +58,7 @@ const useStyle = makeStyles(theme => ({
 },
   textfield: {
     paddingLeft: 10,
+    width:200,
   },
   label:{
     marginLeft:10,
@@ -81,18 +102,20 @@ function Alert(props) {
 
 export default function AcceptScore( props )  {
   const classes = useStyle();
-  
-
-
-  const [openS, setOpenS] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     score:'',
     content:'',
   });
-  const [open, setOpen] = React.useState(false);
+  //const [state,setState] = React.useState({});
+  
+  const [label, setLabel] = React.useState(props.label);
+  
 
-  const [label, setLabel] = React.useState("");
-
+  // 完成驗收成功小綠綠
+  const [openS, setOpenS] = React.useState(false);
+  // 退回驗收成功小綠綠2
+  const [openR, setOpenR] = React.useState(false);
   
   const [expanded, setExpanded] = React.useState(false);
 
@@ -108,9 +131,88 @@ export default function AcceptScore( props )  {
     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
     //
   }
-  
+  var labb=props.label;
+
+  console.log('props',props.label);
+  console.log('label',label);
+  console.log('labb',labb);
+
   const handleChangelabel = (event) => {
-    setLabel(event.target.value);
+    setLabel(event.target.checked);
+    labb=(event.target.checked);
+    console.log('props in submit',props.label);
+    console.log('label in submit',label);
+    console.log('labb in submit',labb);
+    labelSubmit();
+  };
+
+  const labelSubmit = () =>
+  {
+    console.log('stdid',props.stdid)
+    console.log('hw_id',props.hwid)
+    console.log('tag',label)
+    console.log('labb',labb)
+    //setLabel((label==0)? false  : true);
+    if (labb == true)
+    //if(label == true)
+    {
+
+      fetch(`/teacher/updateTag/`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          std_id: props.stdid,
+          accept_hw_id:props.hwid,
+          accept_tag: 1,
+          
+        })
+      })
+      .then(msg=>console.log(msg))
+      .catch(error=>console.log(error)
+      )
+    }
+    else
+    {
+      fetch(`/teacher/updateTag/`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          std_id: props.stdid,
+          accept_hw_id:props.hwid,
+          accept_tag: 0,
+          
+        })
+      })
+      .then(msg=>console.log(msg))
+      .catch(error=>console.log(error)
+      )
+    }
+     }
+
+  const rejectClick = () => {
+    setOpenR(true);
+    console.log(props.stdid);
+    console.log(props.hwid);
+    console.log(parseInt(inputs.score));
+    
+    fetch('/teacher/rejectAcceptance/',{
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          std_id: props.stdid,
+          accept_hw_id: props.hwid,
+          accept_score: parseInt(inputs.score),
+          accept_content:inputs.content,
+          accept_tag:label,
+      })
+  })
+ window.location.reload();
   };
 
   const submitClick = () => {
@@ -131,13 +233,14 @@ export default function AcceptScore( props )  {
           // accept_done: 1
       })
   })
-
+  window.location.reload();
   };
 
   const submitClose = (event, reason) => {
 
     handleClose(true);
     setOpenS(false);
+    setOpenR(false);
     setInputs(1);
     window.location.reload();
   };
@@ -146,6 +249,7 @@ export default function AcceptScore( props )  {
 
     handleClose(true);
     setOpenS(false);
+    setOpenR(false);
     setInputs(1);
     // window.location.reload();
   };
@@ -225,18 +329,7 @@ export default function AcceptScore( props )  {
 
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <div 
-          style={{display: "flex",
-        flexDirection: "column", 
-         justifyContent: "center"}}>
-        <div 
-        style={{display: "flex",
-        //flexDirection: "column", 
-         justifyContent: "center"}}
-         >
-
-
-
+        <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typo} >
             分數 :
           
@@ -248,49 +341,20 @@ export default function AcceptScore( props )  {
                 size="small"
                 variant="outlined"
                 className={classes.textfield}
-                style={{width:85}}
+                style={{width:200}}
             />
             
             </Typography>
 
            <Typography className={classes.typo} >
             標記 :
-
-            <FormControl
-            className={classes.label}
-             >
-            <Select
-             className={classes.textfield}
-          value={label}
-          onChange={handleChangelabel}
-          input={<BootstrapInput name="label"/>}
-          style={{width:85}}
-        >
-          <MenuItem value="">
-          <ListItemIcon>
-             <em>  None </em>
-            </ListItemIcon>
-          </MenuItem>
-          <MenuItem value={1} select>
-            <ListItemIcon>
-              <GradeIcon />
-            </ListItemIcon>
-          </MenuItem>
-          <MenuItem value={2}>
-            <ListItemIcon>
-              <CheckIcon />
-            </ListItemIcon>
-          </MenuItem>
-          <MenuItem value={3}>
-          <ListItemIcon>
-              <RadioButtonCheckedIcon />
-            </ListItemIcon>
-          </MenuItem>
-        </Select>
-            </FormControl>
-       </Typography>     
-            {/* <TextField
-                disabled={label === "" ? true : false }
+            <FormControlLabel
+            control={<Switch checked={label} onChange={handleChangelabel} name="label"
+            color="secondary"
+            className={classes.label} />}
+            />
+            <TextField
+                // disabled={label.label===true ? false:true }
                 label="註記內容"
                 id="content"
                 value={inputs.content}
@@ -298,45 +362,9 @@ export default function AcceptScore( props )  {
                 size="small"
                 variant="outlined"
                 className={classes.textfield}
-            /> */}
-</div>
-<div>
-            <Autocomplete
-            
-            disabled={label === "" ? true : false }
-              multiple
-              options={comments.map(option => option.title)}
-              //defaultValue={[top100Films[1].title]}
-              freeSolo
-              ChipProps={{ onDelete: () => {} }}
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
-                    variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={params => (
-                <TextField
-                  {...params}
-                  //disabled={label === "" ? true : false }
-                  variant="outlined"
-                  size="small"
-                  label="註記內容"
-                  value={inputs.content}
-                  onChange={handleChange('content')} 
-                  className={classes.textfield}
-                  fullWidth
-                />
-              )}
             />
-
-
-</div>
+          </Typography>
           </div>
-          
           </ExpansionPanelDetails>
           </ExpansionPanel>
 
@@ -345,16 +373,25 @@ export default function AcceptScore( props )  {
       
 
       </DialogContent>
-      <DialogActions>
+       <DialogActions>
         <Button onClick={nosubmitClose} color="default" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>關閉視窗</Button>
-        <Button onClick={submitClick} color="secondary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>退回重驗</Button>
+        <Button onClick={rejectClick} color="secondary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>退回重驗</Button>
         <Button onClick={submitClick} color="primary" style={{fontFamily: 'Microsoft JhengHei'}} autoFocus>完成驗收</Button>
         
-        <Snackbar open={openS} autoHideDuration={1000} onClose={submitClose} >
-        <Alert onClose={submitClose} severity="success">
-          已儲存！
+        
+      {/* 完成驗收成功小綠框 */}
+      <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Alert severity="success">
+        已儲存!
         </Alert>
       </Snackbar>
+      {/* 退回驗收成功小綠框 */}
+      <Snackbar open={openR} autoHideDuration={2000} onClose={submitClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Alert severity="success">
+        已退回學生驗收!
+        </Alert>
+      </Snackbar>
+
       </DialogActions>
     </Dialog>
     </div>
