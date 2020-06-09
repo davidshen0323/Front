@@ -1,6 +1,6 @@
 import React , { useState, useEffect } from 'react';
 import MyMenu from '../MenuT';
-import { Button, Table, TableHead, TableBody, TableCell, TableRow,Box, ButtonBase, makeStyles, Grid, CardActionArea, Fab } from '@material-ui/core';
+import { Button, Table, TableHead, TableBody, TableCell, TableRow,TableContainer,Box, ButtonBase, makeStyles, Grid, CardActionArea, Fab } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
@@ -28,14 +28,14 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#E0E0E0',
   },
   button: {
-    
     marginLeft: 10,
     marginTop: 10,
     marginBottom: 10,
-    width:'120px',
+    width:'80px',
     fontFamily: 'Microsoft JhengHei',
     color: "white",
-    backgroundColor: "#003060",
+    fontSize:14,
+    backgroundColor: "#f8b62b",
     fontWeight:'bold',
 },
   selehw: {
@@ -70,10 +70,10 @@ export default function SelectHW_T() {
   //接值
   
   const classes = useStyles();
-
+  
   const [Acc, setAcc] = React.useState([]);
 
-  const acceptanceList = [ 'hw_name','hw_content', 'hw_createtime','hw_id' ]
+  const acceptanceList = [ 'hw_name','hw_content', 'hw_createtime','hw_id','accept_done' ]
 
   const params = useParams();
   const csid = params.cs_id;
@@ -91,10 +91,58 @@ export default function SelectHW_T() {
 
   console.log(Acc);
 
+  const closeHW=(event,id)=>{
+    const hwIndex = Acc.findIndex(s=>s.hw_id=id)
+    handleCloseHW(Acc[hwIndex])
+    console.log('hwIndex',Acc[hwIndex])
+    
+  }
+
+  const handleCloseHW = (Accept) =>
+   {
+     console.log('homework',Accept['hw_id'])
+        fetch(`/teacher/closedHomework/`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              hw_id: Accept.hw_id,
+              
+        })
+       })
+      window.location.reload();
+      }
+
+
+  const reopenHW=(event,id)=>{
+    const hwIndex = Acc.findIndex(s=>s.hw_id=id)
+    handleReOpenHW(Acc[hwIndex])
+    console.log('hwIndex',Acc[hwIndex])
+    
+  }
+
+  const handleReOpenHW = (Accept) =>
+   {
+     console.log('homework',Accept['hw_id'])
+        fetch(`/teacher/REopenHomework/`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              hw_id: Accept.hw_id,
+              
+        })
+       })
+      window.location.reload();
+      }
+
   const deletHW=(event,id)=>{
     const hwIndex = Acc.findIndex(s=>s.hw_name=id)
     handleDelete(Acc[hwIndex])
     console.log('hwIndex',Acc[hwIndex])
+    
   }
 
   const handleDelete = (Accept) =>
@@ -111,7 +159,7 @@ export default function SelectHW_T() {
               hw_cs_id: params.cs_id,
         })
        })
-       window.location.reload();
+      window.location.reload();
       }
 
 
@@ -130,14 +178,15 @@ export default function SelectHW_T() {
         <br/>
       <Typography className={classes.selehw} variant="h5" component="h2" gutterBottom style={{marginBottom:'2%',textAlign:'center',marginTop:'2%'}}>請選擇作業：</Typography>
       <Paper className={classes.Paper}>
-          
+      <TableContainer>
           <Table>
             <TableHead>
                 <TableRow>
                     <TableCell align="center" className={classes.typo}>作業名稱</TableCell>
                     <TableCell align="center" className={classes.typo}>內容</TableCell>
                     <TableCell align="center" className={classes.typo}>日期</TableCell>
-                    <TableCell align="left" className={classes.typo}>編輯</TableCell>
+                    <TableCell align="center" className={classes.typo}>編輯</TableCell>
+                    <TableCell align="center" className={classes.typo}>處理</TableCell>
                 </TableRow>
             </TableHead>
             
@@ -154,7 +203,8 @@ export default function SelectHW_T() {
                     </ButtonBase>
                       </TableCell>
                     :
-                    <TableCell key={i} align="left">
+                    i>2&&i<4?
+                    <TableCell key={i} align="center">
                 <Grid>
                 <EditHW 
                 name={Acc['hw_name']} 
@@ -167,6 +217,15 @@ export default function SelectHW_T() {
                </IconButton>
                </Grid>
                     </TableCell>
+                    :
+                  Acc["hw_closed"] == 0?
+              <TableCell align="center">
+                <Button className={classes.button} onClick={(e)=>closeHW(e,Acc.hw_id)}>關閉驗收</Button>
+              </TableCell>
+              :
+              <TableCell align="center">
+              <Button className={classes.button} onClick={(e)=>reopenHW(e,Acc.hw_id)}>重啟驗收</Button>
+            </TableCell>
                       )
                     }
                     {/* </ButtonBase> */}
@@ -175,6 +234,7 @@ export default function SelectHW_T() {
              
             </TableBody>
           </Table>
+          </TableContainer>
       </Paper>
       <Grid
         container

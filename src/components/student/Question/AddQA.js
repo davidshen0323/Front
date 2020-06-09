@@ -2,9 +2,73 @@ import React from "react";
 import {useParams} from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import {Snackbar, Button, DialogActions, DialogContent, Typography, TextareaAutosize} from "@material-ui/core";
+import {Fab} from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import {Snackbar, Button,Typography, TextareaAutosize} from "@material-ui/core";
+import Dialog from '@material-ui/core/Dialog';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
+import { withStyles } from '@material-ui/core/styles';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+  
+});
+
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h3">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
+
 
 const useStyle = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  fab: {
+      position: "fixed",
+      bottom: 20,
+      right: 20,
+      backgroundColor:"#582707",
+      zIndex:10,
+    },
   typo: {
     padding: 5,
     flex: 1,
@@ -17,7 +81,7 @@ const useStyle = makeStyles(theme => ({
   },
   typoHeading: {
     color: "#582707",
-    padding: 5,
+    padding: 10,
     fontFamily:'微軟正黑體'
   },
   button: {
@@ -165,26 +229,21 @@ export default function AddQA ()  {
  
 
   return (
-    <div>
-{/* 
-    <Button 
-      onClick = {handleClickOpen}
-      variant = "contained" 
-      color = "primary" 
-      className={classes.button}
-    >
-    我要發問
-  </Button> */}
+    <div className={classes.root}>
+    <Fab aria-label="add" style={{color:'#ffffff'}} className={classes.fab} onClick={handleClickOpen} >
+      <AddIcon />
+    </Fab>
 
-    {/* <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description"> */}
-      <DialogContent>
-        <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+    <Dialog onClose={handleClose}  open={open} variant="inline" fullWidth maxWidth="xs">
+        <DialogTitle  edge="start"onClose={handleClose}>
+     
           <Typography className={classes.typoHeading} variant="h5" >
             提問
           </Typography>
-        </div>
+        </DialogTitle>
 
-        <div style={{ display: "flex",flexDirection: "column"}}>
+        
+        <DialogContent className={classes.text}>
           <Typography className={classes.typo} variant="body1">
             請輸入問題內容：
           </Typography>
@@ -200,8 +259,8 @@ export default function AddQA ()  {
              placeholder="請輸入問題"
              />
           </Typography>
-        </div>
       </DialogContent>
+
       <DialogActions>
         <Button onClick={submitClose} color="default" className={classes.btntext} >關閉視窗</Button>
         <Button 
@@ -212,6 +271,9 @@ export default function AddQA ()  {
         >
           確認送出
           </Button>
+          </DialogActions>
+        </Dialog>
+
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
@@ -242,8 +304,6 @@ export default function AddQA ()  {
             您不屬於該課程！
           </Alert>
         </Snackbar>
-      </DialogActions>
-    {/* </Dialog> */}
       </div>
   );
 }

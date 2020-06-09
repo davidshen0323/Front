@@ -64,7 +64,7 @@ export default function ApplyRDDp() {
 
   return (
           <div>
-            <AppBar position="static" color="inherite" >
+            <AppBar position="static" color="inherite" style={{maxWidth:'97%',margin:'auto'}}>
                 <Tabs
                 value={value}
                 onChange={handleChange}
