@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 10,
         //backgroundColor: 'lightgray',
         fontFamily: 'Microsoft JhengHei', //沒用
+        width: 'auto',
 
     },
 

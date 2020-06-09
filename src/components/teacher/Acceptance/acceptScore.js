@@ -110,6 +110,7 @@ export default function AcceptScore( props )  {
   //const [state,setState] = React.useState({});
   
   const [label, setLabel] = React.useState(props.label);
+  
 
   // 完成驗收成功小綠綠
   const [openS, setOpenS] = React.useState(false);
@@ -137,8 +138,11 @@ export default function AcceptScore( props )  {
   console.log('labb',labb);
 
   const handleChangelabel = (event) => {
-    //setLabel(event.target.checked);
-    labb=(event.target.checked)
+    setLabel(event.target.checked);
+    labb=(event.target.checked);
+    console.log('props in submit',props.label);
+    console.log('label in submit',label);
+    console.log('labb in submit',labb);
     labelSubmit();
   };
 
@@ -148,7 +152,9 @@ export default function AcceptScore( props )  {
     console.log('hw_id',props.hwid)
     console.log('tag',label)
     console.log('labb',labb)
-    if(label === true)
+    //setLabel((label==0)? false  : true);
+    if (labb == true)
+    //if(label == true)
     {
 
       fetch(`/teacher/updateTag/`,{
@@ -163,6 +169,9 @@ export default function AcceptScore( props )  {
           
         })
       })
+      .then(msg=>console.log(msg))
+      .catch(error=>console.log(error)
+      )
     }
     else
     {
@@ -178,6 +187,9 @@ export default function AcceptScore( props )  {
           
         })
       })
+      .then(msg=>console.log(msg))
+      .catch(error=>console.log(error)
+      )
     }
      }
 
@@ -316,20 +328,8 @@ export default function AcceptScore( props )  {
           </Typography>
 
         </ExpansionPanelSummary>
-
-        <ExpansionPanelSummary>
-          <div 
-          style={{display: "flex",
-        flexDirection: "column", 
-         justifyContent: "center"}}>
-        <div 
-        style={{display: "flex",
-       // flexDirection: "row", 
-         justifyContent: "center"}}
-         >
-
-
-
+        <ExpansionPanelDetails>
+        <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <Typography className={classes.typo} >
             分數 :
           
@@ -341,61 +341,20 @@ export default function AcceptScore( props )  {
                 size="small"
                 variant="outlined"
                 className={classes.textfield}
-                style={{width:60,marginRight:5}}
-            />
-            
-            
-
-{/* 
-            <Typography className={classes.typo} > */}
-            標記 :
-            <FormControlLabel
-            control={<Switch checked={props.label} onChange={handleChangelabel} 
-            color="secondary"
-            className={classes.label} 
-            />}
+                style={{width:200}}
             />
             
             </Typography>
-            {/* </Typography> */}
-           {/* <Typography className={classes.typo} >
-            標記 :
 
+           <Typography className={classes.typo} >
+            標記 :
             <FormControlLabel
-                              control={
-                              <Checkbox 
-                              icon={<RadioButtonUncheckedIcon />} 
-                              checkedIcon={<FiberManualRecordIcon />} 
-                              checked={state.label}
-                              onChange={labelChange}
-                              />}
-                            /> */}
-            {/* <FormControl
-            className={classes.label}
-             >
-            <Select
-             className={classes.textfield}
-          value={label}
-          onChange={handleChangelabel}
-          input={<BootstrapInput name="label"/>}
-          style={{width:85}}
-        >
-          <MenuItem value="">
-          <ListItemIcon>
-             <em>  None </em>
-            </ListItemIcon>
-          </MenuItem>
-          <MenuItem value={1} select>
-            <ListItemIcon>
-              <GradeIcon />
-            </ListItemIcon>
-          </MenuItem>
-      
-        </Select>
-            </FormControl> */}
-       {/* </Typography>      */}
-            {/* <TextField
-                disabled={label === "" ? true : false }
+            control={<Switch checked={label} onChange={handleChangelabel} name="label"
+            color="secondary"
+            className={classes.label} />}
+            />
+            <TextField
+                // disabled={label.label===true ? false:true }
                 label="註記內容"
                 id="content"
                 value={inputs.content}
@@ -403,47 +362,10 @@ export default function AcceptScore( props )  {
                 size="small"
                 variant="outlined"
                 className={classes.textfield}
-            /> */}
-</div>
-{/* <div> */}
-            <Autocomplete
-            
-            //disabled={label === "" ? true : false }
-              multiple
-              options={comments.map(option => option.title)}
-              //defaultValue={[top100Films[1].title]}
-              freeSolo
-              ChipProps={{ onDelete: () => {} }}
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
-                    variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={params => (
-                <TextField
-                  {...params}
-                  //disabled={label === "" ? true : false }
-                  variant="outlined"
-                  size="small"
-                  label="註記內容"
-                  //value={inputs.content}
-                  //onChange={handleChange('content')} 
-                  // className={classes.textfield}
-                  style={{marginLeft:10,width:240}}
-                  fullWidth
-                />
-              )}
             />
-
-
-{/* </div> */}
+          </Typography>
           </div>
-          
-          </ExpansionPanelSummary>
+          </ExpansionPanelDetails>
           </ExpansionPanel>
 
 

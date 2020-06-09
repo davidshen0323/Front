@@ -164,6 +164,59 @@ export default function TAcceptanceList() {
           accept_tag: 1,
           
         })
+        
+      })
+    }
+    else
+    {
+      fetch(`/teacher/updateTag/`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          std_id: label.std_id,
+          accept_hw_id: label.accept_hw_id,
+          accept_tag: 0,
+          
+        })
+      })
+    }window.location.reload();
+     }
+
+     const labelChange2 = (event,id) => {
+      const tagIndex = acceptances.findIndex(s=>s.std_id==id)
+      var newlist = [...acceptances]
+      newlist[tagIndex].accept_tag =(event.target.checked) 
+      // == true ? 1 : 0
+      //setState({ ...state, [event.target.name]: event.target.checked });
+      
+      setAcceptances(newlist);
+      labelSubmit2(acceptances[tagIndex])
+      console.log(' newlist[tagIndex]', acceptances[tagIndex])
+    };
+
+     const labelSubmit2 = (label) =>
+  {
+    console.log('stdid',label['std_id'])
+    console.log('hw_id',label['accept_hw_id'])
+    console.log('tag',label['accept_tag'])
+
+    if(label['accept_tag'] === true)
+    {
+
+      fetch(`/teacher/updateTag/`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          std_id: label.std_id,
+          accept_hw_id: label.accept_hw_id,
+          accept_tag: 1,
+          
+        })
+        
       })
     }
     else
@@ -390,7 +443,7 @@ const submitClose = (event, reason) => {
                           icon={<RadioButtonUncheckedIcon />} 
                           checkedIcon={<FiberManualRecordIcon />} 
                           checked={acceptance["accept_tag"]}
-                          onChange={(e)=>labelChange(e,acceptance.std_id)}
+                          onChange={(e)=>labelChange2(e,acceptance.std_id)}
                           />}
                         />
                      </TableCell>

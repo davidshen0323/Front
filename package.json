@@ -24,6 +24,7 @@
         "react": "^16.13.1",
         "react-baseui": "^1.0.0",
         "react-dom": "^16.13.1",
+        "react-else-if": "^1.0.5",
         "react-geolocation": "^1.0.4",
         "react-load-script": "0.0.6",
         "react-qr-reader": "^2.2.1",

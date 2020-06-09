@@ -69,7 +69,7 @@ export default function AcceptScore( props )  {
     console.log(props.hwid);
     console.log(parseInt(inputs.score));
     
-    fetch('/teacher/updateScore',{
+    fetch('/teacher/updateScoreAfterFinish',{
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json',

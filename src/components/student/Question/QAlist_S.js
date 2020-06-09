@@ -1,29 +1,51 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Card, Grid, CardActionArea, AppBar, Tabs, Tab, Table, TableHead, TableBody, TableRow, TableCell, Typography, Box, Button, Container } from '@material-ui/core';
-import MyMenu from '../MenuS';
-import AddQA from './AddQA';
-import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
-import TableContainer from '@material-ui/core/TableContainer';
-import { List, Dialog } from '@material-ui/core/';
-import CloseIcon from '@material-ui/icons/Close';
-import { IconButton } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import ViewQA from './viewQAlist_S';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import {
+  Card,
+  Grid,
+  CardActionArea,
+  AppBar,
+  Tabs,
+  Tab,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Typography,
+  Box,
+  Button,
+  Container,
+  Tooltip,
+  ButtonBase,
+  TablePagination,
+} from "@material-ui/core";
+import MyMenu from "../MenuS";
+import AddQA from "./AddQA";
+import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import { useParams, Link } from "react-router-dom";
+import TableContainer from "@material-ui/core/TableContainer";
+import { List, Dialog } from "@material-ui/core/";
+import CloseIcon from "@material-ui/icons/Close";
+import { IconButton } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import CommentBoxS from "./CommentBoxS";
+// import { withStyles } from "@material-ui/core/styles";
 
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import TextField from '@material-ui/core/TextField';
-import Orange from '@material-ui/core/colors/orange';
-import Smile from '@material-ui/icons/SentimentVerySatisfied';
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import TextField from "@material-ui/core/TextField";
+import Orange from "@material-ui/core/colors/orange";
+import Smile from "@material-ui/icons/SentimentVerySatisfied";
+import DeleteQuestionS from "./DeleteQuestionS";
+import CompleteQuestionS from "./CompleteQuestionS";
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 const styles = (theme) => ({
   root: {
@@ -31,12 +53,11 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-  
 });
 
 function TabPanel(props) {
@@ -65,7 +86,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `nav-tab-${index}`,
-    'aria-controls': `nav-tabpanel-${index}`,
+    "aria-controls": `nav-tabpanel-${index}`,
   };
 }
 
@@ -73,7 +94,7 @@ function LinkTab(props) {
   return (
     <Tab
       component="a"
-      onClick={event => {
+      onClick={(event) => {
         event.preventDefault();
       }}
       {...props}
@@ -81,106 +102,69 @@ function LinkTab(props) {
   );
 }
 
-
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
-
 /*------------ STYLE ------------*/
-const useStyles = makeStyles(theme => ({
-
+const useStyles = makeStyles({
+  div: {
+    height: "350vh",
+    backgroundColor: "#ffe1c4",
+  },
   Paper: {
-    width: '100%',
-    margin: 'auto',
+    width: "100%",
+    margin: "auto",
   },
   root: {
-    width: '100%',
-    textAlign: 'center',
+    width: "100%",
+    textAlign: "center",
   },
   table: {
     minWidth: 750,
   },
   button: {
-    margin: theme.spacing(1),
     marginLeft: 10,
     marginTop: 10,
     marginBottom: 10,
-    width: '100px',
-    fontFamily: 'Microsoft JhengHei',
+    width: "100px",
+    fontFamily: "Microsoft JhengHei",
     color: "white",
     fontSize: 16,
-    backgroundColor: "#f8b62b",
-    fontWeight: 'bold',
+    backgroundColor: "#F8B62B",
+    fontWeight: "bold",
   },
-  div: {
-    height: '250vh',
-    // background: 'linear-gradient(0deg,#ffffff  0%,#fff8e5 30%,#fff2d1 50%,  #ffe1c4 100%)',
-    backgroundColor: '#ffe1c4',
-  },
+ 
   card: {
-    //marginLeft: theme.spacing(10),
-    // marginTop: theme.spacing(3),
-    maxWidth: '80%',
-    margin: 'auto',
-    // width: 'auto',
-    // padding: theme.spacing(3),
-    borderRadius: "25px",
+    maxWidth: "100%",
+    margin: "auto",
+    borderRadius: "20px",
     borderStyle: "solid",
     borderColor: "white",
-    border:1,
-    backgroundColor:'white',
+    border: 1,
+    backgroundColor: "white",
+    
   },
-tablecell: {
-  width: '800pt',
-  margin: 'auto',
-  // marginTop: '500pt',
-  // paddingTop: "30pt",
-  // paddingBottom: "30pt",
-  // paddingInline: "30pt",
-  borderRadius: "25px",
-  borderColor: "white",
-  fontFamily: 'Microsoft JhengHei',
-  fontWeight: 'bold',
-  },
-  stdid: {
-    width: '800pt',
-    margin: 'auto',
-    // marginTop: '500pt',
-    // paddingTop: "30pt",
-    // paddingBottom: "30pt",
-    // paddingInline: "30pt",
+  tablecell: {
+    width: "800pt",
+    margin: "auto",
     borderRadius: "25px",
     borderColor: "white",
-    fontFamily: 'Microsoft JhengHei',
-    fontWeight: 'bold',
+    fontFamily: "Microsoft JhengHei",
+    fontWeight: "bold",
+  },
+  stdid: {
+    width: "800pt",
+    margin: "auto",
+    borderRadius: "25px",
+    borderColor: "white",
+    fontFamily: "Microsoft JhengHei",
+    fontWeight: "bold",
     fontSize: 20,
   },
-}
-));
+  Button: {
+    width: '50%',
+    height:35,
+    backgroundColor:'#f8b62b',
+    marginLeft:20,
+  },
+});
 
 /*--------------------------------*/
 
@@ -195,29 +179,36 @@ export default function QAlist_S() {
   const csid = params.cs_id;
 
   const [question, setQuestion] = React.useState([]);
+  const [solvedquestion, setSolvedQuestion] = React.useState([]);
 
-
-  const questionlist = ['q_asktime', 'q_content'];
-  const solved_qlist = ['q_std_id', 'q_content', 'q_replytime', 'q_reply'];
+  const questionlist = ["q_asktime", "q_content"];
+  const solved_qlist = ["q_std_id", "q_content", "q_replytime", "q_reply"];
 
   const [stdid, setStdid] = React.useState(0);
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.get(`/student/question/all/${csid}/`)
+      const result = await axios.get(`/student/unresolvedquestion/all/${csid}`);
       setQuestion(result.data);
       console.log(result.data);
-
     }
+
+    async function fetchData2() {
+      const result = await axios.get(`/student/solvedquestion/all/${csid}`);
+      setSolvedQuestion(result.data);
+      console.log(result.data);
+    }
+
     async function fetchStdid() {
       const result = await axios.get(`/student/std_id`);
       // setStdid(result.data);
-      setStdid(result.data['std_id']);
+      setStdid(result.data["std_id"]);
       console.log(result.data);
       console.log(stdid);
     }
 
     fetchData();
+    fetchData2();
     fetchStdid();
   }, []);
 
@@ -240,9 +231,9 @@ export default function QAlist_S() {
     setForum(false);
   };
 
-
-
-  {/* 學生新增問題 */ }
+  {
+    /* 學生新增問題 */
+  }
   const [openAddQa, closeAddQa] = React.useState(false);
   const onCloseAddQa = () => {
     closeAddQa(openAddQa ? false : true);
@@ -263,334 +254,415 @@ export default function QAlist_S() {
 
   //   }
 
-  const deletequestion = (event, id) => {
-    const QuesIndex = question.findIndex(s => s.q_asktime == id)
-    var newlist = [...question]
+  // const deletequestion = (event, id) => {
+  //   const QuesIndex = question.findIndex((s) => s.q_asktime === id);
+  //   var newlist = [...question];
 
-    setQuestion(newlist)
-    handleDelete(question[QuesIndex])
-    console.log('newlist', question[QuesIndex])
-  }
+  //   setQuestion(newlist);
+  //   handleDelete(question[QuesIndex]);
+  //   console.log("newlist", question[QuesIndex]);
+  // };
 
-  const handleDelete = (qstudent) => {
+  // const handleDelete = () => {
+    
 
-    console.log('qstudent', qstudent['q_asktime'])
-    console.log('stdid', stdid)
-    console.log('qstdid', qstudent["q_std_id"])
+  //   fetch(`/student/deletequestioncontent/`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       q_std_id: ,
+  //       q_asktime: ,
+  //     }),
+  //   });
+  //   window.location.reload();
+  // };
 
-    fetch(`/student/deletequestioncontent/`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        q_std_id: qstudent.q_std_id,
-        q_asktime: qstudent.q_asktime,
-      })
-    })
-    window.location.reload();
-  }
+  // const handleFinish = () => {
+    
+  //   fetch(`/student/CompletionQuestion`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       q_std_id: ,
+  //       q_asktime: ,
+  //       cs_id: csid,
+  //     }),
+  //   });
+  // }
 
- 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
 
   return (
-
-     <div className={classes.div}>
-
-        <MyMenu/>
-            <AppBar position="static" color="default" style={{maxWidth:'96%',margin:'auto'}}>
-                <Tabs
-                variant="fullWidth"
-                value={value}
-                onChange={handleChange}
-                aria-label="nav tabs example"
-                >
-                <LinkTab label="未解決" href="/drafts" {...a11yProps(0)} style={{ fontFamily:'微軟正黑體'}}/>
-                <LinkTab label="已解決" href="/trash" {...a11yProps(1)} style={{ fontFamily:'微軟正黑體'}}/>
-            
-                </Tabs>
-            </AppBar>
-
-
+    <div className={classes.div}>
+      <MyMenu />
+      <AddQA />
+      <AppBar
+        position="static"
+        color="default"
+        style={{ maxWidth: "96%", margin: "auto" }}
+      >
+        <Tabs
+          variant="fullWidth"
+          value={value}
+          onChange={handleChange}
+          aria-label="nav tabs example"
+        >
+          <LinkTab
+            label="未解決"
+            href="/drafts"
+            {...a11yProps(0)}
+            style={{ fontFamily: "微軟正黑體" }}
+          />
+          <LinkTab
+            label="已解決"
+            href="/trash"
+            {...a11yProps(1)}
+            style={{ fontFamily: "微軟正黑體" }}
+          />
+        </Tabs>
+      </AppBar>
 
       <TabPanel value={value} index={0}>
-
         <div className={classes.root}>
-
-
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            >
-
-            {question.map((Ques, index) => Ques["q_solved"] === "0" ?
+          <Grid container direction="row" justify="center" alignItems="center">
+            {question
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((Ques, index) =>
+              Ques["q_solved"] === "0"
+              ? 
               (
-                <TableCell style={{border:0}}>
+                Ques["q_std_id"]===stdid
+                ?
+                (
+                  <TableCell style={{ border: 0 }}>
+                    <Card>
+                    <Tooltip 
+                    title="點擊進入留言板!" 
+                    >
+                    <CardActionArea
+                      component={Link}
+                      to={`/CommentBoxS/${Ques["cs_id"]}/${Ques["q_id"]}/${Ques["q_content"]}`}
+                      className={classes.card}
+                    >
+                      
+                      {questionlist.map((list, i) =>
+                        i < 1 ? (
+                          <div>
+                            <Container maxWidth="sm">
+  
+                              <TableCell
+                                key={i}
+                                component="th"
+                                scope="row"
+                                align="center"
+                                variant="body"
+                                className={classes.stdid}
+                              >
+                                {Ques["q_content"]}
+                                
+                              </TableCell>
+                            </Container>
+                          </div>
+                        ) : 
+                          <div>
+                           <TableCell
+                              key={i}
+                              component="th"
+                              scope="row"
+                              align="center"
+                              variant="body"
+                              className={classes.tablecell}
+                            >
+                              {Ques["q_asktime"]}
+                            
+                            </TableCell>
+                          </div>
+                        )}
+                    </CardActionArea>
+                      </Tooltip>
+                      <List >
+                        <ListItem button>
+                          
+                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
+                          <CompleteQuestionS
+                          time={Ques["q_asktime"]}
+                          />
+                          </ListItemIcon> */}
+                          <Button variant="contained" color="#F8B62B" className={classes.Button}> 
+                            <DeleteQuestionS
+                            time={Ques["q_asktime"]}
+                            />
+                          </Button>
 
-                {/* <Card> */}
+                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
+                          <DeleteQuestionS
+                          time={Ques["q_asktime"]}
+                          />
+                          </ListItemIcon> */}
 
-                <CardActionArea
-                  className={classes.card} 
-                  onClick={forumOpen}
-                  rquestion={Ques['q_content']}
+                        <Button variant="contained" backgroundcolor="#F8B62B" className={classes.Button}>
+                          <CompleteQuestionS
+                          time={Ques["q_asktime"]}
+                          />
+                          </Button>
+                        </ListItem>
+
+                        </List>
+                    </Card>
+                  </TableCell>
+                  )
+                :
+                (
+                <TableCell style={{ border: 0 }}>
+                  <Card>
+                  <Tooltip 
+                  title="點擊進入留言板!" 
                   >
-                  {
-                    questionlist.map((list, i) => i < 1 ?
-                    (
-                      <div>
-                        <Container maxWidth="sm">
-
-                    <TableCell
-                    key={i}
-                    component="th"
-                    scope="row"
-                    align="center"
-                    variant="body"
-                    className={classes.stdid}>
-                      {/* <Typography> *6
-                      */}
-                        {Ques['q_content']}
-                    </TableCell>
-<ViewQA 
-question={Ques['q_content']}
-time={Ques['q_asktime']}/>
+                  <CardActionArea
+                    component={Link}
+                    to={`/CommentBoxS/${Ques["cs_id"]}/${Ques["q_id"]}/${Ques["q_content"]}`}
+                    className={classes.card}
+                  >
                     
+                    {questionlist.map((list, i) =>
+                      i < 1 ? (
+                        <div>
+                          <Container maxWidth="sm">
 
-                    </Container>
-                    </div>
-                   )
-                   :
-                   (
-                     <div>
-
-                    <TableCell
-                    key={i}
-                    component="th"
-                    scope="row"
-                    align="center"
-                    variant="body"
-                    className={classes.tablecell}>
-                      {/* <Typography> */}
-                        {Ques['q_asktime']}
-                    {/* </Typography> */}
-                    </TableCell>
-
-                    </div>
-                    )
-                    )
-                  }
-
-                  
-                </CardActionArea>
-                
-
-                
-            {/* </Card> */}
-                    </TableCell>
-                    
-
-)
-:
-<div></div>)
-            }
-
-
+                            <TableCell
+                              key={i}
+                              component="th"
+                              scope="row"
+                              align="center"
+                              variant="body"
+                              className={classes.stdid}
+                            >
+                              {Ques["q_content"]}
+                              
+                            </TableCell>
+                          </Container>
+                        </div>
+                      ) : 
+                        <div>
+                         <TableCell
+                            key={i}
+                            component="th"
+                            scope="row"
+                            align="center"
+                            variant="body"
+                            className={classes.tablecell}
+                          >
+                            {Ques["q_asktime"]}
+                          
+                          </TableCell>
+                        </div>
+                      // )
+                      )}
+                  </CardActionArea>
+                    </Tooltip>
+                    </Card>
+                </TableCell>
+                )
+              ) 
+              : 
+              (
+                <div></div>
+              )
+              )
+              }
           </Grid>
+              <TablePagination
+        rowsPerPageOptions={[10, 25]}
+        component="div"
+        count={question.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+   
 
-{/* 
-<Paper>
-            <TableContainer>
-              <Table
-                className={classes.table}
-                size='small'>
-                <TableHead>
-                  <TableRow>
-                   
-                    <TableCell component="th" scope="row" align="center">學號</TableCell>
-                    <TableCell component="th" scope="row" align="center">問題內容</TableCell>
-                    <TableCell component="th" scope="row" align="center">最後更新時間</TableCell>
-                    <TableCell component="th" scope="row" align="left">取消問題</TableCell>
-                    
-
-                  </TableRow>
-                </TableHead>
-
-                <TableBody>
-                  {question.map((Ques, index) => Ques["q_solved"] === "0" ?
-                    (
-                      <TableRow key={index}>
-
-                        {
-                          questionlist.map((list, i) => i < 3 ?
-
-                            <TableCell key={i} component="th" scope="row" align="center">
-                              {Ques[list]}
-                            </TableCell>
-                            :
-                            <TableCell>
-                              {
-                                Ques['q_std_id'] === stdid ?
-                                  <IconButton>
-                                    <CloseIcon onClick={(e) => deletequestion(e, Ques.q_asktime)} />
-                                  </IconButton>
-                                  :
-                                  <div style={{ padding: 20 }}></div>
-                              }
-
-                            </TableCell>
-                          )
-                        }
-
-                      </TableRow>
-
-                    )
-                    :
-                    <div></div>
-                  )}
-
-
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper> */}
-
-
-          <Button
+          {/* <Button
             onClick={handleClickOpen}
             variant="contained"
             className={classes.button}
           >
             我要發問
-        </Button>
-
-
+          </Button>
 
           <Dialog open={open} onClose={handleClose}>
-
             <AddQA />
-          </Dialog>
-
-
+          </Dialog> */}
         </div>
       </TabPanel>
 
       {/* 老師回覆問題的小框框 */}
       {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
 
+
+
       <TabPanel value={value} index={1}>
         <div className={classes.root}>
-          
-        <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            >
-
-            {question.map((Ques, index) => Ques["q_solved"] === "1" ?
+          <Grid container direction="row" justify="center" alignItems="center">
+            {solvedquestion
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((Ques, index) =>
+              Ques["q_solved"] === "1"
+              ? 
               (
-                <TableCell style={{border:0}}>
-
-                {/* <Card> */}
-
-                <CardActionArea
-                  className={classes.card} 
-                  >
-                  {
-                    questionlist.map((list, i) => i < 1 ?
-                    (
-                      <div>
-                        <Container maxWidth="sm">
-
-                    <TableCell
-                    key={i}
-                    component="th"
-                    scope="row"
-                    align="center"
-                    variant="body"
-                    className={classes.stdid}>
-                      {/* <Typography> *6
-                      */}
-                        {Ques['q_content']}
-                    {/* </Typography> */}
-                    </TableCell>
-
-                    </Container>
-                    </div>
-                   )
-                   :
-                   (
-                     <div>
-
-                    <TableCell
-                    key={i}
-                    component="th"
-                    scope="row"
-                    align="center"
-                    variant="body"
-                    className={classes.tablecell}>
-                      {/* <Typography> */}
-                        {Ques['q_asktime']}
-                    {/* </Typography> */}
-                    </TableCell>
-
-                    </div>
-                    )
-                    )
-                  }
-                </CardActionArea>
-            {/* </Card> */}
-                    </TableCell>
-
-)
-:
-<div></div>)
-            }
-
-
-          </Grid>
-          {/* <Paper>
-            <TableContainer>
-              <Table
-                className={classes.table}
-                size='small'>
-                <TableHead>
-                  <TableRow>
-                   
-                    <TableCell component="th" scope="row" align="center">學號</TableCell>
-                    <TableCell component="th" scope="row" align="center">問題內容</TableCell>
-                    <TableCell component="th" scope="row" align="center">最後更新時間</TableCell>
-                    <TableCell component="th" scope="row" align="center">回覆內容</TableCell>
-                  </TableRow>
-                </TableHead>
-
-                <TableBody>
-                  {
-
-                    question.map((Ques, k) => Ques["q_solved"] === "1" ? (
-                      <TableRow key={k}>
-
-                        {
-                          solved_qlist.map((list, i) =>
-
-                            <TableCell key={i} component="th" scope="row" align="center">
-                              {Ques[list]}
+                Ques["q_std_id"]===stdid
+                ?
+                (
+                  <TableCell style={{ border: 0 }}>
+                    <Card>
+                    <Tooltip 
+                    title="點擊進入留言板!" 
+                    >
+                    <CardActionArea
+                      component={Link}
+                      to={`/CommentBoxS/${Ques["cs_id"]}/${Ques["q_id"]}/${Ques["q_content"]}`}
+                      className={classes.card}
+                    >
+                      
+                      {questionlist.map((list, i) =>
+                        i < 1 ? (
+                          <div>
+                            <Container maxWidth="sm">
+  
+                              <TableCell
+                                key={i}
+                                component="th"
+                                scope="row"
+                                align="center"
+                                variant="body"
+                                className={classes.stdid}
+                              >
+                                {Ques["q_content"]}
+                                
+                              </TableCell>
+                            </Container>
+                          </div>
+                        ) : 
+                          <div>
+                           <TableCell
+                              key={i}
+                              component="th"
+                              scope="row"
+                              align="center"
+                              variant="body"
+                              className={classes.tablecell}
+                            >
+                              {Ques["q_asktime"]}
+                            
                             </TableCell>
-                          )
-                        }
+                          </div>
+                        )}
+                    </CardActionArea>
+                      </Tooltip>
+                      <List >
+                        <ListItem button>
+                          
+                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
+                          <CompleteQuestionS
+                          time={Ques["q_asktime"]}
+                          />
+                          </ListItemIcon> */}
+                          <Button variant="contained"  style={{width:'100%',height:35,backgroundColor:'#f8b62b'}}>
+                            <DeleteQuestionS
+                            time={Ques["q_asktime"]}
+                            />
+                          </Button>
 
-                      </TableRow>
-                    ) :
-                      <div></div>
-                    ).reverse()}
+                        </ListItem>
 
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper> */}
+                        </List>
+                    </Card>
+                  </TableCell>
+                  )
+                :
+                (
+                <TableCell style={{ border: 0 }}>
+                  <Card>
+                  <Tooltip 
+                  title="點擊進入留言板!" 
+                  >
+                  <CardActionArea
+                    component={Link}
+                    to={`/CommentBoxS/${Ques["cs_id"]}/${Ques["q_id"]}/${Ques["q_content"]}`}
+                    className={classes.card}
+                  >
+                    
+                    {questionlist.map((list, i) =>
+                      i < 1 ? (
+                        <div>
+                          <Container maxWidth="sm">
+
+                            <TableCell
+                              key={i}
+                              component="th"
+                              scope="row"
+                              align="center"
+                              variant="body"
+                              className={classes.stdid}
+                            >
+                              {Ques["q_content"]}
+                              
+                            </TableCell>
+                          </Container>
+                        </div>
+                      ) : 
+                        <div>
+                         <TableCell
+                            key={i}
+                            component="th"
+                            scope="row"
+                            align="center"
+                            variant="body"
+                            className={classes.tablecell}
+                          >
+                            {Ques["q_asktime"]}
+                          
+                          </TableCell>
+                        </div>
+                      // )
+                      )}
+                  </CardActionArea>
+                    </Tooltip>
+                    </Card>
+                </TableCell>
+                )
+              ) 
+              : 
+              (
+                <div></div>
+              )
+              )
+              }
+          </Grid>
+              <TablePagination
+        rowsPerPageOptions={[10, 25]}
+        component="div"
+        count={question.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+   
         </div>
       </TabPanel>
     </div>
