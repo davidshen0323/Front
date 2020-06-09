@@ -19,7 +19,6 @@ import {Snackbar, Button, Dialog,Typography} from "@material-ui/core";
 
 
 
-
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -243,7 +242,7 @@ const handleClose = () => {
 
     <Grid item  xs={12}>
       <Typography>
-        <QRCode value={qrcode} size={300}/>
+        <QRCode level="H" imageSettings={{src:"https://i.imgur.com/PWfHRt7.png", height:100,width:100,excavate:true}} value={qrcode} size={300}/>
       </Typography>
         
         {/* <QRcodeMade /> */}

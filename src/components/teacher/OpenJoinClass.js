@@ -108,7 +108,7 @@ export default function OpenJoinClass ()  {
           <Typography className={classes.typoHeading} variant="body1">
             QRcode：
           </Typography>
-          <QRCode value={joinID} size={250}/>
+          <QRCode level="H" imageSettings={{src:"https://i.imgur.com/PWfHRt7.png", height:60,width:60,excavate:true}}  value={joinID} size={300}/>
         </div>
 
       </DialogContent>
