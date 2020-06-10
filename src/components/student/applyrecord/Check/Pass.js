@@ -204,10 +204,10 @@ export default function Pass() {
                 
                     <TableRow hover >
                       {/* 碰到的時候後面會反灰 */}
-                      <TableCell></TableCell>
+                      <TableCell height="30"></TableCell>
                       {
                     ingList.map( (list, i) =>    
-                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    <TableCell height="30" key={i} component="th" scope="row" align="left" padding="none" >
                     {ing[list]}
                  </TableCell>
                     )   

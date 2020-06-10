@@ -528,7 +528,7 @@ export default function AcceptanceList(props) {
       </Snackbar>
       {/* 失敗小紅框1 */}
 
-      <Snackbar open={openErr1} autoHideDuration={1500} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Snackbar open={openErr1} autoHideDuration={2000} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
 
         <Alert severity="error">
           老師已經打分數了，無法取消！
@@ -536,7 +536,7 @@ export default function AcceptanceList(props) {
       </Snackbar>
       {/* 失敗小紅框2 */}
 
-      <Snackbar open={openErr2} autoHideDuration={1500} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Snackbar open={openErr2} autoHideDuration={2000} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
 
         <Alert severity="error">
           老師已經關閉此作業，無法排隊驗收或發問囉！
@@ -545,7 +545,7 @@ export default function AcceptanceList(props) {
 
       {/* 失敗小紅框3 */}
 
-      <Snackbar open={openErr3} autoHideDuration={1500} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Snackbar open={openErr3} autoHideDuration={2000} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
 
         <Alert severity="error">
           請重新確認！
@@ -554,7 +554,7 @@ export default function AcceptanceList(props) {
 
       {/* 驗收失敗小橘框1 */}
 
-      <Snackbar open={openWarnA} autoHideDuration={1500} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Snackbar open={openWarnA} autoHideDuration={2000} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
 
         <Alert severity="warning">
           你已經在驗收列隊中，無法重複驗收！
@@ -562,7 +562,7 @@ export default function AcceptanceList(props) {
       </Snackbar>
       {/*驗收失敗小橘框2 */}
 
-      <Snackbar open={openWarnA2} autoHideDuration={1500} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Snackbar open={openWarnA2} autoHideDuration={2000} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
 
         <Alert severity="warning">
           你已經在發問列隊中，無法驗收！請先取消您的發問。
@@ -571,7 +571,7 @@ export default function AcceptanceList(props) {
 
       {/* 發問失敗小橘框1 */}
 
-      <Snackbar open={openWarnQ} autoHideDuration={1500} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Snackbar open={openWarnQ} autoHideDuration={2000} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
 
         <Alert severity="warning">
           你已經在發問列隊中，無法重複發問！
@@ -579,7 +579,7 @@ export default function AcceptanceList(props) {
       </Snackbar>
       {/* 發問失敗小橘框2 */}
 
-      <Snackbar open={openWarnQ2} autoHideDuration={1500} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Snackbar open={openWarnQ2} autoHideDuration={2000} onClose={handleClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
 
         <Alert severity="warning">
           你已經在驗收列隊中，無法發問！請先取消您的驗收。
