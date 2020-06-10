@@ -22,6 +22,11 @@ const useStyle = makeStyles(theme => ({
     color: "#582707",
     padding: 10
   },
+  button: {
+    fontFamily: 'Microsoft JhengHei',
+    fontWeight:'bold',
+    width:'100px',
+  },
 }));
 
 
@@ -131,8 +136,8 @@ export default function EditEmail({ open, handleClose })  {
         
       </DialogContent>
       <DialogActions>
-        <Button onClick={submitClose} color="default" style={{fontFamily:'微軟正黑體'}} autoFocus>關閉視窗</Button>
-        <Button disabled={inputs===2 ? false : true} onClick={submitClick} color="primary" style={{fontFamily:'微軟正黑體'}} autoFocus>儲存</Button>
+        <Button onClick={submitClose} color="default" className={classes.button} autoFocus>關閉視窗</Button>
+        <Button disabled={inputs===2 ? false : true} className={classes.button} onClick={submitClick} color="primary" autoFocus>儲存</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">
