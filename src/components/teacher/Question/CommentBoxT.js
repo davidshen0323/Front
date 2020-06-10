@@ -173,7 +173,7 @@ export default function CommentBoxT() {
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(
-        `/student/findAllmessageIntheQuestion/${csid}/${qid}`
+        `/teacher/findAllmessageIntheQuestion/${csid}/${qid}`
       );
       setComment(result.data);
       console.log(result.data);
@@ -208,7 +208,7 @@ export default function CommentBoxT() {
     // console.log(props.id);
     // console.log(inputs.tl_content);
     // console.log(inputs.typeid);
-    fetch("/student/AddNewMessages", {
+    fetch("/teacher/AddNewMessages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -283,14 +283,37 @@ export default function CommentBoxT() {
                   {commentList.map((list, i) => (
 
               <ListItem alignItems="flex-start">
+                      {
+                      Com['std_id'] === 0 ?
                       <ListItemAvatar>
-                        <Avatar src="https://image.flaticon.com/icons/svg/1933/1933446.svg" />
+                        <Avatar src="https://image.flaticon.com/icons/svg/1915/1915932.svg" />
                       </ListItemAvatar>
-
+                      :
                       <ListItemAvatar>
-                        B{index + 1}
+                        <Avatar src="https://image.flaticon.com/icons/png/512/1046/1046270.png" />
                       </ListItemAvatar>
+                      
+                      }
 
+                      {
+                      Com['std_id'] === 0 ?
+                        <ListItemAvatar style={{
+                          marginLeft: 10,
+                          marginRight: 30,
+                          width: 70,
+                        }}>
+                        教師
+                      </ListItemAvatar>
+                      :
+                      <ListItemAvatar style={{
+                        marginLeft: 10,
+                        marginRight: 30,
+                        width: 70,
+                      }}>
+                      {Com["std_id"]}
+                    </ListItemAvatar>
+
+                      }
                       <ListItemText>
                         <Typography style={{
                           borderRadius: 10,

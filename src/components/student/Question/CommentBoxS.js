@@ -280,16 +280,33 @@ export default function CommentBoxS() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((Com, index) => (
                 <List>
-                  {commentList.map((list, i) => (
+                  {commentList.map((list, i) =>  (
 
               <ListItem alignItems="flex-start">
+                      {
+                      Com['std_id'] === 0 ?
                       <ListItemAvatar>
-                        <Avatar src="https://image.flaticon.com/icons/svg/1933/1933446.svg" />
+                        <Avatar src="https://image.flaticon.com/icons/svg/1915/1915932.svg" />
                       </ListItemAvatar>
+                      :
+                      <ListItemAvatar>
+                        <Avatar src="https://image.flaticon.com/icons/png/512/1046/1046270.png" />
+                      </ListItemAvatar>
+                      
+                      }
 
+                      
+                      {
+                      Com['std_id'] === 0 ?
+                      <ListItemAvatar>
+                        教師
+                      </ListItemAvatar>
+                      :
                       <ListItemAvatar>
                         B{index + 1}
                       </ListItemAvatar>
+                      }
+
 
                       <ListItemText>
                         <Typography style={{

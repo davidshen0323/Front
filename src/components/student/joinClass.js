@@ -242,7 +242,7 @@ const handleSubmit = () =>
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} className={classes.button} color="default" >關閉視窗</Button>
-        <Button onClick={handleSubmit} className={classes.button} color="primary" >加入課程</Button>
+        <Button onClick={handleSubmit} disabled={inputs.cs_qrcode.length || scan.length !== 0 ? false : true} className={classes.button} color="primary" >加入課程</Button>
         {/* 成功小綠框 */}
         <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{marginBottom:100}}>
           <Alert severity="success">

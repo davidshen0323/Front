@@ -656,7 +656,7 @@ const handleChangePage = (event, newPage) => {
               <TablePagination
         rowsPerPageOptions={[10, 25]}
         component="div"
-        count={question.length}
+        count={solvedquestion.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

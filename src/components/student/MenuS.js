@@ -427,9 +427,9 @@ export default function LoginMenu() {
       {/* </StyledTreeItem> */}
       <StyledTreeItem onClick={f9} nodeId="10" labelText="基本資料" labelIcon={PermContactCalendarIcon} color="#1a73e8" bgColor="#e8f0fe"/>
       <Divider />
-      <form action="/logout" method="POST">
+      {/* <form action="/logout" method="POST">
         <Button className={classes.logoutButton} type="submit" variant="outline" >登出</Button>
-      </form>
+      </form> */}
       {/* <StyledTreeItem nodeId="11" labelText="登出" labelIcon={ExitToAppIcon} /> */}
       <Divider />
 

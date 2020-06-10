@@ -161,7 +161,7 @@ export default function Ing() {
   
    useEffect(() => {
      async function fetchData() {
-       const result = await axios.get(`/student/takeleave/TakeleaveRecord/${params.cs_id}/`);
+       const result = await axios.get(`/student/takeleave/TakeleaveRecord/${params.cs_id}/0/`);
        
        console.log(result.data);
        

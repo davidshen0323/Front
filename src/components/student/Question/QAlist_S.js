@@ -105,7 +105,7 @@ function LinkTab(props) {
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
   div: {
-    height: "350vh",
+    height: "220vh",
     backgroundColor: "#ffe1c4",
   },
   Paper: {
@@ -296,7 +296,7 @@ export default function QAlist_S() {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
   
@@ -656,7 +656,7 @@ const handleChangePage = (event, newPage) => {
               <TablePagination
         rowsPerPageOptions={[10, 25]}
         component="div"
-        count={question.length}
+        count={solvedquestion.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
