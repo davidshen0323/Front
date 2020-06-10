@@ -1,6 +1,6 @@
 import React , { useState, useEffect } from 'react';
 import MyMenu from '../MenuT';
-import { Button, Table, TableHead, TableBody, TableCell, TableRow,TableContainer,Box, ButtonBase, makeStyles, Grid, CardActionArea, Fab } from '@material-ui/core';
+import { Snackbar,Button, Table, TableHead, TableBody, TableCell, TableRow,TableContainer,Box, ButtonBase, makeStyles, Grid, CardActionArea, Fab } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
@@ -11,6 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
 import EditHW from './EditHW';
 import {brown} from '@material-ui/core/colors';
+import MuiAlert from "@material-ui/lab/Alert";
 
 /*-------------------------------------------------------*/
 const useStyles = makeStyles(theme => ({
@@ -64,6 +65,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 /*-------------------------------------------------------*/
 
 export default function SelectHW_T() {
@@ -72,7 +77,18 @@ export default function SelectHW_T() {
   const classes = useStyles();
   
   const [Acc, setAcc] = React.useState([]);
-
+  // 成功小綠綠
+  const [openS, setOpenS] = React.useState(false);
+  // 失敗小紅1
+  const [openErr1, setOpenErr1] = React.useState(false);
+  // 成功小綠綠2
+  const [openS2, setOpenS2] = React.useState(false);
+  // 失敗小紅2
+  const [openErr2, setOpenErr2] = React.useState(false);
+  // 成功小綠綠3
+  const [openS3, setOpenS3] = React.useState(false);
+  // 失敗小紅3
+  const [openErr3, setOpenErr3] = React.useState(false);
   const acceptanceList = [ 'hw_name','hw_content', 'hw_createtime','hw_id','accept_done' ]
 
   const params = useParams();
@@ -111,7 +127,27 @@ export default function SelectHW_T() {
               
         })
        })
-      window.location.reload();
+       .then(res => {
+                    
+        async function fetchres(){
+        const test = await res.text();  //接收後端傳來的訊息
+        if (test === "關閉作業成功！") //關閉作業成功！
+        {
+            //alert("關閉作業成功！");
+            console.log(1);
+            setOpenS(true);
+            setOpenErr1(false);
+        }
+        else if(test === "teacher not in this class!") 
+        {
+            //alert("teacher not in this class!");
+            console.log(2);
+            setOpenErr1(true);
+            setOpenS(false);
+        }
+       
+    } fetchres() })
+      // window.location.reload();
       }
 
 
@@ -135,7 +171,27 @@ export default function SelectHW_T() {
               
         })
        })
-      window.location.reload();
+       .then(res => {
+                    
+        async function fetchres(){
+        const test = await res.text();  //接收後端傳來的訊息
+        if (test === "重新開啟作業成功！") //重新開啟作業成功！
+        {
+            //alert("重新開啟作業成功！");
+            console.log(1);
+            setOpenS2(true);
+            setOpenErr2(false);
+        }
+        else if(test === "teacher not in this class!") 
+        {
+            //alert("teacher not in this class!");
+            console.log(2);
+            setOpenErr2(true);
+            setOpenS2(false);
+        }
+       
+    } fetchres() })
+      // window.location.reload();
       }
 
   const deletHW=(event,id)=>{
@@ -145,11 +201,21 @@ export default function SelectHW_T() {
     
   }
 
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    setOpenS2(false);
+    setOpenErr2(false);
+    setOpenS3(false);
+    setOpenErr3(false);
+    window.location.reload();
+};
+
   const handleDelete = (Accept) =>
    {
      console.log('homework',Accept['hw_name'])
      console.log(params.cs_id)
-        fetch(`/teacher/acceptance/deleteHomework`,{
+        fetch(`/teacher/acceptance/deleteHomework/`,{
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -159,7 +225,27 @@ export default function SelectHW_T() {
               hw_cs_id: params.cs_id,
         })
        })
-      window.location.reload();
+       .then(res => {
+                    
+        async function fetchres(){
+        const test = await res.text();  //接收後端傳來的訊息
+        if (test === "刪除作業完成!") //刪除作業完成!
+        {
+            //alert("刪除作業完成!");
+            console.log(1);
+            setOpenS3(true);
+            setOpenErr3(false);
+        }
+        else
+        {
+            //alert("teacher not in this class!");
+            console.log(2);
+            setOpenErr3(true);
+            setOpenS3(false);
+        }
+       
+    } fetchres() })
+      // window.location.reload();
       }
 
 
@@ -249,7 +335,42 @@ export default function SelectHW_T() {
       </Button> */}
       </Grid>
       <AddAccept open={openCreateHw} handleClose={onCloseCreateHw}/>
-
+        {/* 成功小綠框 */}
+        <Snackbar open={openS} autoHideDuration={1500} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="success">
+            關閉作業成功！
+          </Alert>
+        </Snackbar>
+        {/* 失敗小紅框1 */}
+        <Snackbar open={openErr1} autoHideDuration={1500} onClose={ErrClose}　style={{marginBottom:100}}>
+          <Alert severity="error">
+            教師不屬於該課程！
+          </Alert>
+        </Snackbar>
+        {/* 成功小綠框2 */}
+        <Snackbar open={openS2} autoHideDuration={1500} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="success">
+            開啟作業成功！
+          </Alert>
+        </Snackbar>
+        {/* 失敗小紅框2 */}
+        <Snackbar open={openErr2} autoHideDuration={1500} onClose={ErrClose}　style={{marginBottom:100}}>
+          <Alert severity="error">
+            教師不屬於該課程！
+          </Alert>
+        </Snackbar>
+         {/* 成功小綠框3 */}
+         <Snackbar open={openS3} autoHideDuration={1500} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="success">
+            刪除作業成功！
+          </Alert>
+        </Snackbar>
+        {/* 失敗小紅框3 */}
+        <Snackbar open={openErr3} autoHideDuration={1500} onClose={ErrClose}　style={{marginBottom:100}}>
+          <Alert severity="error">
+            刪除作業失敗！
+          </Alert>
+        </Snackbar>
     </div>
   )
 }
