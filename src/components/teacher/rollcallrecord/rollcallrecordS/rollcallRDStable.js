@@ -225,6 +225,22 @@ useEffect(() => {
                     <TableCell key={i} component="th" scope="row" align="left">
                     {rollcall[list]}
                  </TableCell>:
+                 rollcall['tl_type_id'] === 8 ?
+                 <TableCell align="left">
+                 <FormControl component="fieldset" onChange={(e)=>changeState(e,rollcall.rc_id)}>
+                   <RadioGroup row  value={rollcall.tl_type_id+''} >
+                     <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="出席" />
+                     <FormControlLabel value="2" control={<Radio color="primary" size="small"/>} label="遠距" />
+                     <FormControlLabel value="3" control={<Radio color="primary" size="small"/>} label="遲到" />
+                     <FormControlLabel value="4" control={<Radio color="primary" size="small"/>} label="病假" />
+                     <FormControlLabel value="5" control={<Radio color="primary" size="small"/>} label="事假" />
+                     <FormControlLabel value="6" control={<Radio color="primary" size="small"/>} label="喪假" />
+                     <FormControlLabel value="7" control={<Radio color="primary" size="small"/>} label="公假" />
+                     <FormControlLabel value="8"  control={<Radio color="primary" size="small"/>} label="缺席" />
+                   </RadioGroup>
+                 </FormControl>
+                 </TableCell>
+                 :
                  <TableCell align="left">
                  <FormControl component="fieldset" onChange={(e)=>changeState(e,rollcall.rc_id)}>
                    <RadioGroup row  value={rollcall.tl_type_id+''} >
