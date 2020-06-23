@@ -170,6 +170,8 @@ export default function GPS() {
   const handleClose = () => {
     setOpen(false);
     setClicked(true);
+    window.location.reload();
+
   };
 
   

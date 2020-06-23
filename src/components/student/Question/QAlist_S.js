@@ -349,7 +349,7 @@ export default function QAlist_S() {
                 ?
                 (
                   <TableCell style={{ border: 0 }}>
-                    <Card>
+                    <Card  className={classes.card}>
                     <Tooltip 
                     title="點擊進入留言板!" 
                     >
@@ -428,7 +428,7 @@ export default function QAlist_S() {
                 :
                 (
                 <TableCell style={{ border: 0 }}>
-                  <Card>
+                  <Card  className={classes.card}>
                   <Tooltip 
                   title="點擊進入留言板!" 
                   >
@@ -528,7 +528,7 @@ export default function QAlist_S() {
                 ?
                 (
                   <TableCell style={{ border: 0 }}>
-                    <Card>
+                    <Card  className={classes.card}>
                     <Tooltip 
                     title="點擊進入留言板!" 
                     >
@@ -573,30 +573,14 @@ export default function QAlist_S() {
                         )}
                     </CardActionArea>
                       </Tooltip>
-                      <List >
-                        <ListItem button>
-                          
-                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
-                          <CompleteQuestionS
-                          time={Ques["q_asktime"]}
-                          />
-                          </ListItemIcon> */}
-                          <Button variant="contained"  style={{width:'100%',height:35,backgroundColor:'#f8b62b'}}>
-                            <DeleteQuestionS
-                            time={Ques["q_asktime"]}
-                            />
-                          </Button>
-
-                        </ListItem>
-
-                        </List>
+                 
                     </Card>
                   </TableCell>
                   )
                 :
                 (
                 <TableCell style={{ border: 0 }}>
-                  <Card>
+                  <Card  className={classes.card}>
                   <Tooltip 
                   title="點擊進入留言板!" 
                   >

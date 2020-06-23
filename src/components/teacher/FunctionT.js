@@ -249,16 +249,16 @@ const useStyles = makeStyles(theme => ({
                 <CardContent>
               <CardMedia
               component="img"
-              alt="發問Q&A"
+              alt="討論區"
              
               image={question}
-              title="發問Q&A"
+              title="討論區"
               className={classes.image}
               />
                 
               </CardContent>
             <CardActions>
-                <Typography className={classes.Cardtext}>發問Q&A</Typography>
+                <Typography className={classes.Cardtext}>討論區</Typography>
               
             </CardActions>
               </ButtonBase>

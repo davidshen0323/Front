@@ -277,7 +277,7 @@ export default function TAcceptanceList() {
           //alert("取消學生問題成功!");    
           setOpenS(true);
           // history.push(`/acceptance/${csid}/${hwname}`);     
-          //window.location.reload();
+          window.location.reload();
 
       }
       
@@ -378,6 +378,8 @@ const submitClose = (event, reason) => {
                              hwid={acceptance['accept_hw_id']}
                              stdname={acceptance['std_name']}
                              label={acceptance['accept_tag']}
+                             content={acceptance['accept_content']}
+                             score={acceptance['accept_score']}
                              />                             
                             </TableCell>
                             :
@@ -387,6 +389,9 @@ const submitClose = (event, reason) => {
                              hwid={acceptance['accept_hw_id']}
                              stdname={acceptance['std_name']}
                              label={acceptance['accept_tag']}
+                             content={acceptance['accept_content']}
+                             score={acceptance['accept_score']}
+
                              />
                              </TableCell>
                          )

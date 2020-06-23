@@ -408,7 +408,7 @@ export default function LoginMenu() {
           <StyledTreeItem
             onClick={f7}
             nodeId="8"
-            labelText="發問Q&A"
+            labelText="討論區"
             labelIcon={HelpOutlineIcon}
             color="#44cedf"
             bgColor="#e3f8fb"

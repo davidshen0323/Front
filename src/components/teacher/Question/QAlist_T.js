@@ -45,7 +45,7 @@ import Smile from "@material-ui/icons/SentimentVerySatisfied";
 import DeleteQuestionT from "./DeleteQuestionT";
 import CompleteQuestionT from "./CompleteQuestionT";
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-
+import AddQA from "./AddQA";
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -181,34 +181,35 @@ export default function QAlist_S() {
   const [solvedquestion, setSolvedQuestion] = React.useState([]);
 
   const questionlist = ["q_asktime", "q_content"];
+  const stdidlist = ["q_std_id", "q_content", "q_asktime"];
   const solved_qlist = ["q_std_id", "q_content", "q_replytime", "q_reply"];
 
   const [stdid, setStdid] = React.useState(0);
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.get(`/teacher/unresolvedquestion/all/${csid}`);
+      const result = await axios.get(`/teacher/unresolvedquestion/all/${csid}/`);
       setQuestion(result.data);
       console.log(result.data);
     }
 
     async function fetchData2() {
-      const result = await axios.get(`/teacher/solvedquestion/all/${csid}`);
+      const result = await axios.get(`/teacher/solvedquestion/all/${csid}/`);
       setSolvedQuestion(result.data);
       console.log(result.data);
     }
 
-    async function fetchStdid() {
-      const result = await axios.get(`/teacher/std_id`);
-      // setStdid(result.data);
-      setStdid(result.data["std_id"]);
-      console.log(result.data);
-      console.log(stdid);
-    }
+    // async function fetchStdid() {
+    //   const result = await axios.get(`/teacher/std_id`);
+    //   // setStdid(result.data);
+    //   setStdid(result.data["std_id"]);
+    //   console.log(result.data);
+    //   console.log(stdid);
+    // }
 
     fetchData();
     fetchData2();
-    fetchStdid();
+    // fetchStdid();
   }, []);
 
   const [open, setOpen] = React.useState(false);
@@ -308,7 +309,7 @@ const handleChangePage = (event, newPage) => {
   return (
     <div className={classes.div}>
       <MyMenu />
-     
+      <AddQA />
       <AppBar
         position="static"
         color="default"
@@ -344,7 +345,7 @@ const handleChangePage = (event, newPage) => {
               Ques["q_solved"] === "0"
               ? 
               (
-                Ques["q_std_id"]===stdid
+                Ques["q_std_id"] === 0
                 ?
                 (
                   <TableCell style={{ border: 0 }}>
@@ -371,6 +372,7 @@ const handleChangePage = (event, newPage) => {
                                 variant="body"
                                 className={classes.stdid}
                               >
+                                
                                 {Ques["q_content"]}
                                 
                               </TableCell>
@@ -438,8 +440,8 @@ const handleChangePage = (event, newPage) => {
                     className={classes.card}
                   >
                     
-                    {questionlist.map((list, i) =>
-                      i < 1 ? (
+                    {stdidlist.map((list, i) =>
+                      i < 2 ? (
                         <div>
                           <Container maxWidth="sm">
 
@@ -451,7 +453,7 @@ const handleChangePage = (event, newPage) => {
                               variant="body"
                               className={classes.stdid}
                             >
-                              {Ques["q_content"]}
+                              {Ques[list]}
                               
                             </TableCell>
                           </Container>
@@ -524,7 +526,7 @@ const handleChangePage = (event, newPage) => {
               Ques["q_solved"] === "1"
               ? 
               (
-                Ques["q_std_id"]===stdid
+                Ques["q_std_id"] === 0
                 ?
                 (
                   <TableCell style={{ border: 0 }}>
@@ -606,8 +608,8 @@ const handleChangePage = (event, newPage) => {
                     className={classes.card}
                   >
                     
-                    {questionlist.map((list, i) =>
-                      i < 1 ? (
+                    {stdidlist.map((list, i) =>
+                      i < 2 ? (
                         <div>
                           <Container maxWidth="sm">
 
@@ -619,7 +621,7 @@ const handleChangePage = (event, newPage) => {
                               variant="body"
                               className={classes.stdid}
                             >
-                              {Ques["q_content"]}
+                              {Ques[list]}
                               
                             </TableCell>
                           </Container>

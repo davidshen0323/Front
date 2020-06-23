@@ -45,6 +45,10 @@ export default function DeleteQuestionS( props )  {
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
+   // 失敗小紅2
+   const [openErr2, setOpenErr2] = React.useState(false);
+   // 失敗小紅3
+   const [openErr3, setOpenErr3] = React.useState(false);
   
 
   const [changes, setChanges] = React.useState(1);
@@ -117,18 +121,32 @@ const [stdid, setStdid] = React.useState(0);
             console.log(1);
             setOpenS(false);
             setOpenErr1(true);
+            setOpenErr2(false);
+            setOpenErr3(false);
         }
         else if (test === "request failed. thw question with asktime was not found!")
         {
             console.log(2);
             setOpenS(false);
-            setOpenErr1(true);
+            setOpenErr2(true);
+            setOpenErr1(false);
+            setOpenErr3(false);
+        }
+        else if (test === "request failed. you can not delete your question, because the question has already replied from teacher!")
+        {
+            console.log(3);
+            setOpenS(false);
+            setOpenErr3(true);
+            setOpenErr2(false);
+            setOpenErr1(false);
         }
         else
         {
           console.log(0);                      
             setOpenS(true);
             setOpenErr1(false);
+            setOpenErr2(false);
+            setOpenErr3(false);
         }
         
     } fetchres() })
@@ -200,6 +218,18 @@ const [stdid, setStdid] = React.useState(0);
         <Snackbar open={openErr1} autoHideDuration={600}style={{marginBottom:100}} onClose={submitClose}>
           <Alert severity="error">
             你不能刪除其他人的問題！
+          </Alert>
+        </Snackbar>
+         {/* 失敗小紅框2 */}
+         <Snackbar open={openErr2} autoHideDuration={600}style={{marginBottom:100}} onClose={submitClose}>
+          <Alert severity="error">
+            沒有此問題！
+          </Alert>
+        </Snackbar>
+         {/* 失敗小紅框3 */}
+         <Snackbar open={openErr3} autoHideDuration={600}style={{marginBottom:100}} onClose={submitClose}>
+          <Alert severity="error">
+            此問題已解決！
           </Alert>
         </Snackbar>
        

@@ -45,6 +45,8 @@ export default function CompleteQuestionS( props )  {
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
+  // 失敗小紅2
+  const [openErr2, setOpenErr2] = React.useState(false);
   
 
   const [changes, setChanges] = React.useState(1);
@@ -90,14 +92,20 @@ const [stdid, setStdid] = React.useState(0);
     setChanges(1);
     inputs.id='';
     // inputs.content='';
-    window.location.reload();
+    // window.location.reload();
     
   };
+  
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    setOpenErr2(false);
+};
     
   const handleFinish = (student) =>
    {
 
-    fetch(`/student/CompletionQuestion`, {
+    fetch(`/student/CompletionQuestion/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -108,29 +116,35 @@ const [stdid, setStdid] = React.useState(0);
           cs_id: csid,
         }),
       })
-    //    .then(res => {
+       .then(res => {
         
-    //     async function fetchres(){
-    //     const test = await res.text();  //接收後端傳來的訊息
-    //     if (test === "刪除此問題成功") //公告不存在
-    //     {
-    //         console.log(1);
-    //         setOpenS(true);
-    //         setOpenErr1(false);
-    //     }
-              
-    //     else
-    //     {
-    //         setOpenS(false);
-    //         setOpenErr1(true);
-    //         console.log(0);                      
-    //     }
+        async function fetchres(){
+        const test = await res.text();  //接收後端傳來的訊息
+        if (test === "request successful! your question has been solved!") //request successful! your question has been solved!
+        {
+            console.log(1);
+            setOpenS(true);
+            setOpenErr1(false);
+            setOpenErr2(false);
+            window.location.reload();
+        }
+        else if(test === "request failed. your question has been solved from teacher or student!") //request failed. your question has been solved from teacher or student!
+        {
+            console.log(2);
+            setOpenErr1(true);
+            setOpenErr2(false);
+        }
+        else if(test === "request failed. the question with asktime was not found!") //request failed. the question with asktime was not found!
+        {
+            console.log(2);
+            setOpenErr2(true);
+            setOpenErr1(false);
+        }
         
-    // } fetchres() })
-    // .then(res => console.log(post))
-    // .then(res => console.log(res))
-    // .catch(err => console.log(`Error with message: ${err}`))
-      window.location.reload();
+    } fetchres() })
+    .then(res => console.log(res))
+    .catch(err => console.log(`Error with message: ${err}`))
+      // window.location.reload();
       }
 
         const handleOpenButton = () => {
@@ -156,30 +170,7 @@ const [stdid, setStdid] = React.useState(0);
           <Typography className={classes.typoHeading} variant="h5">
             確定要完成此問題?
           </Typography>
-
-          {/* <Typography className={classes.typo} variant="body1">
-            請輸入公告id：<Input id="title" value={inputs.id} onChange={handleChange('id')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-
-          </Typography> */}
-
         </div>
-
-        {/* <div style={{ display: "flex", justifyContent: "center", flexDirection: "column"}}>
-          <Typography className={classes.typo} variant="body1">
-            請輸入公告內容：
-          </Typography>
-
-          <Typography className={classes.typo} variant="body1">
-            <TextareaAutosize
-            id="content" 
-            value={inputs.content} 
-            onChange={handleChange('content')} 
-            style={{borderRadius:10, padding:8, width:350, height:150, fontSize:14, fontFamily:'微軟正黑體'}}
-            rowsMin={5}
-            placeholder="請輸入公告內容"
-            />
-          </Typography>
-        </div> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
@@ -191,7 +182,13 @@ const [stdid, setStdid] = React.useState(0);
           </Alert>
         </Snackbar>
         {/* 失敗小紅框1 */}
-        <Snackbar open={openErr1} style={{marginBottom:100}}>
+        <Snackbar open={openErr1} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
+          <Alert severity="error">
+            您的問題已完成！
+          </Alert>
+        </Snackbar>
+        {/* 失敗小紅框2 */}
+        <Snackbar open={openErr2} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>
           <Alert severity="error">
             沒有此問題！
           </Alert>

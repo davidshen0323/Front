@@ -60,7 +60,8 @@ export default function EditAnnouncement( props )  {
   const [openErr3, setOpenErr3] = React.useState(false);
   // 失敗小橘4
   const [openErr4, setOpenErr4] = React.useState(false);
-
+  // 失敗小橘5
+  const [openErr5, setOpenErr5] = React.useState(false);
   const [Announcement, setAnnouncement] = React.useState([]);
 
 
@@ -106,6 +107,7 @@ const handleChange = fieldname => event => {
     
   const handleEdit = () =>
     {
+      setOpenErr5(true);
         if(inputs.title.length > 0 
             && inputs.content.length > 0) //每個輸入格都不為空值
             {
@@ -160,7 +162,7 @@ const handleChange = fieldname => event => {
                         setOpenErr2(false);
                         setOpenErr3(false);
                         setOpenErr4(false);
-
+                        setOpenErr5(false);
                        
                         console.log(0);
                                        
@@ -299,10 +301,15 @@ const handleChange = fieldname => event => {
           </Alert>
         </Snackbar>
         {/* 失敗小橘框4 */}
-
         <Snackbar open={openErr4} style={{marginBottom:100}}>
           <Alert severity="warning">
             請再次確認！
+          </Alert>
+        </Snackbar>
+        {/* 稍後小橘框5 */}
+        <Snackbar open={openErr5} style={{marginBottom:100}}>
+          <Alert severity="warning">
+            請稍候，正在發送公告信！
           </Alert>
         </Snackbar>
       </DialogActions>

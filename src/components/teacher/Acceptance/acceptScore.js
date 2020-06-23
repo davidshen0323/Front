@@ -104,8 +104,8 @@ export default function AcceptScore( props )  {
   const classes = useStyle();
   const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = React.useState({
-    score:'',
-    content:'',
+    score: props.score,
+    content:props.content,
   });
   //const [state,setState] = React.useState({});
   
@@ -116,7 +116,9 @@ export default function AcceptScore( props )  {
   const [openS, setOpenS] = React.useState(false);
   // 退回驗收成功小綠綠2
   const [openR, setOpenR] = React.useState(false);
-  
+  // 失敗
+  const [openError, setError] = React.useState(false);
+
   const [expanded, setExpanded] = React.useState(false);
 
   // const handleChange = fieldname => event => {
@@ -194,11 +196,11 @@ export default function AcceptScore( props )  {
      }
 
   const rejectClick = () => {
-    setOpenR(true);
+    // setOpenR(true);
     console.log(props.stdid);
     console.log(props.hwid);
     console.log(parseInt(inputs.score));
-    
+    console.log()
     fetch('/teacher/rejectAcceptance/',{
       method: 'PUT',
       headers: {
@@ -209,10 +211,29 @@ export default function AcceptScore( props )  {
           accept_hw_id: props.hwid,
           accept_score: parseInt(inputs.score),
           accept_content:inputs.content,
-          accept_tag:label,
+          // accept_tag:label,
       })
   })
- window.location.reload();
+  .then(res => {
+                    
+    async function fetchres(){
+    const test = await res.text();  //接收後端傳來的訊息
+    if (test === "已退回學生驗收") //已退回學生驗收
+    {
+       
+        console.log(1);
+        setOpenR(true);
+        setError(false);        
+    }
+    else if(test === "此學生尚未排隊") //教師不屬於該課堂
+    {
+       
+        console.log(2);
+        setError(true);
+        setOpenS(false);
+    }    
+} fetchres() })
+//  window.location.reload();
   };
 
   const submitClick = () => {
@@ -230,10 +251,21 @@ export default function AcceptScore( props )  {
           std_id: props.stdid,
           accept_hw_id: props.hwid,
           accept_score: parseInt(inputs.score),
+          accept_content:inputs.content,
           // accept_done: 1
       })
   })
-  window.location.reload();
+  .then( res => {
+    if(res.status === 200)
+    {
+      setError(false);
+      window.location.reload();
+    }
+    else
+    {
+      setError(true);
+    }
+  })
   };
 
   const submitClose = (event, reason) => {
@@ -241,6 +273,7 @@ export default function AcceptScore( props )  {
     handleClose(true);
     setOpenS(false);
     setOpenR(false);
+    setError(false);
     setInputs(1);
     window.location.reload();
   };
@@ -250,8 +283,9 @@ export default function AcceptScore( props )  {
     handleClose(true);
     setOpenS(false);
     setOpenR(false);
+    setError(false);
     setInputs(1);
-    // window.location.reload();
+    window.location.reload();
   };
   
   const handleClickOpen = () => {
@@ -382,13 +416,19 @@ export default function AcceptScore( props )  {
       {/* 完成驗收成功小綠框 */}
       <Snackbar open={openS} autoHideDuration={2000} onClose={submitClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
       <Alert severity="success">
-        已儲存!
+        已儲存！
         </Alert>
       </Snackbar>
       {/* 退回驗收成功小綠框 */}
       <Snackbar open={openR} autoHideDuration={2000} onClose={submitClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
       <Alert severity="success">
-        已退回學生驗收!
+        已退回學生驗收！
+        </Alert>
+      </Snackbar>
+      {/* 失敗 */}
+      <Snackbar open={openError} autoHideDuration={2000} onClose={submitClose} style={{ marginBottom: 100, fontFamily: '微軟正黑體' }}>
+      <Alert severity="error">
+        請再試一次！
         </Alert>
       </Snackbar>
 

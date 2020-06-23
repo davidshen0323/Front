@@ -46,6 +46,10 @@ export default function DeleteQuestionT( props )  {
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
   
+  const [openErr2, setOpenErr2] = React.useState(false);
+  
+  const [openErr3, setOpenErr3] = React.useState(false);
+  
 
   const [changes, setChanges] = React.useState(1);
   const [inputs, setInputs] = React.useState({
@@ -87,6 +91,9 @@ const [stdid, setStdid] = React.useState(0);
   const submitClose = (event, reason) => {
     handleClose(true);
     setOpenS(false);
+    setOpenErr1(false);
+    setOpenErr2(false);
+    setOpenErr3(false);
     setChanges(1);
     inputs.id='';
     // inputs.content='';
@@ -98,13 +105,14 @@ const [stdid, setStdid] = React.useState(0);
    {
     console.log(stdid);
     console.log(props.time);
-    fetch(`/student/deletequestioncontent/`, {
+
+    fetch(`/teacher/deletequestioncontent/`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          q_std_id: stdid,
+          q_std_id: 0,
           q_asktime: props.time,
         }),
       })
@@ -117,18 +125,32 @@ const [stdid, setStdid] = React.useState(0);
             console.log(1);
             setOpenS(false);
             setOpenErr1(true);
+            setOpenErr2(false);
+            setOpenErr3(false);
         }
-        else if (test === "request failed. thw question with asktime was not found!")
+        else if (test === "request failed. thw question with asktime was not found!(teacher)")
         {
             console.log(2);
             setOpenS(false);
-            setOpenErr1(true);
+            setOpenErr1(false);
+            setOpenErr2(true);
+            setOpenErr3(false);
+        }
+        else if( test === "request failed. the question with asktime was not found!(student)")
+        {
+          console.log(3);                      
+            setOpenS(false);
+            setOpenErr1(false);
+            setOpenErr2(false);
+            setOpenErr3(true);
+
         }
         else
         {
-          console.log(0);                      
-            setOpenS(true);
-            setOpenErr1(false);
+          setOpenS(true);
+          setOpenErr1(false);
+          setOpenErr2(false);
+          setOpenErr3(false);
         }
         
     } fetchres() })
@@ -200,6 +222,16 @@ const [stdid, setStdid] = React.useState(0);
         <Snackbar open={openErr1} autoHideDuration={600}style={{marginBottom:100}} onClose={submitClose}>
           <Alert severity="error">
             你不能刪除其他人的問題！
+          </Alert>
+        </Snackbar>
+        <Snackbar open={openErr2} autoHideDuration={600}style={{marginBottom:100}} onClose={submitClose}>
+          <Alert severity="error">
+            沒有此問題！
+          </Alert>
+        </Snackbar>
+        <Snackbar open={openErr3} autoHideDuration={600}style={{marginBottom:100}} onClose={submitClose}>
+          <Alert severity="error">
+            沒有此問題！
           </Alert>
         </Snackbar>
        

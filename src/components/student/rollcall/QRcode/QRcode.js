@@ -93,6 +93,7 @@ export default function Qrcode() {
 
   const handleClose = () => {
     setOpen(false);
+    window.location.reload();
   };
 
   const handleChange = cs_id => event => {
