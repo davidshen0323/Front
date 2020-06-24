@@ -1,15 +1,13 @@
 import React , { useEffect } from 'react';
 import axios from 'axios';
 import MyMenu from '../../teacher/MenuT';
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AddIcon from '@material-ui/icons/Add';
 import AddAnnouncement from './addAnnouncement';
 import EditAnnouncement from './editAnnouncement';
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteAnnouncement from './DeleteAnnouncement';
-import {Paper, Fab, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Container, Typography, Box, ExpansionPanelActions, Divider, Button} from '@material-ui/core';
-
-
+import { Paper, Fab, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Container, Typography, ExpansionPanelActions, Divider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   Paper:{
@@ -18,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop:'5%',   
     marginBottom:'5%',
     padding:'2%',
-    //boxShadow:"1px 1px 1px 1px #9E9E9E",    
 },
   fab: {
     position: 'fixed',
@@ -46,16 +43,10 @@ const useStyles = makeStyles((theme) => ({
 export default function ViewAnnouncementt() {
 
   const classes = useStyles();
-  
   const [Announcement, setAnnouncement] = React.useState([]);
-
   const AnnouncementList = [ 'at_title', 'at_content', 'at_posttime', '', 'at_id' ]
-
   const params = useParams();
   const csid = params.cs_id;
-
-  
-  // console.log(csid);
   useEffect(() => {
     async function fetchData() {
 
@@ -63,9 +54,6 @@ export default function ViewAnnouncementt() {
       
       setAnnouncement(result.data);
       console.log(result.data);
-      // console.log(result.data[0]['cs_id']);
-      
-      // const path ={result.data['cs_id']}
     }
     
     fetchData();
@@ -102,7 +90,6 @@ export default function ViewAnnouncementt() {
           <AddIcon />
         </Fab>
 
-       
       <Paper className={classes.Paper}>
       <Typography  variant="h4" component="h2"  gutterBottom style={{ marginBottom:'2%',textAlign:'center',fontFamily:'微軟正黑體',color:"#000000"}}>公佈欄</Typography>
 
@@ -149,10 +136,9 @@ export default function ViewAnnouncementt() {
             
             </Container>
            </Paper>
-    {/* 教師發佈公告 */}
-    <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>
-    
-   
+      {/* 教師發佈公告 */}
+      <AddAnnouncement open={openAddAnnouncement} handleClose={onCloseAddAnnouncement}/>
+      
     </div>
     
   );

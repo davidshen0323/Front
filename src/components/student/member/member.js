@@ -4,7 +4,7 @@ import MyMenu from '../MenuS';
 import MMTable from './MMtableS';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import {TableContainer, Paper, Table, TableRow, TableCell} from '@material-ui/core';
+import { TableContainer, Paper, Table, TableRow, TableCell } from '@material-ui/core';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
@@ -83,6 +83,5 @@ export default function Member() {
                   />
                 </Paper>
              </div>
-
         )
     }

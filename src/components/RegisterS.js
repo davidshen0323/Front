@@ -1,16 +1,11 @@
 import React from 'react';
-import { Button, TextField, Paper, Snackbar, Radio, Typography } from '@material-ui/core/';
+import clsx from 'clsx';
+import { List } from 'antd-mobile';
 import MuiAlert from "@material-ui/lab/Alert";
-import MyMenu from './MenuisLogouted';
+import { useHistory, Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-// import Logo from './logo.js';
-import { List } from 'antd-mobile';
-import clsx from 'clsx';
-import { useHistory, Link } from "react-router-dom";
-// import FormHelperText from '@material-ui/core/FormHelperText';
-// import Select from '@material-ui/core/Select';
-// import NativeSelect from '@material-ui/core/NativeSelect';
+import { Button, TextField, Paper, Snackbar, Radio, Typography } from '@material-ui/core/';
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,22 +28,17 @@ const useStyles = makeStyles(theme => ({
     },
 
     margin: {
-        // margin: theme.spacing(3),
         fontFamily: 'Microsoft JhengHei',
-
     },
 
     textfield: {
         marginBottom: 10,
-        //backgroundColor: 'lightgray',
-        fontFamily: 'Microsoft JhengHei', //沒用
+        fontFamily: 'Microsoft JhengHei', 
         width: 'auto',
-
     },
 
     root: {
         width: '70%',
-        // marginTop: 100,
         margin: 'auto',
         marginBottom: 100,
         overflowX: 'auto',
@@ -57,7 +47,6 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Microsoft JhengHei',
         fontWeight: 'bold',
         color: '#582707',
-
     },
     radio: {
         color: 'orange',
@@ -86,7 +75,6 @@ export default function RegisterS() {
         pwd: '',
         repeatpwd: '',
         name: '',
-        // gender:'',
         dpart: '',
         phone: '',
         mail: ''
@@ -141,39 +129,30 @@ export default function RegisterS() {
                         const test = await res.text();  //接收後端傳來的訊息
                         if (test === "This account has already exist!") //帳號已註冊過
                         {
-                            //alert("已註冊過!");
                             setOpenS(false);
                             setOpenErr1(true);
                             setOpenErr2(false);
                             setOpenErr3(false);
                             setOpenErr4(false);
-
                             console.log(1);
-
                         }
                         else if (test === "request failed. Email format error!") //信箱不包含@
                         {
-                            //alert("信箱格式有誤! 請輸入有效信箱!");
                             setOpenS(false);
                             setOpenErr1(false);
                             setOpenErr2(true);
                             setOpenErr3(false);
                             setOpenErr4(false);
-
                             console.log(2);
-
                         }
                         else if (inputs.user.length !== 9) //學號長度不等於9
                         {
-                            //alert("學號長度有誤! 請再次確認!");
                             setOpenS(false);
                             setOpenErr1(false);
                             setOpenErr2(false);
                             setOpenErr3(true);
                             setOpenErr4(false);
-
                             console.log(3);
-
                         }
                         else if (res.status === 500) {
                             setOpenS(false);
@@ -183,29 +162,22 @@ export default function RegisterS() {
                             setOpenErr4(true);
                         }
                         else {
-                            //alert("註冊成功!");
                             setOpenS(true);
                             setOpenErr1(false);
                             setOpenErr2(false);
                             setOpenErr3(false);
                             setOpenErr4(false);
-
                             console.log(0);
-                            // history.push("/login");
                             window.location.href = "/login";
-
-
                         }
 
                     } fetchres()
                 })
-                // .then(res => console.log(post))
                 .then(res => console.log(res))
                 .catch(err => console.log(`Error with message: ${err}`))
         }
 
         else {
-            //alert("請再次確認!!")
             setOpenS(false);
             setOpenErr1(false);
             setOpenErr2(false);
@@ -213,12 +185,7 @@ export default function RegisterS() {
             setOpenErr4(true);
         }
 
-
-
-
-
     }
-    // console.log(post);
 
     //用在性別的state跟handlechange
     const [selectedvalue, setSelectedValue] = React.useState('');
@@ -227,36 +194,14 @@ export default function RegisterS() {
         setSelectedValue(event.target.value);
     };
 
-    // //用在選系級的state跟handlechange
-    // const [dpart, setDpart] = React.useState({
-    //     dpart: '',
-    //     name: 'hai',
-    // });
-
-    // const handleChangeDpart = (event) => {
-    //     const name = event.target.name;
-    //     setState({
-    //         ...state,
-    //         [name]: event.target.value,
-    //     });
-    // };
-
     return (
         <div className={classes.div}>
-            {/* <MyMenu/> */}
 
             <Paper className={classes.root}>
                 <h2>註冊</h2>
-
-
-
-
                 <List>
 
-
                     <FormControl className={clsx(classes.margin)} variant="outlined" size="small">
-
-
                         <TextField
                             required
                             id="user"
@@ -303,16 +248,6 @@ export default function RegisterS() {
                             className={classes.textfield}
                         />
 
-                        {/* <TextField
-                required
-                id="gender"
-                label="性別"
-                value={inputs.gender}
-                onChange={handleChange('gender')}
-                size="small"
-                variant="outlined"
-                className={classes.textfield}
-            /> */}
                         <Typography>
 
                             性別:
@@ -337,24 +272,6 @@ export default function RegisterS() {
                                 color="orange"
                             />
                         </Typography>
-
-                        {/* <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="age-native-helper">所屬系所</InputLabel>
-                            <NativeSelect
-                                value={dpart.dpart}
-                                onChange={handleChangeDpart}
-                                inputProps={{
-                                    name: 'dpart',
-                                    id: 'age-native-helper',
-                                }}
-                            >
-                                <option aria-label="None" value="" />
-                                <option value={資訊管理學系}>資訊管理學系</option>
-                                <option value={企業管理學系}>企業管理學系</option>
-                                <option value={公共衛生學系}>公共衛生學系</option>
-                            </NativeSelect>
-                            <FormHelperText>Some important helper text</FormHelperText>
-                        </FormControl> */}
 
                         <TextField
                             required
@@ -395,14 +312,11 @@ export default function RegisterS() {
                     className={classes.button}
                     onClick={handleSubmit}
                     variant="contained"
-                //   component={Link}
-                //   to='/login'
                 >確認送出
               </Button>
 
                 <Button
                     className={classes.button}
-                    //   onClick={handleSubmit}
                     variant="contained"
                     component={Link}
                     to='/login'

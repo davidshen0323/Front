@@ -1,26 +1,13 @@
 import React from 'react';
-import MyMenu from './MenuisLogouted';
-import {makeStyles} from '@material-ui/core/styles';
-import {WingBlank} from 'antd-mobile';
-import {Link} from "react-router-dom";
-import {Button, Grid, List, Paper, FormControl, TextField} from '@material-ui/core/';
 import clsx from 'clsx';
 import ForgetPw from './forgetpw';
+import MyMenu from './MenuisLogouted';
+import { WingBlank } from 'antd-mobile';
+import { Link } from "react-router-dom";
 import logo from '../../src/img/Rollsuplogo.jpeg';
-//import Image from '@material-ui-image' ;
-// class Login extends Component{
-//     constructor(props){
-//         super(props);
-//         //繫結this時間，如果不繫結，無法傳遞this
-//         this.register = this.register.bind(this);
-//     }
-//     register(){
-//         console.log(this.props);
-//         //跳轉到註冊頁面
-//         this.props.history.push('/register')
-//     }
-// }
-    
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, Grid, List, Paper, FormControl, TextField } from '@material-ui/core/';
+
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
     
@@ -39,7 +26,6 @@ const useStyles = makeStyles(theme =>({
         margin: {
             margin: theme.spacing(1),
             fontFamily: 'Microsoft JhengHei',
-            
           },
 
         root:{
@@ -47,7 +33,6 @@ const useStyles = makeStyles(theme =>({
             height:'60vh',
             marginTop: theme.spacing(12),
             marginBottom: theme.spacing(12),
-            //marginLeft: theme.spacing(25),
             overflow: 'auto',
             textAlign: 'center',
             fontFamily: 'Microsoft JhengHei',
@@ -86,24 +71,7 @@ export default function Login(){
             event.persist();
             setInputs(inputs => ({...inputs, [fieldname]: event.target.value }));
           }
-          
-        //   let login;
-        //   const handleSubmit = () =>
-        //   {
-        //     if(inputs.Userid.length > 0 && inputs.Userpassword.length > 0)
-        //     {
-        //         login = true;
-        //         return login;
-        //     }
-        //     else
-        //     {
-        //         alert("請再次確認!");
-        //         login = false;
-        //         return login;
-        //     }
-        //   }
-
-
+     
         return (
             <div className={classes.div}>
                 <MyMenu/>
@@ -116,7 +84,6 @@ export default function Login(){
                 
                 >
                 <Paper className={classes.root}>
-                    {/* <h2>上課應用系統</h2> */}
                     <img src={logo} width="100px"></img>
 
         <WingBlank>
@@ -152,9 +119,7 @@ export default function Login(){
             />
         </FormControl>
         </List>
-                    
-                    
-                    {/* <WhiteSpace/> */}
+            
         <List>
                     <Button
                     variant="contained"
@@ -164,13 +129,11 @@ export default function Login(){
                     >
                     註冊
                     </Button>
-                    
-
+                
                     <Button 
                     type="submit"
                     variant="contained" 
                     className={classes.button}
-                    // onClick={handleSubmit}
                     >
                     登入
                     </Button>

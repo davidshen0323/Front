@@ -14,9 +14,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
-import {Typography, ListItem, IconButton, Divider, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
-
-
+import { Typography, ListItem, IconButton, Divider, Drawer, AppBar, Toolbar, Button, Grid } from '@material-ui/core/';
 
 const drawerWidth = 240;
 
@@ -56,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
   
   Nav: {
     margin: `${theme.spacing(1)}px auto`,
-    // flexGrow: 1,
   },
   
   list: {
@@ -133,15 +130,7 @@ drawerHeader: {
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 },
-// content: {
-//   flexGrow: 1,
-//   padding: theme.spacing(3),
-//   transition: theme.transitions.create('margin', {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   marginLeft: -drawerWidth,
-// },
+
 contentShift: {
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.easeOut,
@@ -275,33 +264,12 @@ export default function LoginMenu() {
             <MenuIcon />
           </IconButton>
 
-              {/* <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography> */}
-              
               <img src={logo} width="200px"></img>
-              {/* <Button 
-                variant="outlined"
-                className={classes.button}
-                href="/homepaget"
-                >
-                我的課程
-              </Button> */}
-
-                
-
-              {/* <Button 
-                variant="text"
-                className={classes.button}
-                href="/TInformation"
-                >
-                基本資料
-                </Button> */}
-              
-
+        
               <Grid container
                direction="row" 
                justify="flex-end"
                className={classes.Nav}
-              // wrap="nowrap"
               spacing={2}
               >
               <Grid item>   

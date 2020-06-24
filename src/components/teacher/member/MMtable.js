@@ -1,18 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import {useState,useEffect} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {useState,useEffect} from 'react';
 import DeleteMember from './DeleteMember';
+import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import { TableSortLabel, TablePagination, TableHead, TableBody, TableContainer, Table, TableRow, TableCell } from '@material-ui/core';
+
 
 function descendingComparator(a, b, orderBy) {//順序升降
   if (b[orderBy] < a[orderBy]) {
@@ -129,8 +123,6 @@ export default function MemberTable( props ) {
   const [students, setMembers] = useState([]);
  
   const params = useParams();
-  // console.log(params);
-  // const csid = params.cs_id;
   console.log(params.cs_id);
   
   const classes = useStyles();

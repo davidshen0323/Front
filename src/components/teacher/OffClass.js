@@ -1,14 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
-import { brown } from '@material-ui/core/colors';
 import { makeStyles } from "@material-ui/styles";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
-import RemoveIcon from '@material-ui/icons/Remove';
-import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 import { IconButton, Snackbar, Dialog, Button, DialogActions, DialogContent, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
@@ -44,15 +38,11 @@ export default function OffClass( props )  {
   const classes = useStyle();
   const params = useParams();
   const csid = params.cs_id;
-
   const [open, setOpen] = React.useState(false);
-
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
   const [openErr1, setOpenErr1] = React.useState(false);
-  
-
   const [changes, setChanges] = React.useState(1);
   const [inputs, setInputs] = React.useState({
     id: props.atid,
@@ -60,27 +50,11 @@ export default function OffClass( props )  {
 });
 
 
-// const handleChange = fieldname => event => {
-//     event.persist();
-//     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-//     //
-// }
-
-// let post; //宣告一個布林值變數
-// let history = useHistory(); //傳值跳頁的方法
-
-
-//   const submitClick = () => {
-  
-//     setOpenS(true);
-//   };
-
   const submitClose = (event, reason) => {
     handleClose(true);
     setOpenS(false);
     setChanges(1);
     inputs.id='';
-    // inputs.content='';
     window.location.reload();
     
   };
@@ -103,7 +77,6 @@ export default function OffClass( props )  {
         const test = await res.text();  //接收後端傳來的訊息
         if (test === "request failed. teacher not in this class!") 
         {
-            // alert("request failed. teacher not in this class!");
             console.log(1);
             setOpenErr1(true);
             setOpenS(false);        
@@ -111,7 +84,6 @@ export default function OffClass( props )  {
         }
         else if(test === "request successful! your course has been closed!") 
         {
-           // alert("request successful! your course has been closed!");
             console.log(2);
             setOpenS(true);        
             setOpenErr1(false);
@@ -153,22 +125,6 @@ export default function OffClass( props )  {
 
         </div>
 
-        {/* <div style={{ display: "flex", justifyContent: "center", flexDirection: "column"}}>
-          <Typography className={classes.typo} variant="body1">
-            請輸入公告內容：
-          </Typography>
-
-          <Typography className={classes.typo} variant="body1">
-            <TextareaAutosize
-            id="content" 
-            value={inputs.content} 
-            onChange={handleChange('content')} 
-            style={{borderRadius:10, padding:8, width:350, height:150, fontSize:14, fontFamily:'微軟正黑體'}}
-            rowsMin={5}
-            placeholder="請輸入公告內容"
-            />
-          </Typography>
-        </div> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="default" className={classes.button} style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
@@ -185,9 +141,6 @@ export default function OffClass( props )  {
             教師不屬於該課程！
           </Alert>
         </Snackbar>
-       
-       
-        
       </DialogActions>
     </Dialog>
     </div>

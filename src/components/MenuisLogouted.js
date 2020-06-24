@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button, Grid, Typography} from '@material-ui/core/';
 import logo from '../img/Rollsup.jpeg';
+import { AppBar, Toolbar } from '@material-ui/core/';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
   
   Nav: {
     margin: `${theme.spacing(1)}px auto`,
-    // flexGrow: 1,
   },
   
   list: {
@@ -78,8 +77,6 @@ export default function MylogoutMenu() {
 
   const classes = useStyles();
 
-  // const [value, setValue] = React.useState("value");
-
   return (
     <div className={classes.root}>
         
@@ -87,47 +84,8 @@ export default function MylogoutMenu() {
           position="fixed"
           
           >
-            <Toolbar className={classes.toolbar}>
-            
-
-              {/* <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography> */}
-              
+            <Toolbar className={classes.toolbar}>   
               <img src={logo} width="200px"></img>
-              {/* <Button 
-                variant="outlined"
-                className={classes.button}
-                href="/homepaget"
-                >
-                我的課程
-              </Button> */}
-
-                
-
-              {/* <Button 
-                variant="text"
-                className={classes.button}
-                href="/TInformation"
-                >
-                基本資料
-                </Button> */}
-              
-
-              {/* <Grid container
-               direction="row" 
-               justify="flex-end"
-               className={classes.Nav}
-              // wrap="nowrap"
-              spacing={2}
-              >
-              <Grid item>   
-              <form action="/logout" method="POST">
-
-                  
-                <Button className={classes.menuButton} type="submit" variant="outline" >登出</Button>
-              </form>
-              </Grid>
-                
-              </Grid> */}
               </Toolbar>
           </AppBar>
 

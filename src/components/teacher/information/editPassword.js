@@ -1,7 +1,7 @@
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import {Snackbar, TextField, Dialog, Button, DialogActions, DialogContent, Typography} from "@material-ui/core";
+import { Snackbar, TextField, Dialog, Button, DialogActions, DialogContent, Typography } from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
@@ -45,7 +45,6 @@ export default function EditPassword({ open, handleClose })  {
     const handleChange = fieldname => event => {
         event.persist();
         setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-        //不知道怎麼解釋哈哈哈哈
     }
   
 
@@ -66,16 +65,14 @@ export default function EditPassword({ open, handleClose })  {
       
       async function fetchres(){
       const test = await res.text();  //接收後端傳來的訊息
-      if (test === "修改密碼失敗，請輸入正確的舊密碼") //帳號已註冊過
+      if (test === "修改密碼失敗，請輸入正確的舊密碼") 
       {
-          //alert("修改密碼失敗，請輸入正確的舊密碼!");
           setOpenErr1(true);
           console.log(1);
           
       }
       else if(test === "修改密碼成功") //修改密碼成功
       {
-          //alert("修改密碼成功");
           setOpenS(true);
           setOpenErr1(false);
           window.location.reload();
@@ -104,10 +101,6 @@ export default function EditPassword({ open, handleClose })  {
             更改密碼
           </Typography>
 
-           {/* 之後要接密碼(? */}  
-          {/* <Typography className={classes.typo} variant="h8">
-            請輸入目前密碼：
-          </Typography> */}
           <TextField 
           label="目前密碼"
           variant="outlined"
@@ -116,10 +109,7 @@ export default function EditPassword({ open, handleClose })  {
           value={inputs.pwd} 
           onChange={handleChange('pwd')} 
           style={{fontFamily:'微軟正黑體',marginTop:10}}/>
-          
-          {/* <Typography className={classes.typo} variant="h8">
-            請輸入新密碼：
-          </Typography> */}
+    
           <TextField 
           label="新密碼"
           variant="outlined"
@@ -129,9 +119,7 @@ export default function EditPassword({ open, handleClose })  {
           onChange={handleChange('newpwd')} 
           style={{fontFamily:'微軟正黑體',marginTop:10}}/>
          
-          {/* <Typography className={classes.typo} variant="h8">
-            確認新密碼：<TextField type="password" value={inputs.repeatpwd} onChange={handleChange('repeatpwd')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-          </Typography> */}
+       
           <TextField 
           label="確認新密碼"
           variant="outlined"
@@ -140,11 +128,8 @@ export default function EditPassword({ open, handleClose })  {
           value={inputs.repeatpwd} 
           onChange={handleChange('repeatpwd')} 
           style={{fontFamily:'微軟正黑體',marginTop:10}}/>
-          {/* <Typography className={classes.typo} variant="body1">
-            
-          </Typography> */}
+    
         </div>
-
         
       </DialogContent>
       <DialogActions>

@@ -1,13 +1,12 @@
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import { useHistory, useParams } from "react-router-dom";
-import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
+import { useParams } from "react-router-dom";
+import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input } from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
   typo: {
-    // marginLeft: 10,
     padding: 5,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
@@ -15,8 +14,6 @@ const useStyle = makeStyles(theme => ({
     color:'#582707'
   },
   typo2: {
-    // marginLeft: 10,
-    // padding: 5,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
   },
@@ -69,12 +66,7 @@ export default function AddAnnouncement({ open, handleClose })  {
 const handleChange = fieldname => event => {
     event.persist();
     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-    //
 }
-
-let post; //宣告一個布林值變數
-let history = useHistory(); //傳值跳頁的方法
-
 
   const submitClose = () => {
     handleClose(true);
@@ -91,7 +83,6 @@ let history = useHistory(); //傳值跳頁的方法
   };
 
   const ErrClose = () => {
-    
     setOpenS(false);
     setOpenErr1(false);
     setOpenErr2(false);
@@ -124,27 +115,21 @@ let history = useHistory(); //傳值跳頁的方法
                     const test = await res.text();  //接收後端傳來的訊息
                     if (test === "request failed. Class does not exist!") //課堂不存在
                     {
-                        //alert("課堂不存在!");
-                        post = false;
                         console.log(1);
                         setOpenErr1(true);
                         setOpenErr2(false);
                         setOpenErr3(false);
                         setOpenErr4(false);
                         setbtnClose(true);
-                        return post;
                     }
                     else if(test === "request failed. teacher not in this class!") //教師不屬於該課堂
                     {
-                        //alert("教師不屬於該課堂!");
-                        post = false;
                         console.log(2);
                         setOpenErr2(true);
                         setOpenErr1(false);
                         setOpenErr3(false);
                         setOpenErr4(false);
                         setbtnClose(true);
-                        return post;
                     }
                     else
                     {
@@ -153,21 +138,16 @@ let history = useHistory(); //傳值跳頁的方法
                         setOpenErr2(false);
                         setOpenErr3(false);
                         setOpenErr4(false);
-                        post = true;
                         console.log(0);
-                     //   history.push('/ViewAnnouncementt/${csid}');
-                        return post;                        
                     }
                     
                 } fetchres() })
-                // .then(res => console.log(post))
                 .then(res => console.log(res))
                 .catch(err => console.log(`Error with message: ${err}`))
             }
             
             else
             {
-                //alert("請再次確認!!")
                 setOpenErr3(true);
                 setOpenErr4(false);
                 setbtnClose(true);
@@ -237,7 +217,7 @@ let history = useHistory(); //傳值跳頁的方法
             請再次確認！
           </Alert>
         </Snackbar>
-        {/* 稍後小橘框4 */}
+        {/* 稍候小橘框4 */}
         <Snackbar open={openErr4} style={{marginBottom:100}}>
           <Alert severity="warning">
             請稍候，正在發送公告信！

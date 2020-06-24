@@ -3,12 +3,11 @@ import axios from 'axios';
 import { useParams } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input} from "@material-ui/core";
+import { Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, TextareaAutosize, Input } from "@material-ui/core";
 
 
 const useStyle = makeStyles(theme => ({
   typo: {
-    // marginLeft: 10,
     padding: 5,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
@@ -16,8 +15,6 @@ const useStyle = makeStyles(theme => ({
     color:'#582707'
   },
   typo2: {
-    // marginLeft: 10,
-    // padding: 5,
     flex: 1,
     fontFamily: 'Microsoft JhengHei',
   },
@@ -43,12 +40,10 @@ const useStyle = makeStyles(theme => ({
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
 export default function EditAnnouncement( props )  {
   const classes = useStyle();
   const params = useParams();
   const csid = params.cs_id;
-
   const [open, setOpen] = React.useState(false);
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
@@ -63,11 +58,8 @@ export default function EditAnnouncement( props )  {
   // 失敗小橘5
   const [openErr5, setOpenErr5] = React.useState(false);
   const [Announcement, setAnnouncement] = React.useState([]);
-
-
   const [value, setValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
-
   const [changes, setChanges] = React.useState(1);
   const [inputs, setInputs] = React.useState({
     id: props.atid,
@@ -78,12 +70,9 @@ export default function EditAnnouncement( props )  {
 
 useEffect(() => {
     async function fetchData() {
-
       const result  = await axios.get(`/teacher/announcement/${csid}/get/`)
-      
       setAnnouncement(result.data);
       console.log(result.data);
-  
     }
     
     fetchData();
@@ -92,7 +81,6 @@ useEffect(() => {
 const handleChange = fieldname => event => {
     event.persist();
     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-    //
 }
 
   const submitClose = (event, reason) => {
@@ -102,7 +90,6 @@ const handleChange = fieldname => event => {
     inputs.title='';
     inputs.content='';
     window.location.reload();
-    
   };
     
   const handleEdit = () =>
@@ -129,22 +116,18 @@ const handleChange = fieldname => event => {
                     const test = await res.text();  //接收後端傳來的訊息
                     if (test === "request failed. at_id not found!") //課堂不存在
                     {
-                       
                         console.log(1);
                         setOpenErr1(true);
                         setOpenErr2(false);
                         setOpenErr3(false);
-                      
                     }
                     else if(test === "request failed. ClassID not found!") //教師不屬於該課堂
                     {
-                       
                         console.log(2);
                         setOpenErr2(true);
                         setOpenErr1(false);
                         setOpenErr3(false);
                         setOpenErr4(false);
-
                     }
                     else if(test === "request failed. teacher not in this class!")
                     {
@@ -153,7 +136,6 @@ const handleChange = fieldname => event => {
                         setOpenErr1(false);
                         setOpenErr2(false);
                         setOpenErr4(false);
-
                     }
                     else
                     {
@@ -163,9 +145,7 @@ const handleChange = fieldname => event => {
                         setOpenErr3(false);
                         setOpenErr4(false);
                         setOpenErr5(false);
-                       
-                        console.log(0);
-                                       
+                        console.log(0);     
                     }
                     
                 } fetchres() })
@@ -176,22 +156,10 @@ const handleChange = fieldname => event => {
             
             else
             {
-               
                 setOpenErr4(true);
-                
             }
             
         }
-
-
-        // const handleChangeSelect = () => {
-          
-        // }
-        
-        // const handleChangeInputSelect = () => {
-
-        // }
-
         const handleOpenButton = () => {
           setOpen(true);
         }
@@ -210,33 +178,6 @@ const handleChange = fieldname => event => {
             更改公告
           </Typography>
 
-          {/* <Autocomplete
-          value={value}
-          onChange=
-          {
-            // handleChangeSelect
-            (event, newValue) => {
-            setValue(newValue);
-          }
-          }
-
-          inputValue={inputValue}
-          onInputChange=
-          {
-            // handleChangeInputSelect
-            (event, newInputValue) => {
-            setInputValue(newInputValue);
-          }
-          }
-          
-
-
-      id="editAnnoucement"
-      options={Announcement}
-      getOptionLabel={(option) => option.at_title}
-      style={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="搜尋公告" variant="outlined" />}
-    /> */}
         <Typography className={classes.typo} variant="body1">
           該公告ID為：{props.atid}
         </Typography>
@@ -306,7 +247,7 @@ const handleChange = fieldname => event => {
             請再次確認！
           </Alert>
         </Snackbar>
-        {/* 稍後小橘框5 */}
+        {/* 稍候小橘框5 */}
         <Snackbar open={openErr5} style={{marginBottom:100}}>
           <Alert severity="warning">
             請稍候，正在發送公告信！

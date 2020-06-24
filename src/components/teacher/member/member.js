@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import MyMenu from '../MenuT';
 import MMTable from './MMtable';
-import { useParams } from 'react-router-dom';
 import Addmember from './addmember';
 import { Paper } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles({
@@ -29,12 +29,9 @@ const useStyles = makeStyles({
 export default function Member() {
     const classes = useStyles();
     const params = useParams();
-    // const csid = params.cs_id;
         return (
-
             <div className={classes.div}>
                 <MyMenu/>
-            {/* <center><label><h1>專題</h1></label> </center> */}
           <Addmember csid={params.cs_id}/>
             <Paper className={classes.Paper}>
               <MMTable

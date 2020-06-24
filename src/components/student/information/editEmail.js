@@ -1,7 +1,7 @@
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import {　TextField, Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@material-ui/core";
+import { TextField, Snackbar, Dialog, Button, DialogActions, DialogContent, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -55,7 +55,6 @@ export default function EditEmail({ open, handleClose })  {
       },
       body: JSON.stringify({
           std_mail: email.email,
-          // teacher_id: tid.tcherid,
       })
   })
   .then(res => {
@@ -64,21 +63,18 @@ export default function EditEmail({ open, handleClose })  {
       const test = await res.text();  //接收後端傳來的訊息
       if (test === "request failed. Email format error!") //帳號已註冊過
       {
-          //alert("email格式錯誤");
           setOpenErr1(true);
           setOpenErr2(false);
           console.log(1);
       }
       else if(test === "This account has already exist!") //信箱不包含@
       {
-          //alert("此信箱已存在");
           setOpenErr2(true);
           setOpenErr1(false);
           console.log(2);
       }
       else
       {
-          //alert("更改成功!");
           console.log(0);
           setOpenS(true);
           setOpenErr1(false);
@@ -117,11 +113,6 @@ export default function EditEmail({ open, handleClose })  {
             修改Email
           </Typography>
 
-           {/* 之後要接Email  
-          <Typography className={classes.typo} variant="h8">
-            目前Email：406401628@mail.fju.edu.tw
-          </Typography> */}
-
           <TextField
           label="新的Email"
           variant="outlined"
@@ -133,7 +124,6 @@ export default function EditEmail({ open, handleClose })  {
           </Typography>
         </div>
 
-        
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} color="default" className={classes.button} autoFocus>關閉視窗</Button>

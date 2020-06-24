@@ -1,19 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import {useState,useEffect} from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { useState,useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { TableSortLabel, TablePagination, TableHead, TableBody, TableContainer, Paper, Table, TableRow, TableCell } from '@material-ui/core';
+
 
 function createData(number,name,grade,group,detail) {
     return { number,name,grade,group,detail};
@@ -176,7 +167,6 @@ export default function MemberTable() {
     setDense(event.target.checked);
   };
 
- // const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
 
  /*=========== Create Table HEAD ===========*/
@@ -198,7 +188,6 @@ useEffect(() => {
 return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
             className={classes.table}
@@ -214,24 +203,13 @@ return (
             />
              {/*===== TableBody =====*/}
             <TableBody>
-              {/* {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */}
                {students.map((student, index) => {
-                  //const isItemSelected = isSelected(row.name);
-                  //const labelId = `enhanced-table-checkbox-${index}`;
+            
 
                   return (
                     <TableRow hover >
                      {/* 碰到的時候後面會反灰 */}
                     
-                      {/* <TableCell padding="default"/>
-
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.number}</TableCell>
-                      <TableCell align="left">{row.name}</TableCell>
-                      <TableCell align="left">{row.grade}</TableCell>
-                      <TableCell align="left">{row.group}</TableCell>
-                      <TableCell align="left">{row.detail}</TableCell> */}
                       {
                       studentList.map( (list, i) =>   i === 0 ? 
                     <TableCell key={i} component="th" scope="row" align="center" padding="none" >

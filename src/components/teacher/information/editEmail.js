@@ -24,15 +24,12 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 export default function EditEmail({ open, handleClose })  {
   const classes = useStyle();
-  
-
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
@@ -44,14 +41,8 @@ export default function EditEmail({ open, handleClose })  {
   const [email, setEmail] = React.useState({
     email: '',
   })
-  // const [tid, setTid] = React.useState({
-  //   tcherid: '',
-  // })
-
   const submitClick = () => {
   
-    
-    
     fetch('/teacher/resetEmail',{
       method: 'PUT',
       headers: {
@@ -59,30 +50,26 @@ export default function EditEmail({ open, handleClose })  {
       },
       body: JSON.stringify({
           teacher_mail: email.email,
-          // teacher_id: tid.tcherid,
       })
   })
   .then(res => {
       
       async function fetchres(){
       const test = await res.text();  //接收後端傳來的訊息
-      if (test === "email格式錯誤") //帳號已註冊過
+      if (test === "email格式錯誤") 
       {
-          //alert("email格式錯誤");
           console.log(1);
           setOpenErr1(true);
           setOpenErr2(false);
       }
-      else if(test === "此帳號已存在") //信箱不包含@
+      else if(test === "此帳號已存在") 
       {
-          //alert("此信箱已存在");
           console.log(2);
           setOpenErr2(true);
           setOpenErr1(false);
       }
       else
       {
-          //alert("更改成功!");
           console.log(0);
           setOpenS(true);
           setOpenErr1(false);
@@ -92,7 +79,6 @@ export default function EditEmail({ open, handleClose })  {
       }
       
   } fetchres() })
-
 
   };
 
@@ -110,13 +96,11 @@ export default function EditEmail({ open, handleClose })  {
     setInputs(1);
     email.email='';
   };
-
   const ErrClose = () => {
     setOpenS(false);
     setOpenErr1(false);
     setOpenErr2(false);
 };
-
   return (
     <Dialog open={open} onClose={handleClose} fullWidth>
       <DialogContent>
@@ -124,30 +108,13 @@ export default function EditEmail({ open, handleClose })  {
           <Typography className={classes.typoHeading} variant="h5">
             修改Email
           </Typography>
-
-           {/* 之後要接Email */}  
-          {/* <Typography className={classes.typo} variant="h8">
-            目前Email：
-            <TextareaAutosize disabled style={{borderRadius:10, padding:8, width:250, height:40, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5} >
-              {props.email}
-            </TextareaAutosize>
-          </Typography> */}
-
-          {/* <Typography className={classes.typo} variant="h5" id="email">
-            新的Email：
-          </Typography> */}
           <TextField
           label="新的Email"
           variant="outlined"
           size="small"
           value={email.email}
           onChange={handleChange('email')}  style={{fontFamily:'微軟正黑體'}}/>
-          {/* <Typography className={classes.typo} variant="body1">
-            
-          </Typography> */}
         </div>
-
-        
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} color="default" style={{fontFamily:'微軟正黑體'}}  autoFocus>關閉視窗</Button>
@@ -172,6 +139,5 @@ export default function EditEmail({ open, handleClose })  {
         </Snackbar>
       </DialogActions>
     </Dialog>
-    
   );
 };

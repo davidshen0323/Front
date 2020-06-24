@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
-import MyMenu from "../teacher/MenuOT";
-import { makeStyles } from "@material-ui/core/styles";
-import {TableCell, Fab, Grid} from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
-import CardActionArea from "@material-ui/core/CardActionArea";
+import MyMenu from "../teacher/MenuOT";
 import { Link } from "react-router-dom";
 import CreateClass from "./createClass";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/core/styles";
+import { TableCell, Fab, Grid } from "@material-ui/core";
+import CardActionArea from "@material-ui/core/CardActionArea";
 
 const useStyles = makeStyles((theme) => ({
   div: {
@@ -60,10 +60,6 @@ const useStyles = makeStyles((theme) => ({
   tablecell: {
     width: '200pt',
   margin: 'auto',
-  // marginTop: '500pt',
-  // paddingTop: "30pt",
-  // paddingBottom: "30pt",
-  // paddingInline: "30pt",
   borderColor: "white",
   fontFamily: 'Microsoft JhengHei',
   fontWeight: 'bold',
@@ -82,28 +78,12 @@ export default function HomepageT() {
       const result = await axios.get(`/teacher/HomePage1_s/one/`);
 
       setClass(result.data);
-      // console.log(result.data);
-      // console.log(result.data[0]['cs_id']);
-
-      // const path ={result.data['cs_id']}
+   
     }
 
     fetchData();
   }, []);
 
-  // const handleSubmit = () => {
-  //   async function getCsid(){
-  //   const csid = await axios.get(`/student/HomePage1_s/one/`);
-  //   setCsid(csid.data);
-  //   let classid = JSON.stringify(csid.data).toString();
-  //   let i;
-  //   for(i=0; i < classid.length; i++)
-  //   {
-  //   console.log(csid.data[i]['cs_id']);
-  //   }
-  // }
-  //   getCsid();
-  // }
   {
     /* 新建課程 */
   }
@@ -122,8 +102,6 @@ export default function HomepageT() {
       >
         <AddIcon />
       </Fab>
-      {/* {console.log(Sclass)} */}
-      {/* <WingBlank></WingBlank> */}
       <Grid
         container
         direction="row"
@@ -134,7 +112,6 @@ export default function HomepageT() {
 
         
           {Sclass.map((classs, index) => (
-            // <Card className={classes.card}>
             <CardActionArea
               className={classes.card}
               component={Link}

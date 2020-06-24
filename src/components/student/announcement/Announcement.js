@@ -1,9 +1,9 @@
 import React , { useEffect } from 'react';
-import {  ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails ,Container, Typography, Box} from '@material-ui/core';
-import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
-import {Link, useParams} from "react-router-dom";
 import MyMenu from '../MenuS';
+import { useParams } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Container, Typography, Box} from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,18 +42,14 @@ export default function ViewAnnouncements() {
   const params = useParams();
   const csid = params.cs_id;
 
-  
-  // console.log(csid);
-  useEffect(() => {
+    useEffect(() => {
     async function fetchData() {
 
       const result  = await axios.get(`/student/announcement/${csid}/get/`)
       
       setAnnouncement(result.data);
       console.log(result.data);
-      // console.log(result.data[0]['cs_id']);
-      
-      // const path ={result.data['cs_id']}
+ 
     }
     
     fetchData();
@@ -87,10 +83,7 @@ export default function ViewAnnouncements() {
                     </ExpansionPanel>
                     
                 ))}
-              
-
-
-
+    
             </Container>
             <Box  mx="auto" marginTop="3%" marginBottom="5%" width={'30%'} borderRadius={16} boxShadow={3} bgcolor="#FFF" borderColor="#0066CC"></Box>
       

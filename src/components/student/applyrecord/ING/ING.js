@@ -197,10 +197,10 @@ export default function Ing() {
                       <TableCell></TableCell>
                       {
                     ingList.map( (list, i) =>   i < 4 ? 
-                    <TableCell key={i} component="th" scope="row" align="left" padding="none" >
+                    <TableCell height="30"  key={i} component="th" scope="row" align="left" padding="none" >
                     {ing[list]}
                  </TableCell>:
-                 <TableCell key={i} align="left" padding="none" >
+                 <TableCell height="30" key={i} align="left" padding="none" >
                    <Write 
                    id={ing['rc_id']}
                    time={ing['rc_starttime']}

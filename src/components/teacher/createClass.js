@@ -1,7 +1,7 @@
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import { TextField, Dialog, Button, DialogActions, DialogContent, Typography, Snackbar} from "@material-ui/core";
+import { TextField, Dialog, Button, DialogActions, DialogContent, Typography, Snackbar } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -37,7 +37,6 @@ function Alert(props) {
 
 export default function CreateClass({ open, handleClose })  {
   const classes = useStyle();
-
    // 成功小綠綠
    const [openS, setOpenS] = React.useState(false);
    // 失敗小紅1
@@ -53,7 +52,6 @@ export default function CreateClass({ open, handleClose })  {
     const handleChange = csid => event => {
         event.persist();
         setInputs(inputs => ({...inputs, [csid]: event.target.value}));
-        //不知道怎麼解釋哈哈哈哈
     }   
 
   const submitClose = () => {
@@ -69,7 +67,6 @@ export default function CreateClass({ open, handleClose })  {
     inputs.csid='';
     inputs.name='';
   };
-  let post; //宣告一個布林值變數
 
   
 const handleSubmit = () =>
@@ -91,46 +88,34 @@ const handleSubmit = () =>
                 
                 async function fetchres(){
                 const test = await res.text();  //接收後端傳來的訊息
-                if (test === "request failed! ClassID and ClassName can not be null!") //課堂不存在
+                if (test === "request failed! ClassID and ClassName can not be null!") 
                 {
-                    //alert("請輸入課程代碼及名稱！");
-                    post = false;
                     console.log(1);
                     setOpenErr1(true);
                     setOpenErr2(false);
-                    return post;
                 }
-                else if(test === "request failed! ClassID has already exist in database, please change a new ClassID") //教師不屬於該課堂
+                else if(test === "request failed! ClassID has already exist in database, please change a new ClassID") 
                 {
-                    //alert("該課程代碼已存在，請新增其他課程代碼！");
-                    post = false;
                     console.log(2);
                     setOpenErr2(true);
                     setOpenErr1(false);
-                    return post;
                 }
                 else
                 {
                     setOpenS(true);
                     setOpenErr1(false);
                     setOpenErr2(false);
-                    post = true;
                     console.log(0);
-                 //   history.push('/ViewAnnouncementt/${csid}');
-                    return post;                        
                 }
                 
             } fetchres() })
-            // .then(res => console.log(post))
             .then(res => console.log(res))
             .catch(err => console.log(`Error with message: ${err}`))
         }
         
         else
         {
-            //alert("請再次確認!!")
             setOpenErr1(true);
-            
         }
         
     }
@@ -142,9 +127,7 @@ const handleSubmit = () =>
           <Typography className={classes.typoHeading} variant="h5">
             建立課程
           </Typography>
-          {/* <Typography className={classes.typo} variant="body1">
-            請輸入課程代碼：<Input value={inputs.csid} onChange={handleChange('csid')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-          </Typography> */}
+     
           <TextField
           label="課程代碼"
           variant="outlined"
@@ -154,9 +137,7 @@ const handleSubmit = () =>
         </div>
 
         <div style={{ display: "flex", justifyContent: "center", flexDirection: "column"}}>
-        {/* <Typography className={classes.typo} variant="body1">
-            請輸入課程名稱：<Input  value={inputs.name} onChange={handleChange('name')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-          </Typography> */}
+  
            <TextField
           label="課程名稱"
           variant="outlined"

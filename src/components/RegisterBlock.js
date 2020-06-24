@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-
 import RegisterS from './RegisterS';
 import RegisterT from './RegisterT';
-import { useParams } from 'react-router-dom';
 import Menu from './MenuisLogouted';
-import { WingBlank } from 'antd-mobile';
+import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, Tabs, Tab, Typography, Box } from '@material-ui/core/';
+
+
 const useStyles = makeStyles(theme => ({
   container: {
       display: 'flex',
@@ -23,9 +19,6 @@ const useStyles = makeStyles(theme => ({
       
     },  
 
-    // appbar:{
-    //     marginTop: 100,
-    // }
   }));
 
 function TabPanel(props) {
@@ -70,16 +63,11 @@ function LinkTab(props) {
   );
 }
 
-
-
 export default function RegisterBlock() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
   const params = useParams();
   const csid = params.cs_id;
-
-  // console.log(csid);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -88,7 +76,6 @@ export default function RegisterBlock() {
     <div className={classes.div}>
         <Menu/>
         
-    
             <AppBar position="static" color="inherit">
                 <Tabs
                 variant="fullWidth"
@@ -97,10 +84,8 @@ export default function RegisterBlock() {
                 >
                 <LinkTab label="學生" href={`/rollcall/${csid}`} {...a11yProps(0)} />
                 <LinkTab label="教師" href={`/rollcallrecord/${csid}`} {...a11yProps(1)} />
-            
                 </Tabs>
             </AppBar>
-
             
       <TabPanel value={value} index={0}>
         <RegisterS/>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel} from "@material-ui/core";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel } from "@material-ui/core";
 
 
 function descendingComparator(a, b, orderBy) {//順序升降
@@ -118,8 +118,6 @@ export default function MemberTable( props ) {
   const [students, setMembers] = useState([]);
  
   const params = useParams();
-  // console.log(params);
-  // const csid = params.cs_id;
   console.log(params.cs_id);
   
   const classes = useStyles();

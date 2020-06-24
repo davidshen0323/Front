@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import OffClass from './OffClass';
 import MyMenu from "../teacher/MenuOT";
@@ -6,7 +6,7 @@ import CreateClass from "./createClass";
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import { CardActionArea, Fab, Grid} from "@material-ui/core";
+import { CardActionArea, Fab, Grid } from "@material-ui/core";
 // core components
 import Card from "../Card/Card.js";
 import CardBody from "../Card/CardBody.js";
@@ -120,10 +120,6 @@ export default function HomepageT() {
       >
         <AddIcon />
       </Fab>    
-      {/* {console.log(Sclass)} */}
-      {/* <WingBlank></WingBlank> */}
-
-
       <Grid
         container
         direction="row"
@@ -136,8 +132,6 @@ export default function HomepageT() {
         <Grid item xs={12} sm={12} md={4} className={classes.grid}>
           <Card>
             <CardActionArea  
-            // component={Link}
-            // to={`/functiont/${classs["cs_id"]}`} 
             >
             <CardHeader color="warning">
             <h1 className={classes.cardTitleWhite}  onClick={() =>Jump(classs)}>
@@ -157,10 +151,8 @@ export default function HomepageT() {
         </Grid>
         ))}
         </Grid>
-
       {/* 教師新建課程 */}
       <CreateClass open={openCreateClass} handleClose={onCloseCreateClass} />
-   
     </div>
   );
 }

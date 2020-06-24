@@ -51,22 +51,19 @@ export default function EditOffice({ open, handleClose })  {
       },
       body: JSON.stringify({
           teacher_office: office.office,
-          // teacher_id: tid.tcherid,
       })
   })
   .then(res => {
       
       async function fetchres(){
       const test = await res.text();  //接收後端傳來的訊息
-      if (test === "input Office too long!") //帳號已註冊過
+      if (test === "input Office too long!") 
       {
-          //alert("input Office too long");
           console.log(1);
           setOpenErr1(true);
       }
-      else if(test === "renew Office Seccessful!") //信箱不包含@
+      else if(test === "renew Office Seccessful!") 
       {
-           //alert("更改成功!");
            console.log(0);
            setOpenS(true);
            setOpenErr1(false);
@@ -74,7 +71,6 @@ export default function EditOffice({ open, handleClose })  {
       }
       
   } fetchres() })
-
 
   };
 
@@ -109,12 +105,8 @@ export default function EditOffice({ open, handleClose })  {
           size="small"
           value={office.office}
           onChange={handleChange('office')}  style={{fontFamily:'微軟正黑體'}}/>
-          {/* <Typography className={classes.typo} variant="body1">
-            
-          </Typography> */}
         </div>
 
-        
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} color="default" style={{fontFamily:'微軟正黑體'}}  autoFocus>關閉視窗</Button>

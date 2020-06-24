@@ -85,22 +85,6 @@ export default function HomepageS() {
     fetchData();
   }, []);
 
-  // const handleSubmit = () => {
-  //   async function getCsid(){
-  //   const csid = await axios.get(`/student/HomePage1_s/one/`);
-  //   setCsid(csid.data);
-  //   let classid = JSON.stringify(csid.data).toString();
-  //   let i;
-  //   for(i=0; i < classid.length; i++)
-  //   {
-  //   console.log(csid.data[i]['cs_id']);
-  //   }
-  // }
-  //   getCsid();
-  // }
-
-
-
      {/* 加入課程 */}
      const [openJoinClass, closeJoinClass] = React.useState(false);
      const onCloseJoinClass = () => {
@@ -117,7 +101,6 @@ export default function HomepageS() {
           onClick={() => closeJoinClass(true)}>
           <AddIcon />
         </Fab>
-      {/* {console.log(Sclass)} */}
          
       <Grid
         container
@@ -143,12 +126,6 @@ export default function HomepageS() {
               <h5 className={classes.cardTitle}>教師：{classs["teacher_name"]}</h5>
               <h3 className={classes.cardTitle}>課程代碼：{classs["cs_id"]}</h3>
             </CardBody>
-
-            {/* <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
-              </div>
-            </CardFooter> */}
             </CardActionArea>
           </Card>
         </Grid>

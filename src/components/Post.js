@@ -1,16 +1,8 @@
 
 import React from 'react';
-// import axios from 'axios';
-// import { apiUserinfo } from './api';
-// import useSignUpForm from './CustomHooks';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-// import {Link} from "react-router-dom";
 
-
-    
-    
-    // const [data, setData] = useState([]);
 
 
     const Post = () => {
@@ -26,31 +18,6 @@ import Button from '@material-ui/core/Button';
           event.persist();
           setInputs(inputs => ({...inputs, [user]: event.target.value}));
         }
-
-
-        // const handleSubmit = () => 
-        // {
-          
-          
-        //     // event.preventDefault();
-            
-            
-        //     fetch('/student/',{
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             // 'Content-Type': 'application/x-www-form-urlencoded',
-        //         },
-        //         body: JSON.stringify({
-        //             std_id: inputs.Userid,
-        //             std_password: inputs.Userpassword
-        //         })
-        //     })
-            
-          
-        // }
-
-
         return (
         <div>
 
@@ -72,9 +39,7 @@ import Button from '@material-ui/core/Button';
             onChange={handleChange('Userpassword')}
             />
           
-          <Button
-            // onClick={handleSubmit}
-            
+          <Button            
             type="submit"
             variant="contained">Submit</Button>
             

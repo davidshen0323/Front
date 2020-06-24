@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { List } from 'antd-mobile';
 import Select from '@material-ui/core/Select';
 import MuiAlert from "@material-ui/lab/Alert";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import { Button, TextField, Paper, Snackbar, Radio, Typography, InputLabel } from '@material-ui/core/';
@@ -28,21 +28,18 @@ const useStyles = makeStyles(theme => ({
     },
 
     margin: {
-        // margin: theme.spacing(3),
         fontFamily: 'Microsoft JhengHei',
 
     },
 
     textfield: {
         marginBottom: 10,
-        //backgroundColor: 'lightgray',
-        fontFamily: 'Microsoft JhengHei', //沒用
+        fontFamily: 'Microsoft JhengHei', 
 
     },
 
     root: {
         width: '70%',
-        // marginTop: 100,
         margin: 'auto',
         marginBottom: 100,
         overflowX: 'auto',
@@ -88,8 +85,6 @@ export default function RegisterT() {
         pwd: '',
         repeatpwd: '',
         name: '',
-        // gender: '',
-        // dpart: '',
         phone: '',
         mail: '',
         office:''
@@ -109,8 +104,6 @@ export default function RegisterT() {
         setInputs(inputs => ({ ...inputs, [fieldname]: event.target.value }));
     }
     
-    let post; //宣告一個布林值變數
-    let history = useHistory(); //傳值跳頁的方法
     const handleSubmit = () => {
         if (inputs.user.length > 0
             && inputs.pwd.length > 0
@@ -145,36 +138,29 @@ export default function RegisterT() {
                         const test = await res.text();  //接收後端傳來的訊息
                         if (test === "此帳號已存在") //帳號已註冊過
                         {
-                            //alert("此帳號已存在!");
                             setOpenS(false);
                             setOpenErr1(true);
                             setOpenErr2(false);
                             setOpenErr3(false);
                             setOpenErr4(false);
-                            
                             console.log(1);
-                            
                         }
                         else if (test === "帳號長度不符") //帳號長度不符
                         {
-                            //alert("帳號長度不符!");
                             setOpenS(false);
                             setOpenErr1(false);
                             setOpenErr2(true);
                             setOpenErr3(false);
                             setOpenErr4(false);
-                            
                             console.log(2);
                         }
                         else if (test === "email格式錯誤") //email格式錯誤
                         {
-                            //alert("帳號長度有誤! 請再次確認!");
                             setOpenS(false);
                             setOpenErr1(false);
                             setOpenErr2(false);
                             setOpenErr3(true);
                             setOpenErr4(false);
-                            
                             console.log(3);
                         }
                         else if (res.status === 500)
@@ -187,27 +173,22 @@ export default function RegisterT() {
                             console.log(1233);
                         }
                         else {
-                            //alert("註冊成功!");
                             setOpenS(true);
                             setOpenErr1(false);
                             setOpenErr2(false);
                             setOpenErr3(false);
                             setOpenErr4(false);
-                            
                             console.log(0);
-                            // history.push("/login");
                             window.location.href = "/login";
                         }
                         
                     } fetchres()
                 })
-                // .then(res => console.log(post))
                 .then(res => console.log(res))
                 .catch(err => console.log(`Error with message: ${err}`))
             }
 
             else {
-                //alert("請再次確認!!")
             setOpenS(false);
             setOpenErr1(false);
             setOpenErr2(false);
@@ -217,7 +198,6 @@ export default function RegisterT() {
 
         
     }
-    // console.log(post);
     
     //用在選性別的state跟handlechange
     const [selectedvalue, setSelectedValue] = React.useState('');
@@ -229,12 +209,10 @@ export default function RegisterT() {
     //用在選系級的state跟handlechange
     const [dpart, setDpart] = React.useState({
         dpart: '',
-        // name: 'hai',
     });
     
     const handleChangeDpart = (event) => {
-        // const name = event.target.name;
-        // setDpart(event.target.value);
+       
         const name = event.target.name;
         setDpart({
           ...dpart,
@@ -244,7 +222,6 @@ export default function RegisterT() {
     
     return (
         <div className={classes.div}>
-            {/* <MyMenu/> */}
 
             <Paper className={classes.root}>
                 <h2>註冊</h2>
@@ -300,26 +277,6 @@ export default function RegisterT() {
                             className={classes.textfield}
                         />
 
-                        {/* <FormControl component="fieldset">
-                            <FormLabel component="legend">性別</FormLabel>
-                            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChangeGender}>
-
-                                <FormControlLabel value="男" control={<Radio />} label="男" />
-                                <FormControlLabel value="女" control={<Radio />} label="女" />
-                                <FormControlLabel value="其他" control={<Radio />} label="其他" />
-                                
-                            </RadioGroup>
-                        </FormControl> */}
-                        {/* <TextField
-                            required
-                            id="gender"
-                            label="性別"
-                            value={inputs.gender}
-                            onChange={handleChange('gender')}
-                            size="small"
-                            variant="outlined"
-                            className={classes.textfield}
-                        /> */}
                         <Typography>
 
                         性別: 
@@ -369,19 +326,8 @@ export default function RegisterT() {
                                 <option value={'金融與國際企業學系'}>金融與國際企業學系</option>
                                 <option value={'化學系'}>化學系</option>
                             </Select>
-                            {/* <FormHelperText>Some important helper text</FormHelperText> */}
                         </FormControl>
                         
-                        {/* <TextField
-                            required
-                            id="dpart"
-                            label="授課系所"
-                            value={inputs.dpart}
-                            onChange={handleChange('dpart')}
-                            size="small"
-                            variant="outlined"
-                            className={classes.textfield}
-                        /> */}
 
                         <TextField
                             required
@@ -421,14 +367,12 @@ export default function RegisterT() {
                     className={classes.button}
                     onClick={handleSubmit}
                     variant="contained"
-                //   component={Link}
-                //   to='/login'
+   
                 >確認送出
               </Button>
 
                 <Button
                     className={classes.button}
-                    //   onClick={handleSubmit}
                     variant="contained"
                     component={Link}
                     to='/login'

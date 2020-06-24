@@ -7,7 +7,7 @@ import UploadImg from './uploadImg';
 import EditOffice from './editOffice';
 import EditPassword from'./editPassword';
 import { makeStyles } from "@material-ui/styles";
-import {TableContainer, Paper, Table, TableRow, TableCell, Button } from '@material-ui/core';
+import { TableContainer, Paper, Table, TableRow, TableCell, Button } from '@material-ui/core';
 
 
 const useStyle = makeStyles(theme => ({
@@ -73,9 +73,7 @@ export default function TInformation() {
    };
    /*------------ STATE ------------*/
    const [information, setInformation] = React.useState([]);
-   const informationList = [ 'teacher_image', 'teacher_name', 'teacher_id', 'teacher_department', 'teacher_gender', 'teacher_mail', 'teacher_phone', 'teacher_password', 'teacher_office'];
    
-
   useEffect(() => {
     async function fetchData(){
       const result = await axios.get('/teacher/information/');
@@ -91,21 +89,11 @@ export default function TInformation() {
     
     <div className={classes.div}> 
         <MyMenu/>
-            
-        {/* <Paper className={classes.box}>
-            <Typography  variant="h4" component="h2" gutterBottom style={{textAlign:'center', fontFamily:'Microsoft JhengHei',fontWeight:'bold'}}>教師基本資料</Typography>
-            </Paper> */}
-
-<br/>
+    <br/>
             <Paper className={classes.Paper}>
             <TableContainer>
             <Table size="small">
-                    {/* <TableRow >
-                        <TableCell width="40%" align="center" className={classes.typo}>頭像</TableCell>
-                        <TableCell width="40%" className={classes.typo}>{information.teacher_image}</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeUploadImg(true)} variant="outlined" className={classes.button}>上傳大頭照</Button></TableCell>
-                        
-                    </TableRow> */}
+               
                     <TableRow >
                         <TableCell width="40%" align="center" className={classes.typo}>姓名</TableCell>
                         <TableCell width="40%" className={classes.typo}>{information["teacher_name"]}</TableCell>

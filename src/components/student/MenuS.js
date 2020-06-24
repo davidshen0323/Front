@@ -21,7 +21,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import {Typography, ListItem, IconButton, Divider, Drawer, AppBar, Toolbar, Button, Grid} from '@material-ui/core/';
+import { Typography, ListItem, IconButton, Divider, Drawer, AppBar, Toolbar, Button, Grid } from '@material-ui/core/';
 
 const drawerWidth = 240;
 
@@ -41,14 +41,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   logoutButton: {
-    // marginRight: theme.spacing(2),
     marginRight: 'auto',
     marginLeft: 'auto',
     fontFamily: 'Microsoft JhengHei',
     fontWeight: 'bold',
     fontSize:17,
-    // color: "#582707",
-    // backgroundColor: "#fffaea",
   },
   School: {
     minWidth: 100,
@@ -61,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
   
   Nav: {
     margin: `${theme.spacing(1)}px auto`,
-    // flexGrow: 1,
   },
   
   list: {
@@ -138,15 +134,6 @@ drawerHeader: {
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 },
-// content: {
-//   flexGrow: 1,
-//   padding: theme.spacing(3),
-//   transition: theme.transitions.create('margin', {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   marginLeft: -drawerWidth,
-// },
 contentShift: {
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.easeOut,
@@ -277,14 +264,9 @@ export default function LoginMenu() {
   const f9 = () => {
     window.location.href=`/SInformation`
   }
-  // 登出
-  // const f10 = () => {
-  //   action="/logout", method="POST"
-  // }
-  
+ 
 
   const params = useParams();
-        // console.log(params);
 
   return (
     
@@ -307,7 +289,6 @@ export default function LoginMenu() {
             <MenuIcon />
           </IconButton>
 
-              {/* <Typography className={classes.School} color="inherit" variant="h6">輔仁大學</Typography> */}
               
               <img src={logo} width="200px"></img>
               
@@ -315,7 +296,6 @@ export default function LoginMenu() {
                direction="row" 
                justify="flex-end"
                className={classes.Nav}
-              // wrap="nowrap"
               spacing={2}
               >
               <Grid item>   
@@ -352,8 +332,7 @@ export default function LoginMenu() {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 24 }} />}
     >
-      {/* <StyledTreeItem nodeId="1" labelText="我的課程" labelIcon={HomeIcon}> */}
-        {/* <StyledTreeItem nodeId="2" labelText="功能" labelIcon={AppsIcon}> */}
+     
           <StyledTreeItem
             onClick={f1}
             nodeId="2"
@@ -421,16 +400,10 @@ export default function LoginMenu() {
             color="#4eba64"
             bgColor="#f0ffe8"
           />
-        {/* </StyledTreeItem> */}
         <Divider />
 
-      {/* </StyledTreeItem> */}
       <StyledTreeItem onClick={f9} nodeId="10" labelText="基本資料" labelIcon={PermContactCalendarIcon} color="#1a73e8" bgColor="#e8f0fe"/>
       <Divider />
-      {/* <form action="/logout" method="POST">
-        <Button className={classes.logoutButton} type="submit" variant="outline" >登出</Button>
-      </form> */}
-      {/* <StyledTreeItem nodeId="11" labelText="登出" labelIcon={ExitToAppIcon} /> */}
       <Divider />
 
     </TreeView>

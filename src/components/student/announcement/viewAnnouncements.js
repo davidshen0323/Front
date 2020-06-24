@@ -1,10 +1,9 @@
 import React , { useEffect } from 'react';
-import {  ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails ,Container, Typography, Box} from '@material-ui/core';
-import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
-import {Link, useParams} from "react-router-dom";
-import Paper from '@material-ui/core/Paper';
 import MyMenu from '../MenuS';
+import { useParams } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { Paper, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Container, Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop:'5%',   
     marginBottom:'5%',
     padding:'2%',
-    //boxShadow:"1px 1px 1px 1px #9E9E9E",    
 },
   fab: {
     position: 'fixed',
@@ -58,7 +56,6 @@ export default function ViewAnnouncements() {
   const csid = params.cs_id;
 
   
-  // console.log(csid);
   useEffect(() => {
     async function fetchData() {
 
@@ -66,9 +63,7 @@ export default function ViewAnnouncements() {
       
       setAnnouncement(result.data);
       console.log(result.data);
-      // console.log(result.data[0]['cs_id']);
-      
-      // const path ={result.data['cs_id']}
+
     }
     
     fetchData();
@@ -105,15 +100,9 @@ export default function ViewAnnouncements() {
                     </ExpansionPanel>
                     
                 ))}
-              
-
-
-
+         
             </Container>
-            
-      
       </Paper>
-      
     </div>
     
   );

@@ -94,8 +94,6 @@ export default function JoinClass({ open, handleClose })  {
   function handleScan (scan) {
     if(scan){
       setScan(scan)
-      //setInputs(scan);
-      // setInputs(cs_qrcode);
     }
   }
 
@@ -112,13 +110,11 @@ export default function JoinClass({ open, handleClose })  {
   const [openErr2, setOpenErr2] = React.useState(false);
   const [inputs, setInputs] = React.useState({
     cs_qrcode:'',
-  
     //宣告要接值的變數
 });
     const handleChange = cs_qrcode => event => {
         event.persist();
         setInputs(inputs => ({...inputs, [cs_qrcode]: event.target.value}));
-        //不知道怎麼解釋哈哈哈哈
     }   
 
   const submitClose = () => {
@@ -135,14 +131,10 @@ export default function JoinClass({ open, handleClose })  {
     inputs.cs_qrcode='';
   };
 
-  
-  
   const previewStyle = {
     height: 240,
     width: 320,
   }
-
-  let post; //宣告一個布林值變數
 
 const handleSubmit = () =>
 {
@@ -164,13 +156,9 @@ const handleSubmit = () =>
                 const test = await res.text();  //接收後端傳來的訊息
                 if (test === "request failed! this class QRcode not exist!") //課堂不存在
                 {
-                    //alert("該QRcode不存在！");
-                    
                     console.log(1);
                     setOpenErr1(true);
                     setOpenErr2(false);
-                    
-                    
                 }
                 else
                 {
@@ -178,29 +166,21 @@ const handleSubmit = () =>
                     setOpenErr1(false);
                     setOpenErr2(false);
                     console.log(0);
-                    window.location.reload();
-                 //   history.push('/ViewAnnouncementt/${csid}');
-                                         
+                    window.location.reload();                                         
                 }
                 
             } fetchres() })
-            // .then(res => console.log(post))
             .then(res => console.log(res))
             .catch(err => console.log(`Error with message: ${err}`))
         }
         
         else
         {
-            //alert("不能為空")
             setOpenErr2(true);
             setOpenErr1(false);
-                    
-            
         }
         console.log(inputs.cs_qrcode);
         console.log(scan);
-      
-      
     }
 
   return (
@@ -217,15 +197,13 @@ const handleSubmit = () =>
                     <Typography>請輸入加課代碼：<Input value={inputs.cs_qrcode} onChange={handleChange('cs_qrcode')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/></Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-
-
+            
             <ExpansionPanel square expanded={expanded === "panel2"} onChange={blockClick("panel2")}>
                 <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
                     <Typography>掃描QRcode</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
-                      {/* <QrReader facingMode="environment"  delay={300} onError={handleError} onScan={handleScan} style={{ width:250}}/> */}
                       <QrReader
                         facingMode="environment"
                         delay={300}
@@ -234,7 +212,6 @@ const handleSubmit = () =>
                         onScan={handleScan}
                       />
                     </Typography>
-                   
                 </ExpansionPanelDetails>
             </ExpansionPanel>
         </div>

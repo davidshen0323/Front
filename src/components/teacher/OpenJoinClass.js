@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useParams } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/styles";
-import {Fab, Dialog, Button, DialogActions, DialogContent, Typography} from "@material-ui/core";
+import { Fab, Dialog, Button, DialogActions, DialogContent, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -59,9 +59,6 @@ export default function OpenJoinClass ()  {
           
           cs_id: csid,
           cs_qrcode: null,
-          // cs_id: params.cs_id,
-          // rc_inputsource: 'QRcode點名'
-          
       })
   })
   window.location.reload();
@@ -79,9 +76,6 @@ export default function OpenJoinClass ()  {
           
           cs_id: csid,
           cs_qrcode: joinID,
-          // cs_id: params.cs_id,
-          // rc_inputsource: 'QRcode點名'
-          
       })
   })
   }
@@ -110,7 +104,6 @@ export default function OpenJoinClass ()  {
           </Typography>
           <QRCode level="H" imageSettings={{src:"https://i.imgur.com/PWfHRt7.png", height:60,width:60,excavate:true}}  value={joinID} size={300}/>
         </div>
-
       </DialogContent>
       <DialogActions>
         <Button className={classes.button} onClick={handleClose} color="default">關閉視窗</Button>

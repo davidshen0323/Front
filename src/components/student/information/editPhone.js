@@ -36,8 +36,6 @@ function Alert(props) {
 
 export default function EditEmail({ open, handleClose })  {
   const classes = useStyle();
-  
-
   // 成功小綠綠
   const [openS, setOpenS] = React.useState(false);
   // 失敗小紅1
@@ -49,9 +47,6 @@ export default function EditEmail({ open, handleClose })  {
   const [phone, setPhone] = React.useState({
     phone: '',
   })
-  // const [tid, setTid] = React.useState({
-  //   tcherid: '',
-  // })
 
   const submitClick = () => {
 
@@ -70,13 +65,11 @@ export default function EditEmail({ open, handleClose })  {
       const test = await res.text();  //接收後端傳來的訊息
       if (test === "input Phone number format error! Only 10 number. ") //電話格式錯誤
       {
-          //alert("email格式錯誤");
           console.log(1);
           setOpenErr1(true);
       }
       else
       {
-          //alert("更改成功!");
           console.log(0);
           setOpenS(true);
           setOpenErr1(false);

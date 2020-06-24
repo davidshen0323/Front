@@ -1,8 +1,8 @@
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
-import {useHistory, Link} from "react-router-dom";
-import {makeStyles} from '@material-ui/core/styles';
-import {Snackbar, Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography, List} from "@material-ui/core";
+import { useHistory, Link } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import { Snackbar, Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography, List } from "@material-ui/core";
 
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
@@ -59,10 +59,8 @@ export default function ForgetPw() {
 const handleChange = fieldname => event => {
   event.persist();
   setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-  //
 }
 
-  let put; //宣告一個布林值變數
   let history = useHistory(); //傳值跳頁的方法
 
 
@@ -85,10 +83,6 @@ const handleChange = fieldname => event => {
     setOpenErr1(false);
     setOpenErr2(false);
     setbtnClose(true);
-    // setOpen(false);
-    // inputs.id='';
-    // inputs.mail='';
-    // inputs.phone='';
   };  
   const handleSubmit = () => {
     setbtnClose(false);
@@ -121,24 +115,18 @@ const handleChange = fieldname => event => {
             const test = await res.text();
             if(test ==="請求失敗，Email或phone沒有找到")
             {
-                //alert("請重新確認及填寫資料!");
                 setOpenErr2(false);
                 setOpenErr1(true);
-                put = false;
                 console.log(1);
-                return put;
             }
             else
             {
-                //alert("填寫成功!");
                 setOpenS(true);
                 setOpenErr1(false);
                 setOpenErr2(false);
                 setOpen(false);
-                put = true;
                 console.log(0);
                 history.push("/login");
-                return put;                        
             }
         } fetchres() })
         .then(res => console.log(res))
@@ -165,24 +153,18 @@ const handleChange = fieldname => event => {
             const test = await res.text();
             if(test ==="request failed. Email or Phone Number has round!")
             {
-                //alert("請重新確認及填寫資料!");
                 setOpenErr1(true);
                 setOpenErr2(false);
-                put = false;
                 console.log(1);
-                return put;
             }
             else
             {
-                //alert("填寫成功!");
                 setOpenS(true);
                 setOpenErr1(false);
                 setOpenErr2(false);
                 setOpen(false);
-                put = true;
                 console.log(0);
                 history.push("/login");
-                return put;                        
             }
         } fetchres() })
         .then(res => console.log(res))
@@ -203,7 +185,6 @@ const handleChange = fieldname => event => {
           忘記密碼?
         </Link>
       </Typography>
-
       <Dialog
         open={open}
         onClose={handleClose}
@@ -214,8 +195,6 @@ const handleChange = fieldname => event => {
           <DialogContentText>
            請填寫以下資料以便我們找回您的密碼
           </DialogContentText>
-
-
           <List >
           <TextField
           autoFocus
@@ -256,7 +235,6 @@ const handleChange = fieldname => event => {
           <Button disabled={btnClose===false} onClick={handleSubmit} className={classes.button} color="primary">
             確認送出
           </Button>
-          {/* {console.log(inputs.user)} */}
         </DialogActions>
       </Dialog>
       {/* 成功小綠框 */}
@@ -271,7 +249,7 @@ const handleChange = fieldname => event => {
             請重新確認及填寫資料！
           </Alert>
       </Snackbar>
-      {/* 稍後小橘框2 */}
+      {/* 稍候小橘框2 */}
       <Snackbar open={openErr2} style={{marginBottom:100}}>
           <Alert severity="warning">
             請稍候，正在發送新密碼！

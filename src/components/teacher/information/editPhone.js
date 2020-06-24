@@ -1,7 +1,7 @@
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/styles";
-import { TextField, Snackbar, Dialog, Button, DialogActions, DialogContent, Typography, Input} from "@material-ui/core";
+import { TextField, Snackbar, Dialog, Button, DialogActions, DialogContent, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
   typo: {
@@ -39,9 +39,6 @@ export default function EditEmail({ open, handleClose })  {
   const [phone, setPhone] = React.useState({
     phone: '',
   })
-  // const [tid, setTid] = React.useState({
-  //   tcherid: '',
-  // })
 
   const submitClick = () => {
   
@@ -52,31 +49,26 @@ export default function EditEmail({ open, handleClose })  {
       },
       body: JSON.stringify({
           teacher_phone: phone.phone,
-          // teacher_id: tid.tcherid,
       })
   })
   .then(res => {
       
       async function fetchres(){
       const test = await res.text();  //接收後端傳來的訊息
-      if (test === "phone格式不正確，請輸入10位數字的電話號碼") //帳號已註冊過
+      if (test === "phone格式不正確，請輸入10位數字的電話號碼") 
       {
-          //alert("email格式錯誤");
           console.log(1);
           setOpenErr1(true);
       }
       else
       {
-          //alert("更改成功!");
           console.log(0);
           setOpenS(true);
           setOpenErr1(false);
           window.location.reload();        
-
       }
       
   } fetchres() })
-
 
   };
 
@@ -84,7 +76,6 @@ export default function EditEmail({ open, handleClose })  {
     setInputs(2);
     event.persist();
     setPhone(phone => ({...phone, [fieldname]: event.target.value}));
-    
 }
   const submitClose = () => {
     handleClose(true);
@@ -98,7 +89,6 @@ export default function EditEmail({ open, handleClose })  {
     setOpenS(false);
     setOpenErr1(false);
 };
-  
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth={'xs'}>
@@ -108,29 +98,15 @@ export default function EditEmail({ open, handleClose })  {
             修改電話號碼
           </Typography>
 
-           {/* 之後要接Email */}  
-          {/* <Typography className={classes.typo} variant="h8">
-            目前Email：
-            <TextareaAutosize disabled style={{borderRadius:10, padding:8, width:250, height:40, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5} >
-              {props.email}
-            </TextareaAutosize>
-          </Typography> */}
-
-          {/* <Typography className={classes.typo} variant="h5" id="email">
-            新的Email：
-          </Typography> */}
           <TextField
           label="新的電話號碼"
           variant="outlined"
           size="small"
           value={phone.phone}
           onChange={handleChange('phone')}  style={{fontFamily:'微軟正黑體'}}/>
-          {/* <Typography className={classes.typo} variant="body1">
-            
-          </Typography> */}
+
         </div>
 
-        
       </DialogContent>
       <DialogActions>
         <Button onClick={submitClose} color="default" style={{fontFamily:'微軟正黑體'}}  autoFocus>關閉視窗</Button>
@@ -147,7 +123,6 @@ export default function EditEmail({ open, handleClose })  {
             電話格式不正確，請輸入10位數字的電話號碼！
           </Alert>
         </Snackbar>
-        
       </DialogActions>
     </Dialog>
     

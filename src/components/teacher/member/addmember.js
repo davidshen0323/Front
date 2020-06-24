@@ -129,7 +129,6 @@ export default function Apply(props) {
     inputs.std_id='';
   };  
   const handleSubmit = () =>{
-    // setOpen(false);
     console.log("stdid",inputs.std_id);
     console.log("csid",props.csid);
     fetch('/teacher/Addstudent/',{
@@ -147,7 +146,6 @@ export default function Apply(props) {
     const test = await res.text();
     if(test ==="新增此學生成功")
     {
-        //alert("成功!");
         setOpenS(true);
         setOpenErr1(false);
         console.log(1);
@@ -155,7 +153,6 @@ export default function Apply(props) {
     }
     else
     {
-        //alert("失敗!");
         setOpenErr1(true);
         setOpenS(false);
         console.log(0);
@@ -178,19 +175,6 @@ export default function Apply(props) {
 
         <DialogContent className={classes.text}>
         
-        {/* <Grid container spacing={1}  
-        direction="column"  
-        justify="center"  
-        alignItems="flex-start"
-        >
-
-            <Grid item xs={12} row>  */}
-              
-                {/* <div> */}
-                {/* <Typography className={classes.inputName} variant="body1">
-                    學生學號：
-                 */}
-                {/* <FormControl variant="outlined" size="small"> */}
                 <TextField 
                 id="std_id"
                 label="學生學號"
@@ -201,22 +185,6 @@ export default function Apply(props) {
                 variant="outlined"
                 className={classes.TextField}
             />
-                {/* </FormControl> */}
-                {/* </Typography> */}
-                {/* </div> */}
-            {/* </Grid>   */}
-
-            {/* <Grid item xs={12}>
-                
-                <div >
-                <Typography className={classes.inputName} variant="body2">
-                    請假事由：
-                </Typography>
-
-                
-                </div>
-            </Grid> */}
-        {/* </Grid> */}
         </DialogContent>
 
         <DialogActions>

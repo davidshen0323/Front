@@ -1,14 +1,12 @@
-import React, {useEffect} from 'react';
-import { Table, TableRow, TableCell, Typography, Box, Button } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import MyMenu from '../MenuOS';
 import EditEmail from './editEmail';
 import EditPhone from './editPhone';
-import EditPassword from'./editPassword';
 import UploadImg from './uploadImg';
-import axios from 'axios';
+import EditPassword from'./editPassword';
 import { makeStyles } from "@material-ui/styles";
-import Paper from '@material-ui/core/Paper';
-import TableContainer from '@material-ui/core/TableContainer';
+import { Paper, TableContainer, Table, TableRow, TableCell, Button } from '@material-ui/core';
 
 const useStyle = makeStyles(theme => ({
   div:{
@@ -70,9 +68,6 @@ export default function StuInformation() {
    const [information, setInformation] = React.useState([]);
    const informationList = [ 'std_image', 'std_name', 'std_id', 'std_department', 'std_gender', 'std_mail', 'std_phone', 'std_password'];
    
-  //  const params = useParams();
-  //  const stdid = params.std_id;
-
   useEffect(() => {
     async function fetchData(){
       const result = await axios.get('/student/information/');
@@ -82,27 +77,15 @@ export default function StuInformation() {
     }
     fetchData();
   },[]);
-  // console.log(Info);
 
   return (
     
     <div className={classes.div}> 
         <MyMenu/>
-            
-        {/* <Paper className={classes.box}>
-            <Typography  variant="h4" component="h2"  style={{textAlign:'center'}} className={classes.typo}>學生基本資料</Typography>
-        </Paper> */}
-
             <br/>
       <Paper className={classes.Paper}>
         <TableContainer>
             <Table size="small">
-                    {/* <TableRow >
-                        <TableCell width="40%" align="center" className={classes.typo}>頭像</TableCell>
-                        <TableCell width="40%"  className={classes.typo}>{information.std_image}</TableCell>
-                        <TableCell width="20%"><Button onClick={() => closeUploadImg(true)} variant="outlined" className={classes.button}>上傳大頭照</Button></TableCell>
-                        
-                    </TableRow> */}
                     <TableRow >
                         <TableCell width="40%" align="center" className={classes.typo}>姓名</TableCell>
                         <TableCell width="40%" className={classes.typo}>{information.std_name}</TableCell>
@@ -150,8 +133,5 @@ export default function StuInformation() {
             {/* 學生上傳圖片 */}
             <UploadImg open={openUploadImg} handleClose={onCloseUploadImg}/>
     </div>
-    
-
-
   );
 }
