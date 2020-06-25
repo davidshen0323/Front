@@ -112,11 +112,7 @@ export default function QaReply( props )  {
 
   };
     
-  
-  // const [openQAReply, closeQAReply] = React.useState(false);
-  // const onCloseQAReply = () => {
-  //   closeQAReply(openQAReply ? false : true);
-  // };
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -131,15 +127,12 @@ export default function QaReply( props )  {
 
     <Button 
       onClick = {handleClickOpen}
-      // onClick = {openQAReply}
       variant = "contained" 
       className={classes.button}
     >
     回覆
   </Button>
-  {/* 老師回覆問題的小框框 */}
-  
-      {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
+
     <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
       <DialogContent>
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>

@@ -162,18 +162,10 @@ export default function AddQA ()  {
                     
     async function fetchres(){
     const test = await res.text();  //接收後端傳來的訊息
-    // if (test === "request failed. Questions cannot be repeated within 5 minutes") //五分鐘內不能繼續問
-    // {
-    //     //alert("五分鐘內不能繼續問!");
-    //     console.log(1);
-    //     setOpenErr1(true);
-    //     setOpenErr2(false);
-    //     setOpenErr3(false);
-    //     setOpenErr4(false);
-    // }
+   
     if(test === "request failed. input content is null!") //內容為空
     {
-        //alert("內容為空!");
+   
         console.log(2);
         setOpenErr2(true);
         // setOpenErr1(false);
@@ -182,7 +174,7 @@ export default function AddQA ()  {
     }
     else if(test === "request failed. input ClassId not found!") //找不到該課
     {
-        //alert(找不到該課!");
+      
         console.log(3);
         setOpenErr3(true);
         // setOpenErr1(false);
@@ -191,7 +183,7 @@ export default function AddQA ()  {
     }
     else if(test === "request failed. teacher does not in this class") //學生不屬於該課
     {
-        //alert(學生不屬於該課!");
+       
         console.log(4);
         setOpenErr4(true);
         // setOpenErr1(false);
@@ -206,7 +198,7 @@ export default function AddQA ()  {
         setOpenErr4(false);
         setOpenS(true);
         console.log(0);
-     //   history.push('/ViewAnnouncementt/${csid}');
+    
     }
     
 } fetchres() })

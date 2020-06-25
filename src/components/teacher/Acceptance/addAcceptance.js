@@ -75,7 +75,7 @@ export default function AddAccept({ open, handleClose })  {
       const test = await res.text();  //接收後端傳來的訊息
       if (test === "作業名稱與內容不得為空") 
       {
-          // alert("作業名稱與內容不得為空");
+        
           console.log(1);
           setOpenErr1(true);
           setOpenErr2(false);
@@ -83,7 +83,7 @@ export default function AddAccept({ open, handleClose })  {
       }
       else if(test === "這堂課已有此作業，請更改作業名稱") 
       {
-         // alert("這堂課已有此作業，請更改作業名稱");
+        
           console.log(2);
            setOpenErr2(true);
            setOpenErr1(false);
@@ -91,7 +91,7 @@ export default function AddAccept({ open, handleClose })  {
       }
       else
       {
-          // alert("新增作業成功");        
+            
           console.log(0);          
           setOpenS(true);        
           setOpenErr1(false);

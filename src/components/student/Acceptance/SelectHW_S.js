@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 
 
 export default function SelectHW() {
-  //接值
+  
 
   const useStyles = makeStyles({
     Paper:{
@@ -69,7 +69,6 @@ export default function SelectHW() {
       console.log(result.data);
       // console.log(result.data[0]['cs_id']);
       
-      // const path ={result.data['cs_id']}
     }
       async function fetchStdid() {
         const result = await axios.get(`/student/acceptance/std_id`);
@@ -122,25 +121,9 @@ export default function SelectHW() {
                     
                       )
                     }
-                    {/* </ButtonBase> */}
+                    
                 </TableRow>
               )
-              // :
-              // <TableRow key={index}>
-                 
-              //     {
-              //       acceptanceList.map( (list, i) => 
-                    
-              //       <TableCell key={i} component="th" scope="row" align="center">
-              //         {/* <ButtonBase className={classes.buttonbase} component={Link} to={`/acceptance/${csid}/${Accept['hw_name']}`}> */}
-              //         {Accept[list]}      
-              //       {/* </ButtonBase> */}
-              //         </TableCell>
-                    
-              //         )
-              //       }
-              //       {/* </ButtonBase> */}
-              //   </TableRow>
               )}
              
             </TableBody>
@@ -150,13 +133,7 @@ export default function SelectHW() {
         container
         justify="center"
       >
-      {/* <Button
-      className={classes.button}
-      component={Link}
-      to={`/functions/${csid}`}
-      >
-      返回
-      </Button> */}
+      
       </Grid>
 
     </div>

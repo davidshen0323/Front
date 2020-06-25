@@ -55,9 +55,7 @@ export default function AcceptScore( props )  {
   );
   const [open, setOpen] = React.useState(false);
 
-  // const [score, setScore] = React.useState({
-  //   score:'',
-  // })
+
 
   const handleChange = fieldname => event => {
     setInputs(2);
@@ -100,7 +98,7 @@ export default function AcceptScore( props )  {
     handleClose(true);
     setOpenS(false);
     setInputs(1);
-    // window.location.reload();
+
   };
   
   const handleClickOpen = () => {

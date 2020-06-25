@@ -162,11 +162,8 @@ export default function CommentBoxT() {
   const csid = params.cs_id;
   const qid = params.q_id;
   const qcontent = params.q_content;
-  // const qtime = params.q_asktime;
 
   const [comment, setComment] = React.useState([]);
-
-  // const [stdid, setStdid] = React.useState(0);
 
   const commentList = ["cb_content"];
 
@@ -178,25 +175,12 @@ export default function CommentBoxT() {
       setComment(result.data);
       console.log(result.data);
     }
-    // async function fetchStdid() {
-    //   const result = await axios.get(`/student/std_id`);
-    //   // setStdid(result.data);
-    //   setStdid(result.data["std_id"]);
-    //   console.log(result.data);
-    //   console.log(stdid);
-    // }
 
     fetchData();
-    // fetchStdid();
+  
   }, []);
 
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
   const ErrClose = () => {
     setOpenS(false);
     setError(false);
@@ -272,7 +256,7 @@ export default function CommentBoxT() {
       <Paper className={classes.Paper}>
         <Typography variant="h5" compfonent="h5" gutterBottom style={{ marginBottom: '2%', textAlign: 'center', fontFamily: "Microsoft JhengHei", fontWeight: "bold", color: "#000000" }}> {qcontent}</Typography>
 
-        {/* <Container maxWidth="sm"> */}
+
 
 
           <TableContainer  >
@@ -367,145 +351,6 @@ export default function CommentBoxT() {
           </TableContainer>
       </Paper>
 
-      {/* <ListItemText> */}
-      {/* </ListItemText> */}
-
-      {/* 
-      <Grid
-        container
-        spacing={1}
-        direction="column"
-        justify="center"
-        alignItems="flex-start"
-      >
-        <Grid item xs={12} direction="row">
-          <div>
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar src="https://image.flaticon.com/icons/svg/1933/1933446.svg" />
-              </ListItemAvatar>
-
-              <ListItemText
-                style={{ marginRight: 10 }}
-                primary={
-                  //   <Typography
-                  //   className={classes.inline}
-                  //   >
-                  "B1"
-                }
-                secondary={
-                  // <Typography
-                  //       component="span"
-                  //       variant="body2"
-                  //       className={classes.inline}
-                  //       >
-                  "04:48"
-                  // </Typography>
-                }
-              /> */}
-      {/* 
-              <ListItemText
-                style={{
-                  borderRadius: 10,
-                  width: 750,
-                  fontFamily: "微軟正黑體",
-                  backgroundColor: "#ffffff",
-                  padding: 10,
-                  marginLeft: 30,
-                }}
-              >
-                {/* hello~ */}
-      {/* {comment['cb_content']} */}
-      {/* </ListItemText> */}
-      {/* // </ListItem> */}
-      {/* // </div> */}
-      {/* // </Grid> */}
-
-      {/* <Grid item xs={12} direction="row">
-          <div>
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar className={classes.Avatar}>
-                  <Smile />
-                </Avatar>
-              </ListItemAvatar>
-
-              <ListItemText
-                style={{ marginRight: 10 }}
-                primary={
-                  //   <Typography
-                  //   className={classes.inline}
-                  //   >
-                  "B1"
-                }
-                secondary={
-                  // <Typography
-                  //       component="span"
-                  //       variant="body2"
-                  //       className={classes.inline}
-                  //       >
-                  "04:48"
-                  // </Typography>
-                }
-              /> */}
-      {/* 
-              <ListItemText
-                style={{
-                  borderRadius: 10,
-                  width: 750,
-                  fontFamily: "微軟正黑體",
-                  backgroundColor: "#ffffff",
-                  padding: 10,
-                  marginLeft: 30,
-                }}
-              >
-                {/* hello~ */}
-      {/* </ListItemText> */}
-      {/* </ListItem> */}
-      {/* </div> */}
-      {/* </Grid> */}
-      {/* </Grid> */}
-
-
-      {/* <Grid container spacing={1} justify="center" alignItems="center"> */}
-      {/* <Grid item xs={12} direction="row"> */}
-      {/* <div> */}
-      {/* <ListItem alignItems="center"> */}
-      {/* <ListItemAvatar>
-                
-              </ListItemAvatar> */}
-      {/* 
-              <ListItemText>
-                <TextField
-                  id="cb_content"
-                  label="請輸入內文"
-                  variant="outlined"
-                  size="small"
-                  style={{ backgroundColor: "#fafafa", width: "70%" }}
-                  onChange={handleChange("cb_content")}
-                />
-
-                <Button
-                  className={classes.button}
-                  onClick={handleSubmit}
-                  color="default"
-                  autoFocus
-                >
-                  留言
-                </Button>
-              </ListItemText> */}
-      {/* </ListItem> */}
-      {/* </div> */}
-      {/* </Grid> */}
-      {/* <Button onClick={handleClose} color="secondary" autoFous>關閉視窗</Button>
-        <Button  
-        // disabled={inputs===2 ? false : true} 
-        onClick={handleSubmit}
-        color="primary" autoFous>確認送出</Button> */}
-      {/* </Grid> */}
-      {/* </DialogActions> */}
-
-      {/* </Dialog> */}
       <Snackbar open={openS} autoHideDuration={2000} onClose={handleSubmit} style={{ marginBottom: 100 }}>
         <Alert severity="success">
           留言成功！

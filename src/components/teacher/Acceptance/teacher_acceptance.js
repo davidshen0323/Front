@@ -97,7 +97,6 @@ export default function TAcceptanceList() {
   });
   const classes = useStyles();
 
-  /*=========== Create Table HEAD ===========*/
   const acceptanceList = [ 'accept_label','std_id','std_name', 'accept_time','accept_state','accept_score','accept_content','accept_score' ]
   const acceptanceDoneList = [ 'accept_label','std_id','std_name' ,'accept_time', 'accept_score','accept_score' ]
   
@@ -294,7 +293,6 @@ const submitClose = (event, reason) => {
   
       <MyMenu/>
 
-      {/* <Box border={1} mx="auto" width="60%" borderRadius={16} boxShadow={3} bgcolor="#FFF" color="background.paper"> */}
       <AppBar position="static" color="default" style={{maxWidth:'96%',margin:'auto'}}>
                 <Tabs
                 variant="fullWidth"
@@ -434,8 +432,7 @@ const submitClose = (event, reason) => {
             <TableBody>
                 {acceptances.map((acceptance,index) => acceptance["accept_done"] === true ? (
                     <TableRow key={index}>
-                      {/* <TableCell align="center"></TableCell> */}
-                      
+          
                     {
                         
                         acceptanceDoneList.map( (list, i) => i < 5 ?

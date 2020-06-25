@@ -239,60 +239,6 @@ export default function QAlist_S() {
     closeAddQa(openAddQa ? false : true);
   };
 
-  //   const handleDelete = () => {
-  //     fetch(`/student/deletequestioncontent/`,{
-  //       method: 'DELETE',
-  //       headers: {
-  //           'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         std_id: stdid,
-  //         q_asktime:  ,
-  //   })
-  //  })
-  //  window.location.reload();
-
-  //   }
-
-  // const deletequestion = (event, id) => {
-  //   const QuesIndex = question.findIndex((s) => s.q_asktime === id);
-  //   var newlist = [...question];
-
-  //   setQuestion(newlist);
-  //   handleDelete(question[QuesIndex]);
-  //   console.log("newlist", question[QuesIndex]);
-  // };
-
-  // const handleDelete = () => {
-    
-
-  //   fetch(`/student/deletequestioncontent/`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       q_std_id: ,
-  //       q_asktime: ,
-  //     }),
-  //   });
-  //   window.location.reload();
-  // };
-
-  // const handleFinish = () => {
-    
-  //   fetch(`/student/CompletionQuestion`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       q_std_id: ,
-  //       q_asktime: ,
-  //       cs_id: csid,
-  //     }),
-  //   });
-  // }
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -397,22 +343,13 @@ export default function QAlist_S() {
                       <List >
                         <ListItem button>
                           
-                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
-                          <CompleteQuestionS
-                          time={Ques["q_asktime"]}
-                          />
-                          </ListItemIcon> */}
+                          
                           <Button variant="contained" color="#F8B62B" className={classes.Button}> 
                             <DeleteQuestionS
                             time={Ques["q_asktime"]}
                             />
                           </Button>
 
-                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
-                          <DeleteQuestionS
-                          time={Ques["q_asktime"]}
-                          />
-                          </ListItemIcon> */}
 
                         <Button variant="contained" backgroundcolor="#F8B62B" className={classes.Button}>
                           <CompleteQuestionS
@@ -470,7 +407,7 @@ export default function QAlist_S() {
                           
                           </TableCell>
                         </div>
-                      // )
+                    
                       )}
                   </CardActionArea>
                     </Tooltip>
@@ -496,23 +433,10 @@ export default function QAlist_S() {
       />
    
 
-          {/* <Button
-            onClick={handleClickOpen}
-            variant="contained"
-            className={classes.button}
-          >
-            我要發問
-          </Button>
-
-          <Dialog open={open} onClose={handleClose}>
-            <AddQA />
-          </Dialog> */}
         </div>
       </TabPanel>
 
-      {/* 老師回覆問題的小框框 */}
-      {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
-
+    
 
 
       <TabPanel value={value} index={1}>

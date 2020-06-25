@@ -121,12 +121,6 @@ export default function AcceptScore( props )  {
 
   const [expanded, setExpanded] = React.useState(false);
 
-  // const handleChange = fieldname => event => {
-  //   setInputs(2);
-  //   event.persist();
-  //   setScore(score => ({...score, [fieldname]: event.target.value}));
-  //   //
-  // }
 
   const handleChange = fieldname => event => {
     event.persist();

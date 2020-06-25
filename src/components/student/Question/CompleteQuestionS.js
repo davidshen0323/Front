@@ -56,20 +56,6 @@ export default function CompleteQuestionS( props )  {
 });
 
 
-// const handleChange = fieldname => event => {
-//     event.persist();
-//     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-//     //
-// }
-
-// let post; //宣告一個布林值變數
-// let history = useHistory(); //傳值跳頁的方法
-
-
-//   const submitClick = () => {
-  
-//     setOpenS(true);
-//   };
 
 const [stdid, setStdid] = React.useState(0);
 
@@ -77,7 +63,7 @@ const [stdid, setStdid] = React.useState(0);
     
     async function fetchStdid() {
       const result = await axios.get(`/student/std_id`);
-      // setStdid(result.data);
+ 
       setStdid(result.data["std_id"]);
     //   console.log(result.data);
     //   console.log(stdid);
@@ -91,8 +77,6 @@ const [stdid, setStdid] = React.useState(0);
     setOpenS(false);
     setChanges(1);
     inputs.id='';
-    // inputs.content='';
-    // window.location.reload();
     
   };
   
@@ -144,7 +128,7 @@ const [stdid, setStdid] = React.useState(0);
     } fetchres() })
     .then(res => console.log(res))
     .catch(err => console.log(`Error with message: ${err}`))
-      // window.location.reload();
+   
       }
 
         const handleOpenButton = () => {

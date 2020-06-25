@@ -199,17 +199,10 @@ export default function QAlist_S() {
       console.log(result.data);
     }
 
-    // async function fetchStdid() {
-    //   const result = await axios.get(`/teacher/std_id`);
-    //   // setStdid(result.data);
-    //   setStdid(result.data["std_id"]);
-    //   console.log(result.data);
-    //   console.log(stdid);
-    // }
 
     fetchData();
     fetchData2();
-    // fetchStdid();
+
   }, []);
 
   const [open, setOpen] = React.useState(false);
@@ -239,60 +232,7 @@ export default function QAlist_S() {
     closeAddQa(openAddQa ? false : true);
   };
 
-  //   const handleDelete = () => {
-  //     fetch(`/student/deletequestioncontent/`,{
-  //       method: 'DELETE',
-  //       headers: {
-  //           'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         std_id: stdid,
-  //         q_asktime:  ,
-  //   })
-  //  })
-  //  window.location.reload();
-
-  //   }
-
-  // const deletequestion = (event, id) => {
-  //   const QuesIndex = question.findIndex((s) => s.q_asktime === id);
-  //   var newlist = [...question];
-
-  //   setQuestion(newlist);
-  //   handleDelete(question[QuesIndex]);
-  //   console.log("newlist", question[QuesIndex]);
-  // };
-
-  // const handleDelete = () => {
-    
-
-  //   fetch(`/student/deletequestioncontent/`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       q_std_id: ,
-  //       q_asktime: ,
-  //     }),
-  //   });
-  //   window.location.reload();
-  // };
-
-  // const handleFinish = () => {
-    
-  //   fetch(`/student/CompletionQuestion`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       q_std_id: ,
-  //       q_asktime: ,
-  //       cs_id: csid,
-  //     }),
-  //   });
-  // }
+  
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -397,23 +337,13 @@ const handleChangePage = (event, newPage) => {
                       </Tooltip>
                       <List >
                         <ListItem button>
-                          
-                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
-                          <CompleteQuestionS
-                          time={Ques["q_asktime"]}
-                          />
-                          </ListItemIcon> */}
+                         
                           <Button variant="contained" color="#f8b62b" className={classes.Button}>
                             <DeleteQuestionT
                             time={Ques["q_asktime"]}
                             />
                           </Button>
 
-                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
-                          <DeleteQuestionS
-                          time={Ques["q_asktime"]}
-                          />
-                          </ListItemIcon> */}
 
                         <Button variant="contained" color="#f8b62b" className={classes.Button}>
                        
@@ -497,24 +427,10 @@ const handleChangePage = (event, newPage) => {
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
    
-
-          {/* <Button
-            onClick={handleClickOpen}
-            variant="contained"
-            className={classes.button}
-          >
-            我要發問
-          </Button>
-
-          <Dialog open={open} onClose={handleClose}>
-            <AddQA />
-          </Dialog> */}
         </div>
       </TabPanel>
 
-      {/* 老師回覆問題的小框框 */}
-      {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
-
+   
 
 
       <TabPanel value={value} index={1}>
@@ -578,11 +494,7 @@ const handleChangePage = (event, newPage) => {
                       <List >
                         <ListItem button>
                           
-                          {/* <ListItemIcon style={{width:'50%'}} edge="center">
-                          <CompleteQuestionS
-                          time={Ques["q_asktime"]}
-                          />
-                          </ListItemIcon> */}
+                          
                           <Button variant="contained" color="#f8b62b" style={{width:'100%',height:35}}>
                             <DeleteQuestionT
                             time={Ques["q_asktime"]}
@@ -640,7 +552,7 @@ const handleChangePage = (event, newPage) => {
                           
                           </TableCell>
                         </div>
-                      // )
+                   
                       )}
                   </CardActionArea>
                     </Tooltip>

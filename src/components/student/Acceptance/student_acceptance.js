@@ -156,20 +156,10 @@ export default function AcceptanceList(props) {
       setAcceptances(result.data);
       console.log(result.data);
     }
-
-    //   async function fetchStdid() {
-    //     const result = await axios.get(`/student/acceptance/std_id`);
-    //     setStdid(result.data);
-    //     console.log(result.data);
-    // }
-
     fetchData();
-    // fetchStdid();
+  
   }, []);
 
-
-
-  // console.log(acceptances);
 
   let history = useHistory(); //傳值跳頁的方法
 
@@ -206,12 +196,12 @@ export default function AcceptanceList(props) {
           }
 
           else if (test === "你已經驗收完畢，請至\"驗收完成\"中查看成績。") {
-            //alert("您已登記過驗收!")
+            
             setOpenErr1(true);
             window.location.reload();
           }
           else if (test === "老師已經關閉此作業，無法排隊驗收或發問囉！") {
-            //alert("您已登記過驗收!")
+        
             setOpenErr2(true);
             window.location.reload();
           }
@@ -389,13 +379,7 @@ export default function AcceptanceList(props) {
                     <div></div>
                   )}
 
-                  {/* <TableRow>
-                    <TableCell>1</TableCell>
-                    <TableCell>406401628</TableCell>
-                    <TableCell>Table 怎麼做</TableCell>
-                    <TableCell>2020-04-03 11:29</TableCell>
-                    <TableCell><Button onClick={() => closeQAReply(true)} variant="contained" color="primary" >回覆</Button></TableCell>
-                </TableRow> */}
+                  
 
 
                 </TableBody>
@@ -432,9 +416,6 @@ export default function AcceptanceList(props) {
         </div>
       </TabPanel>
 
-      {/* 老師回覆問題的小框框 */}
-      {/* <QAReply open={openQAReply} handleClose={onCloseQAReply}/> */}
-
 
 
       <TabPanel value={value} index={1}>
@@ -457,7 +438,7 @@ export default function AcceptanceList(props) {
                   {
 
                     acceptances.map((acceptance, index) => acceptance["accept_done"] === true
-                      //  && acceptance['std_id'] === stdid 
+                      
                       ? (
                         <TableRow key={index}>
                           {/* <TableCell align="center">{k+1}</TableCell> */}

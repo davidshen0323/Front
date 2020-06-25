@@ -133,21 +133,20 @@ export default function SelectHW_T() {
         const test = await res.text();  //接收後端傳來的訊息
         if (test === "關閉作業成功！") //關閉作業成功！
         {
-            //alert("關閉作業成功！");
+         
             console.log(1);
             setOpenS(true);
             setOpenErr1(false);
         }
         else if(test === "teacher not in this class!") 
         {
-            //alert("teacher not in this class!");
+          
             console.log(2);
             setOpenErr1(true);
             setOpenS(false);
         }
        
     } fetchres() })
-      // window.location.reload();
       }
 
 
@@ -177,21 +176,21 @@ export default function SelectHW_T() {
         const test = await res.text();  //接收後端傳來的訊息
         if (test === "重新開啟作業成功！") //重新開啟作業成功！
         {
-            //alert("重新開啟作業成功！");
+        
             console.log(1);
             setOpenS2(true);
             setOpenErr2(false);
         }
         else if(test === "teacher not in this class!") 
         {
-            //alert("teacher not in this class!");
+        
             console.log(2);
             setOpenErr2(true);
             setOpenS2(false);
         }
        
     } fetchres() })
-      // window.location.reload();
+
       }
 
   const deletHW=(event,id)=>{
@@ -314,7 +313,7 @@ export default function SelectHW_T() {
             </TableCell>
                       )
                     }
-                    {/* </ButtonBase> */}
+                 
                 </TableRow>
               ))}
              
@@ -326,13 +325,7 @@ export default function SelectHW_T() {
         container
         justify="center"
       >
-      {/* <Button
-      className={classes.button}
-      component={Link}
-      to={`/functiont/${csid}`}
-      >
-      返回
-      </Button> */}
+     
       </Grid>
       <AddAccept open={openCreateHw} handleClose={onCloseCreateHw}/>
         {/* 成功小綠框 */}

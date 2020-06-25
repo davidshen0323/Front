@@ -58,21 +58,6 @@ export default function DeleteQuestionT( props )  {
 });
 
 
-// const handleChange = fieldname => event => {
-//     event.persist();
-//     setInputs(inputs => ({...inputs, [fieldname]: event.target.value}));
-//     //
-// }
-
-// let post; //宣告一個布林值變數
-// let history = useHistory(); //傳值跳頁的方法
-
-
-//   const submitClick = () => {
-  
-//     setOpenS(true);
-//   };
-
 const [stdid, setStdid] = React.useState(0);
 
   useEffect(() => {
@@ -96,7 +81,7 @@ const [stdid, setStdid] = React.useState(0);
     setOpenErr3(false);
     setChanges(1);
     inputs.id='';
-    // inputs.content='';
+  
     window.location.reload();
     
   };
@@ -154,10 +139,7 @@ const [stdid, setStdid] = React.useState(0);
         }
         
     } fetchres() })
-    // .then(res => console.log(post))
-    // .then(res => console.log(res))
-    // .catch(err => console.log(`Error with message: ${err}`))
-      // window.location.reload();
+  
       }
 
         const handleOpenButton = () => {
@@ -185,29 +167,9 @@ const [stdid, setStdid] = React.useState(0);
             確定要刪除此問題?
           </Typography>
 
-          {/* <Typography className={classes.typo} variant="body1">
-            請輸入公告id：<Input id="title" value={inputs.id} onChange={handleChange('id')} style={{borderRadius:10, padding:8, width:250, height:30, fontSize:14, fontFamily:'微軟正黑體'}} rowsMin={5}/>
-
-          </Typography> */}
-
         </div>
 
-        {/* <div style={{ display: "flex", justifyContent: "center", flexDirection: "column"}}>
-          <Typography className={classes.typo} variant="body1">
-            請輸入公告內容：
-          </Typography>
-
-          <Typography className={classes.typo} variant="body1">
-            <TextareaAutosize
-            id="content" 
-            value={inputs.content} 
-            onChange={handleChange('content')} 
-            style={{borderRadius:10, padding:8, width:350, height:150, fontSize:14, fontFamily:'微軟正黑體'}}
-            rowsMin={5}
-            placeholder="請輸入公告內容"
-            />
-          </Typography>
-        </div> */}
+        
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary" style={{fontFamily: 'Microsoft JhengHei'}}>關閉視窗</Button>
