@@ -120,7 +120,7 @@ const useStyles = makeStyles(theme => ({
             <CardActionArea className={classes.cardaction}>
               <ButtonBase
               component={Link}
-              to ={`/LeaveBlockS/${params.cs_id}`}
+              to ={`/ApplyRecord/${params.cs_id}`}
               style={{
                 display:"flex",
                 flexDirection:"column",

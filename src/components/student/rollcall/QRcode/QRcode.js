@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     width: '150px',
     margin:'auto',
     marginTop: 20,
-    // marginLeft: 10,
     marginBottom: 10,
     margin: theme.spacing(1),
     fontFamily: 'Microsoft JhengHei',
@@ -63,13 +62,6 @@ export default function Qrcode() {
   
     //宣告要接值的變數
 });
-  // const params = useParams();
-  // console.log(params);
-  // const csid = params.cs_id;
-  // console.log(params.cs_id);
-   
-  
-  //QRcode
    const [scan, setScan] = useState();
 
    function handleScan (scan) {
@@ -99,7 +91,6 @@ export default function Qrcode() {
   const handleChange = cs_id => event => {
     event.persist();
     setInputs(inputs => ({...inputs, [cs_id]: event.target.value}));
-    //不知道怎麼解釋哈哈哈哈
     setChange(1);
 }   
 
@@ -107,7 +98,6 @@ const watch = true;
 const {
   latitude,
   longitude,
-  // error,
 } = usePosition(watch);
 
 const gpspoint = latitude + ',' + longitude;
@@ -143,7 +133,6 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
       setOpenErr3(false);
       console.log(2);
       window.location.reload();
-      // setQrcode(null);   
   }
   else if(rq === "request failed. GPS point distance too far!")
     {
@@ -157,7 +146,6 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
         //alert("QRcode不存在!");
         setOpenErr2(true);
         console.log(4);
-        // setQrcode(null);   
   }
     
     
@@ -196,7 +184,6 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
     <Grid item  xs={12}>
       <Typography>
       <QrReader
-        // ref={qr}
         facingMode="environment"
         delay={300}
         style={{width:250}}
@@ -205,7 +192,6 @@ fetch('/student/rollcall/QRcodeRollcall/' + scan + '/' + gpspoint,{
       />
       </Typography>
         
-        {/* <QRcodeMade /> */}
     </Grid>    
 
       

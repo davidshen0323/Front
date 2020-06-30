@@ -40,18 +40,10 @@ export default function Ttable( props ) {
       
       setAttend(result.data);
     }
-      // function fetchData() {
-      //     const result = fetch('/teacher/rollcall/oneRollcall/Summary/'+props.id+'/')
-          
-      //     console.log(result.data);
-      //     setAttend(result);
-
-    //}
+     
     fetchData();
   }, [props.id]);
   
-
-//   {console.log(attend["present"])}
 
   return (
       <div className={classes.root}>  

@@ -6,7 +6,6 @@ import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 import ComButton from "../../../ComButton";
 import Grid from '@material-ui/core/Grid';
-// import QRcodeMade from './QRcodeMade';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import QRCode from 'qrcode.react';
@@ -18,7 +17,6 @@ import MuiAlert from "@material-ui/lab/Alert";
 import {Snackbar, Button, Dialog,Typography} from "@material-ui/core";
 
 
-
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -28,9 +26,7 @@ const useStyles = makeStyles((theme) => ({
     width: '150px',
     margin:'auto',
     marginTop: 20,
-    // marginLeft: 10,
     marginBottom: 10,
-    // margin: theme.spacing(1),
     fontFamily: 'Microsoft JhengHei',
     color: "white",
     fontSize:16,
@@ -60,102 +56,72 @@ export default function Qrcode() {
   const [openErr1, setOpenErr1] = React.useState(false);
   const [clicked, setClicked] = React.useState(true);
   const params = useParams();
-  
-  // console.log(params.cs_id);
-  
-  // useEffect(() => {
-    //   async function getUuidv4() {
-      //   const test = uuidv4(); //qrcode亂碼
-      //   setQrcode(test);
-      //   }
-      //   getUuidv4();
-      // }, [])
-      
-      const watch = true;
-      const {
-        latitude,
-        longitude,
-        // error,
-      } = usePosition(watch);
-      
-      // const test = uuidv4();
-      
-      const [rcid, setRcid] = React.useState(0)
-      
-      const handleSubmit = () => {
-        // setQrcode(uuidv4());
-        console.log(qrcode);
-        fetch('/teacher/rollcall/addrollcall',{
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-          
-          // rc_inputsource:inputs.way,
-          qrcode: qrcode,
-          // @ts-ignore
-          cs_id: params.cs_id,
-          rc_inputsource: 'QRcode點名',
-          gps_point: latitude + ","  + longitude,
-      })
-  })
-  .then(res => {
-    
-    async function fetchres(){
-    const rq = await res.text();  //接收後端傳來的訊息
-    if (rq === 'request failed. teacher not in this class!')
-    {
-        //alert("點名失敗! 您不是此課程的老師!");
-        setOpenErr1(true);
-        // console.log(1);
         
-    }
-    else if(rq === "request successful! the rollcall has already added!") 
-    {
-      //alert("點名成功!");
-      setOpenS(true);
-      setClicked(false);
-      // console.log(2);
-      // setQrcode(null);   
-    }
-    
-    
-  } fetchres() })
-  .then(res => {
-    async function fetchData() {
-      const result = await axios.get(`/teacher/rollcall/findRCID/${qrcode}/`)
-      setRcid(result.data[0]["rc_id"]);
-      
-      // console.log(result.data[0]["rc_id"]);
-    }
-    fetchData()
+  const watch = true;
+  const {
+    latitude,
+    longitude,
+  } = usePosition(watch);
+  
+  const [rcid, setRcid] = React.useState(0)  
+  const handleSubmit = () => {
+    console.log(qrcode);
+    fetch('/teacher/rollcall/addrollcall',{
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+      qrcode: qrcode,
+      cs_id: params.cs_id,
+      rc_inputsource: 'QRcode點名',
+      gps_point: latitude + ","  + longitude,
   })
-  
-  
+})
+.then(res => {
+
+async function fetchres(){
+const rq = await res.text();  //接收後端傳來的訊息
+if (rq === 'request failed. teacher not in this class!')
+{
+    //alert("點名失敗! 您不是此課程的老師!");
+    setOpenErr1(true);
+    
 }
-      const handleClickOpen = () => {
-        setOpen(true);
-        setQrcode(uuidv4());
-        
-      };
-      const ErrClose = () => {
-        setOpenS(false);
-        setOpenErr1(false);
-        setOpenC(false);
-        setClicked(false);
-      };  
-
-      
-      
-// const Rcid = ['rc_id'];
+else if(rq === "request successful! the rollcall has already added!") 
+{
+  //alert("點名成功!");
+  setOpenS(true);
+  setClicked(false); 
+}
 
 
-const handleClose = () => {
+} fetchres() })
+.then(res => {
+async function fetchData() {
+  const result = await axios.get(`/teacher/rollcall/findRCID/${qrcode}/`)
+  setRcid(result.data[0]["rc_id"]);
+}
+fetchData()
+})
+
+
+  }
+  const handleClickOpen = () => {
+    setOpen(true);
+    setQrcode(uuidv4());
+    
+  };
+  const ErrClose = () => {
+    setOpenS(false);
+    setOpenErr1(false);
+    setOpenC(false);
+    setClicked(false);
+  };  
+  const handleClose = () => {
   
   setClicked(true);
   
-  // .then(res => {
     console.log(rcid)
     async function putData() {
       
@@ -165,9 +131,7 @@ const handleClose = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            
             rc_id: rcid,
-            
         })
     })
     .then(res => {
@@ -178,10 +142,6 @@ const handleClose = () => {
     putData();
     
   };
-  
-  
-
-
   const handleChangeQr = () => {
   
       let code = uuidv4();
@@ -204,7 +164,6 @@ const handleClose = () => {
         
     })
       .then(res => {
-          // setQrcode('0');
           setOpenC(true);
           console.log(qrcode)
       })
@@ -212,10 +171,11 @@ const handleClose = () => {
     putData();
     
   };
+
+
   return (
 
     <div>
-      {/* {console.log(rcid)} */}
       <Button onClick={handleClickOpen} >
        <ComButton title="QRcode" url="https://image.flaticon.com/icons/svg/2313/2313039.svg" />
       </Button>
@@ -245,12 +205,10 @@ const handleClose = () => {
         <QRCode level="H" imageSettings={{src:"https://i.imgur.com/PWfHRt7.png", height:100,width:100,excavate:true}} value={qrcode} size={300}/>
       </Typography>
         
-        {/* <QRcodeMade /> */}
     </Grid>    
 
     <Grid>
           
-      {/* disable */}
       <Button disabled={clicked===false} onClick={handleSubmit}  className={classes.button}>
         開始點名
       </Button>

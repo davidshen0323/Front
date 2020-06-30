@@ -55,25 +55,6 @@ function LinkTab(props) {
   );
 }
 
-
-
-// function download() {
-//   // fake server request, getting the file url as response
-//   setTimeout(() => {
-//     const params = useParams();
-//     const csid = params.cs_id;
-//     const response = {
-//       file: 'http://localhost:8080/teacher/downloadExcel/Rollcall/'+csid,
-      
-//     };
-//     // server sent the url to the file!
-//     // now, let's download:
-//     window.open(response.file);
-//     // you could also do:
-//     // window.location.href = response.file;
-//   }, 100);
-// }
-
 /*------------ STYLE ------------*/
 const useStyles = makeStyles(theme =>({
     
@@ -97,14 +78,6 @@ export default function RollcallRDDp( props ) {
     setValue(newValue);
   };
 
-
-//   useEffect(() => {
-//     async function fetchData() {
-//         const result = await axios.get(`/teacher/downloadExcel/Rollcall/${csid}`);
-//         setAcceptances(result.data);
-//     }
-//     fetchData();
-// }, []);
 
 
 const download = () => {
@@ -144,7 +117,6 @@ console.log('csid',csid);
                 <LinkTab label="學生查看" href="/rollcallrecordS" {...a11yProps(1)}   style={{ fontFamily:'微軟正黑體'}}/>
                
                 <Button  color="primary" className={classes.Link} onClick={download}>
-                  {/* <Exportexcel/> */}
                   匯出成Excel檔
                 </Button>
               

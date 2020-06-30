@@ -203,11 +203,9 @@ export default function Write(props) {
                     請假類別：
                 
                 <FormControl variant="outlined" className={classes.formControl} size="small">
-                    {/* <InputLabel>假別</InputLabel> */}
                     <Select
                     native
                     value={props.type}
-                    // onChange={handleChange('typeid')}
                    disabled
                     >
                     <option value="" />
@@ -230,7 +228,6 @@ export default function Write(props) {
 
                 <Typography className={classes.inputName} variant="body2">
                     <TextareaAutosize 
-                    //onChange={()=> setInputs(2)} id="question" 
                     style={{borderRadius:10, padding:8, width:550, height:50, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請詳述請假事由"
                     value={inputs.content}
                     onChange={handleChange('content')}/>
@@ -243,7 +240,6 @@ export default function Write(props) {
         <DialogActions>
         <Button onClick={handleClose} className={classes.button} style={{fontFamily: 'Microsoft JhengHei'}} color="default" autoFous>關閉視窗</Button>
         <Button  
-        // disabled={inputs===2 ? false : true} 
         onClick={handleSubmit}
         style={{fontFamily: 'Microsoft JhengHei'}}
         className={classes.button}

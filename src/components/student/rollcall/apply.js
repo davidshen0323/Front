@@ -90,13 +90,6 @@ export default function Apply(props) {
       
   }
 
-  // const handleChange = (event) => {
-  // const name = event.target.name;
-  // setState({
-  //     ...state,
-  //     [name]: event.target.value,
-  // });
-  // };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -136,7 +129,7 @@ export default function Apply(props) {
         console.log(test);
         setOpenErr1(true);
     }
-    else if(test === "申請成功") //內容為空
+    else if(test === "申請成功") 
     {
         //alert("內容為空!");
         console.log(2);
@@ -227,7 +220,6 @@ export default function Apply(props) {
 
                 <Typography className={classes.inputName} variant="body2">
                     <TextareaAutosize 
-                    //onChange={()=> setInputs(2)} id="question" 
                     style={{borderRadius:10, padding:8, width:550, height:50, fontSize:14, fontFamily:'微軟正黑體'}}    rowsMin={5} placeholder="請詳述請假事由"
                     value={inputs.tl_content}
                     onChange={handleChange('tl_content')}/>
@@ -240,7 +232,6 @@ export default function Apply(props) {
         <DialogActions>
         <Button onClick={handleClose} className={classes.button} color="default" autoFous>關閉視窗</Button>
         <Button  
-        // disabled={inputs===2 ? false : true} 
         onClick={handleSubmit}
         className={classes.button}
         color="primary" autoFous>確認送出</Button>

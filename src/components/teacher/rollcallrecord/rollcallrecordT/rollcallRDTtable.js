@@ -134,12 +134,6 @@ export default function RollcallRDT( props ) {
   /*------------ STATE ------------*/
   const [students, setStudents] = useState([]);
 
-  // const params = useParams();
-  //  console.log(params);
-  // const rcid = params.rc_id;
-  // console.log(params.rc_id);
-
-
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -190,7 +184,6 @@ export default function RollcallRDT( props ) {
   }
 /*=========== Create Table HEAD ===========*/
 const studentList = [ 'std_id', 'std_name', 'std_department','tl_type_id']
-// console.log(props.id)
 useEffect(() => {
  async function fetchData() {
      const result = await axios.get(`/teacher/rollcall/oneRollcall/`+props.id);
@@ -229,14 +222,11 @@ useEffect(() => {
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
-                  //const labelId = `enhanced-table-checkbox-${index}`;
-
                     studentList.map( (list, i) =>   i < 3 ? 
                     <TableCell key={i} component="th" scope="row" align="left">
                     {student[list]}
                  </TableCell>:
                  student['tl_type_id'] === 8 ?
-                //  <TableCell key={i} align="left">{student[list]}</TableCell> 
                 <TableCell align="left" >
                     <FormControl component="fieldset" onChange={(e)=>changeState(e,student.std_id)}>
                       <RadioGroup row  value={student.tl_type_id+''}  >
@@ -278,9 +268,6 @@ useEffect(() => {
           </Table>
         </TableContainer>
 
-        {/* <Button onClick={studentarray}>
-            確定
-        </Button> */}
 
         <TablePagination
           rowsPerPageOptions={[10, 25]}

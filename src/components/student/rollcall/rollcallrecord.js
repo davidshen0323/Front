@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import Apply from '../leave/apply';
+import Apply from './apply';
 import {useState,useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
@@ -164,11 +164,6 @@ useEffect(() => {
  fetchData();
 }, []);
 
-  // const testFunc = (e, id) => {
-  //   console.log(e.target.value);
-  //   setTest(e.target.value)
-  // }
-
   return (
     <div className={classes.root}>  
       <Paper>
@@ -195,23 +190,18 @@ useEffect(() => {
                       <TableCell>{index+1}</TableCell>
                   {
                     rollcallrecordList.map( (list, i) =>   i === 3 && rollcallrecord['tl_type_name']==="缺席" ? 
-                    <TableCell height="30" key={i} align="left"><Apply id={rollcallrecord['rc_id']}
+                    <TableCell height="30" key={i} align="left">
+                      <Apply id={rollcallrecord['rc_id']}
                     time={rollcallrecord['rc_starttime']}
-                    resource={rollcallrecord['rc_inputsource']}  /></TableCell> 
+                    resource={rollcallrecord['rc_inputsource']}  />
+                    </TableCell> 
                     :
                  <TableCell height="60" key={i} component="th" scope="row" align="left" padding="none" >
                     {rollcallrecord[list]}
                  </TableCell>
                         )
                   }   
-                      {/* <TableCell padding="default" />
-
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.time}</TableCell>
-                      <TableCell align="left">{row.attend}</TableCell>
-                      <TableCell align="left">{row.score}</TableCell>
-                      <TableCell align="left">{row.from}</TableCell> */}
-
+                     
                     </TableRow>
                   );
                 })}

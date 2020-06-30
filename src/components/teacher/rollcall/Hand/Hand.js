@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Handtable from './Handtable';
-// import TTable from '../rollcallrecordT/ttable';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ComButton from "../../../ComButton";
@@ -44,9 +43,6 @@ export default function Hand() {
   const [uujoinID,setuujoinID] = React.useState(uuidv4);
 
   const params = useParams();
-  // console.log(params);
-  // const csid = params.cs_id;
-  // console.log(params.cs_id);
 
   const watch = true;
   const {
@@ -68,7 +64,6 @@ export default function Hand() {
           body: JSON.stringify({
               qrcode:uujoinID ,
               gps_point:latitude + ","  + longitude,
-              // rc_inputsource:inputs.way,
               cs_id: params.cs_id,
               rc_inputsource: '手動點名'
               
@@ -77,20 +72,6 @@ export default function Hand() {
       .then(res => {
                     
         async function fetchres(){
-        //const rq = await res.text();  //接收後端傳來的訊息
-        // if (rq === 'request failed. teacher not in this class!')
-        // {
-        //     alert("點名失敗! 您不是此課程的老師!");
-        //     console.log(1);
-            
-        // }
-        // else if(rq === "request successful! the rollcall has already added!") 
-        // {
-        //     alert("點名成功!");
-        //     console.log(2);
-        //     // setQrcode(null);   
-        // }
-        
         
     } fetchres() })
       .then(res => {
@@ -99,7 +80,6 @@ export default function Hand() {
         
         setRcid(result.data[0]["rc_id"]);
         
-        // console.log(result.data[0]["rc_id"]);
         }
         fetchData()
     })

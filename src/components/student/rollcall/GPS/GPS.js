@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     height:'150px',
   },
   imageSrc: {
-    //position: 'absolute',
     maxHeight:'200px',
     maxWidth:'200px',
     display:'block',
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     width: '150px',
     margin:'auto',
     marginTop: 20,
-    // marginLeft: 10,
     marginBottom: 10,
     margin: theme.spacing(1),
     fontFamily: 'Microsoft JhengHei',
@@ -62,34 +60,26 @@ export default function GPS() {
   // 失敗小紅2
   const [openErr2, setOpenErr2] = React.useState(false);  
   const [clicked, setClicked] = React.useState(true);
-  // const [count, setCount] = React.useState(0);
 
   useEffect(() => {
     async function fetchData() {
         const result = await axios.get(`/student/rollcall/newlyGPSRollcall/${params.cs_id}/`);
         
         console.log(result.data);
-        // if(result.data['rc_end'] === 0)
-        // {
         setGps(result.data);
-        // }
     }
     fetchData();
    }, []);
 
   const params = useParams();
-  //console.log(params.cs_id);
 
   
   const watch = true;
       const {
         latitude,
         longitude,
-        // error,
       } = usePosition(watch);
 
-
-      // const [rcid, setRcid] = React.useState(0)
 
       const handleSubmit = () => {
         
@@ -116,8 +106,6 @@ export default function GPS() {
         //alert("點名失敗! 老師已關閉點名!");
         setOpenErr1(true);
         setOpenErr2(false);
-        // setClicked(false);
-        // setCount(count+1);
         
         console.log(1);
         
@@ -127,11 +115,7 @@ export default function GPS() {
         //alert("點名失敗! 您不再範圍內!");
         setOpenErr2(true);
         setOpenErr1(false);
-        // setClicked(false);
-        // setCount(count+1);
-
         console.log(2);
-        // setQrcode(null);   
     }
     else if(rq === 'request successful! the GPS rollcall record has already added!') 
     {
@@ -144,8 +128,7 @@ export default function GPS() {
         setOpenErr2(false);
         console.log(3.3);
         setClicked(false);
-        console.log(3.4);
-        // setQrcode(null);   
+        console.log(3.4);  
     }
     else{
       console.log(4)
@@ -157,7 +140,6 @@ export default function GPS() {
       
   }
 
-  // console.log(count);
 
   const handleClickOpen = () => {
     setOpen(true);

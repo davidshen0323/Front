@@ -9,7 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-//import Apply from './apply';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {useEffect} from 'react';
@@ -139,9 +138,6 @@ export default function Pass() {
   const [ing,setIng] = React.useState([]);
   const params =useParams();
 
-
-  const [test, setTest] = React.useState('test');
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -156,15 +152,6 @@ export default function Pass() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  // const handleChange = () => {
-  //   setChecked(pp => !pp);
-  // };
-
-  // const testFunc = (e, id) => {
-  //   console.log(e.target.value);
-  //   setTest(e.target.value)
-  // }
 
    /*=========== Create Table HEAD ===========*/
    const ingList = [ 'rc_starttime', 'tl_createtime', 'tl_type_name', 'tl_content']

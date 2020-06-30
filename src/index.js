@@ -11,7 +11,7 @@ import homepaget from './components/teacher/HomepageT';
 import functiont from './components/teacher/FunctionT';
 import AcceptanceList from './components/student/Acceptance/student_acceptance';
 import TAcceptanceList from './components/teacher/Acceptance/teacher_acceptance';
-import Rollcall from './components/teacher/rollcall/rollcall';
+import Rollcall from './components/teacher/rollcall/Rollcall';
 import RollcallRecord from './components/teacher/rollcallrecord/rollcallrecord';
 import Leavemanage from './components/teacher/leaveMN/leavemanage';
 import Login from './components/login.js';
@@ -40,7 +40,8 @@ import MemberT from './components/teacher/member/member';
 import MemberS from './components/student/member/member';
 
 import RollcallBlockT from './components/teacher/rollcall/RollcallBlockT';
-import LeaveBlockS from './components/student/leave/LeaveBlockS';
+import ApplyRecord from './components/student/applyrecord/applyrecord';
+//import LeaveBlockS from './components/student/leave/LeaveBlockS';
 import QRcode from './components/teacher/rollcall/QRcode/QRcode';
 import Hand from './components/teacher/rollcall/Hand/Hand';
 
@@ -63,9 +64,9 @@ ReactDOM.render(
             
             <Route path="/login" component={Login}/>
             <Route path="/register" component={RegisterBlock}/>
-            <Route path="/rollcall/:cs_id" component={Rollcall}/>
+            {/* <Route path="/rollcall/:cs_id" component={Rollcall}/> */}
             <Route path="/leavemanage/:cs_id" component={Leavemanage}/>
-            <Route path="/rollcallrecord" component={RollcallRecord}/> 
+            {/* <Route path="/rollcallrecord" component={RollcallRecord}/>  */}
             <Route path="/homepages" component={homepages}/>
             <Route path="/functions/:cs_id" component={functions}/>
             <Route path="/loading" component={Loading}/>
@@ -93,8 +94,8 @@ ReactDOM.render(
             <Route path="/RollcallBlockT/:cs_id" component={RollcallBlockT}/>
             <Route path="/QRcode" component={QRcode}/> 
             <Route path="/Hand" component={Hand}/>
-
-            <Route path="/LeaveBlockS/:cs_id" component={LeaveBlockS}/>
+            <Route path="/ApplyRecord/:cs_id" component={ApplyRecord}/>
+            {/* <Route path="/LeaveBlockS/:cs_id" component={LeaveBlockS}/> */}
             <Route path="/RollcallRD/:cs_id" component={RollcallRD}/>
             <Route path="/selectHW_S/:cs_id" component={selectHWs}/>
 

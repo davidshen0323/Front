@@ -23,8 +23,6 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         margin: 'auto',
         marginBottom: theme.spacing(2),
-        //backgroundColor: '#F2F2F2',
-        
     },
     Button:{
         width:'50%',
@@ -38,9 +36,6 @@ const useStyles = makeStyles(theme => ({
       height: 220,
       margin: 'auto',
       borderRadius:20,
-      //marginTop: 30,
-      //marginLeft: 'auto',
-      //marginRight: 'auto',
     },
     cardaction: {
       width:'100%',

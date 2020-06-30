@@ -147,14 +147,6 @@ export default function Ing() {
     setPage(0);
   };
 
-  // const handleChange = () => {
-  //   setChecked(pp => !pp);
-  // };
-
-  // const testFunc = (e, id) => {
-  //   console.log(e.target.value);
-  //   setTest(e.target.value)
-  // }
 
    /*=========== Create Table HEAD ===========*/
    const ingList = [ 'rc_starttime', 'tl_createtime', 'tl_type_name', 'tl_content','tl_content']

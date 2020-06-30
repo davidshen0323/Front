@@ -83,11 +83,7 @@ export default function RollcallRD() {
 
   return (
     <div className={classes.div}> 
-      {/* <Button  component={Link} to={`/rollcallRD/${params.cs_id}`} >
-       <FunctionButton title="點名" url="https://image.flaticon.com/icons/svg/1828/1828867.svg" />
-      </Button> */}
-
-
+     
 
       <MyMenu/>
          <AppBar position="static" color="inherite" style={{maxWidth:'97%',margin:'auto'}}>
