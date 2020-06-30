@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MyMenu from '../MenuT';
 
-import Rollcall from './rollcall';
+import Rollcall from './Rollcall';
 import RollcallRecord from '../rollcallrecord/rollcallrecord';
 import { useParams } from 'react-router-dom';
 
@@ -75,7 +75,6 @@ export default function RollcallBlockT() {
   const params = useParams();
   const csid = params.cs_id;
 
-  // console.log(csid);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

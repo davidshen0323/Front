@@ -131,9 +131,7 @@ export default function RollcallrecordTable() {
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  
-  //const [test, setTest] = React.useState('test');
-  
+    
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -163,12 +161,6 @@ export default function RollcallrecordTable() {
     fetchData();
   }, []);
   
-
-  
-  // const testFunc = (e, id) => {
-  //   console.log(e.target.value);
-  //   setTest(e.target.value)
-  // }
 
   return (
     <div className={classes.root}>  

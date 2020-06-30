@@ -219,8 +219,6 @@ useEffect(() => {
                      {/* 碰到的時候後面會反灰 */}
                   <TableCell>{index+1}</TableCell>
                   {
-                  //const labelId = `enhanced-table-checkbox-${index}`;
-
                     rollcallsList.map( (list, i) =>   i < 2 ? 
                     <TableCell key={i} component="th" scope="row" align="left">
                     {rollcall[list]}

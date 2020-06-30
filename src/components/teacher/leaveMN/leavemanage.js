@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import LMNTable from './LMNTable';
 import Leavemanagetable from './leavemanagetable';
 import MyMenu from '../../teacher/MenuT';
 import { useParams } from 'react-router-dom';

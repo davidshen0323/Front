@@ -129,9 +129,6 @@ export default function Handtable( props ) {
   const [students, setMembers] = useState([]);
   const [rcid, setRcid] = useState();
 const params = useParams();
-// console.log(params);
-// const csid = params.cs_id;
-// console.log(params.cs_id);
  
 
 const classes = useStyles();
@@ -268,16 +265,7 @@ useEffect(() => {
               })}
             </TableBody>
             </Table>
-            {/* <div align="center" >
-                    <Button variant="contained" color="secondary"  className= {classes.button} startIcon={<Delete />}>
-                        取消
-                    </Button>
-                    
-                    <Button variant="contained" color="primary"   className= {classes.button} startIcon={<Save />} onClick={handleSubmit}> 
-                        確定
-                    </Button>
-            </div>
-           */}
+           
         </TableContainer>
 
         <TablePagination

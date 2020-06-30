@@ -139,8 +139,7 @@ export default function RDSB(props) {
 
 
           <Grid item xs={3} >
-        {/* present={props.present} absent={props.absent} otherwise={props.otherwise} */}
-        
+              
             <ListItem>
               <ListItemText
                   primary={

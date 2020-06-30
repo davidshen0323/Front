@@ -80,15 +80,6 @@ function EnhancedTableHead(props) {
           </TableCell>
           ))}
           
-          {/* <TableCell padding="default">
-          <Checkbox color="default"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          />
-        </TableCell>
-         */}
       </TableRow>
     </TableHead>
   );
@@ -96,12 +87,9 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
-  //numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  //onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
-  //rowCount: PropTypes.number.isRequired,
 };
 
 const useToolbarStyles = makeStyles(theme => ({
@@ -204,15 +192,10 @@ export default function Leavemanagetable(props) {
   /*------------ STATE ------------*/
   const [leaves, setLeaves] = React.useState([]);
 
-  //const params = useParams();
-  // console.log(params);
-  // const csid = params.cs_id;
-  //console.log(params.cs_id);
 
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('number');
-  //const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -221,35 +204,6 @@ export default function Leavemanagetable(props) {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
-  // const handleSelectAllClick = event => {
-  //   if (event.target.checked) {
-  //     const newSelecteds = leaves.map(n => n.name);
-  //     setSelected(newSelecteds);
-  //     return;
-  //   }
-  //   setSelected([]);
-  // };
-
-  // const handleClick = (event, name) => {
-  //   const selectedIndex = selected.indexOf(name);
-  //   let newSelected = [];
-
-  //   if (selectedIndex === -1) { //-1表示name不存在 
-  //     newSelected = newSelected.concat(selected, name);//加入newSelected
-  //   } else if (selectedIndex === 0) {//name是第一個(index=0)
-  //     newSelected = newSelected.concat(selected.slice(1));//抓第二個(index=1)之後的東西==把第一個刪掉
-  //   } else if (selectedIndex === selected.length - 1) {//name是最後一個
-  //     newSelected = newSelected.concat(selected.slice(0, -1));//抓從第一個(index=0)到倒數第二個==刪掉最後一個
-  //   } else if (selectedIndex > 0) {
-  //     newSelected = newSelected.concat(
-  //       selected.slice(0, selectedIndex),
-  //       selected.slice(selectedIndex + 1),
-  //     //刪掉第n個
-  //     );
-  //   }
-  //   setSelected(newSelected);
-  // };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -260,7 +214,6 @@ export default function Leavemanagetable(props) {
     setPage(0);
   };
 
-  // const isSelected = name => selected.indexOf(name) !== -1;
 
 
   const handleSubmit = (leave) =>
@@ -311,41 +264,28 @@ export default function Leavemanagetable(props) {
 
   return (
     <div className={classes.root}>
-        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer> 
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
             size='small'
-            // aria-label="enhanced table"
           >
            
             <EnhancedTableHead
               classes={classes}
-              //numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              //onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              //rowCount={leaves.length}
             />
             <TableBody>
               {
-              // stableSort(leaves, getComparator(order, orderBy))
-              //   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 leaves.map((leave, index) => leave["tl_state"] === 0 ?
                   (
                     <TableRow 
                       hover
-                      // onClick={event => handleClick(event, leave.name)}
-                      // role="checkbox"
-                      // aria-checked={isItemSelected}
-                      // tabIndex={-1}
-                      // key={leave.name}
                       
                     >
                         <TableCell height="30">
-                          {/* {index+1} */}
                         </TableCell>
                   {
                     leaveList.map( (list, i) =>   i < 6 ? 
@@ -357,7 +297,6 @@ export default function Leavemanagetable(props) {
                    <RadioGroup row value={leave.tl_state+''} >
                      <FormControlLabel value="1" control={<Radio color="primary" size="small"/>} label="通過" />
                      <FormControlLabel value="2" control={<Radio color="secondary" size="small"/>} label="未通過" />
-                     {/* <FormControlLabel value="0" control={<Radio color="primary" size="small"/>} label="未審核" /> */}
                    </RadioGroup>
                  </FormControl>
                  </TableCell>
@@ -374,15 +313,7 @@ export default function Leavemanagetable(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <TablePagination
-          rowsPerPageOptions={[10,25]}
-          component="div"
-          count={leaves.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />      */}
+        
     </div>
   );
 }

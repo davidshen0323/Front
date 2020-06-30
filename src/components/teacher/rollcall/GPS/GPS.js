@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     width: '150px',
     margin:'auto',
     marginTop: 20,
-    // marginLeft: 10,
     marginBottom: 10,
     margin: theme.spacing(1),
     fontFamily: 'Microsoft JhengHei',
@@ -33,7 +32,6 @@ const useStyles = makeStyles(theme => ({
     color: '#fff',
   },
   imageSrc: {
-    //position: 'absolute',
     maxHeight:'200px',
     maxWidth:'200px',
     display:'block',
@@ -60,21 +58,18 @@ export default function GPS() {
   const [uujoinID,setUuJoinID] = React.useState('0');
   const [clicked, setClicked] = React.useState(true);
   const params = useParams();
-  // console.log(params);
 
 
   const watch = true;
       const {
         latitude,
         longitude,
-        // error,
       } = usePosition(watch);
 
 
       const [rcid, setRcid] = React.useState(0)
 
       const handleSubmit = () => {
-        // setQrcode(uuidv4());
         
     fetch('/teacher/rollcall/addrollcall',{
       method: 'POST',
@@ -83,9 +78,7 @@ export default function GPS() {
       },
       body: JSON.stringify({
           
-          // rc_inputsource:inputs.way,
           qrcode: uujoinID,
-          // @ts-ignore
           cs_id: params.cs_id,
           rc_inputsource: 'GPS點名',
           gps_point: latitude + "," + longitude,
@@ -139,7 +132,6 @@ export default function GPS() {
     setOpen(false);
     setClicked(true);
     
-    // .then(res => {
       console.log(rcid)
       async function putData() {
       
@@ -163,19 +155,6 @@ export default function GPS() {
 };
 
   
-  // const [inputs, setInputs] = React.useState({
-  //   rc_id:'',
-  //   rc_inputsource:'',
-  //   //qrcode:'',
-  //   //宣告要接值的變數
-  // });
-
-//   const handleChange = user => event => {
-//     event.persist();
-//     setInputs(inputs => ({...inputs, [user]: event.target.value}));
-//     //不知道怎麼解釋哈哈哈哈
-// }
-
 
   return (
     <div>
@@ -216,11 +195,11 @@ export default function GPS() {
       </Button>
     </Grid>    
 
-      
         </Grid>
       </Backdrop>
 
         
+
       </Dialog>
       {/* 成功小綠框 */}
       <Snackbar open={openS} autoHideDuration={2000} onClose={ErrClose} style={{marginBottom:100}}>

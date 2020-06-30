@@ -165,11 +165,6 @@ export default function RollcallrecordSTable() {
  }, []);
   
  
-   // const testFunc = (e, id) => {
-   //   console.log(e.target.value);
-   //   setTest(e.target.value)
-   // }
- 
    return (
      <div className={classes.root}>  
          

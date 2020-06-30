@@ -9,7 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-//import Apply from './apply';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {useEffect} from 'react';
@@ -156,15 +155,6 @@ export default function Fail() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  // const handleChange = () => {
-  //   setChecked(pp => !pp);
-  // };
-
-  // const testFunc = (e, id) => {
-  //   console.log(e.target.value);
-  //   setTest(e.target.value)
-  // }
 
    /*=========== Create Table HEAD ===========*/
    const ingList = [ 'rc_starttime', 'tl_createtime', 'tl_type_name', 'tl_content']
