@@ -30,7 +30,7 @@
         "react-qr-reader": "^2.2.1",
         "react-qrcode": "^0.2.5",
         "react-router-dom": "^5.1.2",
-        "react-scripts": "3.3.1",
+        "react-scripts": "5.0.1",
         "react-window": "^1.8.5",
         "react.qrcode.generator": "0.0.3",
         "reaviz": "^8.0.6",
